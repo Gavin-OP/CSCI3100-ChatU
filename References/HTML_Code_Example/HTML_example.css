@@ -1,0 +1,103 @@
+* {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    outline: 0;
+}
+
+#chapter3 {
+    margin: 0px;
+    padding: 0px;
+}
+
+#chapter4-heading {
+    font-family: 'Franklin Gothic';
+    color: red;
+    line-height: 80px;
+    font-weight: 900;
+    font-size: smaller;
+    text-align: center;
+}
+
+.bg-image-top {
+    background-image: url("./background.jpg");
+}
+
+p.nav-p {
+    color: grey;
+}
+
+p a:hover {
+    color: red;
+}
+
+.chp3-container-bg {
+    background-color: grey;
+}
+
+li#inline {
+    display: inline;
+    background-color: yellow;
+    padding: 20px;
+    margin: 30px;
+}
+
+#external-warning {
+    background-color: rgba(128, 128, 128, 0.493);
+    margin: 0px 100px 30px 40px;
+    padding: 20px 20px 20px 20px;
+    border: dotted;
+    border-top-width: 5px;
+    border-right-width: 10px;
+    border-left-color: red;
+    min-height: 500px;
+    max-height: 1000px;
+    min-width: 300px;
+    max-height: 1000px;
+}
+
+#translate:hover {
+    transform: translate(5px, 10px);
+    background-color: grey;
+    width: 300px;
+    height: auto;
+}
+
+#rotate:hover {
+    transform: rotate(4deg);
+    background-color: lightblue;
+    width: 150px;
+    height: auto;
+}
+
+#skew:defined {
+    transform: skew(20deg, -5deg);
+    background-color: grey;
+    width: 300px;
+    height: auto;
+}
+
+@media screen and (max-width: 500px) {
+    body {
+        background-color: lightblue;
+    }
+}
+
+input[type=text] {
+    background-color: grey;
+}
+input:disabled {
+    background-color: red;
+ }
+
+textarea:read-only {
+    color: red;
+ }
+
+ input:required {
+    background-color: red;
+ }
+
+ input:invalid {
+    border: 2px solid blue;
+  }

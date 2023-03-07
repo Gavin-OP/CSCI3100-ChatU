@@ -1,0 +1,866 @@
+<!DOCTYPE html>
+<html lang="en">
+
+
+<head>
+    <!-- Head section is not for display. It is for script and stylesheet -->
+    <title>CSCI2720 Midterm Review</title>
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css"
+        integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="HTML_example.css" type="text/css">
+    <script src="HTML_example.js"></script>
+    <script src="Basic_Javascript.js"></script>
+    <meta charset="utf-8">
+    <meta name="discription" content="HTML Example">
+    <meta name="keywords" content="CUHK, CSCI">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+        h1#midterm-review {
+            text-align: center;
+        }
+
+        li:nth-child(2) {
+            color: blue;
+        }
+
+        li:nth-child(2)::first-letter {
+            font-family: 'Franklin Gothic Medium';
+            font-size: 150%;
+        }
+
+        p u {
+            color: blueviolet;
+        }
+    </style>
+</head>
+
+
+<body>
+    <!-- Body section is where to display in the browser. -->
+    <header id="top" class="bg-image-top">
+        <h1 id="midterm-review">CSCI2720 Midterm Review</h1>
+        <style>
+            @import url('https://fonts.googleapis.com/css2?family=Kanit&family=Sono:wght@600&display=swap');
+
+            header p {
+                font-family: 'Kanit', sans-serif;
+            }
+        </style>
+
+        <p>Author: OP <br> This is for HTML Review. </p>
+    </header>
+
+
+    <nav class="navbar navbar-expand-lg sticky-top">
+        <div>
+            <p class="nav-p">Navigation </p>
+
+        </div>
+        <div>
+            <ul class="list-inline nav-p">
+                <li class="list-inline-item">
+                    <a href="#chapter2">Chapter 2</a>
+                </li>
+                <li class="list-inline-item">
+                    <a href="#chapter3">Chapter 3</a>
+                </li>
+                <li class="list-inline-item">
+                    <a href="#chapter4">Chapter 4</a>
+                </li>
+                <li class="list-inline-item">
+                    <a href="#chapter5">Chapter 5</a>
+                </li>
+                <li class="list-inline-item">
+                    <a href="#chapter7">Chapter 7</a>
+                </li>
+                <li class="list-inline-item">
+                    <a href="#chapter8">Chapter 8</a>
+                </li>
+                <li class="list-inline-item">
+                    <a href="#chapter9">Chapter 9</a>
+                </li>
+                <li class="list-inline-item">
+                    <a href="#end">Bottom</a>
+                </li>
+            </ul>
+        </div>
+        <b class="nav-p">Search:</b>
+    </nav>
+
+
+    <main>
+        <section id="chapter2">
+            <h2>Chapter 2</h2>
+            <article>
+                <p>We have Heading from h1 to h6. <br> And we have other formatting tools. </p>
+                <p>A paragraph with <b>bold text</b>, <i>italic text</i>, and <u>underlined text</u> with line break
+                    <br>
+                    like this
+                    followed by <sub>subsript</sub> which can be used as limit<sub>x &#8594; 0</sub> and
+                    <sup>superscript</sup> which can be
+                    used as X<sup>2</sup>.
+                </p>
+                <p>We can use pre-formmated for text that indentations or spaces matter. <br> For example: <br>
+                <pre>
+            for(i=1, i<100){
+                i=i+1;
+            }
+                </pre>
+                </p>
+            </article>
+            <h3>List</h3>
+            <b>Unordered List</b>
+            <ul>
+                <li>Item 1</li>
+                <li>Item 2</li>
+                <li>Item 3</li>
+            </ul>
+            <ul type="square">
+                <li>Item 4</li>
+                <li>Item 5</li>
+                <li>Item 6</li>
+            </ul>
+            <ul type="cricle">
+                <li>Item 7</li>
+                <li>Item 8</li>
+                <li>Item 9</li>
+            </ul>
+            <b>Ordered List</b>
+            <ol>
+                <li>Item 1</li>
+                <li>Item 2</li>
+                <li>Item 3</li>
+            </ol>
+            <ol type="A" start="4">
+                <li>Item 4</li>
+                <li>Item 5</li>
+                <li>Item 6</li>
+            </ol>
+            <ol type="I" start="7">
+                <li>Item 7</li>
+                <li>Item 8</li>
+                <li>Item 9</li>
+            </ol>
+            <h3>Table</h3>
+            <table border="1" class="table table-striped table-hover">
+                <thead>
+                    <tr>
+                        <th>Item</th>
+                        <th>Name</th>
+                        <!-- This is a header. -->
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>1</td>
+                        <td>Gavin</td>
+                    </tr>
+                    <tr>
+                        <td>2</td>
+                        <td>Jack</td>
+                    </tr>
+                    <tr>
+                        <td>3</td>
+                        <td>Roy</td>
+                    </tr>
+                    <tr>
+                        <td>4</td>
+                        <td>Lily</td>
+                    </tr>
+                </tbody>
+            </table>
+            <h3>Hyperlinks</h3>
+            <p>
+                <a href="#top">Click this to go back to top. </a><br>
+                <!-- There are relative paths below. -->
+                <a id="hello_world" href="./hello_world.html" target="_blank">Hello World!</a><br>
+                <!-- There are absolute paths below. -->
+                <a href="https://Gavin-OP.github.io">Gavin's Website</a>
+            </p>
+            <h3>Image</h3>
+            <div class="container-fluit">
+                <img src="./people.png" style="max-width: 30%; height:auto">
+            </div>
+            <svg width="100" height="100" color="black">
+                <circle cx="50" cy="50" r="40" stroke="black" stroke-width="3" fill="grey"></circle>
+            </svg><br>
+            <picture>
+                <source srcset="./bg.jpeg 6x, ./background.jpg 5.5x">
+                <img src="./house.jpeg 6x">
+            </picture><br>
+            <h3>Special Characters</h3>
+            <p>Let X be the variable and assume x &lt; 100 and X &gt; 0. <br> I can also add &nbsp; &nbsp; &nbsp; &nbsp;
+                spaces!!! <br></p>
+        </section>
+
+
+        <aside>
+            <ul class="list-inline">
+                <li class="list-inline-item">
+                    <a href="#top">Back to TOP</a>
+                </li>
+                <li class="list-inline-item">
+                    <a href="#chapter2">Chapter 2</a>
+                </li>
+                <li class="list-inline-item">
+                    <a href="#chapter3">Chapter 3</a>
+                </li>
+                <li class="list-inline-item">
+                    <a href="#chapter4">Chapter 4</a>
+                </li>
+                <li class="list-inline-item">
+                    <a href="#chapter5">Chapter 5</a>
+                </li>
+                <li class="list-inline-item">
+                    <a href="#chapter7">Chapter 7</a>
+                </li>
+                <li class="list-inline-item">
+                    <a href="#chapter8">Chapter 8</a>
+                </li>
+                <li class="list-inline-item">
+                    <a href="#chapter9">Chapter 9</a>
+                </li>
+                <li class="list-inline-item">
+                    <a href="#end">Bottom</a>
+                </li>
+            </ul>
+        </aside>
+
+
+        <section id="chapter3">
+            <h2>Chapter 3</h2>
+            <div class="container-sm chp3-container-bg">small</div>
+            <div class="container-md chp3-container-bg">medium</div>
+            <div class="container-lg chp3-container-bg">large</div>
+            <div id="full-image" class="container-fluit" style="width: inherit; height: inherit; object-fit: cover;">
+                <img src="./background.jpg" width="100%">
+            </div>
+            <div id="budge-components" class="container-fluit">
+                <button type="button" class="btn btn-primary position-relative"
+                    style="margin-top: 20px; margin-bottom: 20px; margin-left: 20px; margin-right: 20px;">
+                    Chatbox1
+                    <span
+                        class="position-absolute top-0 start-100 translate-middle p-2 bg-danger border border-light rounded-circle">
+                    </span>
+                </button>
+                <button type="button" class="btn btn-secondary position-relative"
+                    style="margin-top: 20px; margin-bottom: 20px; margin-left: 20px; margin-right: 20px;">
+                    Chatbox2
+                    <span
+                        class="position-absolute top-0 start-100 translate-middle p-2 bg-danger border border-light rounded-circle">
+                    </span>
+                </button>
+                <button type="button" class="btn btn-success position-relative"
+                    style="margin-top: 20px; margin-bottom: 20px; margin-left: 20px; margin-right: 20px;">
+                    Chatbox3
+                    <span
+                        class="position-absolute top-0 start-100 translate-middle p-2 bg-danger border border-light rounded-circle">
+                    </span>
+                </button>
+                <button type="button" class="btn btn-danger position-relative d-block"
+                    style="margin-top: 20px; margin-bottom: 20px; margin-left: 20px; margin-right: 20px;">
+                    Chatbox4
+                    <span
+                        class="position-absolute top-0 start-100 translate-middle p-2 bg-danger border border-light rounded-circle">
+                    </span>
+                </button>
+            </div>
+            <p class="text-warning bg-success mx-2">This is a text-warning, which can change text to yellow. bg-success
+                means is like this. So ugly. mx-2 change the left and right margin. </p>
+            <div class="form-floating mb-3">
+                <input id="name" class="form-control" type="text" placeholder="Gavin" required>
+                <label for="name">What is your name?</label>
+            </div>
+            <div class="form-floating mb-3">
+                <input id="email" class="form-control" type="email" placeholder="email@XX.XX">
+                <label for="email">What is your email?</label>
+            </div>
+            <div class="form-check form-switch mb-3">
+                <input id="laydown" class="form-check-input" type="checkbox">
+                <label for="laydown" class="form-check-label">摆烂一分钟</label>
+            </div>
+            <div class="mb-3">
+                <label for="range">Percentage</label>
+                <input id="range" class="form-range" type="range">
+            </div>
+        </section>
+
+
+        <section id="chapter4">
+            <h2 id="chapter4-heading">Chapter 4</h2>
+            <h3>Try Different Length Units</h3>
+            <div class="container-fluid">
+                <table border="1" class="table table-striped table-hover">
+                    <thead>
+                        <tr>
+                            <th>Item</th>
+                            <th>Name</th>
+                            <!-- This is a header. -->
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr style="height: 10px;">
+                            <td>1: height: 10px;</td>
+                            <td>Gavin</td>
+                        </tr>
+                        <tr style="height: 10%;">
+                            <td>2: height: 10%;</td>
+                            <td>Gavin</td>
+                        </tr>
+                        <tr style="height: 15em">
+                            <td>3: height: 15em</td>
+                            <td>Jack</td>
+                        </tr>
+                        <tr style="height: 10vh;">
+                            <td>4:height: 10vh</td>
+                            <td>Roy</td>
+                        </tr>
+                        <tr style="height: 10rem;">
+                            <td>5: height: 10rem</td>
+                            <td>Lily</td>
+                        </tr>
+                        <tr style="height: 10vw;">
+                            <td>6: height: 10vw</td>
+                            <td>Tony</td>
+                        </tr>
+                        <tr>
+                            <td>7: none</td>
+                            <td>Barry</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <h3>Blockquote</h3>
+            <blockquote cite="https://Gavin-OP.github.io">
+                Being a multitasker who is not only good at risk management but also talented in time management,
+                paperwork,
+                communication, coding, and various tasks, I can deal with the stress even under CUHK courses and NTU
+                exchange while managing 5 associations and organizing voluntary teams simultaneously. I would like to
+                take
+                on the coming challenges and innovations to embrace the goal of joining the financial industry.
+            </blockquote>
+            <p>Let's try what is <small>small</small> elements.</p>
+            <h3>Inline Block</h3>
+
+            <p>I want to know how to use a <span style="background-color: grey; color: whitesmoke; padding: 5px;">inline
+                    box</span> to make some modifications. </p>
+
+            <ul>
+                <li id="inline">
+                    <a href="#top">Back to TOP</a>
+                </li>
+                <li id="inline">
+                    <a href="#chapter2">Chapter 2</a>
+                </li>
+                <li id="inline">
+                    <a href="#chapter3">Chapter 3</a>
+                </li>
+                <li id="inline">
+                    <a href="#chapter4">Chapter 4</a>
+                </li>
+                <li id="inline">
+                    <a href="#chapter5">Chapter 5</a>
+                </li>
+            </ul>
+
+            <div style="display: none;">
+                <p>You can not see the block and there is no space. </p>
+            </div>
+
+            <div style="visibility: hidden;">
+                <p>You can not see the content but you can see a white block. </p>
+            </div>
+
+            <div style="position: absolute; top: 80px; right: 30px;">
+                CUHK Student.
+            </div>
+
+            <div style="position: fixed; top: 40px; right: 30px;">
+                Perfectly Balanced.
+            </div>
+
+            <div style="position: relative; width: 500px; height: 30px;">
+                May the force be with you.
+            </div>
+
+            <div id="external-warning">
+                <article>
+                    <pre>
+Do not go gentle into that good night,
+Old age should burn and rave at close of day;
+Rage, rage against the dying of the light.
+
+Though wise men at their end know dark is right,
+Because their words had forked no lightning they
+Do not go gentle into that good night.
+
+Good men, the last wave by, crying how bright
+Their frail deeds might have danced in a green bay,
+Rage, rage against the dying of the light.
+
+Wild men who caught and sang the sun in flight,
+And learn, too late, they grieved it on its way,
+Do not go gentle into that good night.
+
+Grave men, near death, who see with blinding sight
+Blind eyes could blaze like meteors and be gay,
+Rage, rage against the dying of the light.
+
+And you, my father, there on the sad height,
+Curse, bless, me now with your fierce tears, I pray.
+Do not go gentle into that good night.
+Rage, rage against the dying of the light.
+                </pre>
+                </article>
+            </div>
+
+            <div class="container-fluit">
+                <h3>Transform</h3>
+                <div id="translate">
+                    <p>Translate</p>
+                </div>
+                <div id="rotate">
+                    <p>Rotate</p>
+                </div>
+                <div id="skew">
+                    <p>Skew</p>
+                </div>
+            </div>
+        </section>
+
+
+        <section id="chapter5">
+            <h2>Chapter 5</h2>
+            <script>
+                document.write('Hello World!\n');
+                document.write('Script usually put at the end of HTML body for faster page load. ')
+            </script>
+            <form method="get">
+                <div>
+                    <label for="name2">Name: </label>
+                    <input id="name2" type="text" name="name2" placeholder="Zhang" autofocus required>
+                </div>
+                <div>
+                    <label for="phone">Phone: </label>
+                    <input id="phone" type="tel" name="phone" placeholder="+852 12345">
+                </div>
+                <div>
+                    <label for="password">Password: </label>
+                    <input id="password" type="password" name="pass" placeholder="123456">
+                </div>
+                <div>
+                    <label for="comment">Your Comments: </label>
+                    <textarea id="comment" name="comment" placeholder="...">My Comments: </textarea>
+                </div>
+                <div>
+                    <label for="readonly">You can only read: </label>
+                    <textarea id="readonly" readonly>May the force be with you. </textarea>
+                </div>
+                <div>
+                    <label for="email2">Email: </label>
+                    <input id="email2" type="email" name="email2" disabled>
+                </div>
+                <div>
+                    <label for="search">Search: </label>
+                    <input id="search" type="search" name="search" placeholder="How to..." value="How to">
+                </div>
+                <div>
+                    <label for="url">Link: </label>
+                    <input id="url" type="url" name="url" placeholder="https://...">
+                </div>
+                <div>
+                    <label for="color">Color: </label>
+                    <input id="color" type="color" name="color">
+                </div>
+
+                <div>
+                    <input type="checkbox" name="sql">SQL<br>
+                    <input type="checkbox" name="R">R<br>
+                    <input type="checkbox" name="python">Python<br>
+                </div>
+                <div>
+                    <p>Language:</p>
+                    <input type="radio" name="lang">English<br>
+                    <input type="radio" name="lang">Chinese<br>
+                    <input type="radio" name="lang">Cantonese<br>
+                </div>
+                <div>
+                    <select name="skills">
+                        <option value="snowboarding">snowboarding</option>
+                        <option value="ski">ski</option>
+                        <option value="piano">piano</option>
+                        <option value="mountain-bike" selected>mountain bike</option>
+                    </select>
+                </div>
+                <div>
+                    <fieldset>
+                        <legend>Choose your name</legend>
+                        <div>
+                            <input type="checkbox" id="gavin" name="choose-name">
+                            <label for="gavin">Gavin</label>
+                        </div>
+                        <div>
+                            <input type="checkbox" id="lily" name="choose-name">
+                            <label for="lily">Lily</label>
+                        </div>
+                    </fieldset>
+                </div>
+                <button type="button">I agree the terms</button>
+                <button type="reset">Clear all content</button>
+                <div>
+                    <button type="submit">Submit</button>
+                </div>
+            </form>
+        </section>
+
+
+        <section id="chapter7">
+            <h1>Chapter 7</h1>
+            <button id="chp6" class="btn" onclick="chapter6()">Click the button to run chapter 6 js code and open the
+                console to see the result.</button>
+            <p id="idddddddd1">123345</p>
+            <p id="modify">This can be modified. </p>
+            <div id="text">This is a plain text. </div>
+            <p id='classWarning' class="text-warning">This is a text-warning. </p>
+            <p id="span">This is a <span>TEST.</span></p>
+
+            <div id="subDOM">
+                <h1 id="DOM">This is a test</h1>
+
+                <p>DOM is <span>fun</span>!!!</p>
+            </div>
+            <button id="chp7" class="btn" onclick="chapter7()">Click the button to run chapter 7 js code and open the
+                console to see the result.</button>
+
+
+            <script>
+                chapter7 = function () {
+                    chapter2 = "123";
+                    chapter2 = window.document.querySelector("h2");
+                    chapter3 = window.document.querySelectorAll("h3");
+                    out1 = window.document.getElementById("idddddddd1");
+                    navig = window.document.getElementsByTagName("nav");
+                    range = window.document.getElementsByClassName("form-range");
+                    console.log(range[0]);
+                    console.log(navig[0]);
+                    console.log(chapter3[0]);
+                    console.log(out1);
+                    window.document.innerHTML = chapter2[0];
+                    console.log(window.document.scripts[0]);
+                    console.log(window.document.links[0]);
+                    out = window.document.getElementById("modify");
+                    console.log(out);
+                    out.innerHTML = '<p id="modify" style="color: blue;">Welcome home OP.</p>';
+                    text = window.document.getElementById("text");
+                    text.innerText = "yeahhhhh. ";
+                    name = window.document.getElementById('name2');
+                    // console.log(name.value);
+                    window.document.getElementById('classWarning').className = "text-primary";
+                    text.style.color = "grey";
+                    out.style.textAlign = "center";
+                    document.getElementById('span').getElementsByTagName("span")[0].style.backgroundColor = "lightblue";
+                    console.log(document.getElementById('span').id);
+                    let para = document.createElement("p");
+                    text = document.createTextNode("This is a new text.");
+                    para.appendChild(text);
+                    console.log(para);
+                    lastelechild = document.getElementById('subDOM').lastElementChild;
+                    console.log(lastelechild);
+                    document.getElementById('subDOM').insertBefore(para, lastelechild);
+                }
+            </script>
+
+
+            <p id="clickMe">Click Me</p>
+            <p id="MouseOver"> Mouse over me</p>
+            <p id="load"></p>
+            <input id="name3" type="name" value="change me">
+            <p id="listen">HIIIIIIIIII, click me to change by addEventListener.</p>
+            <button id="effect" class="btn" onclick="effect()">Click the button to see the effect and open the
+                console to see the output.</button>
+
+
+            <script>
+                effect = () => {
+                    document.getElementById('clickMe').onclick = function () { alert('Clicked!'); };
+                    document.getElementById('MouseOver').onmouseover = function () { document.getElementById('MouseOver').style.color = "red"; };
+                    document.getElementById('load').onload = document.getElementById('load').innerHTML = '<p id="modify" style="color: blue;">loading.</p>';
+                    document.getElementById('load').onunload = document.getElementById('load').innerHTML = '<p id="modify" style="color: blue;">loaded.</p>';
+                    document.getElementById('name3').onchange = function () { document.getElementById('name3').value = "changed" };
+                    document.getElementById('name3').onfocus = function () { document.getElementById('name3').style.backgroundColor = "red" };
+                    document.getElementById('MouseOver').onmouseout = function () { document.getElementById('MouseOver').style.color = "blue"; };
+                    document.getElementById("listen").addEventListener("click", function () {
+                        document.getElementById("listen").innerHTML = "Hello World!";
+                    });
+
+                    // Create Object
+
+                    let stu1 = { name: "John", age: 18 };
+                    stu1.name = "Gavin";
+                    stu1["age"] = 20;
+                    console.log(stu1);
+                    function student(name, sid) {
+                        this.name = name;
+                        this.sid = sid;
+                    }
+                    let stu2 = new student("Lily", 22);
+                    let stu3 = new student("Jack", 30);
+                    console.log(student);
+                    console.log(stu3);
+                    let obj = {
+                        x: 10,
+                        y: function () { console.log(this.x); }
+                    }
+                    obj.y();
+
+
+                    x = 20;
+                    a = obj.y;
+                    b = obj.y;
+                    a();
+                    b();
+
+                    let myJSONtext = '{"name": "John", "age": 18}';
+                    let myData = JSON.parse(myJSONtext);
+                    console.log(myData);
+                    myJSONtext = JSON.stringify(myData);
+                    console.log(myJSONtext);
+                }
+            </script>
+
+        </section>
+
+
+        <section id="chapter8">
+            <h2>Chapter 8</h2>
+            <button id="chp8" class="btn" onclick="chapter8()">Click the button to run chapter 8 js code and open the
+                console to see the result.</button>
+            <div class="container-fluit">
+                <form class="form-floating">
+                    <div>
+                        <label for="login" class="form-label">Username: </label>
+                        <input id="login" class="form-control" type="text">
+                    </div>
+                    <div>
+                        <button type="submit" onclick="f5()">submit</button>
+                    </div>
+                </form>
+                <p id="myscore"></p>
+                <p id="mygen"></p>
+                <button id="btn1" type="button" class="btn">click to show my score. </button><br>
+                <button id="btn2" type="button" class="btn" onclick="this.style.color = 'red'">click to show change
+                    color. </button><br>
+                <button id="btn3" type="button" class="btn"
+                    onclick="console.log('You have clicked '+ count.next().value + ' times.');">click to count.
+                </button><br>
+
+            </div>
+            <script>
+                function* g(inc) {
+                    let x = 0;
+                    while (1)
+                        yield x += inc;
+                }
+                let count = g(1);
+                function f5() {
+                    login = window.document.getElementById('login').value;
+                    console.log("This is the f5 input: " + login);
+                }
+                chapter8 = () => {
+                    function f1(x, y = 2, z) {
+                        console.log("x = " + x);
+                        console.log("y = " + y);
+                        console.log("z = " + z);
+                    }
+                    f1(5);
+
+                    function f2() {
+                        for (i of arguments) {
+                            console.log(i);
+                        }
+                    }
+                    f2(1, "car", 50);
+
+                    function f3(x, y, ...others) {
+                        console.log("x = " + x);
+                        console.log("y = " + y);
+                        console.log(others);
+                        console.log(typeof others);
+                    }
+                    f3(1, 3, "car", "apple");
+
+                    let f4 = (a, ...b) => {
+                        console.log(b);
+                    }
+                    f4(1, 2, 3, 4, 5);
+
+
+
+                    let f6 = function (text) {
+                        console.log('this is the f6 input: ' + text);
+                    }
+                    let f7 = (text) => { console.log('this is f7 inpu: ' + text) };
+                    f6("IG");
+                    f7("AC");
+                    console.log(f5);
+
+                    (() => console.log('hello there!'))();
+
+                    document.querySelector("#btn1").onclick = () => { document.querySelector("#myscore").innerHTML = '<p id="myscore">Your score is 100!</p>' };
+
+                    function nest1(a) {
+                        function nest2(b) {
+                            return a + b;
+                        }
+                        return nest2;
+                    }
+                    console.log(nest1(10));
+                    console.log(nest1(19)(4));
+
+                    // function f8(resolve, error) {
+                    //     x = prompt('Please input your age: ');
+                    //     if (x < 20)
+                    //         resolve();
+                    //     else
+                    //         error();
+                    // }
+                    // res = () => {
+                    //     f4(1, 2, 3, 4, 5);
+                    //     console.log('resolved');
+                    // }
+                    // err = () => {
+                    //     f6("IG");
+                    //     console.log("error");
+                    // }
+                    // f8(res, err);
+
+
+
+                    let human = {
+                        keyword: "Gavin",
+                        shout: function () { console.log(this.keyword) }
+                    }
+                    // Arrow function does not work.
+                    human.shout();
+                    let human2 = {
+                        keyword: "Peter",
+                        shout() { console.log(this.keyword) }
+                    }
+                    human2.shout();
+                }
+            </script>
+
+
+            <button id="array" type="button" class="btn" onclick="arrayfuc()">Click the button to run chapter 8
+                array js code and open the console to see the result.
+            </button><br>
+            <script>
+                arrayfuc = function () {
+                    let x = [1, 2, 3];
+                    console.log(Array.isArray(x));
+                    y = x;
+                    console.log(y);
+                    console.log(y[0]);
+
+                    let s = 'Hello World!';
+                    let array1 = Array.from(s);
+                    console.log(array1);
+                    console.log(s.length);
+                    console.log(array1.length);
+
+                    a1 = [1, 3, 5];
+                    b1 = [2, 4, 6];
+                    c1 = [...a1, 'lalala', ...b1];
+                    console.log(c1);
+
+                    [a, b, ...rest] = [10, 20, "gavin", 45, 65, 324];
+                    console.log(a);
+                    console.log(b);
+                    console.log(rest);
+
+                    c = [...a1, ...b1, ...rest, ...array1];
+                    console.log(c);
+                    console.log(c.slice(3, 20));
+                    console.log(c.splice(3, 2, "red", "green", "end"));
+                    console.log(c);
+                    console.log(c.slice(-3, 22));
+
+                    console.log(c.pop())
+                    c.push(222, 333, 444, 555);
+                    console.log(c);
+                    console.log(c.shift())
+                    c.unshift("aaa", "bbb", "ccc");
+                    c.push("using queue but added by push");
+                    console.log(c);
+
+                    a = [1, 3, 5];
+                    for (let i = 0; i < a.length; i++) {
+                        console.log(a[i]);
+                    }
+                    for (let i of a) {
+                        console.log(i);
+                    }
+                    a.forEach((item) => console.log(item));
+                    a.forEach(
+                        (item, i, array) => {
+                            console.log("this is " + i + "th iteration.")
+                            console.log("the " + i + "th item is " + item);
+                            array[i] += 1;
+                            console.log(array[i]);
+
+                        }
+                    );
+                    console.log(a);
+
+                    console.log(c.indexOf("l", 0));
+                    console.log(c.lastIndexOf("l", 28));
+                    // from the last element to the first elements.
+                    console.log(c);
+                    console.log(c.includes(6));
+                    a = [1, 3, 5, 7, 9];
+                    small3 = function (a) {
+                        return a <= 5;
+                    }
+                    console.log(a.find(small3));
+                    console.log(a.filter(small3));
+                    console.log(a.reverse());
+                    ccc = "My name is Barry Allen.".split(" ");
+                    console.log(ccc);
+                    console.log(ccc.join(" "));
+
+                    let num = [10, 12, 13, 15, 20, 5];
+                    console.log(num.map(n => n * 2));
+                    console.log(num.sort((a, b) => a - b))
+                }
+            </script>
+
+        </section>
+
+
+        <section id="chapter9">
+            <h2>Chapter 9</h2>
+        </section>
+        <div id="app">React is readering...</div>
+    </main>
+
+
+    <!-- This is a footer. -->
+    <footer id="end" style="background-color:#c6c6c6">
+        <a href="#top">Back to TOP</a>
+        <div class="container-fluid" style="text-align: center;">
+            <div class="row">
+                <p class="col-sm-4 col-md-3 col-xl-2"><i class="bi bi-envelope-fill"></i> Email</p>
+                <p class="col-sm-4 col-md-6 col-xl-8 border-start border-3 border-end"
+                    style="border-color: rgba(128, 128, 128, 0.493);"><i class="bi bi-linkedin"></i> LinkedIn</p>
+                <p class="col-sm-4 col-md-3 col-xl-2"><i class="bi bi-geo-alt-fill"></i> Address</p>
+            </div>
+        </div>
+    </footer>
+    <script src="https://unpkg.com/react@18/umd/react.development.js" crossorigin></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js" crossorigin></script>
+    <!-- Executable scripts are put at the end of the HTML body. -->
+</body>
+
+</html>

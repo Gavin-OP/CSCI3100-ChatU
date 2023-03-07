@@ -24,3 +24,4 @@
 ## Reference
 [JavaScript 图片压缩参考](https://github.com/wuwhs/js-image-compressor/blob/master/README-CN.md)  
 [Lazy load Reference](https://developer.mozilla.org/en-US/docs/Web/Performance/Lazy_loading)  
+[Git Book](https://git-scm.com/book/en/v2)

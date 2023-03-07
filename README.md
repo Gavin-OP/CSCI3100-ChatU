@@ -2,7 +2,7 @@
 ## Front-end Start Command  
 
 1. Download NodeJS
-1. Open Command Line in the project folder. 
+1. Open Command Line under the project folder. 
 1. `cd frontend`: Go to the frontend folder.  
 2. `npm install`: Install all the dependencies, including packages: `react`, `bootstrap`, `body-parser`, `mdb-react-ui-kit`, `react-google-maps`, etc. 
 3. `npm start`: Start the frontend.
@@ -13,7 +13,7 @@
 ## Back-end Start Command
 
 1. Download NodeJS
-1. Open Command Line in the project folder. 
+1. Open Command Line under the project folder. 
 1. `cd backend`: Go to the backend folder.
 2. `npm install`: Install all dependencies, including packages: `express`, `nodemon`, `mongoose`, `xml2json-light`, `cors`, `express-session`, `cookie-parser`, etc. 
 3. `npx nodemon server.js`: Start the backend server, connect to mongoDB
@@ -24,3 +24,4 @@
 ## Reference
 [JavaScript 图片压缩参考](https://github.com/wuwhs/js-image-compressor/blob/master/README-CN.md)  
 [Lazy load Reference](https://developer.mozilla.org/en-US/docs/Web/Performance/Lazy_loading)  
+[Git Book](https://git-scm.com/book/en/v2)

@@ -22,7 +22,8 @@
 
 ## Frontend Module Design
 
-> Recommend reading: CSCI2720 chapter 6, 9
+> Recommend reading: CSCI2720 chapter 6, 9  
+> The number of 👍 represents the difficulty of the module. 
 
 👍1 header  i: login ii: User, icon and dropdown. iii: admin （ZHX）   
 👍👍👍<6 tweet card: only the small box and its comment.    

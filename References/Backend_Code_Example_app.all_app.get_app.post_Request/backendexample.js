@@ -49,7 +49,7 @@ app.all(/.*\.jpg$/, function (req, res) {
 // Route parameters matching
 // http://localhost:3000/course/CSCI/lecture/3100
 app.all('/course/:cID/lecture/:lID', function (req, res) {
-  res.send(req.params);
+  res.send(req.params)
 });
 
 
@@ -110,4 +110,4 @@ app.get('/path3', function (req, res) {
 // -----
 
 
-const server = app.listen(3000);
+const server = app.listen(5555);

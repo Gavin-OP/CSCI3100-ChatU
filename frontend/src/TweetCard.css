@@ -1,0 +1,143 @@
+.container {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    margin: 5px;
+}
+
+.tweet-card {
+    background-color: #fff;
+    border-radius: 10px;
+    padding: 16px;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+    max-width: 600px;
+}
+
+.tweet-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.avatar img {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    margin-right: 10px;
+}
+
+.user-info {
+    display: flex;
+    flex-direction: row;
+    /* margin-left: 12px; */
+}
+
+.username {
+    font-weight: bold;
+    font-size: 16px;
+    margin-right: 4px;
+    height: 28px;
+}
+
+.follow {
+    height: 28px;
+    display: flex;
+    flex-direction: column;
+}
+
+.follow-button {
+    padding: 4px 4px;
+    border-radius: 5px;
+    font-size: 9px;
+    background-color: #a2adb496;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    margin-right: 10px;
+}
+
+
+/* not test yet */
+.tweet-id {
+    font-size: 12px;
+    color: #657786;
+}
+
+
+
+.tweet-content {
+    display: flex;
+    flex-direction: row;
+    margin-top: 16px;
+}
+
+.tweet-image img {
+    max-width: 100%;
+    max-height: 200px;
+    object-fit: cover;
+    border-radius: 10px;
+    margin-right: 16px;
+}
+
+.tweet-text {
+    font-size: 16px;
+    line-height: 1.5;
+    margin-right: 16px;
+}
+
+.tweet-actions {
+    display: flex;
+    flex-direction: row;
+    margin-top: 16px;
+}
+
+.retweet-button,
+.like-dislike-button,
+.favorite-button,
+.comment-button {
+    padding: 8px 12px;
+    border-radius: 30px;
+    font-size: 12px;
+    background-color: transparent;
+    color: #657786;
+    border: none;
+    cursor: pointer;
+    margin-right: 16px;
+}
+
+.retweet-button:hover,
+.like-dislike-button:hover,
+.favorite-button:hover,
+.comment-button:hover {
+    background-color: #e8f5fe;
+    color: #1da1f2;
+}
+
+.like-dislike-button {
+    display: flex;
+    align-items: center;
+}
+
+.like-dislike-button svg {
+    width: 16px;
+    height: 16px;
+    margin-right: 8px;
+}
+
+.comment-input {
+    margin-top: 16px;
+}
+
+.comment-input input {
+    width: 100%;
+    padding: 12px;
+    border-radius: 30px;
+    border: 1px solid #e1e8ed;
+    font-size: 14px;
+    color: #14171a;
+    outline: none;
+}
+
+.comment-input input::placeholder {
+    color: #657786;
+}

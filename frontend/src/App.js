@@ -12,7 +12,7 @@ function App() {
 
   return (
     <div>
-    {
+      {
     /* //   <div style={{ textAlign: 'center' }}>
     //     <NavigationBar page={"login"}/>
     //     <h1 style={{ textAlign: "center" }}>ChatU is under development. </h1>
@@ -20,8 +20,7 @@ function App() {
     //   </div> */}
 
       <BrowserRouter>
-        {/* <NavigationBar page='login' /> */}
-        <TweetCard />
+        <TweetCard avatarUrl='./avatar.png' username='Gavin OP' tweetId='#10034' imageSrc='./avatar.png' tweetText='This is my first tweet!!!!!!!!!!' />
         <Routes>
           {<Route path="/Login" element={<Login />} />}
           { /*<Route path="/Login" element={<Navigate to="/Login" />} /> */}

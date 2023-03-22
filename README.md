@@ -26,8 +26,8 @@
 > The number of ⭐ represents the difficulty of the module. 
 1. Header
    - Features: logo, navigation bar, avatar, dropdown
-   - Difficulty: ⭐
    - People in Charge: OP
+   - Difficulty: ⭐
    - Versions: 
      - Login page header
      - User page header
@@ -38,14 +38,16 @@
   
 2. Tweet Card
    - Features: comment 
-   - Difficulty: ⭐⭐
    - People in Charge: OP
+   - Difficulty: ⭐⭐
+
 
 
 3. Retweet Card
    - Features: 
-   - Difficulty: ⭐
    - People in Charge: OP
+   - Difficulty: ⭐
+
 
 
 

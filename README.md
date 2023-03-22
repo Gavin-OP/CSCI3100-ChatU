@@ -4,7 +4,7 @@
 1. Download NodeJS
 1. Open Command Line under the project folder. 
 1. `cd frontend`: Go to the frontend folder.  
-2. `npm install`: Install all the dependencies, including packages: `react`, `bootstrap`, `body-parser`, `mdb-react-ui-kit`, `react-google-maps`, etc. 
+2. `npm install`: Install all the dependencies, including packages: `react`, `react-router-dom`, `bootstrap`, `body-parser`, `mdb-react-ui-kit`, `react-google-maps`, etc. 
 3. `npm start`: Start the frontend.
 4. Go to the web browser, access the web app in localhost port 3000: [http://localhost:3000/](http://localhost:3000/)  
 5. `Ctrl`+`c`: Shutdown frontend  
@@ -23,11 +23,30 @@
 ## Frontend Module Design
 
 > Recommend reading: CSCI2720 chapter 6, 9  
-> The number of 👍 represents the difficulty of the module. 
+> The number of ⭐ represents the difficulty of the module. 
+1. Header
+   - Features: logo, navigation bar, avatar, dropdown
+   - Difficulty: ⭐
+   - People in Charge: OP
+   - Versions: 
+     - Login page header
+     - User page header
+     - Admin page header  
+   - Usage
+      1. write `import { NavigationBar } from './Navbar.js';` at the begining of the file to import the header module
+      2. write `<NavigationBar page='login' />`, `<NavigationBar page='user' />`, `<NavigationBar page='admin' />` like a basic HTML element in the return part. The codes are for login, user, and admin respectively.  
+  
+2. Tweet Card
+   - Features: comment 
+   - Difficulty: ⭐⭐
+   - People in Charge: OP
 
-👍1 header  i: login ii: User, icon and dropdown. iii: admin （ZHX）   
-👍👍👍<6 tweet card: only the small box and its comment.    
-7 retweet card > (ZHX).    
+
+3. Retweet Card
+   - Features: 
+   - Difficulty: ⭐
+   - People in Charge: OP
+
 
 
 👍2 login, register  central components (LZX).    

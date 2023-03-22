@@ -6,6 +6,7 @@ import './App.css';
 import { NavigationBar } from './Navbar.js';
 import { Route, Navigate } from 'react-router-dom';
 import { Login } from './Login';
+import { TweetCard } from './TweetCard'
 
 function App() {
 
@@ -20,8 +21,9 @@ function App() {
 
       <BrowserRouter>
         {/* <NavigationBar page='login' /> */}
+        <TweetCard />
         <Routes>
-          { <Route path="/Login" element={<Login />} /> }
+          {<Route path="/Login" element={<Login />} />}
           { /*<Route path="/Login" element={<Navigate to="/Login" />} /> */}
         </Routes>
       </BrowserRouter>

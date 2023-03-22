@@ -13,13 +13,13 @@ export function Login(){
             <form class="p-3 mt-3" method='post' >
                 <div class="form-field">
                     <span class="Email"></span>
-                    <input type="text" name="Email" id="email" placeholder="Email"/>
+                    <input type="email" name="Email" id="email" placeholder="Email"/>
                 </div>
                 <div class="form-field">
                     <span class="pw"></span>
                     <input type="password" name="password" id="pwd" placeholder="Password"/>
                 </div>
-                <button class="btn mt-3">Login</button>
+                <button type="submit" class="btn mt-3">Login</button>
             </form>
             <div class="text-center fs-6">
                 <a href="#">Forget password?</a> or <a href="#">Sign up</a>

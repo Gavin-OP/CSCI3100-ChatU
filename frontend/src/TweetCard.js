@@ -6,24 +6,32 @@ import './TweetCard.css';
 export function TweetCard(props) {
     const [state, setState] = useState({
         commentDisplay: 'none',
-        picDisplay: 'none'
+        picDisplay: 'none',
+        like: '#657786'
     });
 
 
-    function picCheck() {
+    // Check whether the user have already like the tweet, if so, light the like button
+    useEffect(() => {
+        const isLike = props.like;
+        // console.log(isLike)
+        if (isLike)
+            setState({ ...state, like: '#d92534' })
+    }, [state.like]);
 
-    }
+
     // Display comment or hide comment when click the comment button
     function toggleCommentInput() {
         if (state.commentDisplay === 'none')
-            setState({ commentDisplay: '' })
+            setState({ ...state, commentDisplay: '' })
         else if (state.commentDisplay === '')
-            setState({ commentDisplay: 'none' })
+            setState({ ...state, commentDisplay: 'none' })
     }
 
-    // Hid comment input after click send comment button
+
+    // Hide comment input after click send comment button
     function sendComment() {
-        setState({ commentDisplay: 'none' })
+        setState({ ...state, commentDisplay: 'none' })
     }
 
     return (
@@ -60,7 +68,7 @@ export function TweetCard(props) {
                     <div className='tweet-text-container'>
                         <div className="tweet-text">{props.tweetText}</div>
                         <div className="tweet-actions">
-                            <button className="like-button"><FontAwesomeIcon icon={faHeart} /></button>
+                            <button className="like-button" style={{ color: state.like }}><FontAwesomeIcon icon={faHeart} /></button>
                             <button className="dislike-button"><FontAwesomeIcon icon={faHeartBroken} /></button>
                             <button className="retweet-button"><FontAwesomeIcon icon={faShare} /></button>
                             <button className="favorite-button"><FontAwesomeIcon icon={faStar} /></button>

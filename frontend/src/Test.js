@@ -4,6 +4,7 @@ import { TweetCard } from './TweetCard'
 const tweet_data = {
     avatarUrl: './avatar.png',
     username: 'Gavin OP',
+    like: 1,
     tweetId: '100056',
     followStatus: 'Following',
     imageSrc: '/tweet_card_pic_1.jpg',

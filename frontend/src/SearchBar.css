@@ -5,7 +5,7 @@
 }
 
 .input {
-    padding: 10px;
+    padding-left: 45px;
     width: 260px;
     height: 60px;
     background: linear-gradient(to right, #a6366a, #db2431);
@@ -15,12 +15,15 @@
     box-sizing: border-box;
     font-family: Comic Sans MS;
     font-size: 26px;
+    font-variant-position: ;
     color: #ffffff;
     outline: none;
     transition: 1.5s;
 }
 
 .input::placeholder {
+    /* position: relative;
+    left: 40px; */
     color: transparent;
     transition: 1s;
 }

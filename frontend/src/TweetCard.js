@@ -15,9 +15,9 @@ export function TweetCard(props) {
     }
     // Display comment or hide comment when click the comment button
     function toggleCommentInput() {
-        if (state.commentDisplay == 'none')
+        if (state.commentDisplay === 'none')
             setState({ commentDisplay: '' })
-        else if (state.commentDisplay == '')
+        else if (state.commentDisplay === '')
             setState({ commentDisplay: 'none' })
     }
 

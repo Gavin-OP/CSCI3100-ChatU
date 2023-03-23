@@ -55,6 +55,9 @@
 👍<3 admin tweet page : search bar, result box (LZX).   
 4 admin user page : search bar, result box.   
 5 admin comment: search bar, result box>.   
+
+SearchBar component: import SearchBar.js and the function is called by: <searchBar page="your page(mayby you need to add something in SearchBar.js file )" />.   
+
 👍8 refresh and user recommendation box (LZX)	  
 
 

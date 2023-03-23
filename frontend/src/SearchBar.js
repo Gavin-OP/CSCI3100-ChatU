@@ -25,10 +25,10 @@ export function SearchBar({ page }) {
         Bar = (
             <div class="container">
                 <div class="box">
+                    <i><FontAwesomeIcon icon={faMagnifyingGlass} /></i>
                     <form name="search">
                         <input type="text" class="input" name="txt" onmouseout="this.value = ''; this.blur();" placeholder='#' />
                     </form>
-                    <i class="faMagnifyingGlass" ></i>
                 </div>
             </div>
         )
@@ -40,10 +40,10 @@ export function SearchBar({ page }) {
         Bar = (
             <div class="container">
                 <div class="box">
+                    <i><FontAwesomeIcon icon={faMagnifyingGlass} /></i>
                     <form name="search">
                         <input type="text" class="input" name="txt" onmouseout="this.value = ''; this.blur();" placeholder='#' />
                     </form>
-                    <i class="fa-solid fa-magnifying-glass"></i>
                 </div>
             </div>
         )

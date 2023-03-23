@@ -27,7 +27,7 @@ export function SearchBar({ page }) {
                 <div class="box">
                     <i><FontAwesomeIcon icon={faMagnifyingGlass} /></i>
                     <form name="search">
-                        <input type="text" class="input" name="txt" onmouseout="this.value = ''; this.blur();" placeholder='#' />
+                        <input type="text" class="input" name="txt" onmouseout="this.value = ''; this.blur();" placeholder='ID/UserName' />
                     </form>
                 </div>
             </div>
@@ -42,7 +42,7 @@ export function SearchBar({ page }) {
                 <div class="box">
                     <i><FontAwesomeIcon icon={faMagnifyingGlass} /></i>
                     <form name="search">
-                        <input type="text" class="input" name="txt" onmouseout="this.value = ''; this.blur();" placeholder='#' />
+                        <input type="text" class="input" name="txt" onmouseout="this.value = ''; this.blur();" placeholder='#ID/content' />
                     </form>
                 </div>
             </div>

@@ -141,14 +141,16 @@
 
 .retweet-button:hover,
 .like-button:hover,
-.dislike-button:hover,
 .favorite-button:hover,
 .comment-button:hover,
 .send-comment:hover {
     background-color: #ecf0f3;
-    color: #d92534;
+    /* color: #d92534; */
 }
 
+.dislike-button:hover {
+    background-color: #ecf0f3;
+}
 
 .comment-input {
     margin-top: 0px;

@@ -6,6 +6,7 @@ export function SearchBar({ page }) {
     let Bar;
 
     // Search bar for tweet
+    // !!! need a search button
     if (page === 'tweet') {
         Bar = (
             <div class="container">
@@ -20,7 +21,7 @@ export function SearchBar({ page }) {
     }
 
     // Search bar for user
-    // !!! Search Icon is not shown
+    // !!! need a search button
     else if (page === 'user') {
         Bar = (
             <div class="container">
@@ -35,7 +36,7 @@ export function SearchBar({ page }) {
     }
 
     // Search bar for comment
-    // !!! Search Icon is not shown
+    // !!! need a search button
     else if (page === 'comment') {
         Bar = (
             <div class="container">

@@ -12,9 +12,9 @@ export function NavigationBar({ page }) {
                     <li><a href="#">Home</a></li>
                     <li><a href="#">Message</a></li>
                 </ul>
-                <div class="user-avatar">
+                <div className="user-avatar">
                     <img src="./avatar.png" alt="User Avatar" />
-                    <div class="dropdown-menu">
+                    <div className="dropdown-menu">
                         <ul>
                             <li><a href="#">Profile</a></li>
                             <li><a href="#">Settings</a></li>
@@ -36,9 +36,9 @@ export function NavigationBar({ page }) {
                     <li><a href="#">Comment</a></li>
                     <li><a href="#">User</a></li>
                 </ul>
-                <div class="user-avatar">
+                <div className="user-avatar">
                     <img src="./avatar.png" alt="User Avatar" />
-                    <div class="dropdown-menu">
+                    <div className="dropdown-menu">
                         <ul>
                             <li><a id='logout' href="#">Log out</a></li>
                         </ul>
@@ -55,10 +55,10 @@ export function NavigationBar({ page }) {
                 <img src="./logo_colorful.svg" alt="Logo" />
                 <ul>
                     <li><a href="/">Home</a></li>
-                    <li><a href="/Login">login</a></li>
+                    <li><a href="/login">login</a></li>
                 </ul>
-                <div class="user-avatar">
-                    <span class="material-symbols-outlined">
+                <div className="user-avatar">
+                    <span className="material-symbols-outlined">
                         person
                     </span>
                 </div>

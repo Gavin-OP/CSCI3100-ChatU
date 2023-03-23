@@ -21,6 +21,8 @@
 } */
 .box{
     position: relative;
+    display: flex;
+    flex-direction: column;
 }
 
 .input {
@@ -39,6 +41,7 @@
     outline: none;
     transition: 1.5s;
 }
+
 .input::placeholder{
     color: transparent;
     transition: 1s;
@@ -55,14 +58,14 @@
 }
 .box i{
     position: absolute;
-    top: 50%;
-    right: 15px;
+    top: 55%;
+    left: 30px;
     transform: translate(-50%,-50%);
     font-size: 26px;
-    color: #ffd52d;
-    transition: 1s;
+    color: #ffffff;
+    transition: 0.65s;
 }
 .box:hover i{
     opacity: 0;
-    z-index: -1;
+    /* z-index: -1; */
 }

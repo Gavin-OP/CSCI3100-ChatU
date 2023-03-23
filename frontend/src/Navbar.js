@@ -55,7 +55,7 @@ export function NavigationBar({ page }) {
                 <img src="./logo_colorful.svg" alt="Logo" />
                 <ul>
                     <li><a href="/">Home</a></li>
-                    <li><a href="/Login">login</a></li>
+                    <li><a href="/login">login</a></li>
                 </ul>
                 <div className="user-avatar">
                     <span className="material-symbols-outlined">

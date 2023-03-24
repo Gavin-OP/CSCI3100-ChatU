@@ -1,4 +1,11 @@
 # CSCI3100-ChatU
+
+<img src="frontend\public\logo_colorful.svg" alt="ChatU" style="zoom:25%;" />
+
+
+
+## Table of Contents
+
 ## Front-end Start Command  
 
 1. Download NodeJS

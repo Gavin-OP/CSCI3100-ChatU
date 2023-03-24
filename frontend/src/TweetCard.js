@@ -18,25 +18,45 @@ export function TweetCard(props) {
 
     useEffect(() => {
         const isLike = props.likeStatus;
-        console.log(isLike)
+        const isDislike = props.dislikeStatus;
+        const isStar = props.starStatus;
         const isPic = props.imageSrc;
 
-        // Check whether the user have already like the tweet, if so, light the like button
-        if (isLike) {
-            // setState({ ...state, likeLight: '#d92534' })
-            console.log(state.likeLight)
+        // Check whether the user have already like the tweet, if so, light the like button, else grey the button. 
+        if (isLike === 1) {
             setState(prevState => ({ ...prevState, likeLight: '#d92534' }))
         }
+        else if (isLike === 0) {
+            setState(prevState => ({ ...prevState, likeLight: '#657786' }))
+        }
+
+
+        // Check whether the user have already dislike the tweet, if so, light the dislike button, else grey the button. 
+        if (isDislike === 1) {
+            setState(prevState => ({ ...prevState, dislikeLight: '#39aaf9' }))
+        }
+        else if (isDislike === 0) {
+            setState(prevState => ({ ...prevState, dislikeLight: '#657786' }))
+        }
+
+
+        // Check whether the user have already favorite the tweet, if so, light the favorite button, else grey the button. 
+        if (isStar === 1) {
+            setState(prevState => ({ ...prevState, starLight: '#d92534' }))
+        }
+        else if (isStar === 0) {
+            setState(prevState => ({ ...prevState, starLight: '#657786' }))
+        }
+
+
         // Check whether there is a picture and decide whether we should display the picture
         if (isPic === undefined || isPic === '')
-            // setState({ ...state, picDisplay: 'none' })
             setState(prevState => ({ ...prevState, picDisplay: 'none' }))
         else
-            // setState({ ...state, picDisplay: '' })
             setState(prevState => ({ ...prevState, picDisplay: '' }))
-    }, [props.likeStatus, props.dislikeStatus]);
+    }, [props.likeStatus, props.dislikeStatus, props.starStatus, props.imageSrc]);
 
-    console.log(state.likeLight)
+
     // Light or grey the like button when click, it should also contain a fetch function to send data back to server
     function handleLike() {
         if (state.likeLight === '#657786') {
@@ -119,10 +139,13 @@ export function TweetCard(props) {
                         <div className="tweet-text">{props.tweetText}</div>
                         <div className="tweet-actions">
                             <button className="like-button" style={{ color: state.likeLight }} onClick={handleLike}><FontAwesomeIcon icon={faHeart} /></button>
+                            <div className="action-number">{props.likeCount}</div>
                             <button className="dislike-button" style={{ color: state.dislikeLight }} onClick={handleDislike}><FontAwesomeIcon icon={faHeartBroken} /></button>
                             <button className="favorite-button" style={{ color: state.starLight }} onClick={handleStar}><FontAwesomeIcon icon={faStar} /></button>
-                            <button className="retweet-button"><FontAwesomeIcon icon={faShare} /></button>
+                            <div className="action-number">{props.starCount}</div>
                             <button className="comment-button" style={{ color: state.commentLight }} onClick={toggleCommentInput}><FontAwesomeIcon icon={faComment} /></button>
+                            <div className="action-number">{props.commentCount}</div>
+                            <button className="retweet-button"><FontAwesomeIcon icon={faShare} /></button>
                         </div>
                     </div>
                 </div>

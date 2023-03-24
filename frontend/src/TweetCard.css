@@ -13,6 +13,7 @@
     max-width: 600px;
 }
 
+
 /* Tweet header with user information and tweet ID */
 .tweet-header {
     display: flex;
@@ -105,6 +106,7 @@
 /* tweet text and action buttons*/
 .tweet-text-container {
     margin-left: 20px;
+    position: relative;
 }
 
 .tweet-text {
@@ -120,7 +122,9 @@
 .tweet-actions {
     display: flex;
     flex-direction: row;
-    margin-top: 30px;
+    position: absolute;
+    bottom: 0;
+    right: 0px;
     justify-content: right;
     margin-right: 10px;
 }
@@ -130,7 +134,10 @@
 .dislike-button,
 .favorite-button,
 .comment-button {
-    padding: 8px 12px;
+    padding-left: 12px;
+    padding-right: 12px;
+    padding-top: 8px;
+    padding-bottom: 9px;
     border-radius: 30px;
     font-size: 16px;
     background-color: transparent;
@@ -151,8 +158,21 @@
     background-color: #ecf0f3;
 }
 
+
+/* action count button css */
+.action-number {
+    display: block;
+    font-size: 12px;
+    text-align: center;
+    padding-left: -4px;
+    padding-right: 10px;
+    padding-top: 11px;
+}
+
+
+/* comment CSS */
 .comment-input {
-    margin-top: 0px;
+    margin-top: 5px;
     display: flex;
     align-items: center;
     border-radius: 6px;

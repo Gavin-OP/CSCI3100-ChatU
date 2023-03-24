@@ -12,6 +12,7 @@ import { Adminpage } from './Adminpage';
 import { Homepage } from './Homepage';
 import { UnderDevelopment } from './UnderDevelopment';
 import { Post } from './Post'
+import { Retweet } from './Retweet'
 import { Tweetpage } from './Tweetpage'
 function App() {
   return (
@@ -27,6 +28,7 @@ function App() {
           <Route path="/homepage" element={<Homepage page="homepage"/>} />
           <Route path='/test' element={<Test />} />
           <Route path='/post' element={<Post />} />
+          <Route path='/retweet' element={<Retweet />} />
           <Route path='/tweetpage' element={<Tweetpage />} />
           <Route path='/*' element={<UnderDevelopment />} />
         </Routes>

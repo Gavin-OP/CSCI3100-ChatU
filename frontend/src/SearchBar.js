@@ -19,6 +19,19 @@ export function SearchBar({ page }) {
             </div>
         )
     }
+    // Search bar for home page
+    else if (page === 'homepage') {
+        Bar = (
+            <div class="container">
+                <div class="box">
+                    <i><FontAwesomeIcon icon={faMagnifyingGlass} /></i>
+                    <form name="search">
+                        <input type="text" class="input" name="txt" onmouseout="this.value = ''; this.blur();" placeholder='Tweet ID/Key Words/Tags' />
+                    </form>
+                </div>
+            </div>
+        )
+    }
 
     // Search bar for user
     // !!! need a search button

@@ -9,14 +9,14 @@ export function NavigationBar({ page }) {
             <nav>
                 <img src="./logo_colorful.svg" alt="Logo" />
                 <ul>
-                    <li><a href="#">Home</a></li>
-                    <li><a href="#">Message</a></li>
+                    <li><a href="/homepage">Home</a></li>
+                    <li><a href="/message">Message</a></li>
                 </ul>
                 <div className="user-avatar">
                     <img src="./avatar.png" alt="User Avatar" />
                     <div className="dropdown-menu">
                         <ul>
-                            <li><a href="#">Profile</a></li>
+                            <li><a href="/personalpage">Personal Page</a></li>
                             <li><a href="#">Settings</a></li>
                             <li><a id='logout' href="#">Log out</a></li>
                         </ul>
@@ -40,6 +40,8 @@ export function NavigationBar({ page }) {
                     <img src="./avatar.png" alt="User Avatar" />
                     <div className="dropdown-menu">
                         <ul>
+                            <li><a href="/personalpage">Personal Page</a></li>
+                            <li><a href="#">Settings</a></li>
                             <li><a id='logout' href="#">Log out</a></li>
                         </ul>
                     </div>
@@ -55,7 +57,7 @@ export function NavigationBar({ page }) {
                 <img src="./logo_colorful.svg" alt="Logo" />
                 <ul>
                     <li><a href="/homepage">Home</a></li>
-                    <li><a href="/homepage/message">Message</a></li>
+                    <li><a href="/message">Message</a></li>
                 </ul>
                 <div className="user-avatar">
                     <img src="./avatar.png" alt="User Avatar" />
@@ -63,7 +65,30 @@ export function NavigationBar({ page }) {
                         <ul>
                             <li><a id='logout' href="#">Log out</a></li>
                             <li><a id='setting' href="##">Setting</a></li>
-                            <li><a id='personal-page' href="###">Personal Page</a></li>
+                            <li><a id='personal-page' href="/personalpage">Personal Page</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </nav >
+        );
+    }
+
+    // Navigation bar for personalpage
+    else if (page === "personalpage") {
+        navContent = (
+            <nav>
+                <img src="./logo_colorful.svg" alt="Logo" />
+                <ul>
+                    <li><a href="/homepage">Home</a></li>
+                    <li><a href="/message">Message</a></li>
+                </ul>
+                <div className="user-avatar">
+                    <img src="./avatar.png" alt="User Avatar" />
+                    <div className="dropdown-menu">
+                        <ul>
+                            <li><a id='logout' href="#">Log out</a></li>
+                            <li><a id='setting' href="##">Setting</a></li>
+                            <li><a id='personal-page' href="/personalpage">Personal Page</a></li>
                         </ul>
                     </div>
                 </div>
@@ -77,7 +102,7 @@ export function NavigationBar({ page }) {
             <nav>
                 <img src="./logo_colorful.svg" alt="Logo" />
                 <ul>
-                    <li><a href="/">Home</a></li>
+                    <li><a href="/homepage">Home</a></li>
                     <li><a href="/login">login</a></li>
                 </ul>
                 <div className="user-avatar">

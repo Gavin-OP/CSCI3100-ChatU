@@ -7,6 +7,13 @@
 A social media application to post, view tweets, follow others, and engage in real-time chat with other users. 
 
 ## Table of Contents
+- [Install](https://github.com/Gavin-OP/CSCI3100-ChatU/edit/main/README.md#install)  
+- [Usage](https://github.com/Gavin-OP/CSCI3100-ChatU/edit/main/README.md#usage)  
+- [Frontend Module Design](https://github.com/Gavin-OP/CSCI3100-ChatU/edit/main/README.md#install)  
+- [To Do](Frontend Module Design)  
+- [Reference](https://github.com/Gavin-OP/CSCI3100-ChatU/edit/main/README.md#reference)  
+- [Contributing](https://github.com/Gavin-OP/CSCI3100-ChatU/edit/main/README.md#contributing)  
+- [License](https://github.com/Gavin-OP/CSCI3100-ChatU/edit/main/README.md#license)  
 
 ## Install
 

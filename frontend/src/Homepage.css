@@ -1,131 +1,136 @@
 .wrapper {
-    min-width: 98%;
-    padding: 0;
+  min-width: 98%;
+  padding: 0;
 
-    white-space: nowrap;
-    overflow: hidden;
+  white-space: nowrap;
+  overflow: hidden;
 }
 
 .col {
-    position: relative;
-    display: inline-block;
-    border: hidden;
-    box-shadow: none;
-    vertical-align: top;
+  position: relative;
+  display: inline-block;
+  border: hidden;
+  box-shadow: none;
+  vertical-align: top;
 }
 
 .col-content {
-    white-space: normal;
+  white-space: normal;
 }
 
 .col1 {
-    width: 25%;
-    background: rgba(0,0,0,0);
-    padding: 0 20px 0 0;
-    
-    
-}
-.col2 {
-    width: 50%;
-    background: #bbb7b7;
-    border: solid;
-    border-color: #3e3232;
-    border-width: 0 3px 0 3px;
-}
-.col3 {
-    width: 25%;
-    background: rgba(0,0,0,0);
-    padding: 0 0 0 20px;
-    
+  width: 25%;
+  /* background: rgba(0,0,0,0); */
+  padding: 0 20px 0 0;
+
+
 }
 
-.write-post-button, 
+.col2 {
+  width: 50%;
+  background: #eceaeacc;
+  /* border: solid; */
+  /* border-color: #8b8888; */
+  border-width: 0 3px 0 3px;
+}
+
+.col3 {
+  width: 25%;
+  /* background: rgba(0, 0, 0, 0); */
+  padding: 0 0 0 20px;
+
+}
+
+.write-post-button,
 .reload-button {
-    background-color: DodgerBlue; /* Blue background */
-    border: none; /* Remove borders */
-    color: white; /* White text */
-    padding: 12px 16px; /* Some padding */
-    font-size: 16px; /* Set a font size */
-    cursor: pointer; /* Mouse pointer on hover */
+  background-color: DodgerBlue;
+  /* Blue background */
+  border: none;
+  /* Remove borders */
+  color: white;
+  /* White text */
+  padding: 12px 16px;
+  /* Some padding */
+  font-size: 16px;
+  /* Set a font size */
+  cursor: pointer;
+  /* Mouse pointer on hover */
 }
 
 .user-rec-follow {
-    height: 28px;
-    display: flex;
-    flex-direction: column;
+  height: 28px;
+  display: flex;
+  flex-direction: column;
 }
 
 .user-rec-follow-button {
-    padding: 4px 4px;
-    border-radius: 4px;
-    font-size: 10px;
-    background-color: #a2adb496;
-    color: #fff;
-    border: none;
-    cursor: pointer;
-    margin-right: 13px;
+  padding: 4px 4px;
+  border-radius: 4px;
+  font-size: 10px;
+  background-color: #a2adb496;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  margin-right: 13px;
 }
 
 /* Darker background on mouse-over */
 .write-post-button:hover {
-    background-color: RoyalBlue;
-  }
+  background-color: RoyalBlue;
+}
 
 /* Darker background on mouse-over */
 .user-rec-follow-button:hover {
-    background-color: RoyalBlue;
-  }
-
-/* Darker background on mouse-over */
-  .reload-button:hover {
-    background-color: RoyalBlue;
-  }
-
-  .user-rec-header {
-    display: inline;
-    align-items: center;
-    height: 28px;
+  background-color: RoyalBlue;
 }
 
-  .user-rec-font {
-    font-weight: bold;
-    font-size: 20px;
-    /*margin-right: 2px; */
-    height: 28px;
+/* Darker background on mouse-over */
+.reload-button:hover {
+  background-color: RoyalBlue;
+}
+
+.user-rec-header {
+  display: inline;
+  align-items: center;
+  height: 28px;
+}
+
+.user-rec-font {
+  font-weight: bold;
+  font-size: 20px;
+  /*margin-right: 2px; */
+  height: 28px;
 }
 
 .user-rec-box {
-    width: 320px;
-    height: 200px;
+  width: 320px;
+  height: 200px;
   padding: 10px;
   border: 5px solid gray;
   margin: auto;
 }
 
 .user-rec-avatar img {
-    width: 80px;
-    height: 80px;
-    border-radius: 50%;
-    margin: auto;
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  margin: auto;
 }
 
 .center {
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
-    width: 50%;
-  }
-
-  .user-rec-text {
-    font-size: 20px;
-    font-weight: bold;
-    line-height: 1.5;
-    text-align: center;
-    display: -webkit-box;
-    -webkit-box-orient: vertical;
-    -webkit-line-clamp: 4;
-    overflow: hidden;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 50%;
 }
 
-
- 
+.user-rec-text {
+  font-size: 20px;
+  font-weight: bold;
+  line-height: 1.5;
+  text-align: center;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 4;
+  overflow: hidden;
+}

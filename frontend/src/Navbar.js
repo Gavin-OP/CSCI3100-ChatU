@@ -32,12 +32,12 @@ export function NavigationBar({ page }) {
             <nav>
                 <img src="./logo_colorful.svg" alt="Logo" />
                 <ul>
-                    <li><a href="/adminpage/tweet">Tweet</a></li>
-                    <li><a href="/adminpage/comment">Comment</a></li>
-                    <li><a href="/adminpage/user">User</a></li>
+                    <li><a href="/adminpage-tweet">Tweet</a></li>
+                    <li><a href="/adminpage-comment">Comment</a></li>
+                    <li><a href="/adminpage-user">User</a></li>
                 </ul>
                 <div className="user-avatar">
-                    <img src="./avatar.png" alt="User Avatar" />
+                    <img src="../avatar.png" alt="User Avatar" />
                     <div className="dropdown-menu">
                         <ul>
                             <li><a id='logout' href="#">Log out</a></li>
@@ -55,7 +55,7 @@ export function NavigationBar({ page }) {
                 <img src="./logo_colorful.svg" alt="Logo" />
                 <ul>
                     <li><a href="/homepage">Home</a></li>
-                    <li><a href="/homepage/message">Message</a></li>
+                    <li><a href="/homepage-message">Message</a></li>
                 </ul>
                 <div className="user-avatar">
                     <img src="./avatar.png" alt="User Avatar" />

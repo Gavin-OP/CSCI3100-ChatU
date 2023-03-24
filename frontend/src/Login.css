@@ -14,7 +14,7 @@ body {
     background: #ecf0f3;
 }
 
-.wrapper {
+.login-wrapper {
     max-width: 350px;
     min-height: 500px;
     margin: 80px auto;
@@ -36,7 +36,7 @@ body {
     border-radius: 100%;
 }
 
-.wrapper .name {
+.login-wrapper .name {
     font-weight: 600;
     font-size: 1.4rem;
     letter-spacing: 1.3px;
@@ -44,7 +44,7 @@ body {
     color: #555;
 }
 
-.wrapper .form-field input {
+.login-wrapper .form-field input {
     width: 100%;
     display: block;
     border: none;
@@ -57,17 +57,17 @@ body {
     box-shadow: inset 8px 8px 8px #cbced1, inset -8px -8px 8px #fff;
 }
 
-.wrapper .form-field {
+.login-wrapper .form-field {
     margin-bottom: 20px;
     border-radius: 20px;
     box-shadow: inset 8px 8px 8px #cbced1, inset -8px -8px 8px #fff;
 }
 
-.wrapper .form-field .pw {
+.login-wrapper .form-field .pw {
     color: #555;
 }
 
-.wrapper .btn {
+.login-wrapper .btn {
     box-shadow: none;
     width: 100%;
     height: 40px;
@@ -82,17 +82,17 @@ body {
     border: none;
 }
 
-.wrapper .btn:hover {
+.login-wrapper .btn:hover {
     background: linear-gradient(to right, #d42a7ae8, #e90413e3)
 }
 
-.wrapper a {
+.login-wrapper a {
     text-decoration: none;
     font-size: 0.8rem;
     color: linear-gradient(to right, #a6366a, #db2431);
 }
 
-.wrapper a:hover {
+.login-wrapper a:hover {
     color: #9101ff;
 }
 
@@ -102,7 +102,7 @@ body {
 }
 
 @media(max-width: 380px) {
-    .wrapper {
+    .login-wrapper {
         margin: 30px 20px;
         padding: 40px 15px 15px 15px;
     }

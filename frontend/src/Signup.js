@@ -6,7 +6,7 @@ export function Signup() {
             {/* Navigationbar */}
             <NavigationBar page={"login"} />
             {/*Sign-up page */}
-            <div className="wrapper">
+            <div className="login-wrapper">
                 <div className="logo">
                     <img src="./logo_colorful.svg" alt="Logo" />
                 </div>
@@ -29,7 +29,7 @@ export function Signup() {
                         </div>
                         <button type="submit" className="btn sign-up-submit">Sign-up</button>
                         <div className="text-center">
-                            <a href='./Login'>Existed a account?</a>
+                            <a href='./Login'>Existed an account?</a>
                         </div>
                     </form>
                 </div>

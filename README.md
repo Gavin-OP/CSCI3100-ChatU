@@ -71,7 +71,7 @@ A social media application to post, view tweets, follow others, and engage in re
    
      2. Store JSON data to `tweet_data`, data structure should be stored like below
    
-            ```javascript
+            ```
             const tweet_data = {
                 avatarUrl: './avatar.png',
                 username: 'Gavin OP',

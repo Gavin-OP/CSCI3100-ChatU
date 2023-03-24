@@ -1,4 +1,5 @@
 import { TweetCard } from './TweetCard'
+import { UserRecomBox } from './UserRecommendBox';
 // This is only a test page, it can be deleted. 
 
 const tweet_data = {
@@ -14,8 +15,16 @@ const tweet_data = {
 
 export function Test() {
     return (
-        <>
+        <div>
+            <div>
+            <UserRecomBox />
+            </div>
+            <div>
             <TweetCard {...tweet_data} />
-        </>
+            </div>        
+            </div>
+            
     )
 }
+
+

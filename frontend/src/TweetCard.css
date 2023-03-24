@@ -11,6 +11,7 @@
     padding: 16px;
     box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
     max-width: 600px;
+    min-height: 225px;
 }
 
 
@@ -107,6 +108,7 @@
 .tweet-text-container {
     margin-left: 20px;
     position: relative;
+    min-height: 150px;
 }
 
 .tweet-text {

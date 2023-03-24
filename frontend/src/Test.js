@@ -1,6 +1,5 @@
 import { TweetCard } from './TweetCard'
 import { NavigationBar } from './Navbar';
-import { SearchBar } from './SearchBar';
 // This is only a test page, it can be deleted. 
 
 const tweet_data = {
@@ -14,8 +13,8 @@ const tweet_data = {
     starCount: 32,
     commentCount: 4,
     followStatus: 'Following',
-    imageSrc: '/tweet_card_pic_1.jpg',
-    // imageSrc: '',
+    // imageSrc: '/tweet_card_pic_1.jpg',
+    imageSrc: '',
     tweetText: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed euismod ante at mi pharetra, quis blandit elit interdum. Cras vulputate, arcu eu sodales lucsdfasdf adfasdfasdfasdf dasdfasdfasdf sdfasdf asdfasdf asdfasdfasdfasdf sdfasdfasd asdfasdf asdftus, nibh massa blandit orci, eget ultricies turpis lorem ut nulla.',
     // tweetText: 'dfasdfanibh massa blandit orci, eget ultricies turpis lorem ut nulla.',
 };

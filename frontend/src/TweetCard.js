@@ -54,7 +54,7 @@ export function TweetCard(props) {
             setState(prevState => ({ ...prevState, picDisplay: 'none' }))
         else
             setState(prevState => ({ ...prevState, picDisplay: '' }))
-    }, [props.likeStatus, props.dislikeStatus, props.starStatus, props.imageSrc]);
+    }, [props.likeStatus, props.dislikeStatus, props.starStatus, props.imageSrc, props.likeCount, props.starCount, props.commentCount]);
 
 
     // Light or grey the like button when click, it should also contain a fetch function to send data back to server

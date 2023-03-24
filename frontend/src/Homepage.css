@@ -1,9 +1,10 @@
 .wrapper {
     min-width: 98%;
     padding: 0;
-
+    margin-top: 0;
     white-space: nowrap;
     overflow: hidden;
+    vertical-align: top;
 }
 
 .col {
@@ -30,7 +31,7 @@
     background: #bbb7b7;
     border: solid;
     border-color: #3e3232;
-    border-width: 0 3px 0 3px;
+    border-width: 3px 3px 0 3px;
 }
 .col3 {
     width: 25%;

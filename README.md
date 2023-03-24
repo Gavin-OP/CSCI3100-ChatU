@@ -58,15 +58,55 @@ A social media application to post, view tweets, follow others, and engage in re
      - User page header
      - Admin page header  
    - Usage
-      1. write `import { NavigationBar } from './Navbar.js';` at the begining of the file to import the header module
+      1. write `import { NavigationBar } from './Navbar.js';` at the beginning of the file to import the Header module
       2. write `<NavigationBar page='login' />`, `<NavigationBar page='user' />`, `<NavigationBar page='admin' />` like a basic HTML element in the return part. The codes are for login, user, and admin respectively.  
   
 2. Tweet Card
-   - Features: comment 
+   - Features: Poster info, follow button, tweet ID, contents with or without photo, action buttons including like, dislike, favorite, comment, and share with color display, toggle comment input place. 
    - People in Charge: OP
    - Difficulty: ⭐⭐
-
-
+   - Usage
+   
+     1. write `import { TweetCard } from './TweetCard'` at the beginning of the file to import the Tweet Card module
+   
+     2. Store JSON data to `tweet_data`, data structure should be stored like below
+   
+            ```javascript
+            const tweet_data = {
+                avatarUrl: './avatar.png',
+                username: 'Gavin OP',
+                tweetId: '100056',
+                likeStatus: 1,
+                dislikeStatus: 0,
+                starStatus: 1,
+                likeCount: 49,
+                starCount: 32,
+                commentCount: 4,
+                followStatus: 'Following',
+                // imageSrc: '/tweet_card_pic_1.jpg',
+                tweetText: 'This is a tweet.',
+            };
+            ```
+   
+     3. write `<TweetCard {...tweet_data} />` like a basic HTML element in the return part. 
+   - Required JSON data from the server should be the structure below
+   
+     ```javascript
+     {
+         avatarUrl: './avatar.png',
+         username: 'Gavin OP',
+         tweetId: '100056',
+         likeStatus: 1,
+         dislikeStatus: 0,
+         starStatus: 1,
+         likeCount: 49,
+         starCount: 32,
+         commentCount: 4,
+         followStatus: 'Following',
+         // imageSrc: '/tweet_card_pic_1.jpg',
+         tweetText: 'This is a tweet.',
+     }
+     ```
 
 3. Retweet Card
    - Features: 

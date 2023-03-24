@@ -7,7 +7,7 @@ export function Login() {
         <div>
             {/* Navigationbar */}
             <NavigationBar page={"login"} />
-            <div className="wrapper">
+            <div className="login-wrapper">
                 {/* Login page */}
                 <div className="logo">
                     <img src="./logo_colorful.svg" alt="Logo" />

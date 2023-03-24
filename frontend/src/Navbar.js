@@ -32,12 +32,12 @@ export function NavigationBar({ page }) {
             <nav>
                 <img src="./logo_colorful.svg" alt="Logo" />
                 <ul>
-                    <li><a href="/adminpage/tweet">Tweet</a></li>
-                    <li><a href="/adminpage/comment">Comment</a></li>
-                    <li><a href="/adminpage/user">User</a></li>
+                    <li><a href="/adminpage-tweet">Tweet</a></li>
+                    <li><a href="/adminpage-comment">Comment</a></li>
+                    <li><a href="/adminpage-user">User</a></li>
                 </ul>
                 <div className="user-avatar">
-                    <img src="./avatar.png" alt="User Avatar" />
+                    <img src="../avatar.png" alt="User Avatar" />
                     <div className="dropdown-menu">
                         <ul>
                             <li><a href="/personalpage">Personal Page</a></li>

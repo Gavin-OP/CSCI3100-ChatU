@@ -12,7 +12,9 @@ import { Adminpage } from './Adminpage';
 import {Homepage} from './Homepage';
 import {Personalpage} from './Personalpage';
 import { UnderDevelopment } from './UnderDevelopment';
-
+import { Post } from './Post'
+import { Retweet } from './Retweet'
+import { Tweetpage } from './Tweetpage'
 function App() {
   return (
     <div>
@@ -27,6 +29,9 @@ function App() {
           <Route path="/homepage" element={<Homepage />} />
           <Route path="/personalpage" element={<Personalpage />} />
           <Route path='/test' element={<Test />} />
+          <Route path='/post' element={<Post />} />
+          <Route path='/retweet' element={<Retweet />} />
+          <Route path='/tweetpage' element={<Tweetpage />} />
           <Route path='/*' element={<UnderDevelopment />} />
         </Routes>
       </BrowserRouter>

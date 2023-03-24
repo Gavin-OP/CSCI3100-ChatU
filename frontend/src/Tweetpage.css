@@ -1,0 +1,23 @@
+.likebuttons{
+    background-color: transparent;
+    padding: 8px 12px;
+    border-radius: 30px;
+    font-size: 16px;
+    color: #657786;
+    border: none;
+    cursor: pointer;
+}
+
+.commentcard{
+    background-color:#f2f2fa;
+    margin-top: 10px;
+    border-bottom: 1px,solid,black;
+}
+.topbutton{
+    position:fixed;
+    top:80vh;
+    left: 88vw;
+    width: 50px;
+    height:50px;
+    font-size: xx-large;
+}

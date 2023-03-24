@@ -1,38 +1,54 @@
 # CSCI3100-ChatU
 
-<img src="frontend\public\logo_colorful.svg" alt="ChatU" style="zoom:25%;" />
+<img src="frontend\public\logo_colorful.png" alt="ChatU" style="zoom:25%;" />
 
 [![standard-readme compliant](https://img.shields.io/badge/readme%20style-standard-brightgreen.svg?style=flat-square)](https://github.com/RichardLitt/standard-readme)
 
-
+A social media application to post, view tweets, follow others, and engage in real-time chat with other users. 
 
 ## Table of Contents
 
-## Front-end Start Command  
+## Install
 
-1. Download NodeJS
-1. Open Command Line under the project folder. 
-1. `cd frontend`: Go to the frontend folder.  
-2. `npm install`: Install all the dependencies, including packages: `react`, `react-router-dom`, `bootstrap`, `body-parser`, `mdb-react-ui-kit`, `react-google-maps`, etc. 
-3. `npm start`: Start the frontend.
-4. Go to the web browser, access the web app in localhost port 3000: [http://localhost:3000/](http://localhost:3000/)  
-5. `Ctrl`+`c`: Shutdown frontend  
-> Note: Frontend is connected to backend by setting the proxy in the the file "/frontend/package.json" with "http://localhost:5000". If presented in a public IP, this proxy link need to be updated to {public IP}:5000
+1. Download [Node.js](https://nodejs.org/en/download) and [Git](https://git-scm.com/downloads)
+2. Open terminal and go to the directory where you want to install the project. 
+3. Type `git clone https://github.com/Gavin-OP/CSCI3100-ChatU.git` in the terminal. 
 
-## Back-end Start Command
+## Usage
 
-1. Download NodeJS
-2. Open Command Line under the project folder. 
-3. `cd backend`: Go to the backend folder.
-4. `npm install`: Install all dependencies, including packages: `express`, `nodemon`, `mongoose`, `xml2json-light`, `cors`, `express-session`, `cookie-parser`, etc. 
-5. `npx nodemon server.js`: Start the backend server, connect to mongoDB
-6. Go to the web browser, server can be accessed in localhost port 5000: [http://localhost:5000/](http://localhost:5000/)
-7. `Ctrl`+`c`: Shutdown backend  
+- Open terminal under the project folder `./CSCI3100-ChatU/`. 
+
+---
+
+### Front-end
+
+- `cd frontend`: Go to the frontend folder.  
+- `npm install`: Install all the dependencies. 
+- `npm start`: Start the frontend.
+- Go to the web browser, access the web app in localhost port 3000: [http://localhost:3000/](http://localhost:3000/)  
+
+> Note: Frontend is connected to backend by setting the proxy in the the file `./frontend/package.json` with "http://localhost:5000". If presented in a public IP, this proxy link need to be updated to [{public IP}:5000]()
+
+---
+
+### Back-end
+
+- `cd backend`: Go to the backend folder.
+
+- `npm install`: Install all dependencies. 
+
+- `npx nodemon server.js`: Start the backend server, connect to mongoDB
+
+- Go to the web browser, server can be accessed in localhost port 5000: [http://localhost:5000/](http://localhost:5000/)
+
+---
+
+- `Ctrl`+`c`: Shutdown backend  
 
 ## Frontend Module Design
 
 > Recommend reading: CSCI2720 chapter 6, 9  
-> The number of ⭐ represents the difficulty of the module. 
+> The number of ⭐ represents the difficulty of the module.   
 1. Header
    - Features: logo, navigation bar, avatar, dropdown
    - People in Charge: OP
@@ -82,7 +98,6 @@ import "./SearchBar.js"
 👍👍9  home page basic UI: search bar, page structure (DHP).    
 👍👍13 personal page structure and information detail (import card)  (DHP).    
 
-
 👍12 setting (TYF).     
 👍14 following, fans and black list page (TYF)   
 👍15 (opt) message box contact list (TYF).    
@@ -98,3 +113,12 @@ import "./SearchBar.js"
 [Lazy load Reference](https://developer.mozilla.org/en-US/docs/Web/Performance/Lazy_loading)  
 [Git Book](https://git-scm.com/book/en/v2)
 [css reference](https://css-tricks.com/lets-look-50-interesting-css-properties-values/#all)
+
+## Contributing
+
+PRs and [issues](https://github.com/Gavin-OP/CSCI3100-ChatU/issues) gladly accepted!
+
+## License
+
+`UNLICENSED`
+

@@ -10,6 +10,7 @@ import { Test } from './Test'
 import { Signup } from './Signup';
 import { Adminpage } from './Adminpage';
 import {Homepage} from './Homepage';
+import {Personalpage} from './Personalpage';
 import { UnderDevelopment } from './UnderDevelopment';
 
 function App() {
@@ -23,7 +24,8 @@ function App() {
           <Route path="/adminpage/tweet" element={<Adminpage page="tweet" />} />
           <Route path="/adminpage/user" element={<Adminpage page="user" />} />
           <Route path="/adminpage/comment" element={<Adminpage page="comment" />} />
-          <Route path="/homepage" element={<Homepage page="homepage"/>} />
+          <Route path="/homepage" element={<Homepage />} />
+          <Route path="/personalpage" element={<Personalpage />} />
           <Route path='/test' element={<Test />} />
           <Route path='/*' element={<UnderDevelopment />} />
         </Routes>

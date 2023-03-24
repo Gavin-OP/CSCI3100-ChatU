@@ -1,6 +1,6 @@
 # CSCI3100-ChatU
 
-<img src="frontend\public\logo_colorful.svg" alt="ChatU" style="zoom:25%;" />
+<img src="frontend\public\logo_colorful.png" alt="ChatU" style="zoom:25%;" />
 
 
 

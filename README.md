@@ -1,6 +1,8 @@
 # CSCI3100-ChatU
 
-<img src="frontend\public\logo_colorful.png" alt="ChatU" style="zoom:25%;" />
+<img src="frontend\public\logo_colorful.svg" alt="ChatU" style="zoom:25%;" />
+
+[![standard-readme compliant](https://img.shields.io/badge/readme%20style-standard-brightgreen.svg?style=flat-square)](https://github.com/RichardLitt/standard-readme)
 
 
 

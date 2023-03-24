@@ -34,7 +34,7 @@ export function Homepage() {
         </div>
 
 
-<div class="wrapper">
+<div class="wrapper" id="homepage">
   <div class="col col1">
      <div class="col-content"> 
        {/*Empty space in which additional content can be put in the future */}
@@ -42,6 +42,7 @@ export function Homepage() {
   </div>
   <div class="col col2">
      <div class="col-content">
+            <br/>
             <TweetCard {...tweet_data} /> <br/> <br/>
             <TweetCard {...tweet_data} /> <br/> <br/>
             <TweetCard {...tweet_data} /> <br/> <br/>

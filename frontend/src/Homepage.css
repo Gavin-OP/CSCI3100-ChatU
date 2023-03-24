@@ -40,20 +40,19 @@
     
 }
 
-.col2 {
+
+/*.col2 {
   width: 50%;
   background: #eceaeacc;
-  /* border: solid; */
-  /* border-color: #8b8888; */
   border-width: 0 3px 0 3px;
 }
 
 .col3 {
   width: 25%;
-  /* background: rgba(0, 0, 0, 0); */
   padding: 0 0 0 20px;
 
-}
+} */
+
 
 .write-post-button,
 .reload-button {

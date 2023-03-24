@@ -6,6 +6,7 @@ export function SearchBar({ page }) {
     let Bar;
 
     // Search bar for tweet
+    // !!! need a search button
     if (page === 'tweet') {
         Bar = (
             <div class="container">
@@ -18,9 +19,22 @@ export function SearchBar({ page }) {
             </div>
         )
     }
+    // Search bar for home page
+    else if (page === 'homepage') {
+        Bar = (
+            <div class="container">
+                <div class="box">
+                    <i><FontAwesomeIcon icon={faMagnifyingGlass} /></i>
+                    <form name="search">
+                        <input type="text" class="input" name="txt" onmouseout="this.value = ''; this.blur();" placeholder='Tweet ID/Key Words/Tags' />
+                    </form>
+                </div>
+            </div>
+        )
+    }
 
     // Search bar for user
-    // !!! Search Icon is not shown
+    // !!! need a search button
     else if (page === 'user') {
         Bar = (
             <div class="container">
@@ -35,7 +49,7 @@ export function SearchBar({ page }) {
     }
 
     // Search bar for comment
-    // !!! Search Icon is not shown
+    // !!! need a search button
     else if (page === 'comment') {
         Bar = (
             <div class="container">

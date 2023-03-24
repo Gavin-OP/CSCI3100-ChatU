@@ -32,7 +32,7 @@ export function NavigationBar({ page }) {
             <nav>
                 <img src="./logo_colorful.svg" alt="Logo" />
                 <ul>
-                    <li><a href="/adminpage">Tweet</a></li>
+                    <li><a href="/adminpage/tweet">Tweet</a></li>
                     <li><a href="/adminpage/comment">Comment</a></li>
                     <li><a href="/adminpage/user">User</a></li>
                 </ul>
@@ -41,6 +41,29 @@ export function NavigationBar({ page }) {
                     <div className="dropdown-menu">
                         <ul>
                             <li><a id='logout' href="#">Log out</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </nav >
+        );
+    }
+
+    // Navigation bar for homepage
+    else if (page === "homepage") {
+        navContent = (
+            <nav>
+                <img src="./logo_colorful.svg" alt="Logo" />
+                <ul>
+                    <li><a href="/homepage">Home</a></li>
+                    <li><a href="/homepage/message">Message</a></li>
+                </ul>
+                <div className="user-avatar">
+                    <img src="./avatar.png" alt="User Avatar" />
+                    <div className="dropdown-menu">
+                        <ul>
+                            <li><a id='logout' href="#">Log out</a></li>
+                            <li><a id='setting' href="##">Setting</a></li>
+                            <li><a id='personal-page' href="###">Personal Page</a></li>
                         </ul>
                     </div>
                 </div>

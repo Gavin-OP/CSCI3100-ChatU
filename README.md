@@ -9,7 +9,7 @@ A social media application to post, view tweets, follow others, and engage in re
 ## Table of Contents
 - [Install](https://github.com/Gavin-OP/CSCI3100-ChatU/blob/main/README.md#install)  
 - [Usage](https://github.com/Gavin-OP/CSCI3100-ChatU/blob/main/README.md#usage)  
-- 
+- [Frontend Router Design](https://github.com/Gavin-OP/CSCI3100-ChatU/blob/main/README.md#frontend-router-design)
 - [Frontend Module Design](https://github.com/Gavin-OP/CSCI3100-ChatU/blob/main/README.md#frontend-module-design)  
 - [To Do](https://github.com/Gavin-OP/CSCI3100-ChatU/blob/main/README.md#to-do)  
 - [Reference](https://github.com/Gavin-OP/CSCI3100-ChatU/blob/main/README.md#reference)  
@@ -42,11 +42,8 @@ A social media application to post, view tweets, follow others, and engage in re
 ### Back-end
 
 - `cd backend`: Go to the backend folder.
-
 - `npm install`: Install all dependencies. 
-
 - `npx nodemon server.js`: Start the backend server, connect to mongoDB
-
 - Go to the web browser, server can be accessed in localhost port 5000: [http://localhost:5000/](http://localhost:5000/)
 
 ---
@@ -56,7 +53,6 @@ A social media application to post, view tweets, follow others, and engage in re
 ## Frontend Router Design
 
 - `/login`: Login page
-
 - `/signup`: Sign up page
 - `/admin/tweet`: Admin tweet management page
 - `/admin/user`: Admin user management page
@@ -75,6 +71,7 @@ A social media application to post, view tweets, follow others, and engage in re
 
 > Recommend reading: CSCI2720 chapter 6, 9  
 > The number of ⭐ represents the difficulty of the module.   
+
 1. Header
    - Features: logo, navigation bar, avatar, dropdown
    - People in Charge: OP
@@ -91,12 +88,9 @@ A social media application to post, view tweets, follow others, and engage in re
    - Features: Poster info, follow button, tweet ID, contents with or without photo, action buttons including like, dislike, favorite, comment, and share with color display, toggle comment input place. 
    - People in Charge: OP
    - Difficulty: ⭐⭐
-   - Usage
-
+   - Usage  
      1. write `import { TweetCard } from './TweetCard'` at the beginning of the file to import the Tweet Card module
-
      2. Store JSON data to `tweet_data`, data structure should be stored like below
-
         ```javascript
         const tweet_data = {
             avatarUrl: './avatar.png',
@@ -113,10 +107,8 @@ A social media application to post, view tweets, follow others, and engage in re
             tweetText: 'This is a tweet.',
         };
         ```
-        
      3. write `<TweetCard {...tweet_data} />` like a basic HTML element in the return part. 
    - Required JSON data from the server should be the structure below
-
      ```javascript
      {
          avatarUrl: './avatar.png',
@@ -140,9 +132,7 @@ A social media application to post, view tweets, follow others, and engage in re
    - Difficulty: ⭐
 
 4. Search Bar
-
    - Features: 
-
    - People in Charge: LZX
    - Difficulty: ⭐
    - Usage: 
@@ -151,35 +141,22 @@ A social media application to post, view tweets, follow others, and engage in re
      3. add whatever your wanted in SearchBar.js file
 
 5. Post Tweet Page
-
    - Features: Text area for text content, tag selection, file uploading, privacy.
-
    - People in Charge: GZH
-
    - Difficulty: ⭐⭐
-
    - Versions: 
-
      - Normal post page (allows pictures uploading)
-
      - Retweet post page (Uses `<TweetCard />` component)     
-
    - Usage: Just use `<Post  />`
 
 6. Tweet Detail and Retweet Detail    
-
       - Features: Tweet content display, comment input, comments display.
-
       - People in Charge: GZH
-
       - Difficulty: ⭐⭐
-
       - Note: 
         - Since we don't have a limit for the number of pictures now, we should set this limit to 2 or 3 in future.
         - Normal post doesn't have tweet_data, retweet post doesn't have imageSrc.
-
       - Usage: Just use `<Tweetpage />`. No input now, we may use `<Tweetpage file={file}} />` later (need to change the file).
-
          ```javascript
         let test_file = {
            username: 'David',
@@ -213,7 +190,7 @@ A social media application to post, view tweets, follow others, and engage in re
         }
          ```
 
-
+  
 
 👍2 login, register  central components (LZX).    
 👍<3 admin tweet page : search bar, result box (LZX).   

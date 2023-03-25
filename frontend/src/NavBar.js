@@ -15,7 +15,7 @@ export function NavigationBar({ page }) {
             <nav>
                 <img src="./logo_colorful.svg" alt="Logo" />
                 <ul>
-                    <li><a href="/home">Home</a></li>
+                    <li><a href="/homepage">Home</a></li>
                     <li><a href="/message">Message</a></li>
                 </ul>
                 <div className="user-avatar">
@@ -108,7 +108,7 @@ export function NavigationBar({ page }) {
             <nav>
                 <img src="./logo_colorful.svg" alt="Logo" />
                 <ul>
-                    <li><a href="/home">Home</a></li>
+                    <li><a href="/homepage">Home</a></li>
                     <li><a href="/login">login</a></li>
                 </ul>
                 <div className="user-avatar">

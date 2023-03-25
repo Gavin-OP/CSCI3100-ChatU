@@ -1,11 +1,11 @@
-.box {
+.search-box {
     position: relative;
     display: flex;
     flex-direction: column;
     padding-bottom: 0;
 }
 
-.input {
+.search-input {
     padding-left: 45px;
     width: 260px;
     height: 60px;
@@ -22,26 +22,26 @@
     transition: 1.5s;
 }
 
-.input::placeholder {
+.search-input::placeholder {
     /* position: relative;
     left: 40px; */
     color: transparent;
     transition: 1s;
 }
 
-.box:hover input {
+.search-box:hover input {
     width: 100%;
     background: linear-gradient(to right, #a6366a, #db2431);
     border-radius: 10px;
-
+    transition: 1s;
 }
 
-.box:hover .input::placeholder {
+.search-box:hover .search-input::placeholder {
     color: #a7a7a7;
     transition: 1s;
 }
 
-.box i {
+.search-box i {
     position: absolute;
     top: 55%;
     left: 30px;
@@ -51,7 +51,7 @@
     transition: 0.65s;
 }
 
-.box:hover i {
+.search-box:hover i {
     opacity: 0;
     /* z-index: -1; */
 }

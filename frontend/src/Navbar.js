@@ -77,13 +77,13 @@ export function NavigationBar({ page }) {
     else if (page === "personalpage") {
         navContent = (
             <nav>
-                <img src="./logo_colorful.svg" alt="Logo" />
+                <img src="../logo_colorful.svg" alt="Logo" />
                 <ul>
                     <li><a href="/homepage">Home</a></li>
                     <li><a href="/message">Message</a></li>
                 </ul>
                 <div className="user-avatar">
-                    <img src="./avatar.png" alt="User Avatar" />
+                    <img src="../avatar.png" alt="User Avatar" />
                     <div className="dropdown-menu">
                         <ul>
                             <li><a id='logout' href="#">Log out</a></li>

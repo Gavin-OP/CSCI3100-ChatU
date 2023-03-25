@@ -20,6 +20,12 @@
     padding: 10px;
     text-align: left;
 }
+.table-tweet-content{
+    padding: 16px;
+    height: 78px;
+    overflow: scroll;
+}
+
 
 .admin-table-column {
     border-bottom: 1px solid #dddddd;
@@ -71,7 +77,11 @@
     padding: 10px;
     text-align: left;
 }
-
+.table-comment-content{
+    padding: 16px;
+    height: 78px;
+    overflow: scroll;
+}
 .admin-comment-delele-button {
     background-color: #F0F0F0;
     border: none;

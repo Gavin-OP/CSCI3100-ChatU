@@ -16,6 +16,8 @@ export function AdminTable({ page }) {
                 { tweetID: "#000001", content: "This is a tweet", userName: "@user1", date: "2021.1.1" },
                 { tweetID: "#114514", content: "AAAAAAAAAAAAAAAAAAA,senpai-sukisi!,AAAAAAAAAAAAAAAAAAAAAAAAAAAA", userName: "@user2", date: "2021.11.4" },
                 { tweetID: "#191981", content: "@*&!@(*$&@!$^*&", userName: "@user3", date: "2021.5.14" },
+                { tweetID: "#233333", content: "This is a long tweet! askdjqwfjqok q oqkdpqs os qj q0i pqoiqwqokdpqow niqfqwofjqpowjfwfqkwfnpqwfw qiwfqwokfpoqwkfpqwf qpwfqpokfpqwkfpqwkfpoqw qwpfjqpowkfqwokfpqowkfpoqwkfpq qwokdpqowkdpqwpqwokdq oqkwdpoqwkdpqokwdpok!!!!!!!!!!!!!!!", userName: "Long tweet", date: "2021.6.6" },
+                { tweetID: "#233334", content: "This is a short tweet! ", userName: "short tweet", date: "2021.6.7" },
             ];
 
 
@@ -26,7 +28,7 @@ export function AdminTable({ page }) {
                     {items.map((item) => (
                         <tr className='admin-table-column'>
                             <td className='table-tweetid'>{item.tweetID}</td>
-                            <td className='table-tweetcontent'>{item.content}</td>
+                            <div className='table-tweet-content'><td className='table-tweetcontent'>{item.content}</td></div>
                             <td className='table-tweet-username'>{item.userName}</td>
                             <td className='table-date'>{item.date}</td>
                             <button className="admin-tweet-delele-button" id="delete-button">Delete</button>
@@ -44,6 +46,7 @@ export function AdminTable({ page }) {
                 { commentID: "#012311", content: "This is a comment", userName: "@user1", date: "2021.1.1" },
                 { commentID: "#111114", content: "oh hohohohohohohohohohohohohohfuck this program!", userName: "@user2", date: "2021.11.4" },
                 { commentID: "#100001", content: "@*&!@(*$&@!$^*&", userName: "@user3", date: "2021.5.14" },
+                { commentID: "#123333", content: "This is a long comment! askdjqwfjqok q oqkdpqs os qj q0i pqoiqwqokdpqow niqfqwofjqpowjfwfqkwfnpqwfw qiwfqwokfpoqwkfpqwf qpwfqpokfpqwkfpqwkfpoqw qwpfjqpowkfqwokfpqowkfpoqwkfpq qwokdpqowkdpqwpqwokdq oqkwdpoqwkdpqokwdpok!!!!!!!!!!!!!!!", userName: "Long comment", date: "2021.6.6" },
             ];
 
         table = (
@@ -52,7 +55,7 @@ export function AdminTable({ page }) {
                     {items.map((item) => (
                         <tr className='admin-table-column'>
                             <td className='table-commentid'>{item.commentID}</td>
-                            <td className="table-commentcontent">{item.content}</td>
+                            <div className='table-tweet-content'><td className="table-commentcontent">{item.content}</td></div>
                             <td className='table-comment-username'>{item.userName}</td>
                             <td className='table-comment-date'>{item.date}</td>
                             <button className="admin-comment-delele-button" id="delete-button">Delete</button>

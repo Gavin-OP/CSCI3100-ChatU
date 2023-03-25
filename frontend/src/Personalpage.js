@@ -1,8 +1,8 @@
-import {NavigationBar} from './Navbar';
+import {NavigationBar} from './NavBar';
 import React from "react";
 import ScrollToTop from 'react-scroll-to-top';
 import ReactDOM from 'react-dom';
-import "./Personalpage.css"
+import "./PersonalPage.css"
 import { TweetCard } from './TweetCard'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {faArrowLeft, faComment, faStar, faTwitter} from '@fortawesome/free-solid-svg-icons'
@@ -19,14 +19,14 @@ const tweet_data = {
     tweetText: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed euismod ante at mi pharetra, quis blandit elit interdum. Cras vulputate, arcu eu sodales lucsdfasdf adfasdfasdfasdf dasdfasdfasdf sdfasdf asdfasdf asdfasdfasdfasdf sdfasdfasd asdfasdf asdftus, nibh massa blandit orci, eget ultricies turpis lorem ut nulla.',
 };
 
-export function Personalpage({page}){
+export function PersonalPage({page}){
     if (page === 'tweet') {
         return (
           <>
               <ScrollToTop />
               <div>
               {/* NavigationBar */}
-              <NavigationBar page={'personalpage'} />
+              <NavigationBar page={'PersonalPage'} />
               </div> 
     
               <div class="a">
@@ -80,7 +80,7 @@ export function Personalpage({page}){
                 <ScrollToTop />
                 <div>
                 {/* NavigationBar */}
-                <NavigationBar page={'personalpage'} />
+                <NavigationBar page={'PersonalPage'} />
                 </div> 
       
                 <div class="a">
@@ -134,7 +134,7 @@ export function Personalpage({page}){
                 <ScrollToTop />
                 <div>
                 {/* NavigationBar */}
-                <NavigationBar page={'personalpage'} />
+                <NavigationBar page={'PersonalPage'} />
                 </div> 
       
                 <div class="a">
@@ -197,7 +197,7 @@ export function Personalpage({page}){
                 <ScrollToTop />
                 <div>
                 {/* NavigationBar */}
-                <NavigationBar page={'personalpage'} />
+                <NavigationBar page={'PersonalPage'} />
                 </div> 
       
                 <div class="a">
@@ -260,7 +260,7 @@ export function Personalpage({page}){
                 <ScrollToTop />
                 <div>
                 {/* NavigationBar */}
-                <NavigationBar page={'personalpage'} />
+                <NavigationBar page={'PersonalPage'} />
                 </div> 
       
                 <div class="a">

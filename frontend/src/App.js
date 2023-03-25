@@ -25,7 +25,7 @@ function App() {
           <Route path="/adminpage/tweet" element={<AdminPage page="tweet" />} />
           <Route path="/adminpage/user" element={<AdminPage page="user" />} />
           <Route path="/adminpage/comment" element={<AdminPage page="comment" />} />
-          <Route path="/homepage" element={<Homepage />} />
+          <Route path="/homepage" element={<HomePage />} />
           <Route path="/personalpage/tweet" element={<PersonalPage page="tweet" />} />
           <Route path="/personalpage/fav" element={<PersonalPage page="favourite" />} />
           <Route path="/personalpage/following" element={<PersonalPage page="following" />} />

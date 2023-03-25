@@ -17,7 +17,7 @@ export function HomePage() {
             <ScrollToTop />
             <div>
                 {/* NavigationBar */}
-                <NavigationBar page={'homepage'} />
+                <NavigationBar page={'user'} />
             </div>
 
             <div class="wrapper" id="homepage">

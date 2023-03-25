@@ -16,7 +16,7 @@ export function NavigationBar({ page }) {
                     <img src="./avatar.png" alt="User Avatar" />
                     <div className="dropdown-menu">
                         <ul>
-                            <li><a href="/personalpage">Personal Page</a></li>
+                            <li><a href="/personalpage/tweet">Personal Page</a></li>
                             <li><a href="#">Settings</a></li>
                             <li><a id='logout' href="#">Log out</a></li>
                         </ul>
@@ -40,7 +40,7 @@ export function NavigationBar({ page }) {
                     <img src="../avatar.png" alt="User Avatar" />
                     <div className="dropdown-menu">
                         <ul>
-                            <li><a href="/personalpage">Personal Page</a></li>
+                            <li><a href="/personalpage/tweet">Personal Page</a></li>
                             <li><a href="#">Settings</a></li>
                             <li><a id='logout' href="#">Log out</a></li>
                         </ul>
@@ -65,7 +65,7 @@ export function NavigationBar({ page }) {
                         <ul>
                             <li><a id='logout' href="#">Log out</a></li>
                             <li><a id='setting' href="##">Setting</a></li>
-                            <li><a id='personal-page' href="/personalpage">Personal Page</a></li>
+                            <li><a id='personal-page' href="/personalpage/tweet">Personal Page</a></li>
                         </ul>
                     </div>
                 </div>
@@ -88,7 +88,7 @@ export function NavigationBar({ page }) {
                         <ul>
                             <li><a id='logout' href="#">Log out</a></li>
                             <li><a id='setting' href="##">Setting</a></li>
-                            <li><a id='personal-page' href="/personalpage">Personal Page</a></li>
+                            <li><a id='personal-page' href="/personalpage/tweet">Personal Page</a></li>
                         </ul>
                     </div>
                 </div>

@@ -128,6 +128,204 @@ export function Personalpage({page}){
           )
         
     }
+    else if (page === 'following') {
+        return (
+            <>
+                <ScrollToTop />
+                <div>
+                {/* NavigationBar */}
+                <NavigationBar page={'personalpage'} />
+                </div> 
+      
+                <div class="a">
+                     <button class="return-button"> <i class="fa fa-arrow-left"></i></button>
+      
+                     <div class="title">Following User List</div>
+
+                     <div class="user-list-bar">
+                          <div className="pg-avatar2">
+                              <img src='../avatar2.png' alt="1" /> 
+                              
+                              <div class="pg-username2">&nbsp; User7 
+                                   <button class="message-button"> Chat </button> &nbsp; &nbsp;
+                                   <button class="blacklist-button"> Unfollow</button>  
+                              </div> 
+                          
+               
+                          </div>
+                     </div>
+                    
+                     <br/> <br/>
+
+                     <div class="user-list-bar">
+                          <div className="pg-avatar2">
+                              <img src='../avatar2.png' alt="1" /> 
+                              
+                              <div class="pg-username2">&nbsp; User8 
+                                   <button class="message-button"> Chat </button> &nbsp; &nbsp;
+                                   <button class="blacklist-button"> Unfollow</button> 
+                              </div> 
+                          
+               
+                          </div>
+                     </div>
+                     
+                     <br/> <br/>
+
+                     <div class="user-list-bar">
+                          <div className="pg-avatar2">
+                              <img src='../avatar2.png' alt="1" /> 
+                              
+                              <div class="pg-username2">&nbsp; User9 
+                                   <button class="message-button"> Chat </button> &nbsp; &nbsp;
+                                   <button class="blacklist-button"> Unfollow</button> 
+                              </div> 
+                          
+               
+                          </div>
+                     </div>
+                     
+       
+      
+                </div>
+           </>
+          )
+    }
+    else if (page === 'fans') {
+        return (
+            <>
+                <ScrollToTop />
+                <div>
+                {/* NavigationBar */}
+                <NavigationBar page={'personalpage'} />
+                </div> 
+      
+                <div class="a">
+                     <button class="return-button"> <i class="fa fa-arrow-left"></i></button>
+      
+                     <div class="fanlist-title">Fan List</div>
+
+                     <div class="user-list-bar">
+                          <div className="pg-avatar2">
+                              <img src='../avatar2.png' alt="1" /> 
+                              
+                              <span class="pg-username2">&nbsp; User10 
+                                   &ensp;<button class="message-button"> Chat </button> &nbsp; &nbsp;
+                                   <button class="blacklist-button"> Remove</button>  
+                              </span> 
+                          
+               
+                          </div>
+                     </div>
+                    
+                     <br/> <br/>
+
+                     <div class="user-list-bar">
+                          <div className="pg-avatar2">
+                              <img src='../avatar2.png' alt="1" /> 
+                              
+                              <span class="pg-username2">&nbsp; User11 
+                                  &ensp; <button class="message-button"> Chat </button> &nbsp; &nbsp; 
+                                   <button class="blacklist-button"> Remove</button> 
+                              </span> 
+                          
+               
+                          </div>
+                     </div>
+                     
+                     <br/> <br/>
+
+                     <div class="user-list-bar">
+                          <div className="pg-avatar2">
+                              <img src='../avatar2.png' alt="1" /> 
+                              
+                              <span class="pg-username2">&nbsp; User12 
+                                   &ensp;<button class="message-button"> Chat </button> &nbsp; &nbsp;
+                                   <button class="blacklist-button"> Remove</button> 
+                              </span> 
+                          
+               
+                          </div>
+                     </div>
+                     
+       
+      
+                </div>
+           </>
+          )
+    }
+    else if (page === 'blacklist') {
+        return (
+            <>
+                <ScrollToTop />
+                <div>
+                {/* NavigationBar */}
+                <NavigationBar page={'personalpage'} />
+                </div> 
+      
+                <div class="a">
+                     <button class="return-button"> <i class="fa fa-arrow-left"></i></button>
+      
+                     <div class="blacklist-title">Blacklist</div>
+
+                     <div class="user-list-bar">
+                          <div className="pg-avatar2">
+                              <img src='../avatar2.png' alt="1" /> 
+                              
+                              <div class="pg-username2">&nbsp; User13 
+                                   {/*<button class="message-button"> Chat </button> &nbsp; &nbsp;*/}
+                                   &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+                                   &nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                   <button class="blacklist-button"> Remove from Blacklist</button>  
+                              </div> 
+                          
+               
+                          </div>
+                     </div>
+                    
+                     <br/> <br/>
+
+                     <div class="user-list-bar">
+                          <div className="pg-avatar2">
+                              <img src='../avatar2.png' alt="1" /> 
+                              
+                              <div class="pg-username2">&nbsp; User14 
+                                   {/*<button class="message-button"> Chat </button> &nbsp; &nbsp;*/}
+                                   &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+                                   &nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                   <button class="blacklist-button"> Remove from Blacklist</button> 
+                              </div> 
+                          
+               
+                          </div>
+                     </div>
+                     
+                     <br/> <br/>
+
+                     <div class="user-list-bar">
+                          <div className="pg-avatar2">
+                              <img src='../avatar2.png' alt="1" /> 
+                              
+                              <div class="pg-username2">&nbsp; User15 
+                                   {/*<button class="message-button"> Chat </button> &nbsp; &nbsp;*/}
+                                   &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+                                   &nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                   <button class="blacklist-button"> Remove from Blacklist</button>
+                              </div> 
+                          
+               
+                          </div>
+                     </div>
+                     
+       
+      
+                </div>
+           </>
+          )
+    }
     
 
     

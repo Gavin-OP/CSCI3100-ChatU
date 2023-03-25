@@ -22,15 +22,15 @@ function App() {
         <Routes>
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<SignUp />} />
-          <Route path="/admin-tweet" element={<AdminPage page="tweet" />} />
-          <Route path="/admin-user" element={<AdminPage page="user" />} />
-          <Route path="/admin-comment" element={<AdminPage page="comment" />} />
-          <Route path="/homepage" element={<HomePage />} />
-          <Route path="/personalpage/tweet" element={<PersonalPage page="tweet" />} />
-          <Route path="/personalpage/fav" element={<PersonalPage page="favourite" />} />
-          <Route path="/personalpage/following" element={<PersonalPage page="following" />} />
-          <Route path="/personalpage/fans" element={<PersonalPage page="fans" />} />
-          <Route path="/personalpage/blacklist" element={<PersonalPage page="blacklist" />} />
+          <Route path="/admin/tweet" element={<AdminPage page="tweet" />} />
+          <Route path="/admin/user" element={<AdminPage page="user" />} />
+          <Route path="/admin/comment" element={<AdminPage page="comment" />} />
+          <Route path="/home" element={<HomePage />} />
+          <Route path="/personal/tweet" element={<PersonalPage page="tweet" />} />
+          <Route path="/personal/fav" element={<PersonalPage page="favourite" />} />
+          <Route path="/personal/following" element={<PersonalPage page="following" />} />
+          <Route path="/personal/fans" element={<PersonalPage page="fans" />} />
+          <Route path="/personal/blacklist" element={<PersonalPage page="blacklist" />} />
           <Route path='/test' element={<Test />} />
           <Route path='/post' element={<Post />} />
           <Route path='/retweet' element={<Retweet />} />

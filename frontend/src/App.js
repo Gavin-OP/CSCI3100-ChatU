@@ -29,7 +29,7 @@ function App() {
           <Route path="/homepage" element={<Homepage />} />
           <Route path="/personalpage/tweet" element={<Personalpage page="tweet" />} />
           <Route path="/personalpage/fav" element={<Personalpage page="favourite" />} />
-          <Route path="/personalpage/fowllowing" element={<Personalpage page="following" />} />
+          <Route path="/personalpage/following" element={<Personalpage page="following" />} />
           <Route path="/personalpage/fans" element={<Personalpage page="fans" />} />
           <Route path="/personalpage/blacklist" element={<Personalpage page="blacklist" />} />
           <Route path='/test' element={<Test />} />

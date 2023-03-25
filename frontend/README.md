@@ -1,6 +1,10 @@
-# Getting Started with Create React App
+# ChatU Frontend Specification
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+
+## Table of Content
+- [Frontend Router Design]()
+- [Frontend Module Design]()
 
 ## Frontend Router Design
 

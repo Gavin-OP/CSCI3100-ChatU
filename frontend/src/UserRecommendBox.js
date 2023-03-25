@@ -15,7 +15,7 @@ export function UserRecomBox(){
                 <button className="Fresh-btn" >Fresh</button>
             </div>
                 {Users.map((item) => (
-                <div className='container'>
+                <div className='URB-container'>
                 <button className='delete-btn'></button>
                 <div className= "UserRecContainer">
                     <div className="card">

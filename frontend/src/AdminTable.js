@@ -21,15 +21,15 @@ export function AdminTable({ page }) {
 
 
         table = (
-            <div className="container paddings-mini">
+            <div className="admin-tweet-container paddings-mini">
                 <table className="tweet-table" id="admin-tweet-table">
                     {items.map((item) => (
-                        <tr>
-                            <td>{item.tweetID}</td>
-                            <td id="content">{item.content}</td>
-                            <td>{item.userName}</td>
-                            <td>{item.date}</td>
-                            <button className="delele-button" id="delete-button">Delete</button>
+                        <tr className='admin-table-column'>
+                            <td className='table-tweetid'>{item.tweetID}</td>
+                            <td className='table-tweetcontent'>{item.content}</td>
+                            <td className='table-tweet-username'>{item.userName}</td>
+                            <td className='table-date'>{item.date}</td>
+                            <button className="admin-tweet-delele-button" id="delete-button">Delete</button>
                         </tr>
                     ))}
                 </table>
@@ -47,15 +47,15 @@ export function AdminTable({ page }) {
             ];
 
         table = (
-            <div className="container paddings-mini">
+            <div className="admin-comment-container paddings-mini">
                 <table className="comment-table" id="admin-comment-table">
                     {items.map((item) => (
-                        <tr>
-                            <td>{item.commentID}</td>
-                            <td id="content">{item.content}</td>
-                            <td>{item.userName}</td>
-                            <td>{item.date}</td>
-                            <button className="delele-button" id="delete-button">Delete</button>
+                        <tr className='admin-table-column'>
+                            <td className='table-commentid'>{item.commentID}</td>
+                            <td className="table-commentcontent">{item.content}</td>
+                            <td className='table-comment-username'>{item.userName}</td>
+                            <td className='table-comment-date'>{item.date}</td>
+                            <button className="admin-comment-delele-button" id="delete-button">Delete</button>
                         </tr>
                     ))}
                 </table>
@@ -67,21 +67,23 @@ export function AdminTable({ page }) {
         // Fake data!!!!!!!!!!!!!!!!!!!!!
         let items =
             [
-                { userID: "1", email: "1314520@love.com", userName: "@user1" },
-                { userID: "1919810", email: "3100course@sb.com", userName: "@user2" },
-                { userID: "233333", email: "emmmmmm@qq.com", userName: "@user3" },
+                { userID: "000001", email: "1314520@love.com", userName: "@user1" , banStatus:"Normal"},
+                { userID: "191981", email: "3100course@sb.com", userName: "@user2", banStatus:"Banned till 2023.03.25 12:00pm" },
+                { userID: "233333", email: "emmmmmm@qq.com", userName: "@user3", banStatus:"Normal" },
             ];
 
         table = (
-            <div className="container paddings-mini">
+            <div className="admin-user-container paddings-mini">
                 <table className="user-table" id="admin-user-table">
                     {items.map((item) => (
-                        <tr>
-                            <td>{item.userID}</td>
-                            <td>{item.email}</td>
-                            <td>{item.userName}</td>
-                            <select id="ban-date"><option value={1}>Ban 1 day</option><option value={2}>Ban 7 days</option></select>
-                            <button className="delele-button" id="delete-button">Delete</button>
+                        <tr className='admin-table-column'>
+                            <td className='table-userid'>{item.userID}</td>
+                            <td className='table-user-email'>{item.email}</td>
+                            <td className='table-username'>{item.userName}</td>
+                            <td className='table-ban-status'>{item.banStatus}</td>
+                            <select className="admin-user-ban-date"><option value={1}>Ban 1 day</option><option value={2}>Ban 7 days</option></select>
+                            <button className='ban-confirm-btn'>Confirm</button>
+                            <button className="admin-user-delele-button" id="delete-button">Delete</button>
                         </tr>
                     ))}
                 </table>

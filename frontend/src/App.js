@@ -22,15 +22,15 @@ function App() {
         <Routes>
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<SignUp />} />
-          <Route path="/adminpage-tweet" element={<AdminPage page="tweet" />} />
-          <Route path="/adminpage-user" element={<AdminPage page="user" />} />
-          <Route path="/adminpage-comment" element={<AdminPage page="comment" />} />
+          <Route path="/adminç-tweet" element={<AdminPage page="tweet" />} />
+          <Route path="/admin-user" element={<AdminPage page="user" />} />
+          <Route path="/admin-comment" element={<AdminPage page="comment" />} />
           <Route path="/home" element={<HomePage />} />
           <Route path="/personal" element={<PersonalPage />} />
           <Route path='/test' element={<Test />} />
           <Route path='/post' element={<Post />} />
           <Route path='/retweet' element={<Retweet />} />
-          <Route path='/tweetpage' element={<TweetPage />} />
+          <Route path='/tweet' element={<TweetPage />} />
           <Route path='/*' element={<UnderDevelopment />} />
         </Routes>
       </BrowserRouter>

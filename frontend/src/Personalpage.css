@@ -154,12 +154,6 @@
 
 }
 
-.container {
-    display: flex;
-  align-items: center;
-  justify-content: center
-   }
-
 .pg-text {
     font-size: 25px;
     line-height: 1.5;

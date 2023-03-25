@@ -65,6 +65,7 @@ A social media application to post, view tweets, follow others, and engage in re
 - `/personal/blacklist`: Show blacklist of the user
 - `/post`: Page to edit and post tweet
 - `/retweet`: Page to retweet a tweet
+- `/tweet`: Tweet detail page
 - `/*`: Under development or no match for the URL
 
 ## Frontend Module Design

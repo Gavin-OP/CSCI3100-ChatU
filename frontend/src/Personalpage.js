@@ -12,7 +12,7 @@ export function PersonalPage({ page }) {
             <ScrollToTop />
             <div>
                 {/* NavigationBar */}
-                <NavigationBar page={'personalpage'} />
+                <NavigationBar page={'user'} />
             </div>
 
             <div class="a">

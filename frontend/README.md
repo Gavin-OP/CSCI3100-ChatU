@@ -2,6 +2,25 @@
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
+## Frontend Router Design
+
+- `/login`: Login page
+- `/signup`: Sign up page
+- `/admin/tweet`: Admin tweet management page
+- `/admin/user`: Admin user management page
+- `/admin/comment`: Admin comment management page
+- `/home`: Home page
+- `/personal/tweet`: Show the tweet the user posted in the past
+- `/personal/fav`: Show the tweet in the user's favorite
+- `/personal/following`: Show the like which the user is currently following
+- `/personal/fans`: Show the fans of the user
+- `/personal/blacklist`: Show blacklist of the user
+- `/post`: Page to edit and post tweet
+- `/retweet`: Page to retweet a tweet
+- `/tweet`: Tweet detail page
+- `/*`: Under development or no match for the URL
+
+
 ## Available Scripts
 
 In the project directory, you can run:

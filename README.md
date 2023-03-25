@@ -88,8 +88,7 @@ A social media application to post, view tweets, follow others, and engage in re
    - Features: Poster info, follow button, tweet ID, contents with or without photo, action buttons including like, dislike, favorite, comment, and share with color display, toggle comment input place. 
    - People in Charge: OP
    - Difficulty: ⭐⭐
-   - Usage
-
+   - Usage  
      1. write `import { TweetCard } from './TweetCard'` at the beginning of the file to import the Tweet Card module
      2. Store JSON data to `tweet_data`, data structure should be stored like below
         ```javascript
@@ -108,7 +107,6 @@ A social media application to post, view tweets, follow others, and engage in re
             tweetText: 'This is a tweet.',
         };
         ```
-        
      3. write `<TweetCard {...tweet_data} />` like a basic HTML element in the return part. 
    - Required JSON data from the server should be the structure below
      ```javascript
@@ -159,7 +157,6 @@ A social media application to post, view tweets, follow others, and engage in re
         - Since we don't have a limit for the number of pictures now, we should set this limit to 2 or 3 in future.
         - Normal post doesn't have tweet_data, retweet post doesn't have imageSrc.
       - Usage: Just use `<Tweetpage />`. No input now, we may use `<Tweetpage file={file}} />` later (need to change the file).
-
          ```javascript
         let test_file = {
            username: 'David',
@@ -193,7 +190,7 @@ A social media application to post, view tweets, follow others, and engage in re
         }
          ```
 
-
+  
 
 👍2 login, register  central components (LZX).    
 👍<3 admin tweet page : search bar, result box (LZX).   

@@ -233,7 +233,10 @@ A social media application to post, view tweets, follow others, and engage in re
 
 ## To do
 
-1. admin user ban
+1. Change Navbar. 
+   1. Navbar for login, click logo is the home page, click icon is login
+   2. Navbar for user, Navbar is slightly different in the toggle list for personal page and setting. 
+
 
 ## Reference
 

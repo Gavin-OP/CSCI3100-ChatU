@@ -1,7 +1,7 @@
-import { NavigationBar } from './Navbar';
+import { NavigationBar } from './NavBar';
 import { SearchBar } from './SearchBar';
 import { AdminTable } from './AdminTable';
-export function Adminpage({ page }) {
+export function AdminPage({ page }) {
     if (page === 'tweet') {
 
         return (

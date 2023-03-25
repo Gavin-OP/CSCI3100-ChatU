@@ -9,8 +9,8 @@ import { Login } from './Login';
 import { Test } from './Test'
 import { Signup } from './Signup';
 import { Adminpage } from './Adminpage';
-import {Homepage} from './Homepage';
-import {Personalpage} from './Personalpage';
+import { Homepage } from './Homepage';
+import { Personalpage } from './Personalpage';
 import { UnderDevelopment } from './UnderDevelopment';
 import { Post } from './Post'
 import { Retweet } from './Retweet'

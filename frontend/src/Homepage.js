@@ -1,16 +1,17 @@
 import React from "react";
 import ScrollToTop from 'react-scroll-to-top';
-import { NavigationBar } from './Navbar';
+import { NavigationBar } from './NavBar';
 import { SearchBar } from './SearchBar';
 import { TweetCard } from './TweetCard'
-import "./Homepage.css"
+import { RetweetCard } from "./RetweetCard";
+import "./HomePage.css"
 import { retweet_data, tweet_data } from "./Test";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faPlus, faRotateRight } from '@fortawesome/free-solid-svg-icons'
 import ReactDOM from 'react-dom';
 
 
-export function Homepage() {
+export function HomePage() {
     return (
         <>
             <ScrollToTop />
@@ -29,7 +30,7 @@ export function Homepage() {
                     <div class="col-content">
                         <SearchBar page={'homepage'} />
                         <TweetCard {...tweet_data} />
-                        <TweetCard {...tweet_data} />
+                        <RetweetCard {...retweet_data} />
                         <TweetCard {...tweet_data} />
                         <TweetCard {...tweet_data} />
                         <TweetCard {...tweet_data} />

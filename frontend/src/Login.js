@@ -1,5 +1,5 @@
 import './Login.css';
-import { NavigationBar } from './Navbar';
+import { NavigationBar } from './NavBar';
 
 
 export function Login() {

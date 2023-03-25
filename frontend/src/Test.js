@@ -1,6 +1,6 @@
 import { TweetCard } from './TweetCard';
 import { RetweetCard } from './RetweetCard';
-import { NavigationBar } from './Navbar';
+import { NavigationBar } from './NavBar';
 // This is only a test page, it can be deleted. 
 
 export const tweet_data = {

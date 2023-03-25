@@ -1,4 +1,4 @@
-import './Navbar.css';
+import './NavBar.css';
 
 export function NavigationBar({ page }) {
     let navContent;

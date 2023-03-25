@@ -5,6 +5,7 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 ## Table of Content
 - [Frontend Router Design](https://github.com/Gavin-OP/CSCI3100-ChatU/blob/main/frontend/README.md#frontend-router-design)
 - [Frontend Module Design](https://github.com/Gavin-OP/CSCI3100-ChatU/blob/main/frontend/README.md#frontend-module-design)
+- [Available Script](https://github.com/Gavin-OP/CSCI3100-ChatU/blob/main/frontend/README.md#available-script)
 
 ## Frontend Router Design
 

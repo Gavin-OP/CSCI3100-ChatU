@@ -1,6 +1,6 @@
 import './Login.css';
-import { NavigationBar } from './Navbar';
-export function Signup() {
+import { NavigationBar } from './NavBar';
+export function SignUp() {
     return (
         <div>
             {/* Navigationbar */}

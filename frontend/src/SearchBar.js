@@ -9,11 +9,11 @@ export function SearchBar({ page }) {
     // !!! need a search button
     if (page === 'tweet') {
         Bar = (
-            <div class="container">
-                <div class="box">
+            <div class="search-container">
+                <div className="search-box">
                     <i><FontAwesomeIcon icon={faMagnifyingGlass} /></i>
                     <form name="search">
-                        <input type="text" class="input" name="txt" onmouseout="this.value = ''; this.blur();" placeholder='#ID/content' />
+                        <input type="text" className="search-input" name="txt" onmouseout="this.value = ''; this.blur();" placeholder='#ID/content' />
                     </form>
                 </div>
             </div>
@@ -22,11 +22,11 @@ export function SearchBar({ page }) {
     // Search bar for home page
     else if (page === 'homepage') {
         Bar = (
-            <div class="container">
-                <div class="box">
+            <div class="search-container">
+                <div className="search-box">
                     <i><FontAwesomeIcon icon={faMagnifyingGlass} /></i>
                     <form name="search">
-                        <input type="text" class="input" name="txt" onmouseout="this.value = ''; this.blur();" placeholder='Tweet ID/Key Words/Tags' />
+                        <input type="text" className="search-input" name="txt" onmouseout="this.value = ''; this.blur();" placeholder='Tweet ID/Key Words/Tags' />
                     </form>
                 </div>
             </div>
@@ -37,11 +37,11 @@ export function SearchBar({ page }) {
     // !!! need a search button
     else if (page === 'user') {
         Bar = (
-            <div class="container">
-                <div class="box">
+            <div class="search-container">
+                <div className="search-box">
                     <i><FontAwesomeIcon icon={faMagnifyingGlass} /></i>
                     <form name="search">
-                        <input type="text" class="input" name="txt" onmouseout="this.value = ''; this.blur();" placeholder='ID/UserName' />
+                        <input type="text" className="search-input" name="txt" onmouseout="this.value = ''; this.blur();" placeholder='ID/UserName' />
                     </form>
                 </div>
             </div>
@@ -52,11 +52,11 @@ export function SearchBar({ page }) {
     // !!! need a search button
     else if (page === 'comment') {
         Bar = (
-            <div class="container">
-                <div class="box">
+            <div class="search-container">
+                <div className="search-box">
                     <i><FontAwesomeIcon icon={faMagnifyingGlass} /></i>
                     <form name="search">
-                        <input type="text" class="input" name="txt" onmouseout="this.value = ''; this.blur();" placeholder='#ID/content' />
+                        <input type="text" className="search-input" name="txt" onmouseout="this.value = ''; this.blur();" placeholder='#ID/content' />
                     </form>
                 </div>
             </div>

@@ -1,6 +1,12 @@
-import './Navbar.css';
+import './NavBar.css';
+import { useState } from 'react'
 
 export function NavigationBar({ page }) {
+    const [state, setState] = useState({
+        personalDisplay: '',
+        settingDisplay: ''
+    });
+
     let navContent;
 
     // Navigation bar for user
@@ -9,7 +15,7 @@ export function NavigationBar({ page }) {
             <nav>
                 <img src="./logo_colorful.svg" alt="Logo" />
                 <ul>
-                    <li><a href="/homepage">Home</a></li>
+                    <li><a href="/home">Home</a></li>
                     <li><a href="/message">Message</a></li>
                 </ul>
                 <div className="user-avatar">
@@ -102,7 +108,7 @@ export function NavigationBar({ page }) {
             <nav>
                 <img src="./logo_colorful.svg" alt="Logo" />
                 <ul>
-                    <li><a href="/homepage">Home</a></li>
+                    <li><a href="/home">Home</a></li>
                     <li><a href="/login">login</a></li>
                 </ul>
                 <div className="user-avatar">
@@ -114,5 +120,7 @@ export function NavigationBar({ page }) {
         );
 
     }
+
+    console.log(window.location['pathname'])
     return navContent;
 }

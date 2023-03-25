@@ -138,8 +138,55 @@ import "./SearchBar.js"
 👍8 refresh and user recommendation box (LZX)	  
 
 
-👍👍10 post tweet page (GZH).    
-👍👍11 tweet detail and retweet detail (GZH).    
+10 post tweet page (GZH).
+   - Features: Textarea for text content, tag selection, file uploading, privacy.
+   - People in Charge: GZH
+   - Difficulty: ⭐⭐
+   - Versions: 
+     - Normal post page (allows pictures uploading)
+     - Retweet post page (Uses `<TweetCard />` component)     
+   - Usage: Just use `<Post />`
+
+11 tweet detail and retweet detail (GZH).    
+   - Features: Tweet content display, comment input, comments display.
+   - People in Charge: GZH
+   - Difficulty: ⭐⭐
+   - Note: 
+      - (i) Since we don't have a limit for the number of pictures now, we should set this limit to 2 or 3 in future.
+      - (ii) Normal post doesn't have tweet_data, retweet post doesn't have imageSrc.
+   - Usage: Just use `<Tweetpage />`. No input now, we may use `<Tweetpage file={file}}/>` later (need to change the file).
+         ```javascript
+         let test_file = {
+            username: 'David',
+            avatar: "./avatar2.png",
+            time: '2023-3-7 0:04',
+            tweetId: 9978,
+            content: "A test twitter: aobtb abyaaotbaotbao btap tnap tpiabt pabtapit bata tat ",
+            favos: 2,
+            likes: 9,
+            comments: [{user:'user1', avatar:"./avatar.png", content:'Comment 1', time:'2023-3-21 19:00'},
+            {user:'uagoab', avatar:"./avatar2.png", content:'anoaotiba', time:'2023-3-22 11:40'},
+            {user:'CSCI3100', avatar:"./avatar.png", content:'Good job', time:'2023-3-22 14:38'}],
+            likeStatus: 0,
+            favorStatus: 0,
+            followStatus: 'Following',
+            //imageSrc: ['/tweet_card_pic_1.jpg'],
+            tweet_data: {
+               avatarUrl: './avatar.png',
+               username: 'Gavin OP',
+               tweetId: '100056',
+               likeStatus: 1,
+               dislikeStatus: 0,
+               starStatus: 1,
+               likeCount: 49,
+               starCount: 32,
+               commentCount: 4,
+               followStatus: 'Following',
+               // imageSrc: '/tweet_card_pic_1.jpg',
+               tweetText: 'dfasdfanibh massa blandit orci, eget ultricies turpis lorem ut nulla.',
+            }
+         }
+        ```
 
 
 👍👍9  home page basic UI: search bar, page structure (DHP).    

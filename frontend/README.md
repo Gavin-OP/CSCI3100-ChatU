@@ -3,8 +3,9 @@
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Table of Content
-- [Frontend Router Design]()
-- [Frontend Module Design]()
+- [Frontend Router Design](https://github.com/Gavin-OP/CSCI3100-ChatU/blob/main/frontend/README.md#frontend-router-design)
+- [Frontend Module Design](https://github.com/Gavin-OP/CSCI3100-ChatU/blob/main/frontend/README.md#frontend-module-design)
+- [Available Scripts](https://github.com/Gavin-OP/CSCI3100-ChatU/blob/main/frontend/README.md#available-scripts)
 
 ## Frontend Router Design
 

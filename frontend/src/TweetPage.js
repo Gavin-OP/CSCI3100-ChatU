@@ -96,7 +96,7 @@ export class TweetPage extends React.Component {
     render() {
         return (
             <>
-                <div className='container-fluid' id="top" style={{ minWidth: '768px' }}>
+                <div className='container-fluid p-0' id="top" style={{ minWidth: '768px' }}>
                     <NavigationBar page='user' />
                     <div className="topbutton"><a href='#top'><i className="bi bi-arrow-up-square"></i></a></div>
                     <div className="container-fluid m-0 py-3 row">

@@ -1,6 +1,12 @@
 import './NavBar.css';
+import { useState } from 'react'
 
 export function NavigationBar({ page }) {
+    const [state, setState] = useState({
+        personalDisplay: '',
+        settingDisplay: ''
+    });
+
     let navContent;
 
     // Navigation bar for user

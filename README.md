@@ -54,6 +54,7 @@ A social media application to post, view tweets, follow others, and engage in re
 ## To do
 
 1. admin user ban
+2. Change tweet card and retweet card CSS background color to be consistance with login and signup. 
 
 ## Reference
 

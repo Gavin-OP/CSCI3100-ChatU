@@ -28,7 +28,7 @@ const tweet_data = {
 };
 export function Retweet() {
     return (
-        <Container fluid>
+        <Container fluid className="p-0">
             <NavigationBar page='user' />
             <Container fluid className="m-2">
                 <Row >

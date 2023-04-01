@@ -37,7 +37,7 @@ function App() {
           <Route path='/post' element={<Post />} />
           <Route path='/retweet' element={<Retweet />} />
           <Route path='/tweet' element={<TweetPage />} />
-          <Route path="/settings" element={<Settings />} />
+          <Route path="/setting" element={<Settings />} />
           <Route path='/*' element={<UnderDevelopment />} />
         </Routes>
       </BrowserRouter>

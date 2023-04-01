@@ -57,6 +57,8 @@ A social media application to post, view tweets, follow others, and engage in re
    1. Navbar for login, click logo is the home page, click icon is login
    2. Navbar for user, Navbar is slightly different in the toggle list for personal page and setting. 
 
+1. admin user ban
+2. Change tweet card and retweet card CSS background color to be consistance with login and signup. 
 
 ## Reference
 

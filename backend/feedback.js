@@ -23,10 +23,9 @@ router.get('/retrieve/:feedbackId', (req, res) => {
 // initialize feedback or add feedback for future use!!!!!!
 router.post('/create', (req, res) => {
     Feedback.findOne({})
-        // .sort('-feedback_id')
+        .sort('-feedback_id')
         .exec()
         .then((feedback) => {
-            // console.log(feedback.feedback_id)
             console.log(feedback != null ? (feedback.feedback_id + 1) : 1)
             const newFeedback = new Feedback(
                 {
@@ -39,7 +38,8 @@ router.post('/create', (req, res) => {
         .then((newFeedback) => {
             console.log('feedback created:', newFeedback);
             res.send('Create feedback successfully.');
-        }).catch((err) => {
+        })
+        .catch((err) => {
             console.error(err)
             res.status(500).send('Failed to create feedback.');
         });

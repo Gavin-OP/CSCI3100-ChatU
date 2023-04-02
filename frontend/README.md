@@ -5,6 +5,7 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 ## Table of Content
 - [Frontend Router Design](https://github.com/Gavin-OP/CSCI3100-ChatU/blob/main/frontend/README.md#frontend-router-design)
 - [Frontend Module Design](https://github.com/Gavin-OP/CSCI3100-ChatU/blob/main/frontend/README.md#frontend-module-design)
+- [To Do](https://github.com/Gavin-OP/CSCI3100-ChatU/blob/main/frontend/README.md#to-do)
 - [Available Scripts](https://github.com/Gavin-OP/CSCI3100-ChatU/blob/main/frontend/README.md#available-scripts)
 
 ## Frontend Router Design
@@ -167,6 +168,10 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 👍15 (opt) message box contact list (TYF).    
 👍16 (opt) message box. (TYF).   
 
+## To Do
+
+
+
 
 ## Available Scripts
 
@@ -205,7 +210,7 @@ Instead, it will copy all the configuration files and the transitive dependencie
 
 You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
 
-## Learn More
+### Learn More
 
 You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
 

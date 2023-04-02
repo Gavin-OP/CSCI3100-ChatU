@@ -2,8 +2,8 @@
 // API: `/getUser/:userID`, GET
 res.send([
     {
-        icon: './avatar.png',
-        name: "User1",
+        avatar: './avatar.png',
+        username: "User1",
     }
 ])
 

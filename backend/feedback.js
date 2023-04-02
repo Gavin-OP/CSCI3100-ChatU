@@ -26,7 +26,6 @@ router.post('/create', (req, res) => {
         .sort('-feedback_id')
         .exec()
         .then((feedback) => {
-            console.log(feedback != null ? (feedback.feedback_id + 1) : 1)
             const newFeedback = new Feedback(
                 {
                     // new id is the highest existed id + 1
@@ -41,7 +40,7 @@ router.post('/create', (req, res) => {
         })
         .catch((err) => {
             console.error(err)
-            res.status(500).send('Failed to create feedback.');
+            res.status(500).send('Fail to create feedback.');
         });
 });
 

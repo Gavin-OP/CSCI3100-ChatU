@@ -1,15 +1,22 @@
 const express = require('express');
 const app = express();
+const mongoose = require('mongoose');
 app.use(express.static('app'));
 
-const mongoose = require('mongoose');
+// const cors = require('cors');
+// app.use(cors());
 
-const bodyParser = require('body-parser');
-app.use(bodyParser.urlencoded({ extended: false }));
-app.use(bodyParser.json())
-const cors = require('cors');
-app.use(cors());
+const router = require('./router')
 
-console.log('Server is online. ')
 
+// connect to database
+mongoose.connect('mongodb+srv://Gavin:GaICBvZZbtJbWdEB@csci3100-chatu.txywakd.mongodb.net/test');
+const db = mongoose.connection;
+db.once('open', () => {
+    console.log('DB connection successful');
+    console.log('Server is online. ')
+    app.use('/', router);
+});
+
+// start the server
 server = app.listen(5000);

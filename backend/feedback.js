@@ -20,7 +20,7 @@ router.get('/retrieve/:feedbackId', (req, res) => {
 });
 
 
-// initialize feedback or add feedback for future use!!!!!!
+// create feedback
 router.post('/create', (req, res) => {
     Feedback.findOne({})
         .sort('-feedback_id')

@@ -1,12 +1,11 @@
 // general
-// API: `/getUser/:userID`, GET
+// API: `/getUser/:userId`, GET
 res.send([
     {
         avatar: './avatar.png',
         username: "User1",
     }
 ])
-
 
 
 

@@ -5,11 +5,11 @@ const Feedback = require('./feedbackSchema');
 
 // get feedback by feedbackId
 router.get('/retrieve/:feedbackId', (req, res) => {
-    Feedback.findOne({ feedbackId: req.params })
+    Feedback.findOne({ feedback_id: req.params['feedbackId'] })
         .then((feedback) => {
             if (feedback == null) res.status(404).send('feedback not found.')
             else {
-                feedback_data = { 'feedbackId': feedback.feedbackId, 'content': feedback.content }
+                feedback_data = { 'feedback_id': feedback.feedback_id, 'content': feedback.content }
                 res.json(feedback_data)
             }
         })
@@ -23,13 +23,15 @@ router.get('/retrieve/:feedbackId', (req, res) => {
 // initialize feedback or add feedback for future use!!!!!!
 router.post('/create', (req, res) => {
     Feedback.findOne({})
-        .sort('-feedbackId')
+        // .sort('-feedback_id')
         .exec()
         .then((feedback) => {
+            // console.log(feedback.feedback_id)
+            console.log(feedback != null ? (feedback.feedback_id + 1) : 1)
             const newFeedback = new Feedback(
                 {
                     // new id is the highest existed id + 1
-                    feedbackId: feedback ? feedback.feedbackId + 1 : 1,
+                    feedback_id: feedback ? feedback.feedback_id + 1 : 1,
                     content: req.body['content'],
                 })
             return newFeedback.save()

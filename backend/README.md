@@ -4,11 +4,12 @@ Backend is constructed by NodeJS and Express with MongoDB as the database.
 
 ## Table of Content
 
-- [Backend Router Design]()
+- [Backend Router Design](https://github.com/Gavin-OP/CSCI3100-ChatU/blob/main/backend/README.md#backend-router-design)
+- [Backend Module Design](https://github.com/Gavin-OP/CSCI3100-ChatU/blob/main/backend/README.md#backend-module-design)
 
 ## Backend Router Design
 
-## Backend Moduel Design
+## Backend Module Design
 
 - `/feedback/retrieve/:feedbackId`:
   - GET

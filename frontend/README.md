@@ -23,6 +23,7 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 - `/post`: Page to edit and post tweet
 - `/retweet`: Page to retweet a tweet
 - `/tweet`: Tweet detail page
+- `/setting`: Personal setting page
 - `/*`: Under development or no match for the URL
 
 ## Frontend Module Design

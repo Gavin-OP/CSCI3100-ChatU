@@ -5,11 +5,9 @@ Backend is constructed by NodeJS and Express with MongoDB as the database.
 ## Table of Content
 
 - [Backend Router Design](https://github.com/Gavin-OP/CSCI3100-ChatU/blob/main/backend/README.md#backend-router-design)
-- [Backend Module Design](https://github.com/Gavin-OP/CSCI3100-ChatU/blob/main/backend/README.md#backend-module-design)
+- [To Do](https://github.com/Gavin-OP/CSCI3100-ChatU/blob/main/backend/README.md#to-do)
 
 ## Backend Router Design
-
-## Backend Module Design
 
 - `/feedback/retrieve/:feedbackId`:
   - GET
@@ -63,3 +61,5 @@ Backend is constructed by NodeJS and Express with MongoDB as the database.
     ```
   - Output: `'Create user successfully.'` for success. `'Fail to create user.'` for failure.
   - Usage: Create new user
+
+## To Do

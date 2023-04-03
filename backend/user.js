@@ -6,58 +6,63 @@ const multer = require('multer');
 const storage = multer.memoryStorage();
 const upload = multer({ storage: storage });
 
-// Login route
+
+// Login
 router.post('/login', (req, res) => {
-  const { email, password } = req.body;
-  
-  // Check if user exists
-  User.findOne({ email })
-    .then(user => {
-      if (!user) {
-        return res.status(400).json({ message: 'Invalid credentials' });
-      }
-      
-      // Check password
-      if (user.pwd !== password) {
-        return res.status(400).json({ message: 'Invalid credentials' });
-      }
-      
-      // Set cookie to identify user
-      res.cookie('userId', user._id, { httpOnly: true });
-      res.json({ message: 'Login successful' });
-    })
-    .catch(err => {
-      console.error(err);
-      res.status(500).json({ message: 'Server error' });
-    });
+    const { email, password } = req.body;
+
+    // Check if user exists
+    User.findOne({ email })
+        .then(user => {
+            if (!user) {
+                return res.status(400).json({ message: 'Wrong email.' });
+            }
+
+            // Check password
+            if (user.pwd !== password) {
+                return res.status(400).json({ message: 'Wrong password.' });
+            }
+
+            // Set cookie to identify user
+            res.cookie('userId', user.user_id, { httpOnly: true });
+            res.cookie('userDbId', user._id, { httpOnly: true });
+            res.json({ message: 'Login successful' });
+        })
+        .catch(err => {
+            console.error(err);
+            res.status(500).json({ message: 'Server error' });
+        });
 });
 
-// Logout route
+
+// Logout
 router.post('/logout', (req, res) => {
-  res.clearCookie('userId');
-  res.json({ message: 'Logout successful' });
+    res.clearCookie('userDbId');
+    res.clearCookie('userId');
+    res.json({ message: 'Logout successful' });
 });
+
 
 // Example protected route that requires authentication
 router.get('/profile', (req, res) => {
-  const userId = req.cookies.userId;
-  
-  if (!userId) {
-    return res.status(401).json({ message: 'Unauthorized' });
-  }
-  
-  User.findById(userId)
-    .then(user => {
-      if (!user) {
+    const userId = req.cookies.userId;
+
+    if (!userId) {
         return res.status(401).json({ message: 'Unauthorized' });
-      }
-      
-      res.json({ user });
-    })
-    .catch(err => {
-      console.error(err);
-      res.status(500).json({ message: 'Server error' });
-    });
+    }
+
+    User.findById(userId)
+        .then(user => {
+            if (!user) {
+                return res.status(401).json({ message: 'Unauthorized' });
+            }
+
+            res.json({ user });
+        })
+        .catch(err => {
+            console.error(err);
+            res.status(500).json({ message: 'Server error' });
+        });
 });
 
 

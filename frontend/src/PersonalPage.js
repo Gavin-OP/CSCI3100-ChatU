@@ -58,7 +58,7 @@ export function PersonalPage({page, userid}){
               <ScrollToTop />
               <div>
               {/* NavigationBar */}
-              <NavigationBar page={'PersonalPage'} />
+              <NavigationBar page={'user'} />
               </div> 
     
               <div className="a container col-8 offset-2">
@@ -112,7 +112,7 @@ export function PersonalPage({page, userid}){
                 <ScrollToTop />
                 <div>
                 {/* NavigationBar */}
-                <NavigationBar page={'PersonalPage'} />
+                <NavigationBar page={'user'} />
                 </div> 
       
                 <div className="container col-8 offset-2">
@@ -150,7 +150,7 @@ export function PersonalPage({page, userid}){
                 <ScrollToTop />
                 <div>
                 {/* NavigationBar */}
-                <NavigationBar page={'PersonalPage'} />
+                <NavigationBar page={'user'} />
                 </div> 
       
                 <div class="a">

@@ -18,7 +18,7 @@ export function UserRecomBox(){
                 <div className='URB-container'>
                 <button className='delete-btn'></button>
                 <div className= "UserRecContainer">
-                    <div className="card">
+                    <div className="user-recom-card">
                         <div className='Round-icon'>
                             <div className='icon'>
                                 <img src={item.Icon} alt="Icon"/>

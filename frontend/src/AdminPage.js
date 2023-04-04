@@ -1,6 +1,5 @@
 import { NavigationBar } from './NavBar';
 import { SearchBar } from './SearchBar';
-import { AdminTable } from './AdminTable';
 export function AdminPage({ page }) {
     if (page === 'tweet') {
 
@@ -8,10 +7,8 @@ export function AdminPage({ page }) {
             <div>
                 {/* NavigationBar */}
                 <NavigationBar page={'admin'} />
-                {/* Search bar */}
-                <SearchBar page={'tweet'} />
                 {/* Table */}
-                <AdminTable page={'tweet'} />
+                <SearchBar page={'tweet'} />
             </div>
         )
     }
@@ -21,10 +18,8 @@ export function AdminPage({ page }) {
             <div>
                 {/* NavigationBar */}
                 <NavigationBar page={'admin'} />
-                {/* Search bar */}
-                <SearchBar page={'comment'} />
                 {/* Table */}
-                <AdminTable page={'comment'} />
+                <SearchBar page={'comment'} />
             </div>
         )
     }
@@ -34,10 +29,8 @@ export function AdminPage({ page }) {
             <div>
                 {/* NavigationBar */}
                 <NavigationBar page={'admin'} />
-                {/* Search bar */}
-                <SearchBar page={'user'} />
                 {/* Table */}
-                <AdminTable page={'user'} />
+                <SearchBar page={'user'} />
             </div>
         )
     }

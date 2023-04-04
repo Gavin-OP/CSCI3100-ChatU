@@ -122,7 +122,6 @@
                 -20px -20px 60px #ffffff;
     padding: 20px;
 }
-
 .user-table {
     border-collapse: collapse;
     width: 100%;
@@ -153,7 +152,7 @@
     padding: 10px;
 }
 
-.ban-confirm-btn {
+.unban-btn {
     background-color: #F0F0F0;
     border: none;
     border-radius: 30px;
@@ -168,13 +167,13 @@
     transition: all 0.2s ease-in-out;
 }
 
-.ban-confirm-btn:hover {
+.unban-btn:hover{
     background: linear-gradient( #dbd55e7e, #4bdc6686);
     box-shadow: inset 2px 2px 2px #dbd55e7e,
                 inset -2px -2px 2px #4bdc6686;
 }
 
-.admin-user-delele-button {
+.admin-user-delele-button, .ban-button{
     background-color: #F0F0F0;
     border: none;
     border-radius: 30px;
@@ -189,7 +188,7 @@
     transition: all 0.2s ease-in-out;
 }
 
-.admin-user-delele-button:hover {
+.admin-user-delele-button:hover, .ban-button:hover {
     background: linear-gradient( #db7ba8aa, #e40d1b86);
     box-shadow: inset 2px 2px 2px #db7ba8aa,
                 inset -2px -2px 2px #e40d1b86;

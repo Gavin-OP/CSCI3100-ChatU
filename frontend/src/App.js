@@ -15,7 +15,7 @@ import { Post } from './Post'
 import { Retweet } from './Retweet'
 import { TweetPage } from './TweetPage'
 import { Settings } from "./Settings";
-
+// import { ChatPage } from "./ChatPage";
 function App() {
   return (
     <div>
@@ -37,7 +37,8 @@ function App() {
           <Route path='/post' element={<Post />} />
           <Route path='/retweet' element={<Retweet />} />
           <Route path='/tweet' element={<TweetPage />} />
-          <Route path="/setting" element={<Settings />} />
+          {/* <Route path="/settings" element={<Settings />} />
+          <Route path="/chat" element={<ChatPage />} /> */}
           <Route path='/*' element={<UnderDevelopment />} />
         </Routes>
       </BrowserRouter>

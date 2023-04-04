@@ -19,7 +19,6 @@ export function HomePage() {
                 {/* NavigationBar */}
                 <NavigationBar page={'user'} />
             </div>
-
             <div class="wrapper" id="homepage">
                 <div class="col col1">
                     <div class="col-content">
@@ -51,11 +50,8 @@ export function HomePage() {
                               </div>
                               <br/> <br/> <br/> <br/> 
                               <UserRecomBox />
-
                     </div>
                 </div>
-
-
             </div>
         </>
     )

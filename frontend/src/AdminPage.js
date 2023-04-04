@@ -16,7 +16,6 @@ export function AdminPage({ page }) {
         )
     }
     if (page === 'comment') {
-
         return (
             <div>
                 {/* NavigationBar */}

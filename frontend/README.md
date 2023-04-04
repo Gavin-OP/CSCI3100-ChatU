@@ -27,6 +27,87 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 - `/setting`: Personal setting page
 - `/*`: Under development or no match for the URL
 
+## Frontend fetch function
+
+## API Reference for adminpage
+
+#### Search tweet
+
+```http
+  GET /admin/tweet/search/ + searchContent
+```
+Requierd response example
+```
+{tweetID: "#000001", content: "This is a tweet", userName: "@user1", date: "2021.1.1" }
+```
+#### Search comment
+
+```http
+  GET /admin/comment/search/ + searchContent
+```
+Requierd response example
+```
+{commentID: "#012391", content: "This is a comment", userName: "@user1", date: "2021.1.1"}
+```
+#### Search user
+
+```http
+  GET /admin/user/search/ + searchContent
+```
+Requierd response example
+```
+{userID: "000001", email: "1314520@love.com", userName: "@user1" , banStatus:"Normal/Banned" }
+```
+#### Delete tweet
+
+```http
+  DELETE /tweet/delete/ + String(tweetID) (for example #000001)
+```
+Requierd response example
+```
+{response.ok}
+```
+#### Delete comment
+
+```http
+  DELETE /comment/delete/ + String(commentID) (for example #000001)
+```
+Requierd response example
+```
+{response.ok}
+```
+#### Delete user
+
+```http
+  DELETE /user/delete/ + String(userID) (for example 000001)
+```
+Requierd response example
+```
+{response.ok}
+```
+#### Ban user
+
+```http
+  GET /user/ban/ + String(userID) (for example 000001)
+```
+Requierd response example
+```
+{response.ok}
+```
+#### Unban user
+
+```http
+  GET /user/unban/ + String(userID) (for example 000001)
+```
+Requierd response example
+```
+{response.ok}
+```
+
+
+
+
+
 ## Frontend Module Design
 
 > Recommend reading: CSCI2720 chapter 6, 9  

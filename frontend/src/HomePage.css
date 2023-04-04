@@ -121,12 +121,6 @@
   margin: auto;
 }
 
-.center {
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
-  width: 50%;
-}
 
 .user-rec-text {
   font-size: 20px;

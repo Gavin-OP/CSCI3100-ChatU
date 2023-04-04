@@ -16,7 +16,7 @@ export function NavigationBar({ page }) {
                 <img src="../logo_colorful.svg" alt="Logo" />
                 <ul>
                     <li><a href="/home">Home</a></li>
-                    <li><a href="/message">Message</a></li>
+                    <li><a href="/chat">Message</a></li>
                 </ul>
                 <div className="user-avatar">
                     <img src="../avatar.png" alt="User Avatar" />

@@ -40,7 +40,7 @@ export class TweetPage extends React.Component {
     constructor(props) {
         super(props);
         this.file = test_file;
-        this.state = { logined: 0, like: test_file.likeStatus, favor: test_file.favorStatus, type: 0 };
+        this.state = { logined: 0, like: test_file.likeStatus, favor: test_file.favorStatus, type: 0 , updated: 0};
     }
     componentDidMount() {
         if (this.file.imageSrc !== undefined && this.file.imageSrc.length > 0) {
@@ -50,6 +50,7 @@ export class TweetPage extends React.Component {
             this.setState({ type: 1 });
         }
     }
+
     handleLike = () => {
         if (this.state.like === 1) {
             this.setState({ like: 0 });
@@ -89,9 +90,19 @@ export class TweetPage extends React.Component {
         }
     }
     sendComment = () => {
-        var time = new Date();
-        time.toLocalDateString();
+        const time = new Date();
+        var yr=time.getFullYear();
+        var mon=time.getMonth()+1;
+        var day=time.getDate();
+        var hr=time.getHours();
+        var min=time.getMinutes();
+        var t = yr + '-' + mon + '-' + day + ' ' + hr + ':' + min;
+        let con= document.getElementById("input").value;
         console.log(time);
+        let new_comment={user: this.file.username, avatar: this.file.avatar, content: con, time: t};
+        console.log(new_comment);
+        this.file.comments.push(new_comment);
+        this.setState({updated:1});
     }
     render() {
         return (
@@ -108,7 +119,7 @@ export class TweetPage extends React.Component {
 
                             </div>
                             <div className="container-fluid d-block my-5">
-                                <div className="container row">
+                                <div className="container-fluid row">
                                     <div className="col-1">
                                         <img src={this.file.avatar} alt="Avatar" style={{ width: '48px', height: '48px', borderRadius: '50%', marginRight: '10px' }} />
                                     </div>
@@ -122,27 +133,26 @@ export class TweetPage extends React.Component {
                                         </div>
                                     </div>
                                     <div className="col-6 container">
-                                        <div className="container-fluid row">
-                                            <div className="col-4"></div>
-                                            <div className="col-8" style={{ fontSize: '22px' }}>NO.{this.file.tweetId}</div>
-
+                                        <div className="container-fluid d-flex flex-row-reverse">
+                                            <div style={{ fontSize: '22px' }}>NO.{this.file.tweetId}</div>
                                         </div>
                                     </div>
                                 </div>
                                 <div className="container m-4" style={{ fontSize: '22px', width: '92%' }}>{this.file.content}</div>
-                                <div className="container m-4 d-flex" id="imgbox" style={{ width: '92%' }}>
+                                <div className="container m-4 d-flex justify-content-center" id="imgbox" style={{ width: '92%' }}>
                                     {this.state.type === 1 ? <TweetCard {...this.file.tweet_data} /> : <div></div>}
                                 </div>
 
                                 <div className="container m-4" style={{ fontSize: '16px', width: '95%' }}>
                                     <div className="container-fluid row">
                                         <div className="col-6 p-2" >{this.file.time}</div>
-                                        <div className="col-6 py-0 flex-right text-right">
-                                            <button className="p-2 likebuttons" alt="Like" onClick={this.handleLike} style={this.state.like == 1 ? { color: "#d92534" } : { color: '#657786' }} ><FontAwesomeIcon icon={faHeart} /> {this.file.likes}</button>
-                                            <button className="p-3 likebuttons" alt="Dislike" onClick={this.handleDislike} style={this.state.like == -1 ? { color: "#39aaf9" } : { color: '#657786' }}><FontAwesomeIcon icon={faHeartBroken} /></button>
-                                            <button className="p-2 likebuttons" alt="Favorite" onClick={this.handleFavor} style={this.state.favor == 1 ? { color: "goldenrod" } : { color: '#657786' }} ><FontAwesomeIcon icon={faStar} /> {this.file.favos}</button>
-                                            <button className="p-3 likebuttons" alt="Comment" style={{ color: "#657786" }} ><FontAwesomeIcon icon={faComment} /> {this.file.comments.length}</button>
+                                        <div className="col-6 py-0  d-flex flex-row-reverse">
+                                            
                                             <button className="p-2 likebuttons" alt="Retweet"><FontAwesomeIcon icon={faShare} /></button>
+                                            <button className="p-3 likebuttons" alt="Comment" style={{ color: "#657786" }} ><FontAwesomeIcon icon={faComment} /> {this.file.comments.length}</button>
+                                            <button className="p-2 likebuttons" alt="Favorite" onClick={this.handleFavor} style={this.state.favor == 1 ? { color: "goldenrod" } : { color: '#657786' }} ><FontAwesomeIcon icon={faStar} /> {this.file.favos}</button>
+                                            <button className="p-3 likebuttons" alt="Dislike" onClick={this.handleDislike} style={this.state.like == -1 ? { color: "#39aaf9" } : { color: '#657786' }}><FontAwesomeIcon icon={faHeartBroken} /></button>
+                                            <button className="p-2 likebuttons" alt="Like" onClick={this.handleLike} style={this.state.like == 1 ? { color: "#d92534" } : { color: '#657786' }} ><FontAwesomeIcon icon={faHeart} /> {this.file.likes}</button>
                                         </div>
                                     </div>
                                 </div>
@@ -205,21 +215,23 @@ class CommentCard extends React.Component {
                             <img src={this.comment.avatar} alt="Avatar" style={{ width: '32px', height: '32px', borderRadius: '50%', marginRight: '10px' }} />
                         </div>
                         <div className="col-5 container offset-0 d-inline-block">
-                            <div className="container row" style={{ fontSize: '14px' }}>
+                            <div className="container row" style={{ fontSize: '18px' }}>
                                 <div className="col-6 p-2">{this.comment.user}</div>
-                                <div className="col-5"></div>
-                                <div className='col-1 container d-block'><div style={{ width: '1px', height: '100%', backgroundColor: 'gray' }}></div></div>
+
+                                
                             </div>
                         </div>
                         <div className="col-6 container">
-                            <div className="container-fluid row">
-                                <div className="col-4"></div>
-                                <div className="col-8 p-2" style={{ fontSize: '14px' }}>{this.comment.time}</div>
+                            <div className="container-fluid d-flex flex-row-reverse">
+                                <div className="p-2" style={{ fontSize: '14px' }}>{this.comment.time}</div>
                             </div>
                         </div>
                     </div>
                     <div className="container m-4" style={{ fontSize: '18px' }}>{this.comment.content}</div>
-                    <div className="col-2 offset-10"><button className="p-2 likebuttons" alt="Reply to ..." onClick={() => this.addCom()} style={{ color: "#657786" }} ><FontAwesomeIcon icon={faComment} /></button></div>
+                    <div className="container-fluid d-flex flex-row-reverse">
+                        <div className="p-2"><button className="p-2 likebuttons" alt="Reply to ..." onClick={() => this.addCom()} style={{ color: "#657786" }} ><FontAwesomeIcon icon={faComment} /></button></div>
+                    </div>
+                    
                 </div>
             </>
         )

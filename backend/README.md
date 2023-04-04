@@ -22,7 +22,7 @@ Backend is constructed by NodeJS and Express with MongoDB as the database.
         "content": "ChatU is a good software"
     }
     ```
-  Failure output:
+    Failure output:
     ```javascript
     {
         "message": "feedback not found."
@@ -87,7 +87,7 @@ Backend is constructed by NodeJS and Express with MongoDB as the database.
     }
     
     ```
-  Failure output:
+    Failure output:
     ```javascript
     {
         "message": "Fail to retrieve user information. Maybe because user does not exist."

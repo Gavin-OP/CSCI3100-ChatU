@@ -3,34 +3,81 @@ const router = express.Router();
 const User = require('./userSchema');
 
 const multer = require('multer');
+const { json } = require('body-parser');
 const storage = multer.memoryStorage();
 const upload = multer({ storage: storage });
 
 
+// sign up a new user
+router.post('/signUp', (req, res) => {
+    User.findOne({})
+        .sort('-user_id')
+        .exec()
+        .then((user) => {
+            const newUser = new User(
+                {
+                    user_id: user ? user.user_id + 1 : 1,
+                    email: req.body['email'],
+                    pwd: req.body['pwd'],
+                    username: req.body['username'],
+                })
+            return newUser.save();
+        })
+        .then((newUser) => {
+            console.log('user created:', newUser);
+
+            // Set cookie to identify user
+            res.cookie('userId', newUser.user_id, { httpOnly: true });
+            res.cookie('userDbId', newUser._id, { httpOnly: true });
+            res.json({
+                message: 'Sign up successful. User will automatically login.',
+                login_status: 2     // 0: wrong email, 1: wrong password, 2: login successful
+            });
+        })
+        .catch((err) => {
+            console.error(err);
+            res.status(500).json({
+                message: "Fail to create user. Maybe because email has been used."
+            });
+        })
+});
+
+
 // Login
 router.post('/login', (req, res) => {
-    const { email, password } = req.body;
+    const { email, pwd } = req.body;
 
     // Check if user exists
     User.findOne({ email })
         .then(user => {
             if (!user) {
-                return res.status(400).json({ message: 'Wrong email.' });
+                return res.status(400).json({
+                    message: 'Wrong email.',
+                    login_status: 0     // 0: wrong email, 1: wrong password, 2: login successful
+                });
             }
 
             // Check password
-            if (user.pwd !== password) {
-                return res.status(400).json({ message: 'Wrong password.' });
+            if (user.pwd !== pwd) {
+                return res.status(400).json({
+                    message: 'Wrong password.',
+                    login_status: 1     // 0: wrong email, 1: wrong password, 2: login successful
+                });
             }
 
             // Set cookie to identify user
             res.cookie('userId', user.user_id, { httpOnly: true });
             res.cookie('userDbId', user._id, { httpOnly: true });
-            res.json({ message: 'Login successful' });
+            res.json({
+                message: 'Login successful',
+                login_status: 2     // 0: wrong email, 1: wrong password, 2: login successful
+            });
         })
         .catch(err => {
             console.error(err);
-            res.status(500).json({ message: 'Server error' });
+            res.status(500).json({
+                message: 'Server error'
+            });
         });
 });
 
@@ -39,7 +86,9 @@ router.post('/login', (req, res) => {
 router.post('/logout', (req, res) => {
     res.clearCookie('userDbId');
     res.clearCookie('userId');
-    res.json({ message: 'Logout successful' });
+    res.json({
+        message: 'Logout successful'
+    });
 });
 
 
@@ -66,7 +115,6 @@ router.get('/profile', (req, res) => {
 });
 
 
-
 // retrieve user information by userId
 router.get('/getUser/:userId', (req, res) => {
     User.findOne({ user_id: req.params['userId'] })
@@ -81,13 +129,16 @@ router.get('/getUser/:userId', (req, res) => {
                 },
             };
             res.set('Content-Type', 'application/json');
-            res.send(user_info);
+            res.json(user_info);
         })
         .catch((err) => {
             console.error(err);
-            res.status(500).send('Fail to retrieve user information. ');
+            res.status(500).json({
+                message: 'Fail to retrieve user information. Maybe because user does not exist.'
+            });
         });
 })
+
 
 // test to upload avatar
 router.post('/create', upload.single("file"), (req, res) => {
@@ -148,32 +199,6 @@ router.post('/create', upload.single("file"), (req, res) => {
         })
 });
 
-
-
-router.post('/signUp', (req, res) => {
-    User.findOne({})
-        .sort('-user_id')
-        .exec()
-        .then((user) => {
-            console.log(user ? 0 : 1)
-            const newUser = new User(
-                {
-                    user_id: user ? user.user_id + 1 : 1,
-                    email: req.body['email'],
-                    pwd: req.body['pwd'],
-                    username: req.body['username'],
-                })
-            return newUser.save();
-        })
-        .then((newUser) => {
-            console.log('user created:', newUser);
-            res.send('Create user successfully');
-        })
-        .catch((err) => {
-            console.error(err);
-            res.status(500).send("Fail to create user. ");
-        })
-});
 
 
 module.exports = router;

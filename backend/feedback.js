@@ -7,15 +7,22 @@ const Feedback = require('./feedbackSchema');
 router.get('/retrieve/:feedbackId', (req, res) => {
     Feedback.findOne({ feedback_id: req.params['feedbackId'] })
         .then((feedback) => {
-            if (feedback == null) res.status(404).send('feedback not found.')
+            if (feedback == null) res.status(404).json({
+                message: 'feedback not found.',
+            })
             else {
-                feedback_data = { 'feedback_id': feedback.feedback_id, 'content': feedback.content }
+                feedback_data = {
+                    'feedback_id': feedback.feedback_id,
+                    'content': feedback.content,
+                }
                 res.json(feedback_data)
             }
         })
         .catch((err) => {
             console.log(err);
-            res.status(500).send('Error retrieving feedback.')
+            res.status(500).json({
+                message: 'Error retrieving feedback.'
+            })
         });
 });
 
@@ -36,11 +43,17 @@ router.post('/create', (req, res) => {
         })
         .then((newFeedback) => {
             console.log('feedback created:', newFeedback);
-            res.send('Create feedback successfully.');
+            res.json({
+                message: 'Create feedback successfully.',
+                feedback_creation_status: 1,
+            });
         })
         .catch((err) => {
             console.error(err)
-            res.status(500).send('Fail to create feedback.');
+            res.status(500).json({
+                message: 'Fail to create feedback.',
+                feedback_creation_status: 0,
+            });
         });
 });
 

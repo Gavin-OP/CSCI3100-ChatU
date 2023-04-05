@@ -219,10 +219,15 @@ Backend is constructed by NodeJS and Express with MongoDB as the database.
 
         ```javascript
         {
-            "message": "Follow user successfully",
+            "message": "Follow user successfully. Followed user's fan list updated.",
             "followList": [
+                1,
                 3,
                 2
+            ],
+            "fanList": [
+                1,
+                4
             ]
         }
         ```
@@ -231,6 +236,12 @@ Backend is constructed by NodeJS and Express with MongoDB as the database.
         ```javascript
         {
             "message": "FollowId not found. Can not follow an non-existing user."
+        }
+        ```
+
+        ```javascript
+        {
+            "message": "Cannot follow yourself"
         }
         ```
 
@@ -246,10 +257,12 @@ Backend is constructed by NodeJS and Express with MongoDB as the database.
 
         ```javascript
         {
-            "message": "Unfollow user successfully",
+            "message": "Unfollow user successfully. Followed user's fan list updated.",
             "followList": [
-                3,
-                2
+                1
+            ],
+            "fanList": [
+                1
             ]
         }
         ```
@@ -261,6 +274,52 @@ Backend is constructed by NodeJS and Express with MongoDB as the database.
             "message": "FollowId not found. Can not unfollow an non-existing user."
         }
         ```
+
+        ```javascript
+        {
+            "message": "Can't unfollow yourself"
+        }
+        ```
+
+- `/fan/delete/:fanId`
+
+    - Usage: Delete a fan
+
+    - GET
+
+    - Output:
+
+        Success output: 
+
+        ```javascript
+        {
+            "message": "Unfan user successfully. Fan's following list updated.",
+            "fanList": [
+                2
+            ],
+            "followList": [
+                2,
+                4,
+                5
+            ]
+        }
+        ```
+
+        Failure output: 
+
+        ```javascript
+        {
+            "message": "Can't unfan yourself"
+        }
+        ```
+
+        ```javascript
+        {
+            "message": "FanId not found. Can not delete an non-existing fan."
+        }
+        ```
+
+        
 
 
 ## To Do

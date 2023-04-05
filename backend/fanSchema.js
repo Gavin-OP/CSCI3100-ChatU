@@ -1,9 +1,9 @@
-// define follow schema
+// define fan schema
 const mongoose = require('mongoose');
 
 
 const fanSchema = mongoose.Schema({
-    user_id: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
+    user_id: { type: Number },
     fan_id: [{ type: Number }],
 });
 

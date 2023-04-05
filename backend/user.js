@@ -150,6 +150,8 @@ router.get('/getUser/:userId', (req, res) => {
                             user_id: user.user_id,
                             username: user.username,
                             description: user.description,
+                            email: user.email,
+                            ban: user.ban,
                             follow_status: followStatus,
                             avatar: {
                                 contentType: user.avatar.contentType,
@@ -171,6 +173,8 @@ router.get('/getUser/:userId', (req, res) => {
                     user_id: user.user_id,
                     username: user.username,
                     description: user.description,
+                    email: user.email,
+                    ban: user.ban,
                     follow_status: 2,
                     avatar: {
                         contentType: user.avatar.contentType,

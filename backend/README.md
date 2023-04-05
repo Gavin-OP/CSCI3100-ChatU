@@ -78,10 +78,12 @@ Backend is constructed by NodeJS and Express with MongoDB as the database.
 
     ```javascript
     {
-        "user_id": 1,
-        "username": "Gavin OP",
+        "user_id": 3,
+        "username": "Gavin",
         "description": "perfectly balanced",
-        "follow_status": 1,   // 0: not following, 1: following, 2: self
+        "email": "gavin@cuhk.com",
+        "ban": false,
+        "follow_status": 1,		// 0: not following, 1: following, 2: self
         "avatar":
         {
             "contentType": "image/png",
@@ -316,6 +318,62 @@ Backend is constructed by NodeJS and Express with MongoDB as the database.
         ```javascript
         {
             "message": "FanId not found. Can not delete an non-existing fan."
+        }
+        ```
+
+- `/follow/followList/:userId`
+
+    - Usage: Return all account that userId is currently following. 
+
+    - GET
+
+    - Output:
+
+        Success output:
+
+        ```javascript
+        {
+            "message": "He/She followes no one."
+        }
+        ```
+
+        ```javascript
+        [
+            {
+                "user_id": 5,
+                "username": "123456",
+                "email": "123456@cuhk.com",
+                "ban": false,
+                "follow_status": 1		// 0: not following, 1: following, 2: self
+            },
+            {
+                "user_id": 1,
+                "username": "admin",
+                "email": "admin",
+                "ban": false,
+                "follow_status": 0
+            },
+            {
+                "user_id": 4,
+                "username": "Gavin",
+                "email": "op@cuhk.com",
+                "ban": false,
+                "follow_status": 2
+            }
+        ]
+        ```
+
+        Failure output:
+
+        ```javascript
+        {
+            "message": "Fail to retrieve follow information."
+        }
+        ```
+
+        ```javascript
+        {
+            "message": "User not found."
         }
         ```
 

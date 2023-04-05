@@ -7,7 +7,38 @@ res.send([
     }
 ])
 
-
+[
+    {
+        "user_id": 4,
+        "username": 'Gavin',
+        "follow_status": 2,
+        "avatar": {
+            "contentType": 'image/vnd.microsoft.icon',
+            "data": {
+                "type": 'Buffer',
+                "data": [
+                    0,
+                    0
+                ]
+            }
+        }
+    },
+    {
+        "user_id": 1,
+        'username': 'admin',
+        'follow_status': 0,
+        'avatar': {
+            'contentType': 'image/png',
+            'data': {
+                'type': 'Buffer',
+                'data': [
+                    0,
+                    0
+                ]
+            }
+        }
+    }
+]
 
 // /login
 // API: `/login`, POST

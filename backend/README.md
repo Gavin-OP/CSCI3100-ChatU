@@ -389,6 +389,71 @@ Backend is constructed by NodeJS and Express with MongoDB as the database.
         }
         ```
 
+- `/fan/fanList/:userId`
+
+    - Usage: Return all account in the userId 's fans list
+
+    - GET
+
+    - Output:
+
+        Successful output:
+
+        ```javascript
+        [
+            {
+                "user_id": 4,
+                "username": 'Gavin',
+                "follow_status": 2,
+                "avatar": {
+                    "contentType": 'image/vnd.microsoft.icon',
+                    "data": {
+                        "type": 'Buffer',
+                        "data": [
+                            0,
+                            0
+                        ]
+                    }
+                }
+            },
+            {
+                "user_id": 1,
+                'username': 'admin',
+                'follow_status': 0,
+                'avatar': {
+                    'contentType': 'image/png',
+                    'data': {
+                        'type': 'Buffer',
+                        'data': [
+                            0,
+                            0
+                        ]
+                    }
+                }
+            }
+        ]
+        ```
+
+        ```javascript
+        {
+            "message": "He/She has no fan."
+        }
+        ```
+
+        Failure output:
+
+        ```javascript
+        {
+            "message": "User not found."
+        }
+        ```
+
+        ````javascript
+        {
+            "message": "Fail to retrieve follow information."
+        }
+        ````
+
         
 
 

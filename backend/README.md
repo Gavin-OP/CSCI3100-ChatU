@@ -332,11 +332,14 @@ Backend is constructed by NodeJS and Express with MongoDB as the database.
             }
         ```
 
-- `/tweet/deleteTweet`
+- `/tweet/delete/:tweetId`
+    
     - Usage: Delete a tweet record from db given the its tweet_id
-    - post
-    - Input: body:
-
+    - GET
+    - Output:
+    
+        Success output:
+    
         ```javascript
         {
             tweet_id: Num
@@ -348,30 +351,31 @@ Backend is constructed by NodeJS and Express with MongoDB as the database.
                 message: 'Tweet successfully deleted'
             }
             ```
-
-- `/tweet/createTweet`
+    
+- `/tweet/create`
+    
     - Usage: Create a new tweet in the db
-    - post
+    - POST
     - Input: 
-       body:
-
+       
         ```javascript
         {
                         content: string,
-                        time: date,
-                        user: num, // (i.e., user_id of the user who posts this tweet),
-                        privacy_state: boolean, // 0 if everyone can see the tweet; 1 if only self can see the tweet
+                        image: files,
+                        privacy_state: boolean, // false if everyone can see the tweet; true if only self can see the tweet
                         tag: string,
         }
         ```
-       (optional depending on whether user has uploaded image(s)) files: an array, called 'pic', of objects, each being an image file
-    - Success output:
+    - Output:
     
-            ```javascript
+        Success output:
+        
             {
-                "Create tweet successfully"
+                "message": "Create tweet successfully",
+                "action_status": true
             }
-            ```
+        
+        Failure outpu
 - `/tweet/createRetweet`
     - Usage: Create a new retweet in the db
     - post
@@ -535,6 +539,31 @@ Backend is constructed by NodeJS and Express with MongoDB as the database.
             "message": "User not found."
         }
         ```
+    
+- `/follow/followNum/:userId`
+
+    - Usage: Return how many user the userId follows
+
+    - GET
+
+    - Output:
+
+        Success output:
+
+        ```javascript
+        {
+            "message": "User with ID 3 is following 3 users.",
+            "following_count": 3
+        }
+        ```
+
+        Failure output:
+
+        ```javascript
+        {
+            "message": "User with ID 12 not found."
+        }
+        ```
 
 
 - `/fan/delete/:fanId`[^1][^2]
@@ -641,14 +670,31 @@ Backend is constructed by NodeJS and Express with MongoDB as the database.
         }
         ````
 
+- `/fan/fansNum/:userId`
+
+
+    - Usage: Return how many fans does userId has
+
+    - GET
+
+    - Output:
+
+        Success output:
+
+        ```javascript
+        {
+            "fansNum": 3
+        }
+        ```
+
 - `/blacklist/add/:userId`
 
     - Usage: Add a user to the blacklist
-    
+
     - GET
-    
+
     - Output
-    
+
         Success output: 
         
         ```javascript
@@ -785,6 +831,60 @@ Backend is constructed by NodeJS and Express with MongoDB as the database.
         ```javascript
         {
             "message": "User not found."
+        }
+        ```
+
+- `/admin/ban/:userId`
+
+
+    - Usage: Ban a user
+
+    - GET
+
+    - Output:
+
+        Success output: 
+
+        ```javascript
+        {
+            "message": "User banned",
+            "ban": true,
+            "action_status": true
+        }
+        ```
+
+        Failure output:
+
+        ```javascript
+        {
+            "message": "User not found"
+        }
+        ```
+
+- `/admin/unban/:userId`
+
+
+    - Usage: Unban a user
+
+    - GET
+
+    - Output:
+
+        Success output:
+
+        ```javascript
+        {
+            "message": "User unbanned",
+            "ban": false,
+            "action_status": true
+        }
+        ```
+
+        Failure output:
+
+        ```javascript
+        {
+            "message": "User not found"
         }
         ```
 

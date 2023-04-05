@@ -165,15 +165,15 @@ router.get('/fansNum/:userId', (req, res) => {
             if (!fan) {
                 return res.json({ fans: 0 });
             }
-            res.json({ fans: fan.fan_id.length });
+            res.json({
+                fansNum: fan.fan_id.length
+            });
         })
         .catch((err) => {
             console.error(err);
             res.status(500).json({ message: 'Failed to get fans for user' });
         });
 });
-
-
 
 
 module.exports = router;

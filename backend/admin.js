@@ -59,37 +59,30 @@ router.get('/ban/:userId', (req, res) => {
 });
 
 
+// unban a user
+router.get('/unban/:userId', (req, res) => {
+    const userId = req.params.userId;
 
-
-// remove a user
-router.get('/delete/:userId', (req, res) => {
-    const userId = req.params['userId'];
-
-    User.findOneAndDelete({ user_id: userId })
-        .exec()
+    User.findOne({ user_id: userId }).exec()
         .then((user) => {
-            if (user) {
-                console.log('user removed:', user);
-
-                // clear cookies
-                res.clearCookie('userId');
-                res.clearCookie('userDbId');
-                res.clearCookie('isAdmin');
-
-                res.json({
-                    message: 'User removed successfully.',
-                });
-            } else {
-                console.log('user not found');
-                res.status(404).json({
-                    message: 'User not found.',
-                });
+            if (!user) {
+                return res.status(404).json({ message: "User not found" });
             }
+
+            user.ban = false;
+            return user.save();
+        })
+        .then((updatedUser) => {
+            res.json({
+                message: "User unbanned",
+                ban: updatedUser.ban,
+                action_status: true,
+            });
         })
         .catch((err) => {
             console.error(err);
             res.status(500).json({
-                message: 'Fail to remove user.',
+                message: "Failed to unban user"
             });
         });
 });

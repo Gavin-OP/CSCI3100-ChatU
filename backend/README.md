@@ -815,6 +815,33 @@ Backend is constructed by NodeJS and Express with MongoDB as the database.
         }
         ```
 
+- `/admin/unban/:userId`
+
+
+    - Usage: Unban a user
+
+    - GET
+
+    - Output:
+
+        Success output:
+
+        ```javascript
+        {
+            "message": "User unbanned",
+            "ban": false,
+            "action_status": true
+        }
+        ```
+
+        Failure output:
+
+        ```javascript
+        {
+            "message": "User not found"
+        }
+        ```
+
         
 
 

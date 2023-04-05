@@ -6,9 +6,13 @@ const bodyParser = require('body-parser');
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json())
 
-// 
+// need to import cookieParser to prevent req.cookies is undefined. 
 const cookieParser = require('cookie-parser');
 app.use(cookieParser());
+
+// need to import cors to prevent CORS error.
+const cors = require('cors');
+app.use(cors());
 
 
 const feedbackRoutes = require('./feedback')

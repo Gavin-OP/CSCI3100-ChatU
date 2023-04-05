@@ -3,8 +3,8 @@ const app = express();
 const mongoose = require('mongoose');
 app.use(express.static('app'));
 
-// const cors = require('cors');
-// app.use(cors());
+const cors = require('cors');
+app.use(cors());
 
 const router = require('./router')
 

@@ -1,5 +1,9 @@
 const express = require('express');
 const router = express.Router();
+const axios = require('axios').create({
+    baseURL: 'http://localhost:5000'
+});
+
 const Follow = require('./followSchema');
 const User = require('./userSchema');
 const Fan = require('./fanSchema');
@@ -147,59 +151,80 @@ router.get('/delete/:followId', (req, res) => {
 
 
 // retrieve user information for all users in the follow_id array
-router.get('/followList', (req, res) => {
-    const loggedInUserId = req.cookies.userId;
+router.get('/followList/:userId', (req, res) => {
+    const requestedUserId = req.params['userId'];
 
-    Follow.findOne({ user_id: loggedInUserId })
-        .then((follow) => {
-            if (!follow) {
+    User.findOne({ user_id: requestedUserId })
+        .then((user) => {
+            if (!user) {
                 return res.status(404).json({
-                    message: 'Follow not found.'
+                    message: 'User not found.'
                 });
             }
 
-            const followIds = follow.follow_id;
-            const promises = followIds.map((userId) => {
-                return axios.get(`/user/getUser/${userId}`)
-                    .then((response) => {
-                        const user_info = response.data;
-                        user_info.follow_status = loggedInUserId === userId ? 2 : 1;
-                        return user_info;
-                    })
-                    .catch((err) => {
-                        console.error(err);
-                        return null;
-                    });
-            });
-
-            Promise.all(promises)
-                .then((user_info_list) => {
-                    user_info_list = user_info_list.filter((user_info) => user_info !== null);
-
-                    if (user_info_list.length === 0) {
+            Follow.findOne({ user_id: requestedUserId })
+                .then((follow) => {
+                    if (!follow) {
                         return res.status(404).json({
-                            message: 'No users found in follow list.'
+                            message: 'He/She followes no one.'
                         });
                     }
 
-                    res.set('Content-Type', 'application/json');
-                    res.json(user_info_list);
+                    const followIds = follow.follow_id;
+                    const promises = followIds.map((userId) => {
+                        return axios.get(`/user/getUser/${userId}`, { headers: { 'Cookie': req.headers.cookie } })
+                            .then((response) => {
+                                const user_info = {
+                                    user_id: response.data.user_id,
+                                    username: response.data.username,
+                                    follow_status: response.data.follow_status,
+                                    avatar: response.data.avatar,
+                                };
+                                console.log(user_info);
+                                return user_info;
+                            })
+                            .catch((err) => {
+                                console.error(err);
+                                return null;
+                            });
+                    });
+
+                    Promise.all(promises)
+                        .then((user_info_list) => {
+                            user_info_list = user_info_list.filter((user_info) => user_info !== null);
+
+                            if (user_info_list.length === 0) {
+                                return res.status(404).json({
+                                    message: 'No users found in his/her follow list.'
+                                });
+                            }
+
+                            res.set('Content-Type', 'application/json');
+                            res.json(user_info_list);
+                        })
+                        .catch((err) => {
+                            console.error(err);
+                            res.status(500).json({
+                                message: 'Fail to retrieve users information.'
+                            });
+                        });
                 })
+
                 .catch((err) => {
                     console.error(err);
                     res.status(500).json({
-                        message: 'Fail to retrieve users information.'
+                        message: 'Fail to retrieve follow information.'
                     });
                 });
         })
+
         .catch((err) => {
             console.error(err);
             res.status(500).json({
-                message: 'Fail to retrieve follow information.'
+                message: 'Fail to retrieve user information. Maybe because user does not exist.'
             });
         });
 });
-
 
 
 module.exports = router;

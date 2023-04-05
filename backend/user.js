@@ -21,6 +21,7 @@ router.post('/signUp', (req, res) => {
                     email: req.body['email'],
                     pwd: req.body['pwd'],
                     username: req.body['username'],
+                    is_admin: false,
                 })
             return newUser.save();
         })
@@ -28,9 +29,9 @@ router.post('/signUp', (req, res) => {
             console.log('user created:', newUser);
 
             // Set cookie to identify user
-            res.cookie('userId', newUser.user_id, { httpOnly: true });
+            res.cookie('userId', newUser.user_id, { httpOnly: false });
             res.cookie('userDbId', newUser._id, { httpOnly: true });
-            res.cookie('isAdmin', newUser.is_admin, { httpOnly: true });
+            res.cookie('isAdmin', newUser.is_admin, { httpOnly: false });
             res.json({
                 message: 'Sign up successful. User will automatically login.',
                 login_status: 2     // 0: wrong email, 1: wrong password, 2: login successful
@@ -68,9 +69,9 @@ router.post('/login', (req, res) => {
             }
 
             // Set cookie to identify user
-            res.cookie('userId', user.user_id, { httpOnly: true });
+            res.cookie('userId', user.user_id, { httpOnly: false });
             res.cookie('userDbId', user._id, { httpOnly: true });
-            res.cookie('isAdmin', user.is_admin, { httpOnly: true });
+            res.cookie('isAdmin', user.is_admin, { httpOnly: false });
             res.json({
                 message: 'Login successful',
                 login_status: 2     // 0: wrong email, 1: wrong password, 2: login successful
@@ -93,6 +94,29 @@ router.post('/logout', (req, res) => {
     res.json({
         message: 'Logout successful'
     });
+});
+
+
+// Example protected route that requires authentication
+router.get('/profile', (req, res) => {
+    const userId = req.cookies.userId;
+
+    if (!userId) {
+        return res.status(401).json({ message: 'Unauthorized' });
+    }
+
+    User.findById(userId)
+        .then(user => {
+            if (!user) {
+                return res.status(401).json({ message: 'Unauthorized' });
+            }
+
+            res.json({ user });
+        })
+        .catch(err => {
+            console.error(err);
+            res.status(500).json({ message: 'Server error' });
+        });
 });
 
 
@@ -171,27 +195,6 @@ router.get('/getUser/:userId', (req, res) => {
 });
 
 
-// Example protected route that requires authentication
-router.get('/profile', (req, res) => {
-    const userId = req.cookies.userId;
-
-    if (!userId) {
-        return res.status(401).json({ message: 'Unauthorized' });
-    }
-
-    User.findById(userId)
-        .then(user => {
-            if (!user) {
-                return res.status(401).json({ message: 'Unauthorized' });
-            }
-
-            res.json({ user });
-        })
-        .catch(err => {
-            console.error(err);
-            res.status(500).json({ message: 'Server error' });
-        });
-});
 
 
 // test to upload avatar

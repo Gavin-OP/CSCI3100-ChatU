@@ -19,7 +19,15 @@ export class Login extends React.Component {
                 document.getElementById('warning').style.display='flex';
             }
             else if (res.login_status===2){
-                window.location.href="/home";
+                console.log(document.cookie);
+                let is_admin=getCookieValue("isAdmin");
+                if (is_admin==='true'){
+                    window.location.href="/admin/tweet";
+                }
+                else {
+                    window.location.href="/home";
+                }
+                
             }
         })
         .catch(error=>{
@@ -61,4 +69,9 @@ export class Login extends React.Component {
             </div>
         )
     }
+}
+
+function getCookieValue(name) {
+    let result = document.cookie.match("(^|[^;]+)\\s*" + name + "\\s*=\\s*([^;]+)")
+    return result ? result.pop() : ""
 }

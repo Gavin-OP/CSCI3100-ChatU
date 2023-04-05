@@ -314,8 +314,7 @@ Backend is constructed by NodeJS and Express with MongoDB as the database.
         }
         ```
     - Success output:
-
-            ```javascript
+        ```javascript
             {
                 tweet_id: num,
                 content: string,
@@ -324,7 +323,7 @@ Backend is constructed by NodeJS and Express with MongoDB as the database.
                     contentType: string
                 }],
                 time: date,
-                user: num (i.e., user_id of the user who posted this tweet),
+                user: num, // (i.e., user_id of the user who posted this tweet),
                 like: array of user_ids,
                 dislike: array of user_ids,
                 privacy_state: boolean, // 0: seen by all, 1: seen by self

@@ -38,7 +38,7 @@ router.post("/create", upload.any('image'), (req, res) => {
             }
 
             const newTweet = new Tweet({
-                tweet_id: tweet ? tweet.tweet_id + 1 : 1,
+                tweet_id: 1,//there should be a tweet_id generator
                 content: req.body['content'],
                 image: images,
                 user: userId,

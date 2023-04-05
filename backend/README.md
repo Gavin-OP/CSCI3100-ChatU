@@ -262,7 +262,7 @@ Backend is constructed by NodeJS and Express with MongoDB as the database.
             }
             ```
 
-`/tweet/fav`
+- `/tweet/fav`
     - Usage: When a user clicks the favorite button of a tweet, add this tweet's id to the favorite list of this user
     - post
     - Input: body:
@@ -291,19 +291,19 @@ Backend is constructed by NodeJS and Express with MongoDB as the database.
             }
             ```
 
-`/tweet/getTweet/:userId`
+- `/tweet/getTweet/:userId`
     - Usage: Retrive tweet_ids of all tweets that a designated user posted
     - get
     - Success output:
         a list of tweet_ids in json format of the tweets that this user posted before 
 
-`/tweet/getFav/:userId`
+- `/tweet/getFav/:userId`
     - Usage: Retrive tweet_ids of all tweets that a designated user favorited
        - get
        - Success output
            a list of tweet_ids in json format of the tweets that this user favorited before
 
-`/tweet/getTweetInfo`
+- `/tweet/getTweetInfo`
     - Usage: Get all info of a tweet/retweet by providing its id. The attribute original is not null only if this is a retweet
     - post
     - Input: body:
@@ -333,7 +333,7 @@ Backend is constructed by NodeJS and Express with MongoDB as the database.
             }
             ```
 
-`/tweet/deleteTweet`
+- `/tweet/deleteTweet`
     - Usage: Delete a tweet record from db given the its tweet_id
     - post
     - Input: body:
@@ -350,7 +350,7 @@ Backend is constructed by NodeJS and Express with MongoDB as the database.
             }
             ```
 
-`/tweet/createTweet`
+- `/tweet/createTweet`
     - Usage: Create a new tweet in the db
     - post
     - Input: 
@@ -372,7 +372,7 @@ Backend is constructed by NodeJS and Express with MongoDB as the database.
                 'Create tweet successfully'
             }
             ```
-`/tweet/createRetweet`
+- `/tweet/createRetweet`
     - Usage: Create a new retweet in the db
     - post
     - Input: 

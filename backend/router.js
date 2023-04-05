@@ -15,13 +15,13 @@ const feedbackRoutes = require('./feedback')
 const userRoutes = require('./user')
 const followRoutes = require('./follow')
 const fanRoutes = require('./fan')
-// const tweetRoutes = require('./tweet')
+const tweetRoutes = require('./tweet')
 
 
 app.use('/feedback', feedbackRoutes);
 app.use('/user', userRoutes)
 app.use('/follow', followRoutes)
 app.use('/fan', fanRoutes)
-// app.use('/tweet', tweetRoutes)
+app.use('/tweet', tweetRoutes)
 
 module.exports = app;

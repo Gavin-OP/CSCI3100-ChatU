@@ -193,7 +193,7 @@ router.get('/getTweet/:userId', (req, res) => {
                 message: 'Fail to retrieve tweet ids posted by this user. Maybe because user does not exist.'
             });
         });
-})
+});
 
 //Retrive tweet_ids of all tweets that a designated user favorites
 //Input: user id (var name: userId)
@@ -210,7 +210,7 @@ router.get('/getFav/:userId', (req, res) => {
                 message: 'Fail to retrieve tweet ids favorited by this user. Maybe because user does not exist.'
             });
         });
-})
+});
 
 //Get all info of a tweet/retweet by providing its id
 //The attribute original is not null only if this is a retweet
@@ -242,10 +242,10 @@ router.post('/getTweetInfo', (req, res) => {
                 message: 'Fail to retrieve tweet information. Maybe because tweet does not exist.'
             });
         });
-})
+});
 
 //Delete a tweet record from db
-//Input: the id of the tweet/retweet to be deleted
+//Input: the id of the tweet/retweet to be deleted (var name: tweet_id)
 router.post('/deleteTweet', (req, res) => {
     Tweet.findOneAndDelete({ tweet_id: req.body['tweet_id'] })
          .then((t) => {
@@ -260,12 +260,145 @@ router.post('/deleteTweet', (req, res) => {
                 message: "Fail to delete tweet. Maybe because tweet does not exist."
             });
         })
-})
+});
 
-//To-do:
 //Create a new tweet in the db
+//Input: content, image (optional depending on whether user uploads), time, privacy_state, tag
+router.post("/createTweet", upload.any('pic'), (req, res) => {
+    const userId = req.cookies.userId;
+
+    if (!userId) {
+        return res.status(401).json({ message: 'Failed to create tweet. Maybe the user has not logged in or the log in is unauthorized.'});
+    }
+
+    Tweet.findOne({})
+        .sort('-tweet_id')
+        .exec()
+        .then((tweet) => {
+            //check if the request has image(s) or not
+            console.log(req.files)
+            if (!req.files) {
+                //if the request has no image
+                const newTweet = new Tweet(
+                    {
+                        tweet_id: tweet ? tweet.tweet_id + 1 : 1,
+                        content: req.body['content'],
+                        image: [],
+                        time: req.body['time'],
+                        user: userId,
+                        comment: [],
+                        like: [],
+                        dislike: [],
+                        privacy_state: req.body['privacy_state'], // 0 if everyone can see the tweet; 1 if only self can see the tweet
+                        original: null,
+                        tag: req.body['tag'],
+                    });
+                // saving the object into the database
+                return newTweet.save().catch((err) => {
+                    console.error(err);
+                    res.status(500).json({
+                        message: "Fail to save the new tweet."
+                    });
+                })
+    
+            } else {
+                //if the request has image(s)
+                let i = 0;
+                let images = [];
+                while (i < req.files.length) {
+                     images.push({
+                                  data: req.files[i].buffer,
+                                  contentType: req.files[i].mimetype
+                                 }).catch((err) => {
+                                     console.error(err);
+                                     res.status(400).json({
+                                         message: "Fail to extract data and/or contentType of a image. Maybe because a file uploaded is not an image"
+                                     });
+                                 });
+                     i++;
+                }
+
+                const newTweet = new Tweet(
+                    {
+                        tweet_id: tweet ? tweet.tweet_id + 1 : 1,
+                        content: req.body['content'],
+                        image: images,
+                        time: req.body['time'],
+                        user: userId,
+                        comment: [],
+                        like: [],
+                        dislike: [],
+                        privacy_state: req.body['privacy_state'], // 0 if everyone can see the tweet; 1 if only self can see the tweet
+                        original: null,
+                        tag: req.body['tag'],
+                    });
+                // saving the object into the database
+                return newTweet.save().catch((err) => {
+                    console.error(err);
+                    res.status(500).json({
+                        message: "Fail to save the new tweet."
+                    });
+                })
+
+            }
+        })
+        .then((newTweet) => {
+            console.log('tweet created');
+            res.send('Create tweet successfully');
+        })
+        .catch((err) => {
+            console.error(err);
+            res.status(500).send("Server Error");
+        })
+});
 
 //Create a new retweet in the db
+//Input: tweet id of the tweet to retweet for (call this var 'original'), content, time, privacy_state, tag
+router.post('/createRetweet', (req, res) => {
+    const userId = req.cookies.userId;
+
+    if (!userId) {
+        return res.status(401).json({ message: 'Failed to create retweet. Maybe the user has not logged in or the log in is unauthorized.'});
+    }
+
+    Tweet.findOne({})
+        .sort('-tweet_id')
+        .exec()
+        .then((tweet) => {
+            const newTweet = new Tweet(
+                {
+                    tweet_id: tweet ? tweet.tweet_id + 1 : 1,
+                    content: req.body['content'],
+                    image: [],
+                    time: req.body['time'],
+                    user: userId,
+                    comment: [],
+                    like: [],
+                    dislike: [],
+                    privacy_state: req.body['privacy_state'], // 0 if everyone can see the tweet; 1 if only self can see the tweet
+                    original: req.body['original'],
+                    tag: req.body['tag'],
+                });
+            // saving the object into the database
+            return newTweet.save().catch((err) => {
+                console.error(err);
+                res.status(500).json({
+                    message: "Fail to save the new retweet."
+                });
+            })
+        })
+        .then((newTweet) => {
+            console.log('retweet created');
+            res.send('Create retweet successfully');
+        })
+        .catch((err) => {
+            console.error(err);
+            res.status(500).send("Server Error");
+        })
+
+});
+
+module.exports = router;
 
 
 

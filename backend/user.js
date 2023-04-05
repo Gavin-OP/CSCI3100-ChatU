@@ -188,7 +188,7 @@ router.get('/getUser/:userId', (req, res) => {
                 message: 'Fail to retrieve user information. Maybe because user does not exist.'
             });
         });
-})
+});
 
 
 // test to upload avatar

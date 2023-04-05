@@ -22,15 +22,17 @@ const fanRoutes = require('./fan')
 const blacklistRoutes = require('./blacklist')
 const adminRoutes = require('./admin')
 const tweetRoutes = require('./tweet')
+const fovoriteRoutes = require('./favorite')
 
 
 
-app.use('/feedback', feedbackRoutes);
+app.use('/feedback', feedbackRoutes)
 app.use('/user', userRoutes)
 app.use('/follow', followRoutes)
 app.use('/fan', fanRoutes)
 app.use('/blacklist', blacklistRoutes)
 app.use('/admin', adminRoutes)
 app.use('/tweet', tweetRoutes)
+app.use('/favorite', fovoriteRoutes)
 
 module.exports = app;

@@ -10,6 +10,9 @@ Backend is constructed by NodeJS and Express with MongoDB as the database.
 ## Backend Router Design
 
 - `/feedback/retrieve/:feedbackId`:
+  
+  - Usage: Retrieve feedback by feedbackId
+  
   - GET
   
   - Output:
@@ -29,53 +32,56 @@ Backend is constructed by NodeJS and Express with MongoDB as the database.
     }
     ```
   
-  - Usage: Retrieve feedback by feedbackId
-  
 - `/feedback/create`:
+
+  - Usage: Create new feedback
+
   - POST
-  
+
   - Input: body:
-  
+
     ```javascript
     {
         content: 'xxx'
     }
     ```
-  
+
   - Output: 
-  
+
     Success output:
-  
+
     ```javascript
     {
         "message": "Create feedback successfully.",
         "feedback_creation_status": 1
     }
     ```
-  
+
     Failure output:
-  
+
     ```javascript
     {
         "message": "Fail to create feedback.",
         "feedback_creation_status": 0
     }
     ```
-  
-  - Usage: Create new feedback
-  
+
 - `/user/getUser/:userId`:
+
+  - Usage: Retrieve basic user information.  
+
   - GET
-  
+
   - Output:
-  
+
     Success output:
-  
+
     ```javascript
     {
         "user_id": 1,
         "username": "Gavin OP",
         "description": "perfectly balanced",
+        "follow_status": 1,   // 0: not following, 1: following, 2: self
         "avatar":
         {
             "contentType": "image/png",
@@ -93,14 +99,15 @@ Backend is constructed by NodeJS and Express with MongoDB as the database.
         "message": "Fail to retrieve user information. Maybe because user does not exist."
     }
     ```
-  
-  - Usage: Retrieve basic user information.  
-  
+
 - `/user/signUp`
+
+  - Usage: Create new user and send cookie
+
   - POST
-  
+
   - Input:
-  
+
     ```javascript
     {
         email: 'OPPPP@gavin.com',
@@ -108,36 +115,37 @@ Backend is constructed by NodeJS and Express with MongoDB as the database.
         username: 'Gavin OP',
     }
     ```
-  
+
   - Output: 
 
     Success output:
-  
+
     ```javascript
     {
         "message": "Sign up successful. User will automatically login.",
         "login_status": 2
     }
     ```
-  
+
     Cookie: 
-  
+
     ```javascript
     userDbId=j%3A%22642c25d78513c3dbb553fd22%22; Path=/; HttpOnly;
     userId=2; Path=/; HttpOnly;
+    isAdmin=false; Path=/; HttpOnly;
     ```
-  
+
     Failure output:
-  
+
     ```javascript
     {
         "message": "Fail to create user. Maybe because email has been used."
     }
     ```
-  
-  - Usage: Create new user
-  
+
 - `/user/login`
+
+    - Usage: Login and send cookie
 
     - POST
 
@@ -166,6 +174,7 @@ Backend is constructed by NodeJS and Express with MongoDB as the database.
         ```javascript
         userDbId=j%3A%22642c25d78513c3dbb553fd22%22; Path=/; HttpOnly;
         userId=2; Path=/; HttpOnly;
+        isAdmin=false; Path=/; HttpOnly;
         ```
 
         Failure output:
@@ -184,9 +193,9 @@ Backend is constructed by NodeJS and Express with MongoDB as the database.
         }
         ```
 
-    - Usage: Create new user
-
 - `/user/logout`
+
+    - Usage: Logout and clear cookies
 
     - POST
 
@@ -198,7 +207,60 @@ Backend is constructed by NodeJS and Express with MongoDB as the database.
         }
         ```
 
-    - Usage: Logout and clear cookies
+- `/follow/create/:followId`
+
+    - Usage: Follow a user
+
+    - GET
+
+    - Output:
+
+        Success output: 
+
+        ```javascript
+        {
+            "message": "Follow user successfully",
+            "followList": [
+                3,
+                2
+            ]
+        }
+        ```
+
+        Failure output: 
+        ```javascript
+        {
+            "message": "FollowId not found. Can not follow an non-existing user."
+        }
+        ```
+
+- `/follow/delete/:followId`
+
+    - Usage: Unfollow a user
+
+    - GET
+
+    - Output:
+
+        Success output: 
+
+        ```javascript
+        {
+            "message": "Unfollow user successfully",
+            "followList": [
+                3,
+                2
+            ]
+        }
+        ```
+
+        Failure output:
+
+        ```javascript
+        {
+            "message": "FollowId not found. Can not unfollow an non-existing user."
+        }
+        ```
 
 
 ## To Do

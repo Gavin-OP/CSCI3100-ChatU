@@ -1,9 +1,10 @@
 const express = require('express');
 const router = express.Router();
 const User = require('./userSchema');
+const Follow = require('./followSchema');
 
 const multer = require('multer');
-const { json } = require('body-parser');
+const bodyParser = require('body-parser');      // is this really necessary???
 const storage = multer.memoryStorage();
 const upload = multer({ storage: storage });
 
@@ -20,6 +21,7 @@ router.post('/signUp', (req, res) => {
                     email: req.body['email'],
                     pwd: req.body['pwd'],
                     username: req.body['username'],
+                    is_admin: true,
                 })
             return newUser.save();
         })
@@ -29,6 +31,7 @@ router.post('/signUp', (req, res) => {
             // Set cookie to identify user
             res.cookie('userId', newUser.user_id, { httpOnly: true });
             res.cookie('userDbId', newUser._id, { httpOnly: true });
+            res.cookie('isAdmin', newUser.is_admin, { httpOnly: true });
             res.json({
                 message: 'Sign up successful. User will automatically login.',
                 login_status: 2     // 0: wrong email, 1: wrong password, 2: login successful
@@ -68,6 +71,7 @@ router.post('/login', (req, res) => {
             // Set cookie to identify user
             res.cookie('userId', user.user_id, { httpOnly: true });
             res.cookie('userDbId', user._id, { httpOnly: true });
+            res.cookie('isAdmin', user.is_admin, { httpOnly: true });
             res.json({
                 message: 'Login successful',
                 login_status: 2     // 0: wrong email, 1: wrong password, 2: login successful
@@ -86,6 +90,7 @@ router.post('/login', (req, res) => {
 router.post('/logout', (req, res) => {
     res.clearCookie('userDbId');
     res.clearCookie('userId');
+    res.clearCookie('isAdmin');
     res.json({
         message: 'Logout successful'
     });
@@ -117,19 +122,65 @@ router.get('/profile', (req, res) => {
 
 // retrieve user information by userId
 router.get('/getUser/:userId', (req, res) => {
-    User.findOne({ user_id: req.params['userId'] })
+    const requestedUserId = req.params['userId'];
+    const loggedInUserId = req.cookies.userId;
+
+    User.findOne({ user_id: requestedUserId })
         .then((user) => {
-            const user_info = {
-                user_id: user.user_id,
-                username: user.username,
-                description: user.description,
-                avatar: {
-                    contentType: user.avatar.contentType,
-                    data: user.avatar.data
-                },
-            };
-            res.set('Content-Type', 'application/json');
-            res.json(user_info);
+            if (!user) {
+                return res.status(404).json({
+                    message: 'User not found.'
+                });
+            }
+
+            if (loggedInUserId != user.user_id) {
+                Follow.findOne({
+                    user_id: loggedInUserId,
+                    follow_id: requestedUserId
+                })
+                    .then((follow) => {
+                        if (follow) {
+                            followStatus = 1;   // 0: not following, 1: following, 2: self
+                        }
+                        else {
+                            followStatus = 0;
+                        }
+
+                        const user_info = {
+                            user_id: user.user_id,
+                            username: user.username,
+                            description: user.description,
+                            follow_status: followStatus,
+                            avatar: {
+                                contentType: user.avatar.contentType,
+                                data: user.avatar.data
+                            },
+                        };
+
+                        res.set('Content-Type', 'application/json');
+                        res.json(user_info);
+                    })
+                    .catch((err) => {
+                        console.error(err);
+                        res.status(500).json({
+                            message: 'Fail to retrieve user information. Maybe because user does not exist.'
+                        });
+                    });
+            } else {
+                const user_info = {
+                    user_id: user.user_id,
+                    username: user.username,
+                    description: user.description,
+                    follow_status: 2,
+                    avatar: {
+                        contentType: user.avatar.contentType,
+                        data: user.avatar.data
+                    },
+                };
+
+                res.set('Content-Type', 'application/json');
+                res.json(user_info);
+            }
         })
         .catch((err) => {
             console.error(err);

@@ -229,31 +229,29 @@ router.get('/followList/:userId', (req, res) => {
 
 // return the number of users the user with userId is following
 router.get('/followNum/:userId', (req, res) => {
-  const userId = req.params.userId;
+    const userId = req.params.userId;
 
-  Follow.findOne({ user_id: userId })
-    .exec()
-    .then((result) => {
-      if (result) {
-        res.status(200).json({
-          message: `User with ID ${userId} is following ${result.follow_id.length} users.`,
-          following_count: result.follow_id.length,
+    Follow.findOne({ user_id: userId })
+        .exec()
+        .then((result) => {
+            if (result) {
+                res.status(200).json({
+                    message: `User with ID ${userId} is following ${result.follow_id.length} users.`,
+                    following_count: result.follow_id.length,
+                });
+            } else {
+                res.status(404).json({
+                    message: `User with ID ${userId} not found.`,
+                });
+            }
+        })
+        .catch((err) => {
+            console.error(err);
+            res.status(500).json({
+                error: err,
+            });
         });
-      } else {
-        res.status(404).json({
-          message: `User with ID ${userId} not found.`,
-        });
-      }
-    })
-    .catch((err) => {
-      console.error(err);
-      res.status(500).json({
-        error: err,
-      });
-    });
 });
-
-
 
 
 module.exports = router;

@@ -535,6 +535,31 @@ Backend is constructed by NodeJS and Express with MongoDB as the database.
             "message": "User not found."
         }
         ```
+    
+- `/follow/followNum/:userId`
+
+    - Usage: Return how many user the userId follows
+
+    - GET
+
+    - Output:
+
+        Success output:
+
+        ```javascript
+        {
+            "message": "User with ID 3 is following 3 users.",
+            "following_count": 3
+        }
+        ```
+
+        Failure output:
+
+        ```javascript
+        {
+            "message": "User with ID 12 not found."
+        }
+        ```
 
 
 - `/fan/delete/:fanId`[^1][^2]

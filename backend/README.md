@@ -338,27 +338,39 @@ Backend is constructed by NodeJS and Express with MongoDB as the database.
         ```
 
         ```javascript
-        [
             {
                 "user_id": 5,
                 "username": "123456",
                 "email": "123456@cuhk.com",
                 "ban": false,
-                "follow_status": 1		// 0: not following, 1: following, 2: self
+                "follow_status": 1,
+                "avatar": {
+                    "contentType": "image/vnd.microsoft.icon",
+                    "data": {
+                        "type": "Buffer",
+                        "data": [
+                            0,
+                            0,
+                        ]
+                    }
+                }
             },
             {
                 "user_id": 1,
                 "username": "admin",
                 "email": "admin",
                 "ban": false,
-                "follow_status": 0
-            },
-            {
-                "user_id": 4,
-                "username": "Gavin",
-                "email": "op@cuhk.com",
-                "ban": false,
-                "follow_status": 2
+                "follow_status": 0,
+                "avatar": {
+                    "contentType": "image/vnd.microsoft.icon",
+                    "data": {
+                        "type": "Buffer",
+                        "data": [
+                            0,
+                            0,
+                        ]
+                    }
+                }
             }
         ]
         ```

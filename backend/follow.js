@@ -180,6 +180,7 @@ router.get('/followList/:userId', (req, res) => {
                                     email: response.data.email,
                                     ban: response.data.ban,
                                     follow_status: response.data.follow_status,
+                                    avatar: response.data.avatar,
                                 };
                                 console.log(user_info);
                                 return user_info;

@@ -330,7 +330,7 @@ Backend is constructed by NodeJS and Express with MongoDB as the database.
                 original: null if this is not a retweet, else tweet_id of the master tweet,
                 tag: string
             }
-            ```
+        ```
 
 - `/tweet/deleteTweet`
     - Usage: Delete a tweet record from db given the its tweet_id

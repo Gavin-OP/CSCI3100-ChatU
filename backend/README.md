@@ -208,59 +208,71 @@ Backend is constructed by NodeJS and Express with MongoDB as the database.
         }
         ```
 
-- `/tweet/like`
+- `/tweet/like/:tweetId`
+    
     - Usage: When a user clicks the like button of a tweet, add the user's id to the like list of this tweet
-    - post
-    - Input: body:
-
+    
+    - GET
+    
+    - Output:
+        
+        Success output
         ```javascript
         {
-            tweet_id: Num
-            liked: Boolean // 0 if the like button is grey (not liked); 1 if it is light (already liked)
+            "message": "like successful.",
+            "action_status": true
         }
         ```
-    - Success output:
-        - if not like before:
-            ```javascript
-            {
-                message: 'like successful.',
-                liked_status: 1     // 0: not liked, 1: liked
-            }
-            ```
-        - if like before:
-             ```javascript
-            {
-                message: 'Unlike successful.',
-                    liked_status: 0     // 0: not liked, 1: liked
-            }
-            ```
+    
+- `/tweet/unlike/:tweetId`
+    
+    - Usage: unlike a tweet
+    
+    - GET
+    
+    - Output:
+    
+        Success output:
+    
+        ```javascript
+        {
+            "message": "unlike successful.",
+            "action_status": true
+        }
+        ```
+    
+- `/tweet/dislike/:tweetId`
 
-- `/tweet/dislike`
     - Usage: When a user clicks the dislike button of a tweet, add the user's id to the dislike list of this tweet
-    - post
-    - Input: body:
+
+    - GET
+
+    - Output:
+        
+        Success output:
+        ```javascript
+        {
+            "message": "dislike successful.",
+            "action_status": true
+        }
+        ```
+
+- `tweet/undislike/:tweetId`
+
+    - Usage: Undislike a tweet.
+
+    - GET
+
+    - Output:
+
+        Success output:
 
         ```javascript
         {
-            tweet_id: Num
-            disliked: Boolean // 0 if the dislike button is grey (not disliked); 1 if it is light (already disliked)
+            "message": "undislike successful.",
+            "action_status": true
         }
         ```
-    - Success output:
-        - if not dislike before:
-            ```javascript
-            {
-                message: 'disliked successful.',
-                disliked_status: 1     // 0: not disliked, 1: disliked
-            }
-            ```
-        - if dislike before:
-             ```javascript
-            {
-                message: 'Un-disliked successful.',
-                disliked_status: 0     // 0: not disliked, 1: disliked
-            }
-            ```
 
 - `/tweet/fav`
     - Usage: When a user clicks the favorite button of a tweet, add this tweet's id to the favorite list of this user
@@ -303,45 +315,59 @@ Backend is constructed by NodeJS and Express with MongoDB as the database.
        - Success output
            a list of tweet_ids in json format of the tweets that this user favorited before
 
-- `/tweet/getTweetInfo`
-    - Usage: Get all info of a tweet/retweet by providing its id. The attribute original is not null only if this is a retweet
-    - post
-    - Input: body:
+- `/tweet/getTweet/:tweetId`
 
+    - Usage: Get all info of a tweet/retweet by providing its id. The attribute original is not null only if this is a retweet
+
+    - GET
+
+    - Output:
+        
+        Success output: 
+        
         ```javascript
         {
-            tweet_id: Num
-        }
-        ```
-    - Success output:
-        ```javascript
-            {
-                tweet_id: num,
-                content: string,
-                image: [{
-                    data: buffer,
-                    contentType: string
-                }],
-                time: date,
-                user: num, // (i.e., user_id of the user who posted this tweet),
-                like: array of user_ids,
-                dislike: array of user_ids,
-                privacy_state: boolean, // 0: seen by all, 1: seen by self
-                original: null if this is not a retweet, else tweet_id of the master tweet,
-                tag: string
+            "message": "retrieve tweet information successful.",
+            "action_status": true,
+            "tweet": {
+                "_id": "642d92af9b16dba5a33c7109",
+                "tweet_id": 1,
+                "content": "This is the first tweet of ChatU",
+                "user": "5",
+                "original": -1,
+                "privacy_state": false,
+                "image": [
+                    {
+                        "data": {
+                            "type": "Buffer",
+                            "data": [
+                                137,
+                                80,
+                            ]
+                        },
+                        "contentType": "image/png",
+                        "_id": "642d92af9b16dba5a33c710b"
+                    }
+                ],
+                "like": [],
+                "dislike": [],
+                "tag": "life",
+                "time": "2023-04-05T15:24:32.000Z",
+                "__v": 14
             }
+        }
         ```
 
 - `/tweet/delete/:tweetId`
-    
+
     - Usage: Delete a tweet record from db given the its tweet_id
-    
+
     - GET
-    
+
     - Output:
-    
+
         Success output:
-    
+
         ```javascript
         {
             "message": "Tweet successfully deleted",
@@ -350,7 +376,7 @@ Backend is constructed by NodeJS and Express with MongoDB as the database.
         ```
 
 - `/tweet/create`
-    
+
     - Usage: Create a new tweet in the db
     - POST
     - Input: 
@@ -364,7 +390,7 @@ Backend is constructed by NodeJS and Express with MongoDB as the database.
         }
         ```
     - Output:
-    
+
         Success output:
         
             {
@@ -379,9 +405,9 @@ Backend is constructed by NodeJS and Express with MongoDB as the database.
             "message": "Fail to save the new tweet."
         }
         ```
-    
+
 - `/tweet/retweet`
-    
+
     - Usage: Create a new retweet in the db
     - POST
     - Input:
@@ -395,13 +421,11 @@ Backend is constructed by NodeJS and Express with MongoDB as the database.
         }
         ```
     - Success output:
-    
+
             {
                 "message": "Create retweet successfully",
                 "action_status": true
             }
-
-
 
 - `/follow/add/:followId`[^1][^2]
 

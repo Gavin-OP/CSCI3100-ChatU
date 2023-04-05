@@ -641,14 +641,31 @@ Backend is constructed by NodeJS and Express with MongoDB as the database.
         }
         ````
 
+- `/fan/fansNum/:userId`
+
+
+    - Usage: Return how many fans does userId has
+
+    - GET
+
+    - Output:
+
+        Success output:
+
+        ```javascript
+        {
+            "fansNum": 3
+        }
+        ```
+
 - `/blacklist/add/:userId`
 
     - Usage: Add a user to the blacklist
-    
+
     - GET
-    
+
     - Output
-    
+
         Success output: 
         
         ```javascript

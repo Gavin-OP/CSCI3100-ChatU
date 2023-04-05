@@ -8,13 +8,13 @@ res.send([
 ])
 {
     "message": "User added to blacklist successfully",
-        "blacklist": [
+    "blacklist": [
             6,
             5,
             2
         ],
-            "action_status": true
-}
+    "action_status": true
+},
 [
     {
         "user_id": 4,

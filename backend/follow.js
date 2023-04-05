@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const axios = require('axios').create({
-    baseURL: 'http://localhost:5000'
+    baseURL: 'http://localhost:5555'
 });
 
 const Follow = require('./followSchema');

@@ -788,6 +788,33 @@ Backend is constructed by NodeJS and Express with MongoDB as the database.
         }
         ```
 
+- `/admin/ban/:userId`
+
+
+    - Usage: Ban a user
+
+    - GET
+
+    - Output:
+
+        Success output: 
+
+        ```javascript
+        {
+            "message": "User banned",
+            "ban": true,
+            "action_status": true
+        }
+        ```
+
+        Failure output:
+
+        ```javascript
+        {
+            "message": "User not found"
+        }
+        ```
+
         
 
 

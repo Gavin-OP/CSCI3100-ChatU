@@ -31,8 +31,6 @@ router.get('/delete/:userId', (req, res) => {
 });
 
 
-
-
 // ban a user
 router.get('/ban/:userId', (req, res) => {
     const userId = req.params.userId;
@@ -48,7 +46,8 @@ router.get('/ban/:userId', (req, res) => {
         .then((updatedUser) => {
             res.json({
                 message: "User banned",
-                user: updatedUser
+                ban: updatedUser.ban,
+                action_status: true,
             });
         })
         .catch((err) => {

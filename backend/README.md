@@ -195,7 +195,7 @@ Backend is constructed by NodeJS and Express with MongoDB as the database.
         }
         ```
 
-- `/user/logout`
+- `/user/logout`[^1]
 
     - Usage: Logout and clear cookies
 
@@ -396,7 +396,7 @@ Backend is constructed by NodeJS and Express with MongoDB as the database.
 
 
 
-- `/follow/create/:followId`
+- `/follow/add/:followId`[^1][^2]
 
     - Usage: Follow a user
 
@@ -434,7 +434,7 @@ Backend is constructed by NodeJS and Express with MongoDB as the database.
         }
         ```
 
-- `/follow/delete/:followId`
+- `/follow/delete/:followId`[^1][^2]
 
     - Usage: Unfollow a user
 
@@ -535,7 +535,7 @@ Backend is constructed by NodeJS and Express with MongoDB as the database.
         ```
 
 
-- `/fan/delete/:fanId`
+- `/fan/delete/:fanId`[^1][^2]
 
     - Usage: Delete a fan
 
@@ -639,7 +639,93 @@ Backend is constructed by NodeJS and Express with MongoDB as the database.
         }
         ````
 
-        
+- `/blacklist/add/:userId`
+
+
+    - Usage: Add a user to the blacklist
+
+    - GET
+
+    - Output:
+
+        Success output:
+
+        ```javascript
+        {
+            "message": "User added to blacklist successfully",
+            "blacklist": [
+                6,
+                5,
+                2
+            ],
+            "action_status": true
+        }
+        ```
+
+        Failure output:
+
+        ```javascript
+        {
+            "message": "User already in blacklist"
+        }
+        ```
+
+        ```javascript
+        {
+            "message": "User not found. Cannot add a non-existing user to the blacklist."
+        }
+        ```
+
+        ```javascript
+        {
+            "message": "Cannot add yourself to the blacklist"
+        }
+        ```
+
+- `/blacklist/delete/:userId`
+
+
+    - Usage: Delete a user from blacklist
+
+    - GET
+
+    - Output: 
+
+        Success output:
+
+        ```javascript
+        {
+            "message": "User with ID 2 removed from your blacklist.",
+            "blacklist": [
+                6,
+                5
+            ],
+            "action_status": true
+        }
+        ```
+
+        Failure output: 
+
+        ```javascript
+        {
+            "message": "User is not in your blacklist."
+        }
+        ```
+
+        ```javascript
+        {
+            "message": "You have no users in your blacklist."
+        }
+        ```
+
+- `/blacklist`
+
+
+    - Usage: Return all user in the blacklist
+    - 
 
 
 ## To Do
+
+[^1]: action_status
+[^2]: Delete something in output

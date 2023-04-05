@@ -155,5 +155,24 @@ router.get('/fanList/:userId', (req, res) => {
         });
 });
 
+// return how many fans the user has
+router.get('/fansNum/:userId', (req, res) => {
+    const userId = req.params.userId;
+
+    Fan.findOne({ user_id: userId })
+        .then((fan) => {
+            if (!fan) {
+                return res.json({ fans: 0 });
+            }
+            res.json({ fans: fan.fan_id.length });
+        })
+        .catch((err) => {
+            console.error(err);
+            res.status(500).json({ message: 'Failed to get fans for user' });
+        });
+});
+
+
+
 
 module.exports = router;

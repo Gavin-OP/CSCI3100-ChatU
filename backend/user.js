@@ -195,6 +195,8 @@ router.get('/getUser/:userId', (req, res) => {
 });
 
 
+
+
 // test to upload avatar
 router.post('/create', upload.single("file"), (req, res) => {
     // req.file can be used to access all file properties

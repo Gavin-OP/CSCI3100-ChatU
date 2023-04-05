@@ -271,7 +271,7 @@ router.post("/createTweet", upload.any('pic'), (req, res) => {
         return res.status(401).json({ message: 'Failed to create tweet. Maybe the user has not logged in or the log in is unauthorized.'});
     }
 
-    Tweet.findOne({})
+    Tweet.find({})
         .sort('-tweet_id')
         .exec()
         .then((tweet) => {
@@ -361,7 +361,7 @@ router.post('/createRetweet', (req, res) => {
         return res.status(401).json({ message: 'Failed to create retweet. Maybe the user has not logged in or the log in is unauthorized.'});
     }
 
-    Tweet.findOne({})
+    Tweet.find({})
         .sort('-tweet_id')
         .exec()
         .then((tweet) => {

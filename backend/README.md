@@ -202,12 +202,200 @@ Backend is constructed by NodeJS and Express with MongoDB as the database.
     - POST
 
     - Output:
-
         ```javascript
         {
             "message": "Logout successful"
         }
         ```
+
+- `/tweet/like`
+    - Usage: When a user clicks the like button of a tweet, add the user's id to the like list of this tweet
+    - post
+    - Input: body:
+
+        ```javascript
+        {
+            tweet_id: Num
+            liked: Boolean // 0 if the like button is grey (not liked); 1 if it is light (already liked)
+        }
+        ```
+    - Success output:
+        - if not like before:
+            ```javascript
+            {
+                message: 'like successful.',
+                liked_status: 1     // 0: not liked, 1: liked
+            }
+            ```
+        - if like before:
+             ```javascript
+            {
+                message: 'Unlike successful.',
+                    liked_status: 0     // 0: not liked, 1: liked
+            }
+            ```
+
+- `/tweet/dislike`
+    - Usage: When a user clicks the dislike button of a tweet, add the user's id to the dislike list of this tweet
+    - post
+    - Input: body:
+
+        ```javascript
+        {
+            tweet_id: Num
+            disliked: Boolean // 0 if the dislike button is grey (not disliked); 1 if it is light (already disliked)
+        }
+        ```
+    - Success output:
+        - if not dislike before:
+            ```javascript
+            {
+                message: 'disliked successful.',
+                disliked_status: 1     // 0: not disliked, 1: disliked
+            }
+            ```
+        - if dislike before:
+             ```javascript
+            {
+                message: 'Un-disliked successful.',
+                disliked_status: 0     // 0: not disliked, 1: disliked
+            }
+            ```
+
+- `/tweet/fav`
+    - Usage: When a user clicks the favorite button of a tweet, add this tweet's id to the favorite list of this user
+    - post
+    - Input: body:
+
+        ```javascript
+        {
+            tweet_id: Num
+            fav: Boolean // 1 if the favorite button of this tweet is light (already favourited);
+                        // 0 if the favorite button of this tweet is grey (not favorited)
+        }
+        ```
+    - Success output:
+        - if not favorite before:
+
+            ```javascript
+            {
+                message: 'favorited successful.',
+                favorited_status: 1     // 0: not favorited, 1: favorited
+            }
+            ```
+        - if favorite before:
+            ```javascript
+            {
+                message: 'Un-favorited successful.',
+                favorited_status: 0     // 0: not favorited, 1: favorited
+            }
+            ```
+
+- `/tweet/getTweet/:userId`
+    - Usage: Retrive tweet_ids of all tweets that a designated user posted
+    - get
+    - Success output:
+        a list of tweet_ids in json format of the tweets that this user posted before 
+
+- `/tweet/getFav/:userId`
+    - Usage: Retrive tweet_ids of all tweets that a designated user favorited
+       - get
+       - Success output
+           a list of tweet_ids in json format of the tweets that this user favorited before
+
+- `/tweet/getTweetInfo`
+    - Usage: Get all info of a tweet/retweet by providing its id. The attribute original is not null only if this is a retweet
+    - post
+    - Input: body:
+
+        ```javascript
+        {
+            tweet_id: Num
+        }
+        ```
+    - Success output:
+
+            ```javascript
+            {
+                tweet_id: num,
+                content: string,
+                image: [{
+                    data: buffer,
+                    contentType: string
+                }],
+                time: date,
+                user: num (i.e., user_id of the user who posted this tweet),
+                like: array of user_ids,
+                dislike: array of user_ids,
+                privacy_state: boolean, // 0: seen by all, 1: seen by self
+                original: null if this is not a retweet, else tweet_id of the master tweet,
+                tag: string
+            }
+            ```
+
+- `/tweet/deleteTweet`
+    - Usage: Delete a tweet record from db given the its tweet_id
+    - post
+    - Input: body:
+
+        ```javascript
+        {
+            tweet_id: Num
+        }
+        ```
+    - Success output:
+            ```javascript
+            {
+                message: 'Tweet successfully deleted'
+            }
+            ```
+
+- `/tweet/createTweet`
+    - Usage: Create a new tweet in the db
+    - post
+    - Input: 
+       body:
+
+        ```javascript
+        {
+                        content: string,
+                        time: date,
+                        user: num, // (i.e., user_id of the user who posts this tweet),
+                        privacy_state: boolean, // 0 if everyone can see the tweet; 1 if only self can see the tweet
+                        tag: string,
+        }
+        ```
+       (optional depending on whether user has uploaded image(s)) files: an array, called 'pic', of objects, each being an image file
+    - Success output:
+            ```javascript
+            {
+                'Create tweet successfully'
+            }
+            ```
+- `/tweet/createRetweet`
+    - Usage: Create a new retweet in the db
+    - post
+    - Input: 
+       body:
+
+        ```javascript
+        {
+                        content: string,
+                        time: date,
+                        user: num //(i.e., user_id of the user who posts this tweet),
+                        privacy_state: boolean, // 0 if everyone can see the tweet; 1 if only self can see the tweet
+                        original: objectId, //(i.e., tweet_id)
+                        tag: string,
+        }
+        ```
+    - Success output:
+            ```javascript
+            {
+                'Create retweet successfully'
+            }
+            ```
+
+
 
 - `/follow/create/:followId`
 

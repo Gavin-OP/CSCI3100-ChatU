@@ -97,29 +97,6 @@ router.post('/logout', (req, res) => {
 });
 
 
-// Example protected route that requires authentication
-router.get('/profile', (req, res) => {
-    const userId = req.cookies.userId;
-
-    if (!userId) {
-        return res.status(401).json({ message: 'Unauthorized' });
-    }
-
-    User.findById(userId)
-        .then(user => {
-            if (!user) {
-                return res.status(401).json({ message: 'Unauthorized' });
-            }
-
-            res.json({ user });
-        })
-        .catch(err => {
-            console.error(err);
-            res.status(500).json({ message: 'Server error' });
-        });
-});
-
-
 // retrieve user information by userId
 router.get('/getUser/:userId', (req, res) => {
     const requestedUserId = req.params['userId'];
@@ -195,6 +172,27 @@ router.get('/getUser/:userId', (req, res) => {
 });
 
 
+// Example protected route that requires authentication
+router.get('/profile', (req, res) => {
+    const userId = req.cookies.userId;
+
+    if (!userId) {
+        return res.status(401).json({ message: 'Unauthorized' });
+    }
+
+    User.findById(userId)
+        .then(user => {
+            if (!user) {
+                return res.status(401).json({ message: 'Unauthorized' });
+            }
+
+            res.json({ user });
+        })
+        .catch(err => {
+            console.error(err);
+            res.status(500).json({ message: 'Server error' });
+        });
+});
 
 
 // test to upload avatar

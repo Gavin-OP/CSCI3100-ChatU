@@ -1,5 +1,7 @@
 const express = require('express');
 const app = express();
+app.use(express.static('app'));
+
 const mongoose = require('mongoose');
 app.use(express.static('app'));
 

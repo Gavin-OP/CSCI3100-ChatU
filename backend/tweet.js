@@ -18,7 +18,7 @@ router.post("/create", upload.any('image'), (req, res) => {
         return res.status(401).json({ message: 'Failed to create tweet. Maybe the user has not logged in or the log in is unauthorized.' });
     }
 
-    Tweet.find({})
+    Tweet.findOne({})
         .sort('-tweet_id')
         .exec()
         .then((tweet) => {
@@ -38,7 +38,7 @@ router.post("/create", upload.any('image'), (req, res) => {
             }
 
             const newTweet = new Tweet({
-                tweet_id: 1,//there should be a tweet_id generator
+                tweet_id: tweet ? tweet.tweet_id + 1 : 1,
                 content: req.body['content'],
                 image: images,
                 user: userId,

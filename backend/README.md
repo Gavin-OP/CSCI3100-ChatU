@@ -335,23 +335,20 @@ Backend is constructed by NodeJS and Express with MongoDB as the database.
 - `/tweet/delete/:tweetId`
     
     - Usage: Delete a tweet record from db given the its tweet_id
+    
     - GET
+    
     - Output:
     
         Success output:
     
         ```javascript
         {
-            tweet_id: Num
+            "message": "Tweet successfully deleted",
+            "action_status": true
         }
         ```
-    - Success output:
-            ```javascript
-            {
-                message: 'Tweet successfully deleted'
-            }
-            ```
-    
+
 - `/tweet/create`
     
     - Usage: Create a new tweet in the db
@@ -375,13 +372,21 @@ Backend is constructed by NodeJS and Express with MongoDB as the database.
                 "action_status": true
             }
         
-        Failure outpu
+        Failure output: 
+        
+        ```javascript
+        {
+            "message": "Fail to save the new tweet."
+        }
+        ```
+    
 - `/tweet/createRetweet`
+    
     - Usage: Create a new retweet in the db
     - post
     - Input: 
        body:
-
+    
         ```javascript
         {
                         content: string,

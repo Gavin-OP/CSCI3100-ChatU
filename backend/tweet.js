@@ -15,7 +15,9 @@ router.post("/create", upload.any('image'), (req, res) => {
     const userId = req.cookies.userId;
 
     if (!userId) {
-        return res.status(401).json({ message: 'Failed to create tweet. Maybe the user has not logged in or the log in is unauthorized.' });
+        return res.status(401).json({
+            message: 'Failed to create tweet. Maybe the user has not logged in or the log in is unauthorized.'
+        });
     }
 
     Tweet.findOne({})
@@ -87,66 +89,169 @@ router.get('/delete/:tweetId', (req, res) => {
 });
 
 
-
-
-
-
-
-//Add or remove the user's id from the list of those who like the tweet when the user clicks its like button
-//Input: id of the tweet (call it 'tweet_id'), 
-// a boolean var called 'liked' : 0 if the like button is grey (not liked); 1 if it is light (already liked)
-router.post('/like', (req, res) => {
+// retweet
+router.post('/retweet', (req, res) => {
     const userId = req.cookies.userId;
 
     if (!userId) {
-        return res.status(401).json({ message: 'Failed to like or unlike. Maybe the user has not logged in or the log in is unauthorized.' });
+        return res.status(401).json({
+            message: 'Failed to create retweet. Maybe the user has not logged in or the log in is unauthorized.'
+        });
     }
 
-    if (!req.body['tweet_id']) {
-        return res.status(400).json({ message: 'Failed to like or unlike. The tweet_id given is not valid.' });
-    }
+    Tweet.findOne({})
+        .sort('-tweet_id')
+        .exec()
+        .then((tweet) => {
+            const newTweet = new Tweet(
+                {
+                    tweet_id: tweet ? tweet.tweet_id + 1 : 1,
+                    content: req.body['content'],
+                    user: userId,
+                    privacy_state: req.body['privacy_state'], // 0 if everyone can see the tweet; 1 if only self can see the tweet
+                    original: req.body['original'],
+                    tag: req.body['tag'],
+                });
+            // saving the object into the database
+            return newTweet.save();
+        })
+        .then((newTweet) => {
+            console.log('retweet created');
+            res.json({
+                message: 'Create retweet successfully',
+                action_status: true
+            });
+        })
+        .catch((err) => {
+            console.error(err);
+            res.status(500).send("Server Error");
+        })
 
-    if (req.body['liked']) {
-        Tweet.updateOne({ tweet_id: req.body['tweet_id'] }, { $pull: { like: userId } })
-            .then(() => {
-                res.json({
-                    message: 'Unlike successful.',
-                    liked_status: 0     // 0: not liked, 1: liked
-                });
-            })
-            .catch((err) => {
-                console.error(err);
-                res.status(500).json({
-                    message: "Fail to save your unlike in server."
-                });
-            })
-
-    } else {
-        const doc = Tweet.findOne({ tweet_id: req.body['tweet_id'] })
-            .catch((err) => {
-                console.error(err);
-                res.status(500).json({
-                    message: "Fail to find the designated tweet."
-                });
-            })
-
-        doc.like.push(userId);
-        doc.save()
-            .then(() => {
-                res.json({
-                    message: 'like successful.',
-                    liked_status: 1     // 0: not liked, 1: liked
-                });
-            })
-            .catch((err) => {
-                console.error(err);
-                res.status(500).json({
-                    message: "Fail to save your like in server."
-                });
-            })
-
-    }
 });
+
+
+// like a tweet
+router.get('/like/:tweetId', (req, res) => {
+    const userId = req.cookies.userId;
+
+    if (!userId) {
+        return res.status(401).json({
+            message: 'Failed to like or unlike. Maybe the user has not logged in or the log in is unauthorized.'
+        });
+    }
+
+    if (!req.params['tweetId']) {
+        return res.status(400).json({
+            message: 'Failed to like or unlike. The tweet_id given is not valid.'
+        });
+    }
+
+    Tweet.updateOne({
+        tweet_id: req.params['tweetId']
+    },
+        {
+            $pull: { like: userId }
+        })
+        .exec()
+        .then((tweet) => {
+            res.json({
+                message: 'like successful.',
+                action_status: true
+            });
+        })
+        .catch((err) => {
+            console.error(err);
+            res.status(500).json({
+                message: "Fail to save your like in server."
+            });
+        })
+});
+
+
+// dislike a tweet
+router.get('/dislike/:tweetId', (req, res) => {
+    const userId = req.cookies.userId;
+
+    if (!userId) {
+        return res.status(401).json({
+            message: 'Failed to dislike or undislike. Maybe the user has not logged in or the log in is unauthorized.'
+        });
+    }
+
+    if (!req.params['tweetId']) {
+        return res.status(400).json({
+            message: 'Failed to dislike or undislike. The tweet_id given is not valid.'
+        });
+    }
+
+    Tweet.findOne({
+        tweet_id: req.params['tweetId']
+    })
+        .exec()
+        .then((tweet) => {
+            if (!tweet) {
+                return res.status(404).json({
+                    message: 'Failed to dislike or undislike. The tweet does not exist.'
+                });
+            }
+
+            // check if the user has already disliked the tweet, if so, remove the dislike
+            if (tweet.dislike.includes(userId)) {
+                Tweet.updateOne({
+                    tweet_id: req.params['tweetId']
+                },
+                    {
+                        $pull: { dislike: userId }
+                    })
+                    .exec()
+                    .then(() => {
+                        res.json({
+                            message: 'Undislike successful.',
+                            action_status: true
+                        });
+                    })
+                    .catch((err) => {
+                        console.error(err);
+                        res.status(500).json({
+                            message: "Fail to save your undislike in server."
+                        });
+                    });
+            } else {
+                Tweet.updateOne({
+                    tweet_id: req.params['tweetId']
+                },
+                    {
+                        $push: { dislike: userId },
+                        $pull: { like: userId }
+                    })
+                    .exec()
+                    .then(() => {
+                        res.json({
+                            message: 'Disliked successful.',
+                            action_status: true
+                        });
+                    })
+                    .catch((err) => {
+                        console.error(err);
+                        res.status(500).json({
+                            message: "Fail to save your dislike in server."
+                        });
+                    });
+            }
+        })
+        .catch((err) => {
+            console.error(err);
+            res.status(500).json({
+                message: "Fail to find the designated tweet."
+            });
+        });
+});
+
+
+
+
+
+
 
 //Add or remove the user's id from the list of those who dislike the tweet when the user clicks its dislike button
 //Input: id of the tweet (call it 'tweet_id'), 
@@ -155,15 +260,24 @@ router.post('/dislike', (req, res) => {
     const userId = req.cookies.userId;
 
     if (!userId) {
-        return res.status(401).json({ message: 'Failed to dislike or un-dislike. Maybe the user has not logged in or the log in is unauthorized.' });
+        return res.status(401).json({
+            message: 'Failed to dislike or un-dislike. Maybe the user has not logged in or the log in is unauthorized.'
+        });
     }
 
     if (!req.body['tweet_id']) {
-        return res.status(400).json({ message: 'Failed to dislike or un-dislike. The tweet_id given is not valid.' });
+        return res.status(400).json({
+            message: 'Failed to dislike or un-dislike. The tweet_id given is not valid.'
+        });
     }
 
     if (req.body['disliked']) {
-        Tweet.updateOne({ tweet_id: req.body['tweet_id'] }, { $pull: { dislike: userId } })
+        Tweet.updateOne({
+            tweet_id: req.body['tweet_id']
+        },
+            {
+                $pull: { dislike: userId }
+            })
             .then(() => {
                 res.json({
                     message: 'Un-disliked successful.',
@@ -325,24 +439,6 @@ router.post('/getTweetInfo', (req, res) => {
                 message: 'Fail to retrieve tweet information. Maybe because tweet does not exist.'
             });
         });
-});
-
-//Delete a tweet record from db
-//Input: the id of the tweet/retweet to be deleted (var name: tweet_id)
-router.post('/deleteTweet', (req, res) => {
-    Tweet.findOneAndDelete({ tweet_id: req.body['tweet_id'] })
-        .then((t) => {
-            console.log('tweet deleted:', t);
-            res.json({
-                message: 'Tweet successfully deleted'
-            });
-        })
-        .catch((err) => {
-            console.error(err);
-            res.status(500).json({
-                message: "Fail to delete tweet. Maybe because tweet does not exist."
-            });
-        })
 });
 
 

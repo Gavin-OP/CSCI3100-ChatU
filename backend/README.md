@@ -380,30 +380,26 @@ Backend is constructed by NodeJS and Express with MongoDB as the database.
         }
         ```
     
-- `/tweet/createRetweet`
+- `/tweet/retweet`
     
     - Usage: Create a new retweet in the db
-    - post
-    - Input: 
-       body:
-    
+    - POST
+    - Input:
+       
         ```javascript
         {
                         content: string,
-                        time: date,
-                        user: num //(i.e., user_id of the user who posts this tweet),
                         privacy_state: boolean, // 0 if everyone can see the tweet; 1 if only self can see the tweet
-                        original: objectId, //(i.e., tweet_id)
+                        original: num, //(i.e., tweet_id)
                         tag: string,
         }
         ```
     - Success output:
     
-            ```javascript
             {
-                "Create retweet successfully"
+                "message": "Create retweet successfully",
+                "action_status": true
             }
-            ```
 
 
 

@@ -155,6 +155,7 @@ router.get('/fanList/:userId', (req, res) => {
         });
 });
 
+
 // return how many fans the user has
 router.get('/fansNum/:userId', (req, res) => {
     const userId = req.params.userId;

@@ -6,20 +6,14 @@ const User = require('./userSchema');
 // remove a user
 router.get('/delete/:userId', (req, res) => {
     const userId = req.params['userId'];
-
     User.findOneAndDelete({ user_id: userId })
         .exec()
         .then((user) => {
             if (user) {
                 console.log('user removed:', user);
-
-                // clear cookies
-                res.clearCookie('userId');
-                res.clearCookie('userDbId');
-                res.clearCookie('isAdmin');
-
                 res.json({
                     message: 'User removed successfully.',
+                    action_status: true,
                 });
             } else {
                 console.log('user not found');

@@ -4,8 +4,7 @@ import ScrollToTop from 'react-scroll-to-top';
 import { Link } from "react-router-dom";
 import "./PersonalPage.css"
 import { TweetCard } from './TweetCard'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import {faArrowLeft, faComment, faStar, faTwitter} from '@fortawesome/free-solid-svg-icons'
+
 
 const tweet_data = {
     avatarUrl: '../avatar.png',
@@ -52,7 +51,7 @@ export function PersonalPage({page, userid}){
      // })
      // .catch(err=>console.log(err))
 
-     if (page === 'tweet' || page === 'favourate') {
+     if (page === 'tweet' || page === 'favourite') {
         return (
           <>
               <ScrollToTop />

@@ -16,12 +16,13 @@ export class SignUp extends React.Component {
         let password = document.getElementById('pwd').value;
         let user_name = document.getElementById('user-name').value;
 
-        fetch('/user/create', 
+        fetch('/user/signUp', 
         {method:'POST', 
         body: JSON.stringify({email: em, pwd: password, username: user_name}),
         headers: { 'Content-Type': 'application/json' }})
+        .then(res=>res.json())
         .then(res=>{
-            console.log(res);
+            console.log(res.message);
             window.history.pushState('','','/home');
         })
         .catch(error=>{

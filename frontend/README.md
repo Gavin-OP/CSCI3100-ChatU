@@ -56,7 +56,7 @@ Requierd response example
 ```
 Requierd response example
 ```
-{userID: "000001", email: "1314520@love.com", userName: "@user1" , banStatus:"Normal/Banned" }
+{ user_id: "233333", email: "emmmmmm@qq.com", username: "@user3", ban:false}
 ```
 #### Delete tweet
 

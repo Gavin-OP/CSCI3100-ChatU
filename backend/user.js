@@ -21,7 +21,6 @@ router.post('/signUp', (req, res) => {
                     email: req.body['email'],
                     pwd: req.body['pwd'],
                     username: req.body['username'],
-                    is_admin: true,
                 })
             return newUser.save();
         })

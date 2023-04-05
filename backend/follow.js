@@ -177,8 +177,6 @@ router.get('/followList/:userId', (req, res) => {
                                 const user_info = {
                                     user_id: response.data.user_id,
                                     username: response.data.username,
-                                    email: response.data.email, // might not need it
-                                    ban: response.data.ban,     // might not need it
                                     follow_status: response.data.follow_status,
                                     avatar: response.data.avatar,
                                 };

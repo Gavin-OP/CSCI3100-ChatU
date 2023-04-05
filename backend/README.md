@@ -283,6 +283,71 @@ Backend is constructed by NodeJS and Express with MongoDB as the database.
         }
         ```
 
+- `/follow/followList/:userId`
+
+    - Usage: Return all account that userId is currently following. 
+
+    - GET
+
+    - Output:
+
+        Success output:
+
+        ```javascript
+        {
+            "message": "He/She followes no one."
+        }
+        ```
+
+        ```javascript
+            {
+                "user_id": 5,
+                "username": "123456",
+                "follow_status": 1,
+                "avatar": {
+                    "contentType": "image/vnd.microsoft.icon",
+                    "data": {
+                        "type": "Buffer",
+                        "data": [
+                            0,
+                            0,
+                        ]
+                    }
+                }
+            },
+            {
+                "user_id": 1,
+                "username": "admin",
+                "follow_status": 0,
+                "avatar": {
+                    "contentType": "image/vnd.microsoft.icon",
+                    "data": {
+                        "type": "Buffer",
+                        "data": [
+                            0,
+                            0,
+                        ]
+                    }
+                }
+            }
+        ]
+        ```
+        
+        Failure output:
+        
+        ```javascript
+        {
+            "message": "Fail to retrieve follow information."
+        }
+        ```
+        
+        ```javascript
+        {
+            "message": "User not found."
+        }
+        ```
+
+
 - `/fan/delete/:fanId`
 
     - Usage: Delete a fan
@@ -321,73 +386,6 @@ Backend is constructed by NodeJS and Express with MongoDB as the database.
         }
         ```
 
-- `/follow/followList/:userId`
-
-    - Usage: Return all account that userId is currently following. 
-
-    - GET
-
-    - Output:
-
-        Success output:
-
-        ```javascript
-        {
-            "message": "He/She followes no one."
-        }
-        ```
-
-        ```javascript
-            {
-                "user_id": 5,
-                "username": "123456",
-                "email": "123456@cuhk.com",
-                "ban": false,
-                "follow_status": 1,
-                "avatar": {
-                    "contentType": "image/vnd.microsoft.icon",
-                    "data": {
-                        "type": "Buffer",
-                        "data": [
-                            0,
-                            0,
-                        ]
-                    }
-                }
-            },
-            {
-                "user_id": 1,
-                "username": "admin",
-                "email": "admin",
-                "ban": false,
-                "follow_status": 0,
-                "avatar": {
-                    "contentType": "image/vnd.microsoft.icon",
-                    "data": {
-                        "type": "Buffer",
-                        "data": [
-                            0,
-                            0,
-                        ]
-                    }
-                }
-            }
-        ]
-        ```
-
-        Failure output:
-
-        ```javascript
-        {
-            "message": "Fail to retrieve follow information."
-        }
-        ```
-
-        ```javascript
-        {
-            "message": "User not found."
-        }
-        ```
 
 - `/fan/fanList/:userId`
 

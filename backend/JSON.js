@@ -6,7 +6,15 @@ res.send([
         username: "User1",
     }
 ])
-
+{
+    "message": "User added to blacklist successfully",
+        "blacklist": [
+            6,
+            5,
+            2
+        ],
+            "action_status": true
+}
 [
     {
         "user_id": 4,

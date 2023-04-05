@@ -366,9 +366,10 @@ Backend is constructed by NodeJS and Express with MongoDB as the database.
         ```
        (optional depending on whether user has uploaded image(s)) files: an array, called 'pic', of objects, each being an image file
     - Success output:
+    
             ```javascript
             {
-                'Create tweet successfully'
+                "Create tweet successfully"
             }
             ```
 - `/tweet/createRetweet`
@@ -388,9 +389,10 @@ Backend is constructed by NodeJS and Express with MongoDB as the database.
         }
         ```
     - Success output:
+    
             ```javascript
             {
-                'Create retweet successfully'
+                "Create retweet successfully"
             }
             ```
 
@@ -641,58 +643,56 @@ Backend is constructed by NodeJS and Express with MongoDB as the database.
 
 - `/blacklist/add/:userId`
 
-
     - Usage: Add a user to the blacklist
-
+    
     - GET
-
-    - Output:
-
-        Success output:
-
+    
+    - Output
+    
+        Success output: 
+        
         ```javascript
         {
-            "message": "User added to blacklist successfully",
-            "blacklist": [
-                6,
-                5,
-                2
-            ],
+                    "message": "User added to blacklist successfully",
+                    "blacklist": [
+                    6,
+                    5,
+                    2
+               ],
             "action_status": true
-        }
+        },
         ```
-
-        Failure output:
-
+        
+        Failure output: 
+        
         ```javascript
         {
-            "message": "User already in blacklist"
+                    "message": "User already in blacklist"
+        }
+        ```
+        
+        ```javascript
+         {
+                    "message": "User not found. Cannot add a non-existing user to the blacklist."
+         }
+        ```
+        
+        ```javascript
+        {
+                    "message": "Cannot add yourself to the blacklist"
         }
         ```
 
-        ```javascript
-        {
-            "message": "User not found. Cannot add a non-existing user to the blacklist."
-        }
-        ```
-
-        ```javascript
-        {
-            "message": "Cannot add yourself to the blacklist"
-        }
-        ```
 
 - `/blacklist/delete/:userId`
-
-
     - Usage: Delete a user from blacklist
-
+    
     - GET
-
+    
     - Output: 
-
+    
         Success output:
-
+    
         ```javascript
         {
             "message": "User with ID 2 removed from your blacklist.",
@@ -703,15 +703,15 @@ Backend is constructed by NodeJS and Express with MongoDB as the database.
             "action_status": true
         }
         ```
-
+    
         Failure output: 
-
+    
         ```javascript
         {
             "message": "User is not in your blacklist."
         }
         ```
-
+    
         ```javascript
         {
             "message": "You have no users in your blacklist."

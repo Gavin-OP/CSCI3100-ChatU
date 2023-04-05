@@ -332,11 +332,14 @@ Backend is constructed by NodeJS and Express with MongoDB as the database.
             }
         ```
 
-- `/tweet/deleteTweet`
+- `/tweet/delete/:tweetId`
+    
     - Usage: Delete a tweet record from db given the its tweet_id
-    - post
-    - Input: body:
-
+    - GET
+    - Output:
+    
+        Success output:
+    
         ```javascript
         {
             tweet_id: Num
@@ -348,30 +351,31 @@ Backend is constructed by NodeJS and Express with MongoDB as the database.
                 message: 'Tweet successfully deleted'
             }
             ```
-
-- `/tweet/createTweet`
+    
+- `/tweet/create`
+    
     - Usage: Create a new tweet in the db
-    - post
+    - POST
     - Input: 
-       body:
-
+       
         ```javascript
         {
                         content: string,
-                        time: date,
-                        user: num, // (i.e., user_id of the user who posts this tweet),
-                        privacy_state: boolean, // 0 if everyone can see the tweet; 1 if only self can see the tweet
+                        image: files,
+                        privacy_state: boolean, // false if everyone can see the tweet; true if only self can see the tweet
                         tag: string,
         }
         ```
-       (optional depending on whether user has uploaded image(s)) files: an array, called 'pic', of objects, each being an image file
-    - Success output:
+    - Output:
     
-            ```javascript
+        Success output:
+        
             {
-                "Create tweet successfully"
+                "message": "Create tweet successfully",
+                "action_status": true
             }
-            ```
+        
+        Failure outpu
 - `/tweet/createRetweet`
     - Usage: Create a new retweet in the db
     - post

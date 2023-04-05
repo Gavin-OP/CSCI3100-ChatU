@@ -56,7 +56,10 @@ router.post("/create", upload.any('image'), (req, res) => {
         })
         .then((newTweet) => {
             console.log('tweet created');
-            res.send('Create tweet successfully');
+            res.json({
+                message: 'Create tweet successfully',
+                action_status: true
+            });
         })
         .catch((err) => {
             console.error(err);
@@ -71,7 +74,8 @@ router.get('/delete/:tweetId', (req, res) => {
         .then((tweet) => {
             console.log('tweet deleted:', tweet);
             res.json({
-                message: 'Tweet successfully deleted'
+                message: 'Tweet successfully deleted',
+                action_status: true
             });
         })
         .catch((err) => {

@@ -33,7 +33,7 @@ export const retweet_data = {
     likeCount: 234,
     starCount: 387,
     commentCount: 2344,
-    followStatus: 'Following',
+    followStatus: 'Follow',
     imageSrc: '/logo_colorful.svg',
     // imageSrc: '',
     tweetText: 'Welcome to ChatU. We are glad to announce that ChatU is officially release a brand new version!!',

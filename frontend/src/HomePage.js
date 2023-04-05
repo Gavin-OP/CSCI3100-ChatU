@@ -13,16 +13,16 @@ import { UserRecomBox } from './UserRecommendBox';
 
 export function HomePage() {
     return (
-        <>
+        <div>
             <ScrollToTop />
-            <div>
+            <div className="stiky-bar">
                 {/* NavigationBar */}
                 <NavigationBar page={'user'} />
             </div>
             <div class="wrapper" id="homepage">
                 <div class="col col1">
                     <div class="col-content">
-                        {/*Empty space in which additional content can be put in the future */}
+                         <button class="write-post-button"><i class="fa fa-plus"></i>   Post my tweet!</button>
                     </div>
                 </div>
                 <div class="col col2">
@@ -44,16 +44,15 @@ export function HomePage() {
                 </div>
                 <div class="col col3">
                     <div class="col-content">
-                         <br/><br/> &nbsp; &nbsp; <button class="write-post-button"><i class="fa fa-plus"></i></button>
                               <div class="user-rec-font">  <br/> <br/> &nbsp; &nbsp; 
-                              User Recommendation 
+                                User Recommendation 
                               </div>
                               <br/> <br/> <br/> <br/> 
                               <UserRecomBox />
                     </div>
                 </div>
             </div>
-        </>
+        </div>
     )
 }
 

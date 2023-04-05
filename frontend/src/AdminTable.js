@@ -140,13 +140,13 @@ export function AdminTable({page,items}) {
                 <table className="user-table" id="admin-user-table">
                     {items.map((item) => (
                         <tr className='admin-table-column'>
-                            <td className='table-userid'>{item.userID}</td>
+                            <td className='table-userid'>{item.user_id}</td>
                             <td className='table-user-email'>{item.email}</td>
-                            <td className='table-username'>{item.userName}</td>
-                            <td className='table-ban-status'>{item.banStatus}</td>
-                            <button className="ban-button" onClick={()=>BanUser(item.userID)}>Ban this user</button>
-                            <button className='unban-btn' onClick={()=>UnbanUser(item.userID)}>Unban</button>
-                            <button className="admin-user-delele-button" id="delete-button" onClick={()=>DeleteUser(item.userID)}>Delete</button>
+                            <td className='table-username'>{item.username}</td>
+                            <td className='table-ban-status'>{item.ban ? 'Banned' : 'Normal'}</td>
+                            <button className="ban-button" onClick={()=>BanUser(item.user_id)}>Ban this user</button>
+                            <button className='unban-btn' onClick={()=>UnbanUser(item.user_id)}>Unban</button>
+                            <button className="admin-user-delele-button" id="delete-button" onClick={()=>DeleteUser(item.user_id)}>Delete</button>
                         </tr>
                     ))}
                 </table>

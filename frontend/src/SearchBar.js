@@ -101,9 +101,9 @@ export function SearchBar({ page }) {
         // Fake data!!!!!!!!!!!!!!!!!!!!!
         let data =
         [
-            { userID: "000001", email: "1314520@love.com", userName: "@user1" , banStatus:"Normal"},
-            { userID: "191981", email: "3100course@sb.com", userName: "@user2", banStatus:"Banned till 2023.03.25 12:00pm" },
-            { userID: "233333", email: "emmmmmm@qq.com", userName: "@user3", banStatus:"Normal" },
+            { user_id: "000001", email: "1314520@love.com", username: "@user1" , ban:false},
+            { user_id: "191981", email: "3100course@sb.com", username: "@user2", ban:true },
+            { user_id: "233333", email: "emmmmmm@qq.com", username: "@user3", ban:false},
         ];
     
 
@@ -115,6 +115,8 @@ export function SearchBar({ page }) {
             //     FrontendFcn(data)
             // })
             // .catch(error => console.log(error));
+
+            
             
 
             //test function

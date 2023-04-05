@@ -12,7 +12,8 @@ export function TweetCard(props) {
         dislikeLight: '#657786',
         forwardLight: '#657786',
         starLight: '#657786',
-        commentLight: '#657786'
+        commentLight: '#657786',
+        followStatus: 'follow',
     });
 
 
@@ -21,6 +22,14 @@ export function TweetCard(props) {
         const isDislike = props.dislikeStatus;
         const isStar = props.starStatus;
         const isPic = props.imageSrc;
+        // Check whether the user have already follow the user, if so, light the follow button, else grey the button.
+        // if (isFollow === 'follow') {
+        //     setState(prevState => ({ ...prevState, followLight: '#ff4444' }))
+        // }
+        // else if (isFollow === 'following') {
+        //     setState(prevState => ({ ...prevState, followLight: '#b5b5b5' }))
+        // }
+
 
         // Check whether the user have already like the tweet, if so, light the like button, else grey the button. 
         if (isLike === 1) {
@@ -54,7 +63,7 @@ export function TweetCard(props) {
             setState(prevState => ({ ...prevState, picDisplay: 'none' }))
         else
             setState(prevState => ({ ...prevState, picDisplay: '' }))
-    }, [props.likeStatus, props.dislikeStatus, props.starStatus, props.imageSrc, props.likeCount, props.starCount, props.commentCount]);
+    }, [props.likeStatus, props.dislikeStatus, props.starStatus, props.imageSrc, props.likeCount, props.starCount, props.commentCount,props.followStatus]);
 
 
     // Light or grey the like button when click, it should also contain a fetch function to send data back to server
@@ -88,7 +97,17 @@ export function TweetCard(props) {
             setState({ ...state, starLight: '#657786' })
         }
     }
+    //function to change the prop.followStatus
 
+
+    function handleFollow() {
+        if (state.followStatus === 'follow') {
+            setState({ ...state, followStatus: 'following' })
+        }
+        else if (state.followStatus === 'following') {
+            setState({ ...state, followStatus: 'follow'})
+        }
+    }
 
     // Display comment or hide comment when click the comment button, and light or grey the button
     function toggleCommentInput() {
@@ -117,7 +136,7 @@ export function TweetCard(props) {
                     <div className="user-info">
                         <div className="username">{props.username}</div>
                         <div className='follow'>
-                            <button className="follow-button">{props.followStatus}</button>
+                            <button className="follow-button"  onClick={handleFollow}>{state.followStatus}</button>
                         </div>
                         <div className='vertical-line'></div>
                     </div>

@@ -23,7 +23,7 @@
     transition: all 0.2s ease-in-out;
     position: relative;
     margin-left: 216px;
-    margin-top: -6px;
+    top: -20px;
 }
 .delete-btn:hover{
     background-color: #800000;

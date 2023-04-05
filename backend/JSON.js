@@ -6,47 +6,24 @@ res.send([
         username: "User1",
     }
 ])
-{
-    "message": "User added to blacklist successfully",
-    "blacklist": [
-            6,
-            5,
-            2
-        ],
-    "action_status": true
-},
+
 [
     {
-        "user_id": 4,
-        "username": 'Gavin',
-        "follow_status": 2,
+        "user_id": 6,
+        "username": "test",
         "avatar": {
-            "contentType": 'image/vnd.microsoft.icon',
             "data": {
-                "type": 'Buffer',
+                "type": "Buffer",
                 "data": [
                     0,
-                    0
-                ]
-            }
-        }
-    },
-    {
-        "user_id": 1,
-        'username': 'admin',
-        'follow_status': 0,
-        'avatar': {
-            'contentType': 'image/png',
-            'data': {
-                'type': 'Buffer',
-                'data': [
                     0,
-                    0
                 ]
-            }
+            },
+            "contentType": "image/vnd.microsoft.icon"
         }
     }
 ]
+
 
 // /login
 // API: `/login`, POST

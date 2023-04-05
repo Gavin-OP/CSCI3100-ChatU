@@ -718,11 +718,52 @@ Backend is constructed by NodeJS and Express with MongoDB as the database.
         }
         ```
 
-- `/blacklist`
+- `/blacklist/list`
 
 
     - Usage: Return all user in the blacklist
-    - 
+
+    - GET
+
+    - Output:
+
+        Success output: 
+
+        ```javascript
+        [
+            {
+                "user_id": 6,
+                "username": "test",
+                "avatar": {
+                    "data": {
+                        "type": "Buffer",
+                        "data": [
+                            0,
+                            0,
+                        ]
+                    },
+                    "contentType": "image/vnd.microsoft.icon"
+                }
+            }
+        ]
+        ```
+
+        ```javascript
+        {
+            "message": "No user found in the blacklist."
+        }
+        ```
+
+        Failure output:
+
+        ```javascript
+        {
+            "message": "Failed to retrieve blacklist.."
+        }
+        ```
+
+        
+
 
 
 ## To Do

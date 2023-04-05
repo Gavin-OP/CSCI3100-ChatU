@@ -144,7 +144,8 @@ router.get('/list', (req, res) => {
 
                         return {
                             user_id: user.user_id,
-                            username: user.username
+                            username: user.username,
+                            avatar: user.avatar,
                         };
                     });
             });
@@ -152,10 +153,7 @@ router.get('/list', (req, res) => {
             Promise.all(promises)
                 .then(users => {
                     users = users.filter(user => user !== null);
-
-                    res.status(200).json({
-                        users: users
-                    });
+                    res.status(200).json(users);
                 })
                 .catch(error => {
                     console.error(`Error retrieving users from the blacklist of user with ID ${requestedUserId}:`, error);
@@ -171,7 +169,6 @@ router.get('/list', (req, res) => {
             });
         });
 });
-
 
 
 module.exports = router;

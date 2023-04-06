@@ -214,6 +214,10 @@ Backend is constructed by NodeJS and Express with MongoDB as the database.
 
 - GET
 
+- Use scenario: 
+    - like button in tweetcards and retweetcards at homepage, tweet search result under homepage, /personal/tweet page, /personal/fav page; 
+    - like button in tweet detail page and retweet detail page
+
 - Input: a int-type var named tweetId, which is the id of the tweet for which the user clicks the like button 
 
 - Output:
@@ -236,6 +240,10 @@ Backend is constructed by NodeJS and Express with MongoDB as the database.
 
 - GET
 
+- Use scenario: 
+    - like button in tweetcards and retweetcards at homepage, tweet search result under homepage, /personal/tweet page, /personal/fav page 
+    - like button in tweet detail page and retweet detail page
+
 - Input: a int-type var named tweetId, which is the id of the tweet for which the user clicks the dislike button
 
 - Output:
@@ -256,6 +264,10 @@ Backend is constructed by NodeJS and Express with MongoDB as the database.
 - Usage: When the dislike button of a tweet is grey and a user clicks it, add the user's id to the dislike list of this tweet
 
 - GET
+
+- Use scenario: 
+    - dislike button in tweetcards and retweetcards at homepage, tweet search result under homepage, /personal/tweet page, /personal/fav page; 
+    - dislike button in tweet detail page and retweet detail page
 
 - Input: a int-type var named tweetId, which is the id of the tweet for which the user clicks the dislike button
 
@@ -278,6 +290,10 @@ Backend is constructed by NodeJS and Express with MongoDB as the database.
 
 - GET
 
+- Use scenario: 
+    - dislike button in tweetcards and retweetcards at homepage, tweet search result under homepage, /personal/tweet page, /personal/fav page; 
+    - dislike button in tweet detail page and retweet detail page
+
 - Input: a int-type var named tweetId, which is the id of the tweet for which the user clicks the dislike button
 
 - Output:
@@ -298,6 +314,13 @@ Backend is constructed by NodeJS and Express with MongoDB as the database.
 - Usage: Get all info of a tweet/retweet by providing its id. The attribute 'original' is not null only if this is a retweet
 
 - GET
+
+- Use scenario: 
+    - display content of tweet in tweet detail page
+    - display content of retweet in retweet detail page 
+    - display partial content of tweet searched under admin/tweet
+    - display partial content of tweet search result under homepage
+    - disply partial content of tweet in tweetcards and retweetcards at homepage, personal/tweet page, personal fav page  
 
 - Input: a int-type var named tweetId, which is the id of the tweet that someone wants to get all info for
 
@@ -346,6 +369,8 @@ Backend is constructed by NodeJS and Express with MongoDB as the database.
 
 - GET
 
+- Use scenario: delete tweet under admin/tweet page and personal/tweet page
+
 - Input: the id of the tweet to delete
 
 - Output:
@@ -364,6 +389,7 @@ Backend is constructed by NodeJS and Express with MongoDB as the database.
 
 - Usage: Create a new tweet in the db
 - POST
+- Use scenario: create a tweet in the /post page
 - Input: 
   
     ```javascript
@@ -399,6 +425,7 @@ Backend is constructed by NodeJS and Express with MongoDB as the database.
 
 - Usage: Create a new retweet in the db
 - POST
+- Use scenario: create a retweet in the /retweet page
 - Input:
   
     ```javascript
@@ -428,6 +455,8 @@ Backend is constructed by NodeJS and Express with MongoDB as the database.
 - Usage: Return how many tweet or retweet a user has posted.
 
 - GET
+
+- Use scenario: display the num of tweets the logged-in user had posted before in the /personal/tweet and /personal/fav pages
 
 - Input: the id of the user whom you want to query about the num of tweets s/he posts
 
@@ -1197,10 +1226,16 @@ Backend is constructed by NodeJS and Express with MongoDB as the database.
 
 
 ## To Do
-1. 用keyword搜索user，可以分进search
-2. recommend user to follow相关的，可以分进recomendation
+1. 用keyword搜索user/tweet/comment，可以分进search
+2. recommend user to follow on homepage，可以分进reccomendation
 3. 一个精简版的getUser, 用user id 去get user name和avatar（这样tweet card, view tweet, comment, following/fan/ban list等等都可以用这个精简版getUser
-4. 给定user id,修改用户名或者修改个人介绍，可以分进setting
+4. (!!!重要，用于tweet recommedation) 给定user id和tag (type: string),将此用户喜欢的tag设为input的tag，可以分进setting
+5. tweet reccommendation on homepage, 可以分进reccomendation
+6. get list of tweet ids of tweets posted by all following users (用于首页的tweet 推送)  
+4. 给定user id,修改用户名，可以分进setting
+5. 给定user id,修改个人介绍，可以分进setting
+6. 给定user id,修改email，可以分进setting
+7. 给定user id,修改password，可以分进setting
 
 
 [^1]: action_status

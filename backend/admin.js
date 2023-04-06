@@ -1,10 +1,11 @@
 const express = require('express');
 const router = express.Router();
 const User = require('./userSchema');
+const Tweet = require('./tweetSchema');
 
 
 // remove a user
-router.get('/delete/:userId', (req, res) => {
+router.get('/deleteUser/:userId', (req, res) => {
     const userId = req.params['userId'];
     User.findOneAndDelete({ user_id: userId })
         .exec()
@@ -83,6 +84,59 @@ router.get('/unban/:userId', (req, res) => {
             console.error(err);
             res.status(500).json({
                 message: "Failed to unban user"
+            });
+        });
+});
+
+
+// delete a tweet
+router.get('/deleteTweet/:tweetId/:userId', (req, res) => {
+    const tweetId = req.params['tweetId'];
+    const userId = req.params['userId'];
+
+    Tweet.findOneAndDelete({ tweet_id: tweetId })
+        .exec()
+        .then((tweet) => {
+            if (tweet) {
+                console.log('tweet removed:', tweet);
+
+                User.findOneAndUpdate(
+                    { user_id: userId },
+                    {
+                        $pull: { tweet: tweetId }
+                    })
+                    .exec()
+                    .then((user) => {
+                        if (user) {
+                            console.log('tweet removed from user:', user);
+                            res.json({
+                                message: 'Tweet removed successfully.',
+                                action_status: true,
+                            });
+                        } else {
+                            console.log('user not found');
+                            res.status(404).json({
+                                message: 'User not found.',
+                            });
+                        }
+                    })
+                    .catch((err) => {
+                        console.error(err);
+                        res.status(500).json({
+                            message: 'Fail to remove tweet from user.',
+                        });
+                    });
+            } else {
+                console.log('tweet not found');
+                res.status(404).json({
+                    message: 'Tweet not found.',
+                });
+            }
+        })
+        .catch((err) => {
+            console.error(err);
+            res.status(500).json({
+                message: 'Fail to remove tweet.',
             });
         });
 });

@@ -813,7 +813,7 @@ Backend is constructed by NodeJS and Express with MongoDB as the database.
     }
     ```
 
-#### `/admin/delete/:userId`
+#### `/admin/deleteUser/:userId`
 
 
 - Usage: Delete a user
@@ -893,7 +893,25 @@ Backend is constructed by NodeJS and Express with MongoDB as the database.
     }
     ```
 
-    
+
+#### `/admin/deleteTweet/:tweetId/:userId`
+
+- Usage: Delete a tweet by admin
+
+- GET
+
+- Output:
+
+  Success output:
+
+  ```javascript
+  {
+      "message": "Tweet removed successfully.",
+      "action_status": true
+  }
+  ```
+
+  
 
 
 ## To Do

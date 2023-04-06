@@ -49,7 +49,12 @@ router.post('/create', (req, res) => {
 });
 
 
-// 
+// delete a comment
+// router.delete('/delete', (req, res) => {
+//     const comment_id = req.body.comment_id;
+//     const user_id = req.cookies.userId;
+
+
 
 
 

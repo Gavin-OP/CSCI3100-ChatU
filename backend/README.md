@@ -1132,7 +1132,33 @@ Backend is constructed by NodeJS and Express with MongoDB as the database.
   ]
   ```
 
+#### `/comment/create`
 
+- Usage: Create a comment
+
+- POST
+
+- Input:
+
+  ```javascript
+  {
+      tweet_id: Num,
+      content: Str,
+  }
+  ```
+
+- Output:
+
+  Success output:
+
+  ```javascript
+  {
+      "message": "Comment created.",
+      "action_status": true
+  }
+  ```
+
+  
 
 
 ## To Do

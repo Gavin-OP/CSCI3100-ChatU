@@ -215,7 +215,7 @@ Backend is constructed by NodeJS and Express with MongoDB as the database.
 - GET
 
 - Output:
-    
+  
     Success output
     ```javascript
     {
@@ -248,7 +248,7 @@ Backend is constructed by NodeJS and Express with MongoDB as the database.
 - GET
 
 - Output:
-    
+  
     Success output:
     ```javascript
     {
@@ -281,7 +281,7 @@ Backend is constructed by NodeJS and Express with MongoDB as the database.
 - GET
 
 - Output:
-    
+  
     Success output: 
     
     ```javascript
@@ -339,7 +339,7 @@ Backend is constructed by NodeJS and Express with MongoDB as the database.
 - Usage: Create a new tweet in the db
 - POST
 - Input: 
-   
+  
     ```javascript
     {
                     content: string,
@@ -370,7 +370,7 @@ Backend is constructed by NodeJS and Express with MongoDB as the database.
 - Usage: Create a new retweet in the db
 - POST
 - Input:
-   
+  
     ```javascript
     {
                     content: string,
@@ -379,12 +379,34 @@ Backend is constructed by NodeJS and Express with MongoDB as the database.
                     tag: string,
     }
     ```
-- Success output:
+- Output:
 
-        {
-            "message": "Create retweet successfully",
-            "action_status": true
-        }
+    Success output:
+    
+    ```javascript
+    {
+        "message": "Create retweet successfully",
+        "action_status": true
+    }
+    ```
+
+#### `/tweet/tweetNum/:userId`
+
+- Usage: Return how many tweet a user has posted.
+
+- GET
+
+- Output:
+
+  Success output:
+
+  ```javascript
+  {
+      "message": "retrieve tweet number successful.",
+      "action_status": true,
+      "tweetNum": 3
+  }
+  ```
 
 #### `/follow/add/:followId`[^1][^2]
 
@@ -875,6 +897,11 @@ Backend is constructed by NodeJS and Express with MongoDB as the database.
 
 
 ## To Do
+1. 用keyword搜索user，可以分进search
+2. recommend user to follow相关的，可以分进recomendation
+3. 一个精简版的getUser, 用user id 去get user name和avatar（这样tweet card, view tweet, comment, following/fan/ban list等等都可以用这个精简版getUser
+4. 给定user id,修改用户名或者修改个人介绍，可以分进setting
+
 
 [^1]: action_status
 [^2]: Delete something in output

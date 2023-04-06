@@ -49,20 +49,25 @@ router.post("/create", upload.any('image'), (req, res) => {
             });
 
             // saving the object into the database
-            return newTweet.save().catch((err) => {
-                console.error(err);
-                res.status(500).json({
-                    message: "Fail to save the new tweet."
-                });
-            });
+            return newTweet.save()
         })
+
         .then((newTweet) => {
-            console.log('tweet created');
-            res.json({
-                message: 'Create tweet successfully',
-                action_status: true
-            });
+            console.log('tweet created', newTweet);
+
+            User.findOneAndUpdate(
+                { user_id: userId },
+                { $push: { tweet: newTweet.tweet_id } },
+                { upsert: true, new: true },
+            )
+                .then((user) => {
+                    res.json({
+                        message: 'Create tweet successfully',
+                        action_status: true
+                    });
+                });
         })
+
         .catch((err) => {
             console.error(err);
             res.status(500).send("Server Error");
@@ -75,10 +80,18 @@ router.get('/delete/:tweetId', (req, res) => {
     Tweet.findOneAndDelete({ tweet_id: req.params.tweetId })
         .then((tweet) => {
             console.log('tweet deleted:', tweet);
-            res.json({
-                message: 'Tweet successfully deleted',
-                action_status: true
-            });
+
+            User.findOneAndUpdate(
+                { user_id: tweet.user },
+                { $pull: { tweet: tweet.tweet_id } },
+                { upsert: true, new: true },
+            )
+                .then((user) => {
+                    res.json({
+                        message: 'Tweet successfully deleted',
+                        action_status: true
+                    });
+                })
         })
         .catch((err) => {
             console.error(err);
@@ -117,10 +130,18 @@ router.post('/retweet', (req, res) => {
         })
         .then((newTweet) => {
             console.log('retweet created');
-            res.json({
-                message: 'Create retweet successfully',
-                action_status: true
-            });
+
+            User.findOneAndUpdate(
+                { user_id: userId },
+                { $push: { tweet: newTweet.tweet_id } },
+                { upsert: true, new: true },
+            )
+                .then((user) => {
+                    res.json({
+                        message: 'Create retweet successfully',
+                        action_status: true
+                    });
+                })
         })
         .catch((err) => {
             console.error(err);
@@ -392,37 +413,31 @@ router.get('/getTweet/:tweetId', (req, res) => {
 router.get('/tweetNum/:userId', (req, res) => {
     const userId = req.params.userId;
 
-    tweet.findOne({ user_id: userId })
+    User.findOne({ user_id: userId })
         .exec()
-        .then((tweet) => {
-            if (!tweet) {
+        .then((user) => {
+            if (!user) {
                 return res.status(404).json({
-                    message: 'Failed to retrieve tweet information. The tweet does not exist.'
+                    message: 'Failed to retrieve tweet number. The user does not exist.'
                 });
             }
-        })
-        .catch((err) => {
-            console.error(err);
-            res.status(500).json({
-                message: "Fail to find the designated tweet."
+
+            if (!user.tweet) {
+                return res.status(404).json({
+                    message: 'Failed to retrieve tweet number. The user has not posted any tweet.'
+                });
+            }
+
+            res.json({
+                message: 'retrieve tweet number successful.',
+                action_status: true,
+                tweetNum: user.tweet.length
             });
-        });
-});
-
-
-//Retrive tweet_ids of all tweets that a designated user posted
-//Input: user id (var name: userId)
-router.get('/getTweet/:userId', (req, res) => {
-    User.findOne({ user_id: req.params['userId'] })
-        .then((result) => {
-            const tweets = result.tweet;
-            res.set('Content-Type', 'application/json');
-            res.json(tweets);
         })
         .catch((err) => {
             console.error(err);
             res.status(500).json({
-                message: 'Fail to retrieve tweet ids posted by this user. Maybe because user does not exist.'
+                message: "Fail to find the designated user."
             });
         });
 });

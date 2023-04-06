@@ -46,8 +46,8 @@ export function NavigationBar({ page }) {
                     <img src="../avatar.png" alt="User Avatar" />
                     <div className="dropdown-menu">
                         <ul>
-                            <li><a href="/personal/tweet">Personal Page</a></li>
-                            <li><a href="#">Settings</a></li>
+                            {/* <li><a href="/personal/tweet">Personal Page</a></li> */}
+                            {/* <li><a href="#">Settings</a></li> */}
                             <li><a id='logout' href="#">Log out</a></li>
                         </ul>
                     </div>

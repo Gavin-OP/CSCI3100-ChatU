@@ -63,7 +63,7 @@ export function TweetCard(props) {
             setState(prevState => ({ ...prevState, picDisplay: 'none' }))
         else
             setState(prevState => ({ ...prevState, picDisplay: '' }))
-    }, [props.likeStatus, props.dislikeStatus, props.starStatus, props.imageSrc, props.likeCount, props.starCount, props.commentCount,props.followStatus]);
+    }, [props.likeStatus, props.dislikeStatus, props.starStatus, props.imageSrc, props.likeCount, props.starCount, props.commentCount, props.followStatus]);
 
 
     // Light or grey the like button when click, it should also contain a fetch function to send data back to server
@@ -105,7 +105,7 @@ export function TweetCard(props) {
             setState({ ...state, followStatus: 'following' })
         }
         else if (state.followStatus === 'following') {
-            setState({ ...state, followStatus: 'follow'})
+            setState({ ...state, followStatus: 'follow' })
         }
     }
 
@@ -136,7 +136,7 @@ export function TweetCard(props) {
                     <div className="user-info">
                         <div className="username">{props.username}</div>
                         <div className='follow'>
-                            <button className="follow-button"  onClick={handleFollow}>{state.followStatus}</button>
+                            <button className="follow-button" onClick={handleFollow}>{state.followStatus}</button>
                         </div>
                         <div className='vertical-line'></div>
                     </div>

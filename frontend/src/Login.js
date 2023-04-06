@@ -61,7 +61,7 @@ export class Login extends React.Component {
                             <button type="button" onClick={this.handleLogin} className="btn mt-3">Login</button>
                         </form>
                         <div className="text-center">
-                            <a href="#">Forget password?</a> or <a href="./Signup">Sign up</a>
+                            <a href="./Signup">Sign up</a>
                         </div>
                         <div className="text-center alert alert-danger" id='warning' style={{display:'none'}}>Wrong Email/Password! Please Check it again! </div>
                     </div>

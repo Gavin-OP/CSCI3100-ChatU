@@ -37,31 +37,38 @@ router.get('/add/:tweetId', (req, res) => {
                         { upsert: true, new: true }
                     )
                         .then(favoriteResult => {
-                            console.log(`Add the tweet with ID ${tweetId} to the favorite list of user with ID ${loggedInUserId}`);
-                            res.status(200).json({
-                                message: "Add tweet to favorite list successfully",
-                                favoriteList: favoriteResult.favorite_id,
-                            });
+                            User.findOneAndUpdate(
+                                { user_id: loggedInUserId },
+                                { $addToSet: { favorite: tweetId } },
+                                { upsert: true, new: true }
+                            )
+                                .then(userResult => {
+                                    console.log(`Add the tweet with ID ${tweetId} to the favorite list of user with ID ${loggedInUserId}`);
+                                    res.status(200).json({
+                                        message: "Add tweet to favorite list successfully",
+                                        favoriteList: favoriteResult.favorite_id,
+                                    });
+                                })
+                                .catch(error => {
+                                    console.error(`Error adding tweet with ID ${tweetId} to the favorite list of user with ID ${loggedInUserId}:`, error);
+                                    res.status(500).json({
+                                        message: "Failed to add the tweet to the favorite list of the logged-in user"
+                                    });
+                                });
                         })
                         .catch(error => {
-                            console.error(`Error adding tweet with ID ${tweetId} to the favorite list of user with ID ${loggedInUserId}:`, error);
+                            console.error(`Error finding tweet with ID ${tweetId}:`, error);
                             res.status(500).json({
-                                message: "Failed to add the tweet to the favorite list of the logged-in user"
+                                message: "Failed to find the tweet"
                             });
                         });
                 })
                 .catch(error => {
-                    console.error(`Error finding tweet with ID ${tweetId}:`, error);
+                    console.error(`Error finding user with ID ${loggedInUserId}:`, error);
                     res.status(500).json({
-                        message: "Failed to find the tweet"
+                        message: "Failed to find the user"
                     });
                 });
-        })
-        .catch(error => {
-            console.error(`Error finding user with ID ${loggedInUserId}:`, error);
-            res.status(500).json({
-                message: "Failed to find the user"
-            });
         });
 });
 
@@ -93,31 +100,39 @@ router.get('/delete/:tweetId', (req, res) => {
                         { upsert: true, new: true }
                     )
                         .then(favoriteResult => {
-                            console.log(`Delete the tweet with ID ${tweetId} from the favorite list of user with ID ${loggedInUserId}`);
-                            res.status(200).json({
-                                message: "Delete tweet from favorite list successfully",
-                                favoriteList: favoriteResult.favorite_id,
-                            });
+                            User.findOneAndUpdate(
+                                { user_id: loggedInUserId },
+                                { $pull: { favorite: tweetId } },
+                                { upsert: true, new: true }
+                            )
+                                .then(userResult => {
+
+                                    console.log(`Delete the tweet with ID ${tweetId} from the favorite list of user with ID ${loggedInUserId}`);
+                                    res.status(200).json({
+                                        message: "Delete tweet from favorite list successfully",
+                                        favoriteList: favoriteResult.favorite_id,
+                                    });
+                                })
+                                .catch(error => {
+                                    console.error(`Error deleting tweet with ID ${tweetId} from the favorite list of user with ID ${loggedInUserId}:`, error);
+                                    res.status(500).json({
+                                        message: "Failed to delete the tweet from the favorite list of the logged-in user"
+                                    });
+                                });
                         })
                         .catch(error => {
-                            console.error(`Error deleting tweet with ID ${tweetId} from the favorite list of user with ID ${loggedInUserId}:`, error);
+                            console.error(`Error finding tweet with ID ${tweetId}:`, error);
                             res.status(500).json({
-                                message: "Failed to delete the tweet from the favorite list of the logged-in user"
+                                message: "Failed to find the tweet"
                             });
                         });
                 })
                 .catch(error => {
-                    console.error(`Error finding tweet with ID ${tweetId}:`, error);
+                    console.error(`Error finding user with ID ${loggedInUserId}:`, error);
                     res.status(500).json({
-                        message: "Failed to find the tweet"
+                        message: "Failed to find the user"
                     });
                 });
-        })
-        .catch(error => {
-            console.error(`Error finding user with ID ${loggedInUserId}:`, error);
-            res.status(500).json({
-                message: "Failed to find the user"
-            });
         });
 });
 
@@ -144,20 +159,30 @@ router.get('/favoriteList', (req, res) => {
                     const promises = favoriteList.map(favoriteId => {
                         return axios.get(`/tweet/getTweet/${favoriteId}`, { headers: { 'Cookie': req.headers.cookie } })
                             .then(response => {
-                                const tweet_info = {
-                                    tweet_id: response.data.tweet_id,
-                                    content: response.data.content,
-                                    user: response.data.user,
-                                    time: response.data.time,
-                                    original: response.data.original,
-                                    privacy_state: response.data.privacy_state,
-                                    image: response.data.image,
-                                    like: response.data.like,
-                                    dislike: response.data.dislike,
-                                    tag: response.data.tag,
+                                if (response.data.tweet.original == -1) {
+                                    return response.data.tweet;
+                                }
+                                else {
+                                    return axios.get(`/tweet/getTweet/${response.data.tweet.original}`, { headers: { 'Cookie': req.headers.cookie } })
+                                        .then(originalResponse => {
+                                            const tweet_info = {
+                                                tweet_id: response.data.tweet.tweet_id,
+                                                content: response.data.tweet.content,
+                                                user: response.data.tweet.user,
+                                                time: response.data.tweet.time,
+                                                privacy_state: response.data.tweet.privacy_state,
+                                                like: response.data.tweet.like,
+                                                dislike: response.data.tweet.dislike,
+                                                tag: response.data.tweet.tag,
+                                                original: originalResponse.data.tweet,
+                                            }
+                                            return tweet_info;
+                                        })
+                                        .catch(err => {
+                                            console.error(err);
+                                            return null;
+                                        });
                                 };
-                                console.log(tweet_info);
-                                return tweet_info;
                             })
                             .catch(err => {
                                 console.error(err);
@@ -166,18 +191,18 @@ router.get('/favoriteList', (req, res) => {
                     });
 
                     Promise.all(promises)
-
                         .then(tweets => {
-                            res.status(200).json({
-                                message: 'Favorite list retrieved successfully',
-                                favoriteList: tweets
-                            });
-                        })
-                        .catch(error => {
-                            console.error(`Error retrieving favorite list:`, error);
-                            res.status(500).json({
-                                message: 'Failed to retrieve favorite list'
-                            });
+                            tweet_list = tweets.filter(tweet => tweet != null)
+                            console.log(tweet_list)
+
+                            if (tweet_list.length == 0) {
+                                return res.status(404).json({
+                                    message: 'Favorite list is empty.'
+                                });
+                            }
+
+                            res.set('Content-Type', 'application/json');
+                            res.status(200).json(tweets);
                         });
                 })
                 .catch(error => {
@@ -188,7 +213,6 @@ router.get('/favoriteList', (req, res) => {
                 });
         })
         .catch(error => {
-
             console.error(`Error retrieving favorite list:`, error);
             res.status(500).json({
                 message: 'Failed to retrieve favorite list'

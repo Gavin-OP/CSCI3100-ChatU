@@ -911,6 +911,115 @@ Backend is constructed by NodeJS and Express with MongoDB as the database.
   }
   ```
 
+#### `/favorite/add/:tweetId`
+
+- Usage: Add favorite
+
+- GET
+
+- Output:
+
+  Success output:
+
+  ```javascript
+  {
+      "message": "Add tweet to favorite list successfully",
+      "favoriteList": [
+          1,
+          4,
+          2
+      ]
+  }
+  ```
+
+  Failure output:
+
+  ```javascript
+  {
+      "message": "TweetId not found. Can not add a non-existing tweet to the favorite list."
+  }
+  ```
+
+#### `/favorite/delete/:tweetId`
+
+- Usage: Delete favorite
+
+- GET
+
+- Output:
+
+  Success output:
+
+  ```javascript
+  {
+      "message": "Delete tweet from favorite list successfully",
+      "favoriteList": [
+          4,
+          2
+      ]
+  }
+  ```
+
+  Failure output: 
+
+  ```javascript
+  {
+      "message": "TweetId not found. Can not delete a non-existing tweet from the favorite list."
+  }
+  ```
+
+#### `/favorite/favoriteList`
+
+- Usage: Return all the tweets in user's favorite list
+
+- GET
+
+- Output:
+
+  Success output:
+
+  ```javascript
+  [{
+      _id: '642e248cb446c27b32a27d45',
+      tweet_id: 6,
+      content: 'I am a fish',
+      user: '8',
+      original: -1,
+      privacy_state: false,
+      image: [ [Object] ],
+      like: [],
+      dislike: [],
+      tag: '',
+      time: '2023-04-06T01:46:52.750Z',
+      __v: 0
+    },
+    {
+      tweet_id: 8,
+      content: 'Wow first tweet',
+      user: '8',
+      time: '2023-04-06T02:57:04.283Z',
+      privacy_state: false,
+      like: [],
+      dislike: [],
+      tag: undefined,
+      original: {
+        _id: '642e2294ea526c54c9831856',
+        tweet_id: 1,
+        content: 'This is the first tweet of ChatU',
+        user: '2',
+        original: -1,
+        privacy_state: false,
+        image: [Array],
+        like: [Array],
+        dislike: [],
+        tag: 'life',
+        time: '2023-04-06T01:38:28.052Z',
+        __v: 1
+      }
+    }
+  ]
+  ```
+
   
 
 

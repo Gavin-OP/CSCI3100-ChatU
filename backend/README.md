@@ -358,7 +358,7 @@ Backend is constructed by NodeJS and Express with MongoDB as the database.
             "dislike": [], //an array that contains user ids of all users who currently dislike this tweet
             "tag": "life", //the tag that creator of this tweet selects
             "time": "2023-04-05T15:24:32.000Z", //time that this tweet is posted
-            "__v": 14 
+            "__v": 14  // an attribute used by Mongodb only, so can ignore it
         }
     }
     ```

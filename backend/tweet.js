@@ -63,14 +63,14 @@ router.post("/create", upload.any('image'), (req, res) => {
                 .then((user) => {
                     res.json({
                         message: 'Create tweet successfully',
-                        action_status: true
+                        action_status: true 
                     });
                 });
         })
 
         .catch((err) => {
             console.error(err);
-            res.status(500).send("Server Error");
+            res.status(500).send("Fail to save the new tweet. Backend Error.");
         });
 });
 
@@ -176,6 +176,14 @@ router.get('/like/:tweetId', (req, res) => {
                 });
             }
 
+            // check if the user has disliked the tweet
+            if (tweet.dislike.includes(userId)) {
+                // remove the user from the dislike list if the user has disliked the tweet
+                tweet.dislike.pull(userId);
+                //And add the user to the like list
+                tweet.like.push(userId);
+            }
+
             // check if the user has liked the tweet
             if (tweet.like.includes(userId)) {
                 // doing nothing if the user has already liked the tweet
@@ -183,12 +191,7 @@ router.get('/like/:tweetId', (req, res) => {
                 // if the user has not liked the tweet, then like it
                 tweet.like.push(userId);
             }
-            // check if the user has disliked the tweet
-            if (tweet.dislike.includes(userId)) {
-                // remove the user from the dislike list if the user has disliked the tweet
-                tweet.dislike.pull(userId);
-            }
-
+            
             return tweet.save();
         })
         .then((tweet) => {
@@ -237,6 +240,7 @@ router.get('/unlike/:tweetId', (req, res) => {
                 // if the user has liked the tweet, then unlike it
                 tweet.like.pull(userId);
             }
+
 
             return tweet.save();
         })
@@ -294,6 +298,8 @@ router.get('/dislike/:tweetId', (req, res) => {
             if (tweet.like.includes(userId)) {
                 // remove the user from the like list if the user has liked the tweet
                 tweet.like.pull(userId);
+                //And add the user to the dislike list of this tweet
+                tweet.dislike.push(userId);
             }
 
             return tweet.save();

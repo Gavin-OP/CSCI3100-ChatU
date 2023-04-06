@@ -210,25 +210,33 @@ Backend is constructed by NodeJS and Express with MongoDB as the database.
 
 #### `/tweet/like/:tweetId`
 
-- Usage: When a user clicks the like button of a tweet, add the user's id to the like list of this tweet
+- Usage: When the like button of a tweet is grey and a user clicks it, add the user's id to the like list of this tweet
 
 - GET
+
+- Input: a int-type var named tweetId, which is the id of the tweet for which the user clicks the like button 
 
 - Output:
   
     Success output
     ```javascript
     {
-        "message": "like successful.",
-        "action_status": true
+        "message": 'like successful.',
+        "action_status": true // this boolean being true indicates that the user_id of this user has been added to the array
+                              // stored in the the 'like' attribute of this tweet
+                              // If you clicks the like button when the dislike button is light, the 'true' value here indicates
+                              //that this user is removed from the dislike list and then added to the like list of this tweet
+
     }
     ```
 
 #### `/tweet/unlike/:tweetId`
 
-- Usage: unlike a tweet
+- Usage: When the like button of a tweet is light and a user clicks it, remove the user's id from the like list of this tweet
 
 - GET
+
+- Input: a int-type var named tweetId, which is the id of the tweet for which the user clicks the dislike button
 
 - Output:
 
@@ -237,15 +245,19 @@ Backend is constructed by NodeJS and Express with MongoDB as the database.
     ```javascript
     {
         "message": "unlike successful.",
-        "action_status": true
+        "action_status": true //if the user clicks the like button again after s/he likes it, this 
+                              //boolean being true means that this user's id has now been removed from the like list of this tweet
+                              //(successful unlike the tweet)
     }
     ```
 
 #### `/tweet/dislike/:tweetId`
 
-- Usage: When a user clicks the dislike button of a tweet, add the user's id to the dislike list of this tweet
+- Usage: When the dislike button of a tweet is grey and a user clicks it, add the user's id to the dislike list of this tweet
 
 - GET
+
+- Input: a int-type var named tweetId, which is the id of the tweet for which the user clicks the dislike button
 
 - Output:
   
@@ -253,15 +265,20 @@ Backend is constructed by NodeJS and Express with MongoDB as the database.
     ```javascript
     {
         "message": "dislike successful.",
-        "action_status": true
+        "action_status": true // this boolean being true indicates that the user_id of this user has been added to the array
+                              // stored in the the 'dislike' attribute of this tweet
+                              // If you clicks the dislike button when the like button is light, the 'true' value here indicates
+                              //that this user is removed from the like list and then added to the dislike list of this tweet
     }
     ```
 
 #### `tweet/undislike/:tweetId`
 
-- Usage: Undislike a tweet.
+- Usage: When the dislike button of a tweet is light and a user clicks it, remove the user's id from the dislike list of this tweet
 
 - GET
+
+- Input: a int-type var named tweetId, which is the id of the tweet for which the user clicks the dislike button
 
 - Output:
 
@@ -270,15 +287,19 @@ Backend is constructed by NodeJS and Express with MongoDB as the database.
     ```javascript
     {
         "message": "undislike successful.",
-        "action_status": true
+        "action_status": true //if the user clicks the dislike button again after s/he dislikes it, this 
+                              //boolean being true means that this user's id has now been removed from the dislike list of this tweet
+                              //(successful undislike the tweet)
     }
     ```
 
 #### `/tweet/getTweet/:tweetId`
 
-- Usage: Get all info of a tweet/retweet by providing its id. The attribute original is not null only if this is a retweet
+- Usage: Get all info of a tweet/retweet by providing its id. The attribute 'original' is not null only if this is a retweet
 
 - GET
+
+- Input: a int-type var named tweetId, which is the id of the tweet that someone wants to get all info for
 
 - Output:
   
@@ -287,14 +308,16 @@ Backend is constructed by NodeJS and Express with MongoDB as the database.
     ```javascript
     {
         "message": "retrieve tweet information successful.",
-        "action_status": true,
+        "action_status": true, //indicate successfully find all info of the designated tweet
         "tweet": {
-            "_id": "642d92af9b16dba5a33c7109",
-            "tweet_id": 1,
-            "content": "This is the first tweet of ChatU",
-            "user": "5",
-            "original": -1,
-            "privacy_state": false,
+            "_id": "642d92af9b16dba5a33c7109", //objectId set by the system (will not be directly used by us)
+            "tweet_id": 1, //our id created for this tweet
+            "content": "This is the first tweet of ChatU", //a string storing all text content of this tweet
+            "user": "5", // user_id of the user who posted this tweet
+            "original": -1, //if this is a retweet, then 'original' is the id of its master tweet; if 'original' === -1, then 
+                            //this tweet is not a retweet
+            "privacy_state": false, // false: this tweet can be seen by everyone; true: this tweet can only be seen by the user 
+                                    // who posted this tweet
             "image": [
                 {
                     "data": {
@@ -308,20 +331,22 @@ Backend is constructed by NodeJS and Express with MongoDB as the database.
                     "_id": "642d92af9b16dba5a33c710b"
                 }
             ],
-            "like": [],
-            "dislike": [],
-            "tag": "life",
-            "time": "2023-04-05T15:24:32.000Z",
-            "__v": 14
+            "like": [], //an array that contains user ids of all users who currently like this tweet
+            "dislike": [], //an array that contains user ids of all users who currently dislike this tweet
+            "tag": "life", //the tag that creator of this tweet selects
+            "time": "2023-04-05T15:24:32.000Z", //time that this tweet is posted
+            "__v": 14 
         }
     }
     ```
 
 #### `/tweet/delete/:tweetId`
 
-- Usage: Delete a tweet record from db given the its tweet_id
+- Usage: given tweet_id, delete this tweet's record from db and from the list of tweets thay the tweet creator posted
 
 - GET
+
+- Input: the id of the tweet to delete
 
 - Output:
 
@@ -330,7 +355,8 @@ Backend is constructed by NodeJS and Express with MongoDB as the database.
     ```javascript
     {
         "message": "Tweet successfully deleted",
-        "action_status": true
+        "action_status": true // a boolean indicating whether the tweet record is removed from db and from
+                              // the list of tweets that the creator of this tweet posted 
     }
     ```
 
@@ -342,26 +368,30 @@ Backend is constructed by NodeJS and Express with MongoDB as the database.
   
     ```javascript
     {
-                    content: string,
-                    image: files,
+                    content: string, // a string object containing the whole text content of the new tweet
+                    image: image, //this means the 'name' attribute of the '<input type="file" name="image" >...</input >' should be 'image'. See https://expressjs.com/en/resources/middleware/multer.html for example
+                                 // if no image(s) uploaded, the 'image' file here should be of null type
                     privacy_state: boolean, // false if everyone can see the tweet; true if only self can see the tweet
-                    tag: string,
+                    tag: string, // the string storing the tag name that the user selects for the tweet 
     }
     ```
 - Output:
 
     Success output:
-    
+    ```javascript
         {
-            "message": "Create tweet successfully",
-            "action_status": true
+            message: 'Create tweet successfully',
+            action_status: true //this means the record of new tweet is now added to the db,
+                                //and the tweet_id of the new tweet is added to the array stored in the 'tweet' attribute of this user
+                                //(check out the 'tweet' attribute in userSchema.js)
         }
+    ```
     
     Failure output: 
     
     ```javascript
     {
-        "message": "Fail to save the new tweet."
+        "message": "Fail to save the new tweet. Backend Error."
     }
     ```
 
@@ -373,10 +403,11 @@ Backend is constructed by NodeJS and Express with MongoDB as the database.
   
     ```javascript
     {
-                    content: string,
+                    content: string, // a string containing the whole text content of this new retweet
+                    user: userId, // the id of the user who posts this retweet
                     privacy_state: boolean, // 0 if everyone can see the tweet; 1 if only self can see the tweet
-                    original: num, //(i.e., tweet_id)
-                    tag: string,
+                    original: num, //(i.e., the id of the master tweet of this retweet)
+                    tag: string, //the string containing the tag of this retweet
     }
     ```
 - Output:
@@ -386,15 +417,19 @@ Backend is constructed by NodeJS and Express with MongoDB as the database.
     ```javascript
     {
         "message": "Create retweet successfully",
-        "action_status": true
+        "action_status": true //this means the record of new retweet is now added to the db,
+                                //and the tweet_id of the new retweet is added to the array stored in the 'tweet' attribute of this user
+                                //(check out the 'tweet' attribute in userSchema.js)
     }
     ```
 
 #### `/tweet/tweetNum/:userId`
 
-- Usage: Return how many tweet a user has posted.
+- Usage: Return how many tweet or retweet a user has posted.
 
 - GET
+
+- Input: the id of the user whom you want to query about the num of tweets s/he posts
 
 - Output:
 
@@ -403,8 +438,8 @@ Backend is constructed by NodeJS and Express with MongoDB as the database.
   ```javascript
   {
       "message": "retrieve tweet number successful.",
-      "action_status": true,
-      "tweetNum": 3
+      "action_status": true, //indicate the retrieval of num of tweets sent by the given user is successful
+      "tweetNum": 3 //num of tweets or retweet that this user posts
   }
   ```
 

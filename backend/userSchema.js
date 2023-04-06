@@ -18,7 +18,7 @@ const userSchema = mongoose.Schema({
     },
     tweet: [{ type: Number }],
     favorite: [{ type: Number }],
-    comment: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Comment' }],
+    comment: [{ type: Number }],
     chat: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Chat' }]
 });
 

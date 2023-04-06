@@ -25,6 +25,7 @@ const tweetRoutes = require('./tweet')
 const fovoriteRoutes = require('./favorite')
 const personalRoutes = require('./personal')
 const homeRoutes = require('./home')
+const commentRoutes = require('./comment')
 
 
 
@@ -38,5 +39,6 @@ app.use('/tweet', tweetRoutes)
 app.use('/favorite', fovoriteRoutes)
 app.use('/personal', personalRoutes)
 app.use('/home', homeRoutes)
+app.use('/comment', commentRoutes)
 
 module.exports = app;

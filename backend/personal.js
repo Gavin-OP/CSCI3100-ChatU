@@ -20,44 +20,48 @@ router.get('/tweet/:userId', (req, res) => {
                 });
             }
 
-            const tweetId = user.tweet_id;
+            const tweetId = user.tweet;
             const promises = tweetId.map((tweetId) => {
                 return axios.get(`/tweet/getTweet/${tweetId}`, { headers: { 'Cookie': req.headers.cookie } })
                     .then(response => {
-                        if (response.data.original === -1) {
-                            originalTweet = response.data;
+                        if (response.data.tweet.original == -1) {
+                            return response.data.tweet;
                         }
                         else {
-                            return axios.get(`/tweet/getTweet/${response.data.original}`, { headers: { 'Cookie': req.headers.cookie } })
+                            return axios.get(`/tweet/getTweet/${response.data.tweet.original}`, { headers: { 'Cookie': req.headers.cookie } })
                                 .then(originalResponse => {
-                                    originalTweet = originalResponse.data;
-
+                                    const tweet_info = {
+                                        tweet_id: response.data.tweet.tweet_id,
+                                        content: response.data.tweet.content,
+                                        user: response.data.tweet.user,
+                                        time: response.data.tweet.time,
+                                        privacy_state: response.data.tweet.privacy_state,
+                                        like: response.data.tweet.like,
+                                        dislike: response.data.tweet.dislike,
+                                        tag: response.data.tweet.tag,
+                                        original: originalResponse.data.tweet,
+                                    }
+                                    return tweet_info;
                                 })
                         }
-                        const tweet_info = {
-                            tweet_id: response.data.tweet_id,
-                            content: response.data.content,
-                            user: response.data.user,
-                            time: response.data.time,
-                            original: originalTweet,
-                            privacy_state: response.data.privacy_state,
-                            image: response.data.Image,
-                            like: response.data.like,
-                            dislike: response.data.dislike,
-                            tag: response.data.tag,
-                        };
-                        return tweet_info;
                     })
             });
-            return Promise.all(promises);
+
+            Promise.all(promises)
+                .then((tweets) => {
+                    tweet_list = tweets.filter(tweet => tweet != null)
+                    console.log(tweet_list)
+
+                    if (tweet_list.length == 0) {
+                        return res.status(404).json({
+                            message: 'No tweet found.'
+                        });
+                    }
+
+                    res.json({ tweets });
+                })
         })
-        .then((tweets) => {
-            res.json({
-                message: 'Tweets fetched successfully.',
-                tweets: tweets,
-                action_status: true,
-            });
-        })
+
         .catch((err) => {
             console.error(err);
             res.status(500).json({

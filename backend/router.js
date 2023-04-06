@@ -23,6 +23,7 @@ const blacklistRoutes = require('./blacklist')
 const adminRoutes = require('./admin')
 const tweetRoutes = require('./tweet')
 const fovoriteRoutes = require('./favorite')
+const personalRoutes = require('./personal')
 
 
 
@@ -34,5 +35,6 @@ app.use('/blacklist', blacklistRoutes)
 app.use('/admin', adminRoutes)
 app.use('/tweet', tweetRoutes)
 app.use('/favorite', fovoriteRoutes)
+app.use('/personal', personalRoutes)
 
 module.exports = app;

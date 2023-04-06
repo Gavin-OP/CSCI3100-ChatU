@@ -5,34 +5,54 @@ import { AdminTable } from './AdminTable';
 import { createRoot } from 'react-dom/client';
 
 export function SearchBar({ page }) {
+
     let Bar;
     // Search bar for tweet
     // !!! need a search button
-    if (page === 'tweet') {
+    if (page === 'tweet') {    
 
-        // Fake data!!!!!!!!!!!!!!!!!!!!!
-        let data =
+
+         // Fake data!!!!!!!!!!!!!!!!!!!!!
+         let data1 =
         [
-            { tweetID: "#000001", content: "This is a tweet", userName: "@user1", date: "2021.1.1" },
-            { tweetID: "#114514", content: "AAAAAAAAAAAAAAAAAAA,senpai-sukisi!,AAAAAAAAAAAAAAAAAAAAAAAAAAAA", userName: "@user2", date: "2021.11.4" },
-            { tweetID: "#191981", content: "@*&!@(*$&@!$^*&", userName: "@user3", date: "2021.5.14" },
-            { tweetID: "#233333", content: "This is a long tweet! askdjqwfjqok q oqkdpqs os qj q0i pqoiqwqokdpqow niqfqwofjqpowjfwfqkwfnpqwfw qiwfqwokfpoqwkfpqwf qpwfqpokfpqwkfpqwkfpoqw qwpfjqpowkfqwokfpqowkfpoqwkfpq qwokdpqowkdpqwpqwokdq oqkwdpoqwkdpqokwdpok!!!!!!!!!!!!!!!", userName: "Long tweet", date: "2021.6.6" },
-            { tweetID: "#233334", content: "This is a short tweet! ", userName: "short tweet", date: "2021.6.7" },
+            { tweet_id: "#000001", content: "This is a tweet", user: "@user1", time: "2021.1.1" },
+            { tweet_id: "#114514", content: "AAAAAAAAAAAAAAAAAAA,senpai-sukisi!,AAAAAAAAAAAAAAAAAAAAAAAAAAAA", user: "@user2", time: "2021.11.4" },
+            { tweet_id: "#191981", content: "@*&!@(*$&@!$^*&", user: "@user3", time: "2021.5.14" },
+            { tweet_id: "#233333", content: "This is a long tweet! askdjqwfjqok q oqkdpqs os qj q0i pqoiqwqokdpqow niqfqwofjqpowjfwfqkwfnpqwfw qiwfqwokfpoqwkfpqwf qpwfqpokfpqwkfpqwkfpoqw qwpfjqpowkfqwokfpqowkfpoqwkfpq qwokdpqowkdpqwpqwokdq oqkwdpoqwkdpqokwdpok!!!!!!!!!!!!!!!", user: "Long tweet", time: "2021.6.6" },
+            { tweet_id: "#233334", content: "This is a short tweet! ", user: "short tweet", time: "2021.6.7" },
         ];
+
+        //this is the initial table
+        fetch('/home/tweet')
+        .then(response => response.json())
+        //initail the admin table
+        .then(data => {
+            FrontendFcn(data.tweets)
+        })
+        .catch(error => console.log(error));
 
         const handleSearch = (query) => {
             // send the search query to the backend
-            // fetch('/admin/tweet/search/'+query)
-            // .then(response => response.json())
-            // .then(data => {
-            //     FrontendFcn(data)
-            // })
-            // .catch(error => console.log(error));
+            let url = '';
+            if (query[0]==='#'){
+                url='/admin/tweet/search/'+query.substring(1);
+            }
+            else{
+                url='/admin/tweet/search/'+query;
+            }
+            fetch(url)
+            .then(response => response.json())
+            .then(data => {
+                FrontendFcn(data)
+            })
+            .catch(error => console.log(error));
             
 
             //test function
-            FrontendFcn(data);
-            console.log('search query:', '/admin/tweet/search/'+query);
+            FrontendFcn(data1);
+            console.log(url);
+
+
         };
         
 
@@ -60,6 +80,7 @@ export function SearchBar({ page }) {
                 handleSearch(query);
             }
         };
+       
         Bar = (
             <div className='bar-and-result'>
                 <div class="search-container">
@@ -99,13 +120,22 @@ export function SearchBar({ page }) {
 
 
         // Fake data!!!!!!!!!!!!!!!!!!!!!
-        let data =
+        let data1 =
         [
             { user_id: "000001", email: "1314520@love.com", username: "@user1" , ban:false},
             { user_id: "191981", email: "3100course@sb.com", username: "@user2", ban:true },
             { user_id: "233333", email: "emmmmmm@qq.com", username: "@user3", ban:false},
         ];
-    
+        
+
+        //this is the initial table
+        // fetch('/home/tweet')
+        // .then(response => response.json())
+        // //initail the admin table
+        // .then(data => {
+        //     FrontendFcn(data.tweets)
+        // })
+        // .catch(error => console.log(error));
 
         const handleSearch = (query) => {
             // send the search query to the backend
@@ -120,7 +150,7 @@ export function SearchBar({ page }) {
             
 
             //test function
-            FrontendFcn(data);
+            FrontendFcn(data1);
             console.log('search query:', '/admin/user/search/'+query);
         };
         

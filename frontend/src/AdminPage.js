@@ -1,6 +1,9 @@
 import { NavigationBar } from './NavBar';
 import { SearchBar } from './SearchBar';
 export function AdminPage({ page }) {
+// Using cookie to identify if the user is an admin
+let is_admin=getCookieValue("isAdmin");
+if(is_admin==='true'){
     if (page === 'tweet') {
 
         return (
@@ -33,4 +36,13 @@ export function AdminPage({ page }) {
             </div>
         )
     }
+}
+else{
+    window.location.href = '/login';
+}
+}
+
+function getCookieValue(name) {
+    let result = document.cookie.match("(^|[^;]+)\\s*" + name + "\\s*=\\s*([^;]+)")
+    return result ? result.pop() : ""
 }

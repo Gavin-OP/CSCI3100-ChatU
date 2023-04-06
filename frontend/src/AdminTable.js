@@ -1,17 +1,21 @@
+import { faHouseMedicalCircleExclamation } from '@fortawesome/free-solid-svg-icons';
 import './AdminTable.css';
 import React from 'react';
+import { useState,useEffect } from 'react';
+
+
+
 
 //Delete a tweet
 
-export function DeleteTweet(tweetID){
-    console.log('/tweet/delete/'+ String(tweetID))
-    fetch('/tweet/delete/'+ String(tweetID),{
-        method:'DELETE'
+export function DeleteTweet(tweetID,userID){
+    console.log('/admin/deleteTweet/'+ String(tweetID)+'/'+String(userID))
+    fetch('/tweet/delete/'+ String(tweetID)+'/'+String(userID),{
+        method:'GET'
     })
-    .then(response => {
-        if(!response.ok){
-            throw new Error('Failed to delete tweet');
-        }
+    .then(response => response.json())
+    .then(data => {
+        console.log(data);
         // update the search result
         alert('Delete successfully!')
     })
@@ -59,14 +63,12 @@ export function DeleteUser(userID){
 }
 //Ban a user
 function BanUser(userID){
-    console.log('/user/ban/'+ String(userID))
-    fetch('/user/ban/'+ String(userID))
-    .then(response => {
-        if(!response.ok){
-            throw new Error('Failed to ban user');
-        }
+    console.log('/admin/ban/'+ String(userID))
+    fetch('/admin/ban/'+ String(userID))
+    .then(response => response.json())
+    .then(data => {
+        console.log(data);
         // update the result
-        alert('Ban successfully!')
     })
     .catch(error => {
         console.error(error);
@@ -74,14 +76,12 @@ function BanUser(userID){
 }
 //Unban a user
 function UnbanUser(userID){
-    console.log('/user/unban/'+ String(userID))
-    fetch('/user/unban/'+ String(userID))
-    .then(response => {
-        if(!response.ok){
-            throw new Error('Failed to unban user');
-        }
+    console.log('/admin/unban/'+ String(userID))
+    fetch('/admin/unban/'+ String(userID))
+    .then(response => response.json())
+    .then(data => {
         // update the result
-        alert('Unban successfully!')
+        console.log(data);
     })
     .catch(error => {
         console.error(error);
@@ -89,8 +89,30 @@ function UnbanUser(userID){
 }
 
 
-
 export function AdminTable({page,items}) {
+    const [items1, setItems] = useState([]);
+    const handleBanClick = (item) => {
+    const updatedItems = items1.map((i) => {
+        if (i.user_id === item.user_id) {
+        return { ...i, ban: true };
+        }
+        return i;
+    });
+    setItems(updatedItems);
+    BanUser(item.user_id);
+    };
+    const handleUnbanClick = (item) => {
+    const updatedItems = items1.map((i) => {
+        if (i.user_id === item.user_id) {
+        return { ...i, ban: false };
+        }
+        return i;
+    });
+    setItems(updatedItems);
+    UnbanUser(item.user_id);
+    };
+
+
     // Table for tweet
     let table;
     if (page === 'tweet') {
@@ -101,11 +123,11 @@ export function AdminTable({page,items}) {
                     <table className="tweet-table" id="admin-tweet-table">
                         {items.map((item) => (
                             <tr className='admin-table-column'>
-                                <td className='table-tweetid'>{item.tweetID}</td>
+                                <td className='table-tweetid'>#{item.tweet_id}</td>
                                 <div className='table-tweet-content'><td className='table-tweetcontent'>{item.content}</td></div>
-                                <td className='table-tweet-username'>{item.userName}</td>
-                                <td className='table-date'>{item.date}</td>
-                                <button className="admin-tweet-delele-button" id="delete-button" onClick={()=>DeleteTweet(item.tweetID)}>Delete</button>
+                                <td className='table-tweet-username'>UserID:{item.user}</td>
+                                <td className='table-date'>{item.time.substring(0,10)+'  '+item.time.substring(11,19)}</td>
+                                <button className="admin-tweet-delele-button" id="delete-button" onClick={()=>DeleteTweet(item.tweet_id)}>Delete</button>
                             </tr>
                         ))}
                     </table>
@@ -144,8 +166,8 @@ export function AdminTable({page,items}) {
                             <td className='table-user-email'>{item.email}</td>
                             <td className='table-username'>{item.username}</td>
                             <td className='table-ban-status'>{item.ban ? 'Banned' : 'Normal'}</td>
-                            <button className="ban-button" onClick={()=>BanUser(item.user_id)}>Ban this user</button>
-                            <button className='unban-btn' onClick={()=>UnbanUser(item.user_id)}>Unban</button>
+                            <button className="ban-button" onClick={()=>{handleBanClick(item)}}>ban</button>
+                            <button className='unban-btn' onClick={()=>{handleUnbanClick(item)}}>Unban</button>
                             <button className="admin-user-delele-button" id="delete-button" onClick={()=>DeleteUser(item.user_id)}>Delete</button>
                         </tr>
                     ))}

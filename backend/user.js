@@ -97,25 +97,37 @@ router.post('/logout', (req, res) => {
 });
 
 
-// Example protected route that requires authentication
-router.get('/profile', (req, res) => {
+// protected route that requires authentication
+router.get('/authorizationCheck', (req, res) => {
     const userId = req.cookies.userId;
 
     if (!userId) {
-        return res.status(401).json({ message: 'Unauthorized' });
+        return res.status(401).json({
+            message: 'Unauthorized',
+            authorized: false
+        });
     }
 
-    User.findById(userId)
+    User.findOne({ user_id: userId })
         .then(user => {
             if (!user) {
-                return res.status(401).json({ message: 'Unauthorized' });
+                return res.status(401).json({
+                    message: 'Unauthorized',
+                    authorized: false
+                });
             }
 
-            res.json({ user });
+            res.json({
+                message: 'Authorized',
+                authorized: true
+            });
         })
         .catch(err => {
             console.error(err);
-            res.status(500).json({ message: 'Server error' });
+            res.status(500).json({
+                message: 'Server error',
+                authorized: false
+            });
         });
 });
 

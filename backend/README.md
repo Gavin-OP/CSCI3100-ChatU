@@ -208,6 +208,39 @@ Backend is constructed by NodeJS and Express with MongoDB as the database.
     }
     ```
 
+#### `/user/authorizationCheck`
+
+- Usage: Check whether user is authorized to visit pages other than `/home` and `login`
+
+- GET
+
+- Output:
+
+  Success output:
+
+  ```javascript
+  {
+      "message": "Authorized",
+      "authorized": true
+  }
+  ```
+
+  Failure output:
+
+  ``` javascript
+  {
+      "message": "Unauthorized",
+      "authorized": false
+  }
+  ```
+
+  ```javascript
+  {
+      "message": "Server error",
+      "authorized": false
+  }
+  ```
+
 #### `/tweet/like/:tweetId`
 
 - Usage: When the like button of a tweet is grey and a user clicks it, add the user's id to the like list of this tweet

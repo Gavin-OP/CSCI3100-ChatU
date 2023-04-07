@@ -1249,10 +1249,70 @@ Backend is constructed by NodeJS and Express with MongoDB as the database.
   }
   ```
 
-  
+
+#### `/comment/delete/:commentId`
+
+- Usage: Delete comment
+
+- GET
+
+- Output:
+
+  Success output:
+
+  ```javascript
+  {
+      "message": "Comment removed successfully.",
+      "action_status": true
+  }
+  ```
+
+#### `/comment/commentList/:tweetId`
+
+- Usage: Retrieve all comments in one tweet
+
+- GET
+
+- Output:
+
+  Success output:
+
+  ```javascript
+  [
+      {
+          "_id": "642f7b366f150ab76c069670",
+          "comment_id": 3,
+          "tweet_id": 1,
+          "user_id": 3,
+          "content": "comgrats",
+          "time": "2023-04-07T02:08:54.610Z",
+          "__v": 0
+      },
+      {
+          "_id": "642f7ae76f150ab76c069663",
+          "comment_id": 2,
+          "tweet_id": 1,
+          "user_id": 2,
+          "content": "Congrats",
+          "time": "2023-04-07T02:07:35.315Z",
+          "__v": 0
+      },
+      {
+          "_id": "642f7ad56f150ab76c06965e",
+          "comment_id": 1,
+          "tweet_id": 1,
+          "user_id": 1,
+          "content": "Congrats",
+          "time": "2023-04-07T02:07:17.419Z",
+          "__v": 0
+      }
+  ]
+  ```
+
 
 
 ## To Do
+
 1. 用keyword搜索user/tweet/comment，可以分进search
 2. recommend user to follow on homepage，可以分进reccomendation
 3. 一个精简版的getUser, 用user id 去get user name和avatar（这样tweet card, view tweet, comment, following/fan/ban list等等都可以用这个精简版getUser

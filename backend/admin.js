@@ -89,6 +89,31 @@ router.get('/unban/:userId', (req, res) => {
 });
 
 
+// get all users
+router.get('/userList', (req, res) => {
+    User.find()
+        .exec()
+        .then((users) => {
+            user_info_list = users.map((user) => {
+                return {
+                    user_id: user.user_id,
+                    username: user.username,
+                    email: user.email,
+                    ban: user.ban,
+                }
+            })
+            console.log(user_info_list)
+            res.json(user_info_list);
+        })
+        .catch((err) => {
+            console.error(err);
+            res.status(500).json({
+                message: 'Fail to retrieve users.',
+            });
+        });
+});
+
+
 // delete a tweet
 router.get('/deleteTweet/:tweetId/:userId', (req, res) => {
     const tweetId = req.params['tweetId'];

@@ -230,7 +230,7 @@ Backend is constructed by NodeJS and Express with MongoDB as the database.
                               // stored in the the 'like' attribute of this tweet
                               // If you clicks the like button when the dislike button is light, the 'true' value here indicates
                               //that this user is removed from the dislike list and then added to the like list of this tweet
-
+    
     }
     ```
 
@@ -1002,6 +1002,33 @@ Backend is constructed by NodeJS and Express with MongoDB as the database.
   {
       "message": "TweetId not found. Can not add a non-existing tweet to the favorite list."
   }
+  ```
+
+#### `/admin/userList`
+
+- Usage: Return all user
+
+- GET
+
+- Output:
+
+  Success output:
+
+  ```javascript
+  [
+      {
+          "user_id": 1,
+          "username": "admin",
+          "email": "admin",
+          "ban": true
+      },
+      {
+          "user_id": 2,
+          "username": "Gavin",
+          "email": "Gavin",
+          "ban": false
+      }
+  ]
   ```
 
 #### `/favorite/delete/:tweetId`

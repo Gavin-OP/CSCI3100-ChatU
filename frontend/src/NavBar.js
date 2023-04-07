@@ -7,6 +7,20 @@ export function NavigationBar({ page }) {
         settingDisplay: ''
     });
 
+    function handleLogout(){
+        fetch('/user/logout',{
+            method: 'POST'
+        })
+        .then(response => response.json())
+        .then(data => {
+            alert(data.message);
+            window.location.href = "/login";
+        })
+        .catch(error => {
+            console.error(error);
+        });
+    }       
+
     let navContent;
 
     // Navigation bar for user
@@ -48,7 +62,7 @@ export function NavigationBar({ page }) {
                         <ul>
                             {/* <li><a href="/personal/tweet">Personal Page</a></li> */}
                             {/* <li><a href="#">Settings</a></li> */}
-                            <li><a id='logout' href="#">Log out</a></li>
+                            <li><a id='logout' href='#' onClick={handleLogout}>Log out</a></li>
                         </ul>
                     </div>
                 </div>

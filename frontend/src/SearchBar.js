@@ -129,13 +129,14 @@ export function SearchBar({ page }) {
         
 
         //this is the initial table
-        // fetch('/home/tweet')
-        // .then(response => response.json())
-        // //initail the admin table
-        // .then(data => {
-        //     FrontendFcn(data.tweets)
-        // })
-        // .catch(error => console.log(error));
+        fetch('/admin/userList')
+        .then(response => response.json())
+        //initail the admin table
+        .then(data => {
+            FrontendFcn(data);
+        })
+        .catch(error => console.log(error));
+
 
         const handleSearch = (query) => {
             // send the search query to the backend
@@ -145,9 +146,6 @@ export function SearchBar({ page }) {
             //     FrontendFcn(data)
             // })
             // .catch(error => console.log(error));
-
-            
-            
 
             //test function
             FrontendFcn(data1);
@@ -195,15 +193,24 @@ export function SearchBar({ page }) {
     // Search bar for comment
     // !!! need a search button
     else if (page === 'comment') {
+        //Initial the table
+        fetch('/admin/commentList')
+        .then(response => response.json())
+        //initail the admin table
+        .then(data => {
+            FrontendFcn(data);
+        })
+        .catch(error => console.log(error));
+
 
 
         // Fake data!!!!!!!!!!!!!!!!!!!!!
-        let data =
+        let data1 =
         [
-            { commentID: "#012391", content: "This is a comment", userName: "@user1", date: "2021.1.1" },
-            { commentID: "#111114", content: "oh hohohohohohohohohohohohohohfuck this program!", userName: "@user2", date: "2021.11.4" },
-            { commentID: "#100001", content: "@*&!@(*$&@!$^*&", userName: "@user3", date: "2021.5.14" },
-            { commentID: "#123333", content: "This is a long comment! askdjqwfjqok q oqkdpqs os qj q0i pqoiqwqokdpqow niqfqwofjqpowjfwfqkwfnpqwfw qiwfqwokfpoqwkfpqwf qpwfqpokfpqwkfpqwkfpoqw qwpfjqpowkfqwokfpqowkfpoqwkfpq qwokdpqowkdpqwpqwokdq oqkwdpoqwkdpqokwdpok!!!!!!!!!!!!!!!", userName: "Long comment", date: "2021.6.6" },
+            { comment_id: "#012391", content: "This is a comment", user_id: "@user1",  time: "2021.1.1" },
+            { comment_id: "#111114", content: "oh hohohohohohohohohohohohohohfuck this program!", user_id: "@user2",  time: "2021.11.4" },
+            { comment_id: "#100001", content: "@*&!@(*$&@!$^*&", user_id: "@user3",  time: "2021.5.14" },
+            { comment_id: "#123333", content: "This is a long comment! askdjqwfjqok q oqkdpqs os qj q0i pqoiqwqokdpqow niqfqwofjqpowjfwfqkwfnpqwfw qiwfqwokfpoqwkfpqwf qpwfqpokfpqwkfpqwkfpoqw qwpfjqpowkfqwokfpqowkfpoqwkfpq qwokdpqowkdpqwpqwokdq oqkwdpoqwkdpqokwdpok!!!!!!!!!!!!!!!", user_id: "Long comment",  time: "2021.6.6" },
         ];
 
 
@@ -218,7 +225,7 @@ export function SearchBar({ page }) {
             
 
             //test function
-            FrontendFcn(data);
+            FrontendFcn(data1);
             console.log('search query:', '/admin/comment/search/'+query);
         };
         

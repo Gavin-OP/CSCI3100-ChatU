@@ -38,6 +38,7 @@ if(is_admin==='true'){
     }
 }
 else{
+    alert("You are not an admin!");
     window.location.href = '/login';
 }
 }

@@ -13,9 +13,10 @@ router.post('/create', (req, res) => {
     const user_id = req.cookies.userId;
     const content = req.body.content;
 
-    Comment.findOne({ tweet_id: tweet_id })
+    Comment.findOne({})
         .sort({ comment_id: -1 })
         .then((comment) => {
+            console.log(comment.comment_id)
             const newComment = new Comment({
                 comment_id: comment ? comment.comment_id + 1 : 1,
                 user_id: user_id,

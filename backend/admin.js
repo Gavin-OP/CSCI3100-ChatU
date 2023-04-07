@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const User = require('./userSchema');
 const Tweet = require('./tweetSchema');
+const Comment = require('./commentSchema');
 
 
 // remove a user
@@ -162,6 +163,31 @@ router.get('/deleteTweet/:tweetId/:userId', (req, res) => {
             console.error(err);
             res.status(500).json({
                 message: 'Fail to remove tweet.',
+            });
+        });
+});
+
+
+// get all comments
+router.get('/commentList', (req, res) => {
+    Comment.find()
+        .sort({ comment_id: -1 })
+        .exec()
+        .then((comment) => {
+            if (comment) {
+                console.log('comment found:', comment);
+                res.json(comment);
+            } else {
+                console.log('comment not found');
+                res.status(404).json({
+                    message: 'Comment not found.',
+                });
+            }
+        })
+        .catch((err) => {
+            console.error(err);
+            res.status(500).json({
+                message: 'Fail to retrieve comments.',
             });
         });
 });

@@ -975,6 +975,48 @@ Backend is constructed by NodeJS and Express with MongoDB as the database.
   }
   ```
 
+#### `/admin/commentList`
+
+- Usage: Retrieve all comment
+
+- GET
+
+- Output: 
+
+  Success output:
+
+  ```javascript
+  [
+      {
+          "_id": "642ff774599d0466ffa03596",
+          "comment_id": 3,
+          "tweet_id": 10,
+          "user_id": 4,
+          "content": "Me too",
+          "time": "2023-04-07T10:59:00.306Z",
+          "__v": 0
+      },
+      {
+          "_id": "642ff753eeab3c781648aec8",
+          "comment_id": 2,
+          "tweet_id": 2,
+          "user_id": 4,
+          "content": "Thanks",
+          "time": "2023-04-07T10:58:27.374Z",
+          "__v": 0
+      },
+      {
+          "_id": "642ff6b324232c87aac43395",
+          "comment_id": 1,
+          "tweet_id": 1,
+          "user_id": 4,
+          "content": "Congrats",
+          "time": "2023-04-07T10:55:47.276Z",
+          "__v": 0
+      }
+  ]
+  ```
+
 #### `/favorite/add/:tweetId`
 
 - Usage: Add favorite

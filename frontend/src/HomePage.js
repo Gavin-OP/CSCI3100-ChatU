@@ -10,6 +10,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faPlus, faRotateRight } from '@fortawesome/free-solid-svg-icons'
 import ReactDOM from 'react-dom';
 import { UserRecomBox } from './UserRecommendBox';
+import { useState, useEffect } from "react";
 
 
 
@@ -54,9 +55,20 @@ import { UserRecomBox } from './UserRecommendBox';
 
 export function HomePage() {
     //fetch data from '/home/tweet'
-    function HandleTweet(){
-        fetch ('/home/tweet')
-    }
+    const [tweets, setTweets] = useState([]);
+
+    // Fetch the data from the API and update the state
+    useEffect(() => {
+    fetch('/home/tweet')
+        .then(response => response.json())
+        .then(data => {
+            setTweets(data);
+            console.log(tweets);
+        })
+        .catch(error => console.error(error));
+    }, [tweets]);
+
+
     return (
         <div>
             <ScrollToTop />
@@ -73,8 +85,16 @@ export function HomePage() {
                 <div class="col col2">
                     <SearchBar page={'homepage'} />
                     <div class="col-content">
-                        
-                        <TweetCard {...tweet_data} />
+                        {/* map tweets with May function */}
+                        {tweets.map((tweet) => {
+                            if(tweet.original === -1) {
+                                return <TweetCard {...tweet} />
+                            }
+                            else {
+                                return <RetweetCard {...tweet} />;
+                            }
+                        })}
+                        {/* <TweetCard {...tweet_data} />
                         <RetweetCard {...retweet_data} />
                         <TweetCard {...tweet_data} />
                         <TweetCard {...tweet_data} />
@@ -85,7 +105,7 @@ export function HomePage() {
                         <TweetCard {...tweet_data} />
                         <TweetCard {...tweet_data} />
                         <TweetCard {...tweet_data} />
-                        <TweetCard {...tweet_data} />
+                        <TweetCard {...tweet_data} /> */}
                     </div>
                 </div>
                 <div class="col col3">

@@ -19,7 +19,6 @@ export function Post() {
         let tag = document.getElementById('formTag').value;
         let picture = document.getElementById('formPictures').files[0];
         let privacy = document.getElementById('formPrivacy').value;
-        
         const time = new Date();
         var yr = time.getFullYear();
         var mon = time.getMonth() + 1;
@@ -27,11 +26,19 @@ export function Post() {
         var hr = time.getHours();
         var min = time.getMinutes();
         var t = yr + '-' + mon + '-' + day + ' ' + hr + ':' + min;
-        console.log(picture, t)
-        fetch('/tweet/post',
-        {method:'POST', body: JSON.stringify({content: content, tag: tag, picture: picture, privacy: privacy, time: t}),
-        headers: { 'Content-Type': 'application/json' }})
-        .then(res=>console.log(res))
+        let formdata = new FormData();
+        formdata.append("content", content);
+        formdata.append("tag", tag);
+        formdata.append("image", picture);
+        formdata.append("privacy", privacy);
+        formdata.append("time", t);
+        console.log(formdata.time)
+        fetch('/tweet/create',
+        {method:'POST', body: formdata})
+        .then(res=>{
+            console.log(res);
+            window.history.back();
+        })
         .catch(error=>console.log(error))
     }
     return (
@@ -41,7 +48,7 @@ export function Post() {
             <Row >
                 <Col md={{ span: 8, offset: 2 }} style={{backgroundColor:'#F7F7F7'}}>
                     <Container fluid >
-                    <Form>
+                    <Form id="postform">
                         <Form.Group className="m-3" controlId="formContent" size='lg'>
                             <Form.Label>Content</Form.Label>
                             <Form.Control as="textarea" rows={4} placeholder="Input your tweet content" required/>

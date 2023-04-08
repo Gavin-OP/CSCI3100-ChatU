@@ -105,7 +105,7 @@ export function PersonalPage({page, userid}){
          </>
         )
     }
-    else if (page === 'following' || page === 'fans') {
+    else if (page === 'following') {
         return (
             <>
                 <ScrollToTop />
@@ -142,6 +142,43 @@ export function PersonalPage({page, userid}){
            </>
           )
     }
+    else if (page === 'fans') {
+     return (
+         <>
+             <ScrollToTop />
+             <div>
+             {/* NavigationBar */}
+             <NavigationBar page={'user'} />
+             </div> 
+   
+             <div className="container col-8 offset-2">
+                  <button class="return-button"> <i class="fa fa-arrow-left"></i></button>
+   
+                  <div className="container-fluid text-center">
+                      <h2>Fans List</h2>
+                  </div>
+                 <div className="container-fluid p-2">
+                      {users.map((user,index)=><UserCard user={user}/>)}
+                 </div>
+                  {/* <div class="user-list-bar">
+                       <div className="pg-avatar2">
+                           <img src='../avatar2.png' alt="1" /> 
+                           
+                           <div class="pg-username2">&nbsp; User7 
+                                <button class="message-button"> Chat </button> &nbsp; &nbsp;
+                                <button class="blacklist-button"> Unfollow</button>  
+                           </div> 
+                       
+            
+                       </div>
+                  </div> */}
+                  
+    
+   
+             </div>
+        </>
+       )
+     }
     
     else if (page === 'blacklist') {
         return (

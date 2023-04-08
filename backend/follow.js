@@ -79,7 +79,29 @@ router.get('/add/:followId', (req, res) => {
         })
 });
 
+router.get('/get/:foollowId', (req, res) => {
+    const loggedInUserId = req.cookies.userId;
+    const followId = req.params['followId'];
 
+    // Check if the followId is the same as the loggedInUserId
+    if (loggedInUserId == followId) {
+        return res.json({
+            status: "following"
+        });
+    }
+
+    // check whether followId is an existing user
+    Follow.findOne({ user_id: loggedInUserId, follow_id: followId})
+        .then(follow => {
+            console.log(follow)
+            if (!follow) {
+                return res.json({
+                    status: 'Follow'
+                });
+            }
+            else return res.json({status:'Following'})
+        })
+})
 // unfollow a user for the currently logged-in user
 router.get('/delete/:followId', (req, res) => {
     const loggedInUserId = req.cookies.userId;

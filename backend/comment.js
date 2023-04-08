@@ -12,6 +12,7 @@ router.post('/create', (req, res) => {
     const tweet_id = req.body.tweet_id;
     const user_id = req.cookies.userId;
     const content = req.body.content;
+    const time = req.body.time;
 
     Comment.findOne({})
         .sort({ comment_id: -1 })
@@ -22,6 +23,7 @@ router.post('/create', (req, res) => {
                 user_id: user_id,
                 tweet_id: tweet_id,
                 content: content,
+                time: time
             });
 
             return newComment.save();

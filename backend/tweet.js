@@ -44,6 +44,7 @@ router.post("/create", upload.any('image'), (req, res) => {
                 content: req.body['content'],
                 image: images,
                 user: userId,
+                time: req.body['time'],
                 privacy_state: req.body['privacy_state'], // 0 if everyone can see the tweet; 1 if only self can see the tweet
                 tag: req.body['tag'],
             });
@@ -400,11 +401,34 @@ router.get('/getTweet/:tweetId', (req, res) => {
                 });
             }
 
-            res.json({
-                message: 'retrieve tweet information successful.',
-                action_status: true,
-                tweet: tweet
-            });
+            User.findOne({ user_id: tweet.user })
+            .exec()
+            .then((user) => {
+                if (!user) {
+                    return res.status(404).json({
+                        message: 'Failed to retrieve user number. The user does not exist.'
+                    });
+                }
+                if (tweet.image!==undefined && tweet.image.length>0){
+                    let image_data = tweet.image[0].data.toString('base64');
+                    res.json({
+                        message: 'retrieve tweet information successful.',
+                        action_status: true,
+                        tweet: tweet,
+                        user: user,
+                        image: {contentType: tweet.image[0].contentType, data: image_data}
+                    });
+                }
+                else {
+                    res.json({
+                        message: 'retrieve tweet information successful.',
+                        action_status: true,
+                        tweet: tweet,
+                        user: user
+                    });
+                }
+            })
+            
         })
         .catch((err) => {
             console.error(err);

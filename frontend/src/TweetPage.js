@@ -28,7 +28,7 @@ let test_file = {
         dislikeStatus: 0,
         starStatus: 1,
         likeCount: 49,
-        starCount: 32,
+        //starCount: 32,
         commentCount: 4,
         followStatus: 'Following',
         // imageSrc: '/tweet_card_pic_1.jpg',
@@ -36,14 +36,93 @@ let test_file = {
     }
 }
 
-export class TweetPage extends React.Component {
+export class TweetPage extends React.Component{
+    constructor(props){
+        super(props);
+        this.state={loaded:0, file:{}};
+    }
+    componentDidMount(){
+        let params = (new URL(document.location)).searchParams;
+        let tid = params.get("tweetId");
+        let uid = getCookieValue("userId");
+        fetch('/tweet/getTweet/'+tid)
+        .then(res=>res.json())
+        .then(data=>{
+            console.log(data);
+            
+            let new_file={
+                username: data.user.username,
+                avatar: "./avatar.png",
+                time: data.tweet.time,
+                tweetId: data.tweet.tweet_id,
+                content: data.tweet.content,
+                likes: data.tweet.like.length-data.tweet.dislike.length,
+                comments: [],
+                likeStatus: 0,
+                favorStatus: 0,
+                followStatus: 'Follow', 
+                image: data.image,
+                original: data.tweet.original
+            }
+            console.log(data.tweet.like)
+            if (data.tweet.like.includes(Number(uid))){
+                new_file.likeStatus = 1;
+            }
+            if (data.tweet.dislike.includes(Number(uid))){
+                new_file.likeStatus = -1;
+            }
+            if (data.user.favorite.includes(Number(uid))){
+                new_file.favorStatus = 1;
+            }
+            fetch('/follow/get/'+uid)
+            .then(res=>res.json())
+            .then(follow=>{
+                new_file.followStatus = follow.status;
+            })
+            .then(fetch('/comment/commentList/'+tid)
+                .then(res=>res.json())
+                .then(res=>{
+                    console.log(res);
+                    new_file.comments = res;
+                })
+                .then(()=>{
+                    this.setState({loaded: 1, file: new_file})
+                }))
+            .catch(err=>console.log(err))
+
+
+        })
+    }
+    render(){
+        return(
+            <>
+            {this.state.loaded===0? <Loading/>: <Page file={this.state.file}/>}
+            </>
+        )
+    }
+}
+
+class Loading extends React.Component{
+    render(){
+        return(
+            <>
+            <div className="container col-8 offset-2">
+                <h2>Loading the page ....</h2>
+            </div>
+            </>
+        )
+    }
+}
+
+class Page extends React.Component {
     constructor(props) {
         super(props);
-        this.file = test_file;
-        this.state = { logined: 0, like: test_file.likeStatus, favor: test_file.favorStatus, type: 0 , updated: 0};
+        this.file = this.props.file;
+        this.state = {logined: 0, like: this.props.file.likeStatus, favor: this.props.file.favorStatus, 
+            follow: this.props.file.followStatus, type: 0 , updated: 0};
     }
     componentDidMount() {
-        if (this.file.imageSrc !== undefined && this.file.imageSrc.length > 0) {
+        if (this.file.image !== undefined) {
             addPic(this.file);
         }
         if (this.file.tweet_data !== undefined && this.file.tweet_data !== "") {
@@ -55,38 +134,64 @@ export class TweetPage extends React.Component {
         if (this.state.like === 1) {
             this.setState({ like: 0 });
             this.file.likes -= 1;
+            fetch('/tweet/unlike/'+this.file.tweetId)
+            .then(res=>console.log(res))
         }
         else if (this.state.like === -1) {
             this.setState({ like: 1 });
             this.file.likes += 2;
+            fetch('/tweet/like/'+this.file.tweetId)
+            .then(res=>console.log(res))
         }
         else {
             this.setState({ like: 1 });
             this.file.likes += 1;
+            fetch('/tweet/like/'+this.file.tweetId)
+            .then(res=>console.log(res))
         }
     }
     handleDislike = () => {
         if (this.state.like === -1) {
             this.setState({ like: 0 });
             this.file.likes += 1;
+            fetch('/tweet/undislike/'+this.file.tweetId)
+            .then(res=>console.log(res))
         }
         else if (this.state.like === 1) {
             this.setState({ like: -1 });
             this.file.likes -= 2;
+            fetch('/tweet/dislike/'+this.file.tweetId)
+            .then(res=>console.log(res))
         }
         else {
             this.setState({ like: -1 });
             this.file.likes -= 1;
+            fetch('/tweet/dislike/'+this.file.tweetId)
+            .then(res=>console.log(res))
         }
     }
     handleFavor = () => {
         if (this.state.favor === 1) {
             this.setState({ favor: 0 });
-            this.file.favos -= 1;
+            fetch('/favorite/delete/'+this.file.tweetId)
+            .then(res=>console.log(res))
         }
         else {
             this.setState({ favor: 1 });
-            this.file.favos += 1;
+            fetch('/favorite/add/'+this.file.tweetId)
+            .then(res=>console.log(res))
+        }
+    }
+    handleFollow = () => {
+        if (this.state.follow === 'Following') {
+            this.setState({ follow: 'Follow' });
+            fetch('/favorite/delete/'+this.file.tweetId)
+            .then(res=>console.log(res))
+        }
+        else {
+            this.setState({ follow: 'Following' });
+            fetch('/favorite/add/'+this.file.tweetId)
+            .then(res=>console.log(res))
         }
     }
     sendComment = () => {
@@ -123,16 +228,16 @@ export class TweetPage extends React.Component {
                                     <div className="col-1">
                                         <img src={this.file.avatar} alt="Avatar" style={{ width: '48px', height: '48px', borderRadius: '50%', marginRight: '10px' }} />
                                     </div>
-                                    <div className="col-5 container offset-0 d-inline-block">
+                                    <div className="col-7 container offset-0 d-inline-block">
                                         <div className="container row" style={{ fontSize: '24px' }}>
                                             <div className="col-6">{this.file.username}</div>
                                             <div className='col-5'>
-                                                <button className="btn btn-primary">{this.file.followStatus}</button>
+                                                <button className="btn btn-primary" onClick={this.handleFollow}>{this.state.follow}</button>
                                             </div>
                                             <div className='col-1 container d-block'><div style={{ width: '1.5px', height: '100%', backgroundColor: 'gray' }}></div></div>
                                         </div>
                                     </div>
-                                    <div className="col-6 container">
+                                    <div className="col-4 container">
                                         <div className="container-fluid d-flex flex-row-reverse">
                                             <div style={{ fontSize: '22px' }}>NO.{this.file.tweetId}</div>
                                         </div>
@@ -150,7 +255,7 @@ export class TweetPage extends React.Component {
                                             
                                             <button className="p-2 likebuttons" alt="Retweet"><FontAwesomeIcon icon={faShare} /></button>
                                             <button className="p-3 likebuttons" alt="Comment" style={{ color: "#657786" }} ><FontAwesomeIcon icon={faComment} /> {this.file.comments.length}</button>
-                                            <button className="p-2 likebuttons" alt="Favorite" onClick={this.handleFavor} style={this.state.favor == 1 ? { color: "goldenrod" } : { color: '#657786' }} ><FontAwesomeIcon icon={faStar} /> {this.file.favos}</button>
+                                            <button className="p-2 likebuttons" alt="Favorite" onClick={this.handleFavor} style={this.state.favor == 1 ? { color: "goldenrod" } : { color: '#657786' }} ><FontAwesomeIcon icon={faStar} /></button>
                                             <button className="p-3 likebuttons" alt="Dislike" onClick={this.handleDislike} style={this.state.like == -1 ? { color: "#39aaf9" } : { color: '#657786' }}><FontAwesomeIcon icon={faHeartBroken} /></button>
                                             <button className="p-2 likebuttons" alt="Like" onClick={this.handleLike} style={this.state.like == 1 ? { color: "#d92534" } : { color: '#657786' }} ><FontAwesomeIcon icon={faHeart} /> {this.file.likes}</button>
                                         </div>
@@ -175,13 +280,13 @@ export class TweetPage extends React.Component {
 }
 
 function addPic(file) {
-    var count = file.imageSrc.length;
-    var code = "";
-    var filename;
+    var type = file.image.contentType;
+    var data = file.image.data;
+    var code='';
+
     let div = document.getElementById("imgbox");
-    for (filename of file.imageSrc) {
-        code += "<image src='" + filename + "' style='max-width:" + (100 / count) + "%'/>";
-    }
+    code += "<image src='data:"+type+";base64, " + data + "' style='max-width:100%'/>";
+    //console.log(data)
     div.innerHTML = code;
 }
 
@@ -191,6 +296,7 @@ class CommentCard extends React.Component {
         super(props);
         this.comment = this.props.comment;
         this.state = { isload: 0 };
+        this.avatar = './avatar.png';
     }
     componentDidMount() {
         this.setState({ isload: 1 });
@@ -212,7 +318,7 @@ class CommentCard extends React.Component {
                 <div className="container-fluid commentcard">
                     <div className="container row p-2">
                         <div className="col-1">
-                            <img src={this.comment.avatar} alt="Avatar" style={{ width: '32px', height: '32px', borderRadius: '50%', marginRight: '10px' }} />
+                            <img src={this.avatar} alt="Avatar" style={{ width: '32px', height: '32px', borderRadius: '50%', marginRight: '10px' }} />
                         </div>
                         <div className="col-5 container offset-0 d-inline-block">
                             <div className="container row" style={{ fontSize: '18px' }}>
@@ -238,3 +344,7 @@ class CommentCard extends React.Component {
     }
 }
 
+function getCookieValue(name) {
+    let result = document.cookie.match("(^|[^;]+)\\s*" + name + "\\s*=\\s*([^;]+)")
+    return result ? result.pop() : ""
+}

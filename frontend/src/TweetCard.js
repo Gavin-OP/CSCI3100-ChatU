@@ -22,13 +22,15 @@ export function TweetCard(props) {
         const isDislike = props.dislikeStatus;
         const isStar = props.starStatus;
         const isPic = props.imageSrc;
-        // Check whether the user have already follow the user, if so, light the follow button, else grey the button.
-        // if (isFollow === 'follow') {
-        //     setState(prevState => ({ ...prevState, followLight: '#ff4444' }))
-        // }
-        // else if (isFollow === 'following') {
-        //     setState(prevState => ({ ...prevState, followLight: '#b5b5b5' }))
-        // }
+        const isFollow = props.followStatus;
+        //Check whether the user have already follow the user, if so, light the follow button, else grey the button.
+        if (isFollow === 'follow') {
+            setState(prevState => ({ ...prevState, followLight: '#ff4444' }))
+
+        }
+        else if (isFollow === 'following') {
+            setState(prevState => ({ ...prevState, followLight: '#b5b5b5' }))
+        }
 
 
         // Check whether the user have already like the tweet, if so, light the like button, else grey the button. 
@@ -102,7 +104,9 @@ export function TweetCard(props) {
 
     function handleFollow() {
         if (state.followStatus === 'follow') {
-            setState({ ...state, followStatus: 'following' })
+            setState({ ...state, followStatus: 'following' });
+            fetch('/follow/add/'+props.userId)
+
         }
         else if (state.followStatus === 'following') {
             setState({ ...state, followStatus: 'follow' })
@@ -123,7 +127,9 @@ export function TweetCard(props) {
         setState({ ...state, commentDisplay: 'none', commentLight: '#657786' })
     }
 
-
+    function handleOpen(){
+        window.location.href='/tweet?tweetId='+props.tweetId;
+    }
     return (
         <div className='tweet-card-container'>
             <div className="tweet-card" >
@@ -154,7 +160,7 @@ export function TweetCard(props) {
                         </div>
                     </div>
                     {/* Tweet content and action buttons */}
-                    <div className='tweet-text-container'>
+                    <div className='tweet-text-container' onClick={handleOpen}>
                         <div className="tweet-text">{props.tweetText}</div>
                         <div className="tweet-actions">
                             <button className="like-button" style={{ color: state.likeLight }} onClick={handleLike}><FontAwesomeIcon icon={faHeart} /></button>

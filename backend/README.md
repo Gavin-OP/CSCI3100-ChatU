@@ -437,7 +437,6 @@ Backend is constructed by NodeJS and Express with MongoDB as the database.
         "message": "FollowId not found. Can not follow an non-existing user."
     }
     ```
-
     ```javascript
     {
         "message": "Cannot follow yourself"

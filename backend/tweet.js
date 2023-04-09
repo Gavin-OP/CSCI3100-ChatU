@@ -416,7 +416,7 @@ router.get('/getTweet/:tweetId', (req, res) => {
                         message: 'retrieve tweet information successful.',
                         action_status: true,
                         tweet: tweet,
-                        user: user,
+                        favorite: user.favorite,
                         image: image_data
                     });
                 }

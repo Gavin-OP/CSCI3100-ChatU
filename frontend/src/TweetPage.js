@@ -79,7 +79,7 @@ export class TweetPage extends React.Component{
                 if (data.tweet.dislike.includes(Number(uid))){
                     new_file.likeStatus = -1;
                 }
-                if (data.user.favorite.includes(Number(uid))){
+                if (data.favorite!== undefined && data.favorite.includes(Number(uid))){
                     new_file.favorStatus = 1;
                 }
                 if (user.follow_status===1){
@@ -203,7 +203,12 @@ class Page extends React.Component {
         var min=time.getMinutes();
         var t = yr + '-' + mon + '-' + day + ' ' + hr + ':' + min;
         let con= document.getElementById("input").value;
-        console.log(time);
+        fetch('/comment/create',
+        { method:'POST',
+         body: JSON.stringify({ user_id: this.file.userId, tweet_id: this.file.tweetId, content: con, time: t}),
+         headers: {'content-type': 'application/json'}})
+        .then(res=>console.log(res))
+        .catch(err=>console.log(err))
         let new_comment={user: this.file.username, avatar: this.file.avatar, content: con, time: t};
         console.log(new_comment);
         this.file.comments.push(new_comment);

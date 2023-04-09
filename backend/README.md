@@ -207,7 +207,6 @@ Backend is constructed by NodeJS and Express with MongoDB as the database.
 
 #### `/blacklist/list`
 
-
 - Usage: Return all user in the blacklist
 - GET
 - Output:
@@ -241,6 +240,77 @@ Backend is constructed by NodeJS and Express with MongoDB as the database.
         "message": "Failed to retrieve blacklist.."
     }
     ```
+
+#### `/comment/create`
+
+- Usage: Create a comment
+- POST
+- Input:
+  ```javascript
+  {
+      tweet_id: Num,
+      content: Str,
+  }
+  ```
+- Output:
+  Success output:
+  ```javascript
+  {
+      "message": "Comment created.",
+      "action_status": true
+  }
+  ```
+
+#### `/comment/delete/:commentId`
+
+- Usage: Delete comment
+- GET
+- Output:
+  Success output:
+  ```javascript
+  {
+      "message": "Comment removed successfully.",
+      "action_status": true
+  }
+  ```
+
+#### `/comment/commentList/:tweetId`
+
+- Usage: Retrieve all comments in one tweet
+- GET
+- Output:
+  Success output:
+  ```javascript
+  [
+      {
+          "_id": "642f7b366f150ab76c069670",
+          "comment_id": 3,
+          "tweet_id": 1,
+          "user_id": 3,
+          "content": "comgrats",
+          "time": "2023-04-07T02:08:54.610Z",
+          "__v": 0
+      },
+      {
+          "_id": "642f7ae76f150ab76c069663",
+          "comment_id": 2,
+          "tweet_id": 1,
+          "user_id": 2,
+          "content": "Congrats",
+          "time": "2023-04-07T02:07:35.315Z",
+          "__v": 0
+      },
+      {
+          "_id": "642f7ad56f150ab76c06965e",
+          "comment_id": 1,
+          "tweet_id": 1,
+          "user_id": 1,
+          "content": "Congrats",
+          "time": "2023-04-07T02:07:17.419Z",
+          "__v": 0
+      }
+  ]
+  ```
 
 #### `/fan/delete/:fanId`[^1][^2]
 
@@ -332,7 +402,6 @@ Backend is constructed by NodeJS and Express with MongoDB as the database.
 
 #### `/fan/fansNum/:userId`
 
-
 - Usage: Return how many fans does userId has
 - GET
 - Output:
@@ -342,6 +411,99 @@ Backend is constructed by NodeJS and Express with MongoDB as the database.
         "fansNum": 3
     }
     ```
+
+#### `/favorite/add/:tweetId`
+
+- Usage: Add favorite
+- GET
+- Output:
+  Success output:
+  ```javascript
+  {
+      "message": "Add tweet to favorite list successfully",
+      "favoriteList": [
+          1,
+          4,
+          2
+      ]
+  }
+  ```
+  Failure output:
+  ```javascript
+  {
+      "message": "TweetId not found. Can not add a non-existing tweet to the favorite list."
+  }
+  ```
+
+#### `/favorite/delete/:tweetId`
+
+- Usage: Delete favorite
+- GET
+- Output:
+  Success output:
+  ```javascript
+  {
+      "message": "Delete tweet from favorite list successfully",
+      "favoriteList": [
+          4,
+          2
+      ]
+  }
+  ```
+  Failure output: 
+  ```javascript
+  {
+      "message": "TweetId not found. Can not delete a non-existing tweet from the favorite list."
+  }
+  ```
+
+#### `/favorite/favoriteList`
+
+- Usage: Return all the tweets in user's favorite list
+- GET
+- Output:
+  Success output:
+  ```javascript
+  [{
+      _id: '642e248cb446c27b32a27d45',
+      tweet_id: 6,
+      content: 'I am a fish',
+      user: '8',
+      original: -1,
+      privacy_state: false,
+      image: [ [Object] ],
+      like: [],
+      dislike: [],
+      tag: '',
+      time: '2023-04-06T01:46:52.750Z',
+      __v: 0
+    },
+    {
+      tweet_id: 8,
+      content: 'Wow first tweet',
+      user: '8',
+      time: '2023-04-06T02:57:04.283Z',
+      privacy_state: false,
+      like: [],
+      dislike: [],
+      tag: undefined,
+      original: {
+        _id: '642e2294ea526c54c9831856',
+        tweet_id: 1,
+        content: 'This is the first tweet of ChatU',
+        user: '2',
+        original: -1,
+        privacy_state: false,
+        image: [Array],
+        like: [Array],
+        dislike: [],
+        tag: 'life',
+        time: '2023-04-06T01:38:28.052Z',
+        __v: 1
+      }
+    }
+  ]
+  ```
 
 #### `/feedback/retrieve/:feedbackId`
 
@@ -882,99 +1044,6 @@ Backend is constructed by NodeJS and Express with MongoDB as the database.
   }
   ```
 
-#### `/favorite/add/:tweetId`
-
-- Usage: Add favorite
-- GET
-- Output:
-  Success output:
-  ```javascript
-  {
-      "message": "Add tweet to favorite list successfully",
-      "favoriteList": [
-          1,
-          4,
-          2
-      ]
-  }
-  ```
-  Failure output:
-  ```javascript
-  {
-      "message": "TweetId not found. Can not add a non-existing tweet to the favorite list."
-  }
-  ```
-
-#### `/favorite/delete/:tweetId`
-
-- Usage: Delete favorite
-- GET
-- Output:
-  Success output:
-  ```javascript
-  {
-      "message": "Delete tweet from favorite list successfully",
-      "favoriteList": [
-          4,
-          2
-      ]
-  }
-  ```
-  Failure output: 
-  ```javascript
-  {
-      "message": "TweetId not found. Can not delete a non-existing tweet from the favorite list."
-  }
-  ```
-
-#### `/favorite/favoriteList`
-
-- Usage: Return all the tweets in user's favorite list
-- GET
-- Output:
-  Success output:
-  ```javascript
-  [{
-      _id: '642e248cb446c27b32a27d45',
-      tweet_id: 6,
-      content: 'I am a fish',
-      user: '8',
-      original: -1,
-      privacy_state: false,
-      image: [ [Object] ],
-      like: [],
-      dislike: [],
-      tag: '',
-      time: '2023-04-06T01:46:52.750Z',
-      __v: 0
-    },
-    {
-      tweet_id: 8,
-      content: 'Wow first tweet',
-      user: '8',
-      time: '2023-04-06T02:57:04.283Z',
-      privacy_state: false,
-      like: [],
-      dislike: [],
-      tag: undefined,
-      original: {
-        _id: '642e2294ea526c54c9831856',
-        tweet_id: 1,
-        content: 'This is the first tweet of ChatU',
-        user: '2',
-        original: -1,
-        privacy_state: false,
-        image: [Array],
-        like: [Array],
-        dislike: [],
-        tag: 'life',
-        time: '2023-04-06T01:38:28.052Z',
-        __v: 1
-      }
-    }
-  ]
-  ```
-
 #### ` /personal/tweet/:userId`
 
 - Usage: return all tweet a user post
@@ -1106,79 +1175,6 @@ Backend is constructed by NodeJS and Express with MongoDB as the database.
   ```
 
   
-
-#### `/comment/create`
-
-- Usage: Create a comment
-- POST
-- Input:
-  ```javascript
-  {
-      tweet_id: Num,
-      content: Str,
-  }
-  ```
-- Output:
-  Success output:
-  ```javascript
-  {
-      "message": "Comment created.",
-      "action_status": true
-  }
-  ```
-
-
-#### `/comment/delete/:commentId`
-
-- Usage: Delete comment
-- GET
-- Output:
-  Success output:
-  ```javascript
-  {
-      "message": "Comment removed successfully.",
-      "action_status": true
-  }
-  ```
-
-#### `/comment/commentList/:tweetId`
-
-- Usage: Retrieve all comments in one tweet
-- GET
-- Output:
-  Success output:
-  ```javascript
-  [
-      {
-          "_id": "642f7b366f150ab76c069670",
-          "comment_id": 3,
-          "tweet_id": 1,
-          "user_id": 3,
-          "content": "comgrats",
-          "time": "2023-04-07T02:08:54.610Z",
-          "__v": 0
-      },
-      {
-          "_id": "642f7ae76f150ab76c069663",
-          "comment_id": 2,
-          "tweet_id": 1,
-          "user_id": 2,
-          "content": "Congrats",
-          "time": "2023-04-07T02:07:35.315Z",
-          "__v": 0
-      },
-      {
-          "_id": "642f7ad56f150ab76c06965e",
-          "comment_id": 1,
-          "tweet_id": 1,
-          "user_id": 1,
-          "content": "Congrats",
-          "time": "2023-04-07T02:07:17.419Z",
-          "__v": 0
-      }
-  ]
-  ```
-
 
 
 ## To Do

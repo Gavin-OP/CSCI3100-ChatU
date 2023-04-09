@@ -876,7 +876,7 @@ Backend is constructed by NodeJS and Express with MongoDB as the database.
     }
     ```
 
-#### `tweet/undislike/:tweetId`
+#### `/tweet/undislike/:tweetId`
 
 - Usage: When the dislike button of a tweet is light and a user clicks it, remove the user's id from the dislike list of this tweet
 - GET
@@ -1097,7 +1097,7 @@ Backend is constructed by NodeJS and Express with MongoDB as the database.
       "message": "Fail to create user. Maybe because email has been used."
   }
   ```
- 
+
 #### `/user/login`
 
 - Usage: Login and send cookie

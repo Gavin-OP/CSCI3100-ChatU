@@ -155,6 +155,105 @@ Backend is constructed by NodeJS and Express with MongoDB as the database.
   }
   ```
 
+#### `/blacklist/add/:userId`
+
+- Usage: Add a user to the blacklist
+- GET
+- Output
+    Success output: 
+    ```javascript
+    {
+                "message": "User added to blacklist successfully",
+                "blacklist": [
+                6,
+                5,
+                2
+           ],
+        "action_status": true
+    },
+    ```
+    Failure output: 
+    ```javascript
+    {
+                "message": "User already in blacklist"
+    }
+    ```
+    ```javascript
+     {
+                "message": "User not found. Cannot add a non-existing user to the blacklist."
+     }
+    ```
+    ```javascript
+    {
+                "message": "Cannot add yourself to the blacklist"
+    }
+    ```
+
+#### `/blacklist/delete/:userId`
+
+- Usage: Delete a user from blacklist
+- GET
+- Output: 
+    Success output:
+    ```javascript
+    {
+        "message": "User with ID 2 removed from your blacklist.",
+        "blacklist": [
+            6,
+            5
+        ],
+        "action_status": true
+    }
+    ```
+    Failure output: 
+    ```javascript
+    {
+        "message": "User is not in your blacklist."
+    }
+    ```
+    ```javascript
+    {
+        "message": "You have no users in your blacklist."
+    }
+    ```
+
+#### `/blacklist/list`
+
+
+- Usage: Return all user in the blacklist
+- GET
+- Output:
+    Success output: 
+    ```javascript
+    [
+        {
+            "user_id": 6,
+            "username": "test",
+            "avatar": {
+                "data": {
+                    "type": "Buffer",
+                    "data": [
+                        0,
+                        0,
+                    ]
+                },
+                "contentType": "image/vnd.microsoft.icon"
+            }
+        }
+    ]
+    ```
+    ```javascript
+    {
+        "message": "No user found in the blacklist."
+    }
+    ```
+    Failure output:
+    ```javascript
+    {
+        "message": "Failed to retrieve blacklist.."
+    }
+    ```
+
 #### `/follow/add/:followId`[^1][^2]
 
 - Usage: Follow a user
@@ -648,106 +747,6 @@ Backend is constructed by NodeJS and Express with MongoDB as the database.
       "authorized": false
   }
   ```
-
-
-#### `/blacklist/add/:userId`
-
-- Usage: Add a user to the blacklist
-- GET
-- Output
-    Success output: 
-    ```javascript
-    {
-                "message": "User added to blacklist successfully",
-                "blacklist": [
-                6,
-                5,
-                2
-           ],
-        "action_status": true
-    },
-    ```
-    Failure output: 
-    ```javascript
-    {
-                "message": "User already in blacklist"
-    }
-    ```
-    ```javascript
-     {
-                "message": "User not found. Cannot add a non-existing user to the blacklist."
-     }
-    ```
-    ```javascript
-    {
-                "message": "Cannot add yourself to the blacklist"
-    }
-    ```
-
-#### `/blacklist/delete/:userId`
-
-- Usage: Delete a user from blacklist
-- GET
-- Output: 
-    Success output:
-    ```javascript
-    {
-        "message": "User with ID 2 removed from your blacklist.",
-        "blacklist": [
-            6,
-            5
-        ],
-        "action_status": true
-    }
-    ```
-    Failure output: 
-    ```javascript
-    {
-        "message": "User is not in your blacklist."
-    }
-    ```
-    ```javascript
-    {
-        "message": "You have no users in your blacklist."
-    }
-    ```
-
-#### `/blacklist/list`
-
-
-- Usage: Return all user in the blacklist
-- GET
-- Output:
-    Success output: 
-    ```javascript
-    [
-        {
-            "user_id": 6,
-            "username": "test",
-            "avatar": {
-                "data": {
-                    "type": "Buffer",
-                    "data": [
-                        0,
-                        0,
-                    ]
-                },
-                "contentType": "image/vnd.microsoft.icon"
-            }
-        }
-    ]
-    ```
-    ```javascript
-    {
-        "message": "No user found in the blacklist."
-    }
-    ```
-    Failure output:
-    ```javascript
-    {
-        "message": "Failed to retrieve blacklist.."
-    }
-    ```
 
 #### `/admin/deleteUser/:userId`
 

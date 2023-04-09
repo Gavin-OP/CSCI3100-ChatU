@@ -187,7 +187,7 @@ router.get('/followList/:userId', (req, res) => {
             Follow.findOne({ user_id: requestedUserId })
                 .then((follow) => {
                     if (!follow) {
-                        return res.status(404).json({
+                        return res.json({
                             message: 'He/She followes no one.'
                         });
                     }
@@ -216,7 +216,7 @@ router.get('/followList/:userId', (req, res) => {
                             user_info_list = user_info_list.filter((user_info) => user_info !== null);
 
                             if (user_info_list.length === 0) {
-                                return res.status(404).json({
+                                return res.json({
                                     message: 'No users found in his/her follow list.'
                                 });
                             }

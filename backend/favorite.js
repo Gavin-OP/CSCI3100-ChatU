@@ -150,7 +150,7 @@ router.get('/favoriteList', (req, res) => {
             Favorite.findOne({ user_id: userId })
                 .then(favorite => {
                     if (!favorite) {
-                        return res.status(404).json({
+                        return res.json({
                             message: 'Favorite not found.'
                         });
                     }
@@ -196,7 +196,7 @@ router.get('/favoriteList', (req, res) => {
                             console.log(tweet_list)
 
                             if (tweet_list.length == 0) {
-                                return res.status(404).json({
+                                return res.json({
                                     message: 'Favorite list is empty.'
                                 });
                             }

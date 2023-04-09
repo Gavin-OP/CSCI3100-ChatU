@@ -686,6 +686,136 @@ Backend is constructed by NodeJS and Express with MongoDB as the database.
     }
     ```
 
+#### `/home/tweet`
+
+- Usage: Return all tweet by time, admin page can also use this. 
+- GET
+- Output:
+  Success output:
+  ```javascript
+  [
+    {
+      tweet_id: 8,
+      content: 'Wow first tweet',
+      user: '8',
+      time: '2023-04-06T02:57:04.283Z',
+      privacy_state: false,
+      like: [],
+      dislike: [],
+      tag: undefined,
+      original: {
+        _id: '642e2294ea526c54c9831856',
+        tweet_id: 1,
+        content: 'This is the first tweet of ChatU',
+        user: '2',
+        original: -1,
+        privacy_state: false,
+        image: [Array],
+        like: [Array],
+        dislike: [],
+        tag: 'life',
+        time: '2023-04-06T01:38:28.052Z',
+        __v: 1
+      }
+    },
+    {
+      _id: '642e2294ea526c54c9831856',
+      tweet_id: 1,
+      content: 'This is the first tweet of ChatU',
+      user: '2',
+      original: -1,
+      privacy_state: false,
+      image: [ [Object] ],
+      like: [ 8 ],
+      dislike: [],
+      tag: 'life',
+      time: '2023-04-06T01:38:28.052Z',
+      __v: 1
+    }
+  ]
+  ```
+
+#### `/home/tweetIdList`
+
+- Usage: Return all tweetId
+- GET
+- Output:
+  Success output:
+  ```javascript
+  {
+      "tweetId": [
+          14,
+          13,
+          12,
+          11,
+          10,
+          9,
+          8,
+          7,
+          6,
+          5,
+          4,
+          3,
+          2,
+          1
+      ]
+  }
+  ```
+
+#### ` /personal/tweet/:userId`
+
+- Usage: return all tweet a user post
+- GET
+- Output:
+  Success output:
+  ```javascript
+  {
+      "message": "No tweet found."
+  }
+  ```
+  ```javascript
+  [
+    {
+      _id: '642e22a6ea526c54c983185c',
+      tweet_id: 2,
+      content: 'Welcome to ChatU',
+      user: '2',
+      original: -1,
+      privacy_state: false,
+      image: [ [Object] ],
+      like: [],
+      dislike: [],
+      tag: 'chat',
+      time: '2023-04-06T01:38:46.523Z',
+      __v: 0
+    },
+    {
+      tweet_id: 8,
+      content: 'Wow first tweet',
+      user: '8',
+      time: '2023-04-06T02:57:04.283Z',
+      privacy_state: false,
+      like: [],
+      dislike: [],
+      tag: undefined,
+      original: {
+        _id: '642e2294ea526c54c9831856',
+        tweet_id: 1,
+        content: 'This is the first tweet of ChatU',
+        user: '2',
+        original: -1,
+        privacy_state: false,
+        image: [Array],
+        like: [Array],
+        dislike: [],
+        tag: 'life',
+        time: '2023-04-06T01:38:28.052Z',
+        __v: 1
+      }
+    }
+  ]
+  ```
+
 #### `/tweet/like/:tweetId`
 
 - Usage: When the like button of a tweet is grey and a user clicks it, add the user's id to the like list of this tweet
@@ -1041,136 +1171,6 @@ Backend is constructed by NodeJS and Express with MongoDB as the database.
   {
       "message": "Server error",
       "authorized": false
-  }
-  ```
-
-#### ` /personal/tweet/:userId`
-
-- Usage: return all tweet a user post
-- GET
-- Output:
-  Success output:
-  ```javascript
-  {
-      "message": "No tweet found."
-  }
-  ```
-  ```javascript
-  [
-    {
-      _id: '642e22a6ea526c54c983185c',
-      tweet_id: 2,
-      content: 'Welcome to ChatU',
-      user: '2',
-      original: -1,
-      privacy_state: false,
-      image: [ [Object] ],
-      like: [],
-      dislike: [],
-      tag: 'chat',
-      time: '2023-04-06T01:38:46.523Z',
-      __v: 0
-    },
-    {
-      tweet_id: 8,
-      content: 'Wow first tweet',
-      user: '8',
-      time: '2023-04-06T02:57:04.283Z',
-      privacy_state: false,
-      like: [],
-      dislike: [],
-      tag: undefined,
-      original: {
-        _id: '642e2294ea526c54c9831856',
-        tweet_id: 1,
-        content: 'This is the first tweet of ChatU',
-        user: '2',
-        original: -1,
-        privacy_state: false,
-        image: [Array],
-        like: [Array],
-        dislike: [],
-        tag: 'life',
-        time: '2023-04-06T01:38:28.052Z',
-        __v: 1
-      }
-    }
-  ]
-  ```
-
-#### `/home/tweet`
-
-- Usage: Return all tweet by time, admin page can also use this. 
-- GET
-- Output:
-  Success output:
-  ```javascript
-  [
-    {
-      tweet_id: 8,
-      content: 'Wow first tweet',
-      user: '8',
-      time: '2023-04-06T02:57:04.283Z',
-      privacy_state: false,
-      like: [],
-      dislike: [],
-      tag: undefined,
-      original: {
-        _id: '642e2294ea526c54c9831856',
-        tweet_id: 1,
-        content: 'This is the first tweet of ChatU',
-        user: '2',
-        original: -1,
-        privacy_state: false,
-        image: [Array],
-        like: [Array],
-        dislike: [],
-        tag: 'life',
-        time: '2023-04-06T01:38:28.052Z',
-        __v: 1
-      }
-    },
-    {
-      _id: '642e2294ea526c54c9831856',
-      tweet_id: 1,
-      content: 'This is the first tweet of ChatU',
-      user: '2',
-      original: -1,
-      privacy_state: false,
-      image: [ [Object] ],
-      like: [ 8 ],
-      dislike: [],
-      tag: 'life',
-      time: '2023-04-06T01:38:28.052Z',
-      __v: 1
-    }
-  ]
-  ```
-
-#### `/home/tweetIdList`
-
-- Usage: Return all tweetId
-- GET
-- Output:
-  Success output:
-  ```javascript
-  {
-      "tweetId": [
-          14,
-          13,
-          12,
-          11,
-          10,
-          9,
-          8,
-          7,
-          6,
-          5,
-          4,
-          3,
-          2,
-          1
-      ]
   }
   ```
 

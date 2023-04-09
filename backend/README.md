@@ -54,147 +54,6 @@ Backend is constructed by NodeJS and Express with MongoDB as the database.
   }
   ```
 
-#### `/user/getUser/:userId`
-
-- Usage: Retrieve basic user information.  
-- GET
-- Output:
-  Success output:
-  ```javascript
-  {
-      "user_id": 3,
-      "username": "Gavin",
-      "description": "perfectly balanced",
-      "email": "gavin@cuhk.com",
-      "ban": false,
-      "follow_status": 1,		// 0: not following, 1: following, 2: self
-      "avatar":
-      {
-          "contentType": "image/png",
-          "data": {
-              "type": "Buffer",
-              "data": [137, 80, 88]
-          }
-      }
-  }
-  
-  ```
-  Failure output:
-  ```javascript
-  {
-      "message": "Fail to retrieve user information. Maybe because user does not exist."
-  }
-  ```
-
-#### `/user/signUp`
-
-- Usage: Create new user and send cookie
-- POST
-- Input:
-  ```javascript
-  {
-      email: 'OPPPP@gavin.com',
-      pwd: 123454,
-      username: 'Gavin OP',
-  }
-  ```
-- Output: 
-  Success output:
-  ```javascript
-  {
-      "message": "Sign up successful. User will automatically login.",
-      "login_status": 2
-  }
-  ```
-  Cookie: 
-  ```javascript
-  userDbId=j%3A%22642c25d78513c3dbb553fd22%22; Path=/; HttpOnly;
-  userId=2; Path=/; HttpOnly;
-  isAdmin=false; Path=/; HttpOnly;
-  ```
-  Failure output:
-  ```javascript
-  {
-      "message": "Fail to create user. Maybe because email has been used."
-  }
-  ```
- 
-#### `/user/login`
-
-- Usage: Login and send cookie
-- POST
-- Input:
-    ```javascript
-    {
-        email: 'OPPPP@gavin.com',
-        pwd: 123454,
-    }
-    ```
-- Output:
-    Success output:
-    ```javascript
-    {
-        "message": "Login successful",
-        "login_status": 2
-    }
-    ```
-    Cookie: 
-    ```javascript
-    userDbId=j%3A%22642c25d78513c3dbb553fd22%22; Path=/; HttpOnly;
-    userId=2; Path=/; HttpOnly;
-    isAdmin=false; Path=/; HttpOnly;
-    ```
-    Failure output:
-    ```javascript
-    {
-        "message": "Wrong email.",
-        "login_status": 0
-    }
-    ```
-    ```javascript
-    {
-        "message": "Wrong password.",
-        "login_status": 1
-    }
-    ```
-
-#### `/user/logout`[^1]
-
-- Usage: Logout and clear cookies
-- POST
-- Output:
-    ```javascript
-    {
-        "message": "Logout successful"
-    }
-    ```
-
-#### `/user/authorizationCheck`
-
-- Usage: Check whether user is authorized to visit pages other than `/home` and `login`
-- GET
-- Output:
-  Success output:
-  ```javascript
-  {
-      "message": "Authorized",
-      "authorized": true
-  }
-  ```
-  Failure output:
-  ``` javascript
-  {
-      "message": "Unauthorized",
-      "authorized": false
-  }
-  ```
-  ```javascript
-  {
-      "message": "Server error",
-      "authorized": false
-  }
-  ```
-
 #### `/tweet/like/:tweetId`
 
 - Usage: When the like button of a tweet is grey and a user clicks it, add the user's id to the like list of this tweet
@@ -408,6 +267,148 @@ Backend is constructed by NodeJS and Express with MongoDB as the database.
       "message": "retrieve tweet number successful.",
       "action_status": true, //indicate the retrieval of num of tweets sent by the given user is successful
       "tweetNum": 3 //num of tweets or retweet that this user posts
+  }
+  ```
+
+
+#### `/user/getUser/:userId`
+
+- Usage: Retrieve basic user information.  
+- GET
+- Output:
+  Success output:
+  ```javascript
+  {
+      "user_id": 3,
+      "username": "Gavin",
+      "description": "perfectly balanced",
+      "email": "gavin@cuhk.com",
+      "ban": false,
+      "follow_status": 1,		// 0: not following, 1: following, 2: self
+      "avatar":
+      {
+          "contentType": "image/png",
+          "data": {
+              "type": "Buffer",
+              "data": [137, 80, 88]
+          }
+      }
+  }
+  
+  ```
+  Failure output:
+  ```javascript
+  {
+      "message": "Fail to retrieve user information. Maybe because user does not exist."
+  }
+  ```
+
+#### `/user/signUp`
+
+- Usage: Create new user and send cookie
+- POST
+- Input:
+  ```javascript
+  {
+      email: 'OPPPP@gavin.com',
+      pwd: 123454,
+      username: 'Gavin OP',
+  }
+  ```
+- Output: 
+  Success output:
+  ```javascript
+  {
+      "message": "Sign up successful. User will automatically login.",
+      "login_status": 2
+  }
+  ```
+  Cookie: 
+  ```javascript
+  userDbId=j%3A%22642c25d78513c3dbb553fd22%22; Path=/; HttpOnly;
+  userId=2; Path=/; HttpOnly;
+  isAdmin=false; Path=/; HttpOnly;
+  ```
+  Failure output:
+  ```javascript
+  {
+      "message": "Fail to create user. Maybe because email has been used."
+  }
+  ```
+ 
+#### `/user/login`
+
+- Usage: Login and send cookie
+- POST
+- Input:
+    ```javascript
+    {
+        email: 'OPPPP@gavin.com',
+        pwd: 123454,
+    }
+    ```
+- Output:
+    Success output:
+    ```javascript
+    {
+        "message": "Login successful",
+        "login_status": 2
+    }
+    ```
+    Cookie: 
+    ```javascript
+    userDbId=j%3A%22642c25d78513c3dbb553fd22%22; Path=/; HttpOnly;
+    userId=2; Path=/; HttpOnly;
+    isAdmin=false; Path=/; HttpOnly;
+    ```
+    Failure output:
+    ```javascript
+    {
+        "message": "Wrong email.",
+        "login_status": 0
+    }
+    ```
+    ```javascript
+    {
+        "message": "Wrong password.",
+        "login_status": 1
+    }
+    ```
+
+#### `/user/logout`[^1]
+
+- Usage: Logout and clear cookies
+- POST
+- Output:
+    ```javascript
+    {
+        "message": "Logout successful"
+    }
+    ```
+
+#### `/user/authorizationCheck`
+
+- Usage: Check whether user is authorized to visit pages other than `/home` and `login`
+- GET
+- Output:
+  Success output:
+  ```javascript
+  {
+      "message": "Authorized",
+      "authorized": true
+  }
+  ```
+  Failure output:
+  ``` javascript
+  {
+      "message": "Unauthorized",
+      "authorized": false
+  }
+  ```
+  ```javascript
+  {
+      "message": "Server error",
+      "authorized": false
   }
   ```
 

@@ -70,6 +70,20 @@ router.get('/tweet/:userId', (req, res) => {
         });
 });
 
+router.get('/tweetid/:userId', (req, res) => {
+    const userId = req.params['userId'];
+
+    User.findOne({ user_id: userId })
+        .then((user) => {
+            if (!user) {
+                return res.status(404).json({
+                    message: 'User not found.'
+                });
+            }
+
+            res.json(user.tweet);
+        })
+})
 
 
 

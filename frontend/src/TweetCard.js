@@ -160,14 +160,13 @@ export function TweetCard(props) {
                         </div>
                     </div>
                     {/* Tweet content and action buttons */}
-                    <div className='tweet-text-container' onClick={handleOpen}>
-                        <div className="tweet-text">{props.tweetText}</div>
+                    <div className='tweet-text-container'>
+                        <div className="tweet-text" onClick={handleOpen}>{props.tweetText}</div>
                         <div className="tweet-actions">
                             <button className="like-button" style={{ color: state.likeLight }} onClick={handleLike}><FontAwesomeIcon icon={faHeart} /></button>
                             <div className="action-number">{props.likeCount}</div>
                             <button className="dislike-button" style={{ color: state.dislikeLight }} onClick={handleDislike}><FontAwesomeIcon icon={faHeartBroken} /></button>
                             <button className="favorite-button" style={{ color: state.starLight }} onClick={handleStar}><FontAwesomeIcon icon={faStar} /></button>
-                            <div className="action-number">{props.starCount}</div>
                             <button className="comment-button" style={{ color: state.commentLight }} onClick={toggleCommentInput}><FontAwesomeIcon icon={faComment} /></button>
                             <div className="action-number">{props.commentCount}</div>
                             <button className="retweet-button"><FontAwesomeIcon icon={faShare} /></button>

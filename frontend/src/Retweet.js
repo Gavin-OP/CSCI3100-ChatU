@@ -20,13 +20,42 @@ const tweet_data = {
     dislikeStatus: 0,
     starStatus: 1,
     likeCount: 49,
-    starCount: 32,
     commentCount: 4,
     followStatus: 'Following',
     imageSrc: '/tweet_card_pic_1.jpg',
     tweetText: 'dfasdfanibh massa blandit orci, eget ultricies turpis lorem ut nulla.',
 };
 export function Retweet() {
+    let params = (new URL(document.location)).searchParams;
+    let tid = params.get("tweetId");
+    const handlePost=()=>{
+        let content = document.getElementById('formContent').value;
+        let tag = document.getElementById('formTag').value;
+        let picture = document.getElementById('formPictures').files[0];
+        let privacy = document.getElementById('formPrivacy').value;
+        const time = new Date();
+        var yr = time.getFullYear();
+        var mon = time.getMonth() + 1;
+        var day = time.getDate();
+        var hr = time.getHours();
+        var min = time.getMinutes();
+        var t = yr + '-' + mon + '-' + day + ' ' + hr + ':' + min;
+        let formdata = new FormData();
+        formdata.append("content", content);
+        formdata.append("tag", tag);
+        formdata.append("image", picture);
+        formdata.append("privacy", privacy);
+        formdata.append("time", t);
+        formdata.append("original",  tid);
+        console.log(formdata.time)
+        fetch('/tweet/retweet',
+        {method:'POST', body: formdata})
+        .then(res=>{
+            console.log(res);
+            window.history.back();
+        })
+        .catch(error=>console.log(error))
+    }
     return (
         <Container fluid className="p-0">
             <NavigationBar page='user' />
@@ -62,7 +91,7 @@ export function Retweet() {
                                     <Button className="m-3" variant="outline-danger" type="reset">
                                         Clear
                                     </Button>
-                                    <Button className="m-3" variant="outline-primary" type="submit">
+                                    <Button className="m-3" variant="outline-primary" onClick={handlePost}>
                                         Submit
                                     </Button>
 

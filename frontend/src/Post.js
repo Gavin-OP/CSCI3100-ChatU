@@ -17,8 +17,13 @@ export function Post() {
     const handlePost=()=>{
         let content = document.getElementById('formContent').value;
         let tag = document.getElementById('formTag').value;
-        let picture = document.getElementById('formPictures').files[0];
+        let picture = document.getElementById('formPictures').files;
         let privacy = document.getElementById('formPrivacy').value;
+        if (picture.length > 3){
+            window.alert("Too many images! Please upload no more than 3 pictures!")
+            return false;
+        }
+        console.log(picture)
         const time = new Date();
         var yr = time.getFullYear();
         var mon = time.getMonth() + 1;
@@ -29,15 +34,16 @@ export function Post() {
         let formdata = new FormData();
         formdata.append("content", content);
         formdata.append("tag", tag);
-        formdata.append("image", picture);
+        for (let i=0;i<picture.length;i++){
+            formdata.append("image", picture[i]);
+        }
         formdata.append("privacy", privacy);
         formdata.append("time", t);
-        console.log(formdata.time)
         fetch('/tweet/create',
         {method:'POST', body: formdata})
         .then(res=>{
             console.log(res);
-            window.history.back();
+            window.history.href='/home';
         })
         .catch(error=>console.log(error))
     }
@@ -61,7 +67,7 @@ export function Post() {
                         </Form.Group>
                         <Form.Group controlId="formPictures" className="m-3">
                             <Form.Label>Upload Pictures</Form.Label>
-                            <Form.Control type="file" accept=".jpg,.gif,.png"  />
+                            <Form.Control type="file" accept=".jpg,.gif,.png" multiple />
                         </Form.Group>
                         <Form.Group className="m-3" size='lg' controlId="formPrivacy">
                             <Form.Label>Privacy</Form.Label>

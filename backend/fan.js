@@ -94,7 +94,7 @@ router.get('/fanList/:userId', (req, res) => {
             Fan.findOne({ user_id: requestedUserId })
                 .then((fan) => {
                     if (!fan) {
-                        return res.status(404).json({
+                        return res.json({
                             message: 'He/She has no fan.'
                         });
                     }
@@ -123,7 +123,7 @@ router.get('/fanList/:userId', (req, res) => {
                             user_info_list = user_info_list.filter((user_info) => user_info !== null);
 
                             if (user_info_list.length === 0) {
-                                return res.status(404).json({
+                                return res.json({
                                     message: 'No users found in his/her fan list.'
                                 });
                             }
@@ -163,7 +163,7 @@ router.get('/fansNum/:userId', (req, res) => {
     Fan.findOne({ user_id: userId })
         .then((fan) => {
             if (!fan) {
-                return res.json({ fans: 0 });
+                return res.json({ fansNum: 0 });
             }
             res.json({
                 fansNum: fan.fan_id.length

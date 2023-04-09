@@ -410,13 +410,14 @@ router.get('/getTweet/:tweetId', (req, res) => {
                     });
                 }
                 if (tweet.image!==undefined && tweet.image.length>0){
-                    let image_data = tweet.image[0].data.toString('base64');
+                    let image_data = tweet.image.map((i,index)=>{
+                        return {contentType: i.contentType, data: i.data.toString('base64')}});
                     res.json({
                         message: 'retrieve tweet information successful.',
                         action_status: true,
                         tweet: tweet,
                         user: user,
-                        image: {contentType: tweet.image[0].contentType, data: image_data}
+                        image: image_data
                     });
                 }
                 else {

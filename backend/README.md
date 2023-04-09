@@ -54,6 +54,142 @@ Backend is constructed by NodeJS and Express with MongoDB as the database.
   }
   ```
 
+#### `/follow/add/:followId`[^1][^2]
+
+- Usage: Follow a user
+- GET
+- Output:
+    Success output: 
+    ```javascript
+    {
+        "message": "Follow user successfully. Followed user's fan list updated.",
+        "followList": [
+            1,
+            3,
+            2
+        ],
+        "fanList": [
+            1,
+            4
+        ]
+    }
+    ```
+    Failure output: 
+    ```javascript
+    {
+        "message": "FollowId not found. Can not follow an non-existing user."
+    }
+    ```
+    ```javascript
+    {
+        "message": "Cannot follow yourself"
+    }
+    ```
+
+#### `/follow/delete/:followId`[^1][^2]
+
+- Usage: Unfollow a user
+- GET
+- Output:
+    Success output: 
+    ```javascript
+    {
+        "message": "Unfollow user successfully. Followed user's fan list updated.",
+        "followList": [
+            1
+        ],
+        "fanList": [
+            1
+        ]
+    }
+    ```
+    Failure output:
+    ```javascript
+    {
+        "message": "FollowId not found. Can not unfollow an non-existing user."
+    }
+    ```
+    ```javascript
+    {
+        "message": "Can't unfollow yourself"
+    }
+    ```
+
+#### `/follow/followList/:userId`
+
+- Usage: Return all account that userId is currently following. 
+- GET
+- Output:
+    Success output:
+    ```javascript
+    {
+        "message": "He/She followes no one."
+    }
+    ```
+    ```javascript
+        {
+            "user_id": 5,
+            "username": "123456",
+            "follow_status": 1,
+            "avatar": {
+                "contentType": "image/vnd.microsoft.icon",
+                "data": {
+                    "type": "Buffer",
+                    "data": [
+                        0,
+                        0,
+                    ]
+                }
+            }
+        },
+        {
+            "user_id": 1,
+            "username": "admin",
+            "follow_status": 0,
+            "avatar": {
+                "contentType": "image/vnd.microsoft.icon",
+                "data": {
+                    "type": "Buffer",
+                    "data": [
+                        0,
+                        0,
+                    ]
+                }
+            }
+        }
+    ]
+    ```
+    Failure output:
+    ```javascript
+    {
+        "message": "Fail to retrieve follow information."
+    }
+    ```
+    ```javascript
+    {
+        "message": "User not found."
+    }
+    ```
+
+#### `/follow/followNum/:userId`
+
+- Usage: Return how many user the userId follows
+- GET
+- Output:
+    Success output:
+    ```javascript
+    {
+        "message": "User with ID 3 is following 3 users.",
+        "following_count": 3
+    }
+    ```
+    Failure output:
+    ```javascript
+    {
+        "message": "User with ID 12 not found."
+    }
+    ```
+
 #### `/tweet/like/:tweetId`
 
 - Usage: When the like button of a tweet is grey and a user clicks it, add the user's id to the like list of this tweet
@@ -411,142 +547,6 @@ Backend is constructed by NodeJS and Express with MongoDB as the database.
       "authorized": false
   }
   ```
-
-#### `/follow/add/:followId`[^1][^2]
-
-- Usage: Follow a user
-- GET
-- Output:
-    Success output: 
-    ```javascript
-    {
-        "message": "Follow user successfully. Followed user's fan list updated.",
-        "followList": [
-            1,
-            3,
-            2
-        ],
-        "fanList": [
-            1,
-            4
-        ]
-    }
-    ```
-    Failure output: 
-    ```javascript
-    {
-        "message": "FollowId not found. Can not follow an non-existing user."
-    }
-    ```
-    ```javascript
-    {
-        "message": "Cannot follow yourself"
-    }
-    ```
-
-#### `/follow/delete/:followId`[^1][^2]
-
-- Usage: Unfollow a user
-- GET
-- Output:
-    Success output: 
-    ```javascript
-    {
-        "message": "Unfollow user successfully. Followed user's fan list updated.",
-        "followList": [
-            1
-        ],
-        "fanList": [
-            1
-        ]
-    }
-    ```
-    Failure output:
-    ```javascript
-    {
-        "message": "FollowId not found. Can not unfollow an non-existing user."
-    }
-    ```
-    ```javascript
-    {
-        "message": "Can't unfollow yourself"
-    }
-    ```
-
-#### `/follow/followList/:userId`
-
-- Usage: Return all account that userId is currently following. 
-- GET
-- Output:
-    Success output:
-    ```javascript
-    {
-        "message": "He/She followes no one."
-    }
-    ```
-    ```javascript
-        {
-            "user_id": 5,
-            "username": "123456",
-            "follow_status": 1,
-            "avatar": {
-                "contentType": "image/vnd.microsoft.icon",
-                "data": {
-                    "type": "Buffer",
-                    "data": [
-                        0,
-                        0,
-                    ]
-                }
-            }
-        },
-        {
-            "user_id": 1,
-            "username": "admin",
-            "follow_status": 0,
-            "avatar": {
-                "contentType": "image/vnd.microsoft.icon",
-                "data": {
-                    "type": "Buffer",
-                    "data": [
-                        0,
-                        0,
-                    ]
-                }
-            }
-        }
-    ]
-    ```
-    Failure output:
-    ```javascript
-    {
-        "message": "Fail to retrieve follow information."
-    }
-    ```
-    ```javascript
-    {
-        "message": "User not found."
-    }
-    ```
-
-#### `/follow/followNum/:userId`
-
-- Usage: Return how many user the userId follows
-- GET
-- Output:
-    Success output:
-    ```javascript
-    {
-        "message": "User with ID 3 is following 3 users.",
-        "following_count": 3
-    }
-    ```
-    Failure output:
-    ```javascript
-    {
-        "message": "User with ID 12 not found."
-    }
-    ```
 
 #### `/fan/delete/:fanId`[^1][^2]
 

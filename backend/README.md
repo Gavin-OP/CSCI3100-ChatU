@@ -629,7 +629,6 @@ Backend is constructed by NodeJS and Express with MongoDB as the database.
     }
     ```
     Failure output:
-
     ```javascript
     {
         "message": "User not found."
@@ -872,11 +871,8 @@ Backend is constructed by NodeJS and Express with MongoDB as the database.
 
 - Usage: Add favorite
 - GET
-
 - Output:
-
   Success output:
-
   ```javascript
   {
       "message": "Add tweet to favorite list successfully",
@@ -887,9 +883,7 @@ Backend is constructed by NodeJS and Express with MongoDB as the database.
       ]
   }
   ```
-
   Failure output:
-
   ```javascript
   {
       "message": "TweetId not found. Can not add a non-existing tweet to the favorite list."
@@ -899,13 +893,9 @@ Backend is constructed by NodeJS and Express with MongoDB as the database.
 #### `/admin/userList`
 
 - Usage: Return all user
-
 - GET
-
 - Output:
-
   Success output:
-
   ```javascript
   [
       {
@@ -926,13 +916,9 @@ Backend is constructed by NodeJS and Express with MongoDB as the database.
 #### `/favorite/delete/:tweetId`
 
 - Usage: Delete favorite
-
 - GET
-
 - Output:
-
   Success output:
-
   ```javascript
   {
       "message": "Delete tweet from favorite list successfully",
@@ -942,9 +928,7 @@ Backend is constructed by NodeJS and Express with MongoDB as the database.
       ]
   }
   ```
-
   Failure output: 
-
   ```javascript
   {
       "message": "TweetId not found. Can not delete a non-existing tweet from the favorite list."
@@ -954,11 +938,8 @@ Backend is constructed by NodeJS and Express with MongoDB as the database.
 #### `/favorite/favoriteList`
 
 - Usage: Return all the tweets in user's favorite list
-
 - GET
-
 - Output:
-
   Success output:
 
   ```javascript
@@ -1006,13 +987,9 @@ Backend is constructed by NodeJS and Express with MongoDB as the database.
 #### ` /personal/tweet/:userId`
 
 - Usage: return all tweet a user post
-
 - GET
-
 - Output:
-
   Success output:
-
   ```javascript
   {
       "message": "No tweet found."
@@ -1065,13 +1042,9 @@ Backend is constructed by NodeJS and Express with MongoDB as the database.
 #### `/home/tweet`
 
 - Usage: Return all tweet by time, admin page can also use this. 
-
 - GET
-
 - Output:
-
   Success output:
-
   ```javascript
   [
     {
@@ -1118,13 +1091,9 @@ Backend is constructed by NodeJS and Express with MongoDB as the database.
 #### `/home/tweetIdList`
 
 - Usage: Return all tweetId
-
 - GET
-
 - Output:
-
   Success output:
-
   ```javascript
   {
       "tweetId": [
@@ -1151,22 +1120,16 @@ Backend is constructed by NodeJS and Express with MongoDB as the database.
 #### `/comment/create`
 
 - Usage: Create a comment
-
 - POST
-
 - Input:
-
   ```javascript
   {
       tweet_id: Num,
       content: Str,
   }
   ```
-
 - Output:
-
   Success output:
-
   ```javascript
   {
       "message": "Comment created.",
@@ -1178,13 +1141,9 @@ Backend is constructed by NodeJS and Express with MongoDB as the database.
 #### `/comment/delete/:commentId`
 
 - Usage: Delete comment
-
 - GET
-
 - Output:
-
   Success output:
-
   ```javascript
   {
       "message": "Comment removed successfully.",
@@ -1195,13 +1154,9 @@ Backend is constructed by NodeJS and Express with MongoDB as the database.
 #### `/comment/commentList/:tweetId`
 
 - Usage: Retrieve all comments in one tweet
-
 - GET
-
 - Output:
-
   Success output:
-
   ```javascript
   [
       {

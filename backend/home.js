@@ -68,4 +68,30 @@ router.get('/tweet', (req, res) => {
         });
 });
 
+
+// get all tweetId posted by time
+router.get('/tweetIdList', (req, res) => {
+    Tweet.find({})
+        .sort({ time: -1 })
+        .then((tweets) => {
+            if (tweets.length == 0) {
+                return res.status(404).json({
+                    message: 'No tweet found.'
+                });
+            }
+            const tweetId = [];
+            tweets.map((tweet) => {
+                tweetId.push(tweet.tweet_id)
+            })
+            res.json({ tweetId });
+        })
+        .catch((err) => {
+            console.log(err);
+            res.status(500).json({
+                message: 'Server error.'
+            });
+        });
+});
+
+
 module.exports = router;

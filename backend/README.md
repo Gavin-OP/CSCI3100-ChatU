@@ -1298,6 +1298,39 @@ Backend is constructed by NodeJS and Express with MongoDB as the database.
   ]
   ```
 
+#### `/home/tweetIdList`
+
+- Usage: Return all tweetId
+
+- GET
+
+- Output:
+
+  Success output:
+
+  ```javascript
+  {
+      "tweetId": [
+          14,
+          13,
+          12,
+          11,
+          10,
+          9,
+          8,
+          7,
+          6,
+          5,
+          4,
+          3,
+          2,
+          1
+      ]
+  }
+  ```
+
+  
+
 #### `/comment/create`
 
 - Usage: Create a comment

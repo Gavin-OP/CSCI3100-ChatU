@@ -12,13 +12,9 @@ Backend is constructed by NodeJS and Express with MongoDB as the database.
 #### `/feedback/retrieve/:feedbackId`
 
 - Usage: Retrieve feedback by feedbackId
-
 - GET
-
 - Output:
-
   Success output:
-
   ```javascript
   {
       "feedback_id": 1,
@@ -35,19 +31,14 @@ Backend is constructed by NodeJS and Express with MongoDB as the database.
 #### `/feedback/create`
 
 - Usage: Create new feedback
-
 - POST
-
 - Input: body:
-
   ```javascript
   {
       content: 'xxx'
   }
   ```
-
 - Output: 
-
   Success output:
 
   ```javascript

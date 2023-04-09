@@ -120,6 +120,29 @@ Backend is constructed by NodeJS and Express with MongoDB as the database.
   ]
   ```
 
+#### `/admin/userList`
+
+- Usage: Return all user
+- GET
+- Output:
+  Success output:
+  ```javascript
+  [
+      {
+          "user_id": 1,
+          "username": "admin",
+          "email": "admin",
+          "ban": true
+      },
+      {
+          "user_id": 2,
+          "username": "Gavin",
+          "email": "Gavin",
+          "ban": false
+      }
+  ]
+  ```
+ 
 #### `/fan/delete/:fanId`[^1][^2]
 
 - Usage: Delete a fan
@@ -880,29 +903,6 @@ Backend is constructed by NodeJS and Express with MongoDB as the database.
   {
       "message": "TweetId not found. Can not add a non-existing tweet to the favorite list."
   }
-  ```
-
-#### `/admin/userList`
-
-- Usage: Return all user
-- GET
-- Output:
-  Success output:
-  ```javascript
-  [
-      {
-          "user_id": 1,
-          "username": "admin",
-          "email": "admin",
-          "ban": true
-      },
-      {
-          "user_id": 2,
-          "username": "Gavin",
-          "email": "Gavin",
-          "ban": false
-      }
-  ]
   ```
 
 #### `/favorite/delete/:tweetId`

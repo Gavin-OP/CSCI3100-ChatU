@@ -522,7 +522,6 @@ Backend is constructed by NodeJS and Express with MongoDB as the database.
         "message": "Fail to retrieve follow information."
     }
     ```
-    
     ```javascript
     {
         "message": "User not found."

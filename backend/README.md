@@ -431,7 +431,6 @@ Backend is constructed by NodeJS and Express with MongoDB as the database.
         ]
     }
     ```
-
     Failure output: 
     ```javascript
     {
@@ -468,7 +467,6 @@ Backend is constructed by NodeJS and Express with MongoDB as the database.
         "message": "FollowId not found. Can not unfollow an non-existing user."
     }
     ```
-
     ```javascript
     {
         "message": "Can't unfollow yourself"
@@ -486,7 +484,6 @@ Backend is constructed by NodeJS and Express with MongoDB as the database.
         "message": "He/She followes no one."
     }
     ```
-
     ```javascript
         {
             "user_id": 5,
@@ -677,13 +674,11 @@ Backend is constructed by NodeJS and Express with MongoDB as the database.
                 "message": "User already in blacklist"
     }
     ```
-    
     ```javascript
      {
                 "message": "User not found. Cannot add a non-existing user to the blacklist."
      }
     ```
-    
     ```javascript
     {
                 "message": "Cannot add yourself to the blacklist"
@@ -941,7 +936,6 @@ Backend is constructed by NodeJS and Express with MongoDB as the database.
 - GET
 - Output:
   Success output:
-
   ```javascript
   [{
       _id: '642e248cb446c27b32a27d45',

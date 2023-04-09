@@ -40,16 +40,13 @@ Backend is constructed by NodeJS and Express with MongoDB as the database.
   ```
 - Output: 
   Success output:
-
   ```javascript
   {
       "message": "Create feedback successfully.",
       "feedback_creation_status": 1
   }
   ```
-
   Failure output:
-
   ```javascript
   {
       "message": "Fail to create feedback.",
@@ -60,13 +57,9 @@ Backend is constructed by NodeJS and Express with MongoDB as the database.
 #### `/user/getUser/:userId`
 
 - Usage: Retrieve basic user information.  
-
 - GET
-
 - Output:
-
   Success output:
-
   ```javascript
   {
       "user_id": 3,
@@ -96,11 +89,8 @@ Backend is constructed by NodeJS and Express with MongoDB as the database.
 #### `/user/signUp`
 
 - Usage: Create new user and send cookie
-
 - POST
-
 - Input:
-
   ```javascript
   {
       email: 'OPPPP@gavin.com',
@@ -108,77 +98,59 @@ Backend is constructed by NodeJS and Express with MongoDB as the database.
       username: 'Gavin OP',
   }
   ```
-
 - Output: 
-
   Success output:
-
   ```javascript
   {
       "message": "Sign up successful. User will automatically login.",
       "login_status": 2
   }
   ```
-
   Cookie: 
-
   ```javascript
   userDbId=j%3A%22642c25d78513c3dbb553fd22%22; Path=/; HttpOnly;
   userId=2; Path=/; HttpOnly;
   isAdmin=false; Path=/; HttpOnly;
   ```
-
   Failure output:
-
   ```javascript
   {
       "message": "Fail to create user. Maybe because email has been used."
   }
   ```
-
+ 
 #### `/user/login`
 
 - Usage: Login and send cookie
-
 - POST
-
 - Input:
-
     ```javascript
     {
         email: 'OPPPP@gavin.com',
         pwd: 123454,
     }
     ```
-
 - Output:
-
     Success output:
-
     ```javascript
     {
         "message": "Login successful",
         "login_status": 2
     }
     ```
-
     Cookie: 
-
     ```javascript
     userDbId=j%3A%22642c25d78513c3dbb553fd22%22; Path=/; HttpOnly;
     userId=2; Path=/; HttpOnly;
     isAdmin=false; Path=/; HttpOnly;
     ```
-
     Failure output:
-
     ```javascript
     {
         "message": "Wrong email.",
         "login_status": 0
     }
     ```
-
     ```javascript
     {
         "message": "Wrong password.",
@@ -189,9 +161,7 @@ Backend is constructed by NodeJS and Express with MongoDB as the database.
 #### `/user/logout`[^1]
 
 - Usage: Logout and clear cookies
-
 - POST
-
 - Output:
     ```javascript
     {
@@ -202,29 +172,22 @@ Backend is constructed by NodeJS and Express with MongoDB as the database.
 #### `/user/authorizationCheck`
 
 - Usage: Check whether user is authorized to visit pages other than `/home` and `login`
-
 - GET
-
 - Output:
-
   Success output:
-
   ```javascript
   {
       "message": "Authorized",
       "authorized": true
   }
   ```
-
   Failure output:
-
   ``` javascript
   {
       "message": "Unauthorized",
       "authorized": false
   }
   ```
-
   ```javascript
   {
       "message": "Server error",
@@ -235,17 +198,12 @@ Backend is constructed by NodeJS and Express with MongoDB as the database.
 #### `/tweet/like/:tweetId`
 
 - Usage: When the like button of a tweet is grey and a user clicks it, add the user's id to the like list of this tweet
-
 - GET
-
 - Use scenario: 
     - like button in tweetcards and retweetcards at homepage, tweet search result under homepage, /personal/tweet page, /personal/fav page; 
     - like button in tweet detail page and retweet detail page
-
 - Input: a int-type var named tweetId, which is the id of the tweet for which the user clicks the like button 
-
 - Output:
-  
     Success output
     ```javascript
     {
@@ -261,19 +219,13 @@ Backend is constructed by NodeJS and Express with MongoDB as the database.
 #### `/tweet/unlike/:tweetId`
 
 - Usage: When the like button of a tweet is light and a user clicks it, remove the user's id from the like list of this tweet
-
 - GET
-
 - Use scenario: 
     - like button in tweetcards and retweetcards at homepage, tweet search result under homepage, /personal/tweet page, /personal/fav page 
     - like button in tweet detail page and retweet detail page
-
 - Input: a int-type var named tweetId, which is the id of the tweet for which the user clicks the dislike button
-
 - Output:
-
     Success output:
-
     ```javascript
     {
         "message": "unlike successful.",
@@ -286,17 +238,12 @@ Backend is constructed by NodeJS and Express with MongoDB as the database.
 #### `/tweet/dislike/:tweetId`
 
 - Usage: When the dislike button of a tweet is grey and a user clicks it, add the user's id to the dislike list of this tweet
-
 - GET
-
 - Use scenario: 
     - dislike button in tweetcards and retweetcards at homepage, tweet search result under homepage, /personal/tweet page, /personal/fav page; 
     - dislike button in tweet detail page and retweet detail page
-
 - Input: a int-type var named tweetId, which is the id of the tweet for which the user clicks the dislike button
-
 - Output:
-  
     Success output:
     ```javascript
     {
@@ -311,19 +258,13 @@ Backend is constructed by NodeJS and Express with MongoDB as the database.
 #### `tweet/undislike/:tweetId`
 
 - Usage: When the dislike button of a tweet is light and a user clicks it, remove the user's id from the dislike list of this tweet
-
 - GET
-
 - Use scenario: 
     - dislike button in tweetcards and retweetcards at homepage, tweet search result under homepage, /personal/tweet page, /personal/fav page; 
     - dislike button in tweet detail page and retweet detail page
-
 - Input: a int-type var named tweetId, which is the id of the tweet for which the user clicks the dislike button
-
 - Output:
-
     Success output:
-
     ```javascript
     {
         "message": "undislike successful.",
@@ -336,22 +277,16 @@ Backend is constructed by NodeJS and Express with MongoDB as the database.
 #### `/tweet/getTweet/:tweetId`
 
 - Usage: Get all info of a tweet/retweet by providing its id. The attribute 'original' is not null only if this is a retweet
-
 - GET
-
 - Use scenario: 
     - display content of tweet in tweet detail page
     - display content of retweet in retweet detail page 
     - display partial content of tweet searched under admin/tweet
     - display partial content of tweet search result under homepage
     - disply partial content of tweet in tweetcards and retweetcards at homepage, personal/tweet page, personal fav page  
-
 - Input: a int-type var named tweetId, which is the id of the tweet that someone wants to get all info for
-
 - Output:
-  
     Success output: 
-    
     ```javascript
     {
         "message": "retrieve tweet information successful.",
@@ -390,17 +325,11 @@ Backend is constructed by NodeJS and Express with MongoDB as the database.
 #### `/tweet/delete/:tweetId`
 
 - Usage: given tweet_id, delete this tweet's record from db and from the list of tweets thay the tweet creator posted
-
 - GET
-
 - Use scenario: delete tweet under admin/tweet page and personal/tweet page
-
 - Input: the id of the tweet to delete
-
 - Output:
-
     Success output:
-
     ```javascript
     {
         "message": "Tweet successfully deleted",
@@ -410,12 +339,10 @@ Backend is constructed by NodeJS and Express with MongoDB as the database.
     ```
 
 #### `/tweet/create`
-
 - Usage: Create a new tweet in the db
 - POST
 - Use scenario: create a tweet in the /post page
 - Input: 
-  
     ```javascript
     {
                     content: string, // a string object containing the whole text content of the new tweet
@@ -426,7 +353,6 @@ Backend is constructed by NodeJS and Express with MongoDB as the database.
     }
     ```
 - Output:
-
     Success output:
     ```javascript
         {
@@ -436,9 +362,7 @@ Backend is constructed by NodeJS and Express with MongoDB as the database.
                                 //(check out the 'tweet' attribute in userSchema.js)
         }
     ```
-    
     Failure output: 
-    
     ```javascript
     {
         "message": "Fail to save the new tweet. Backend Error."
@@ -451,7 +375,6 @@ Backend is constructed by NodeJS and Express with MongoDB as the database.
 - POST
 - Use scenario: create a retweet in the /retweet page
 - Input:
-  
     ```javascript
     {
                     content: string, // a string containing the whole text content of this new retweet
@@ -462,9 +385,7 @@ Backend is constructed by NodeJS and Express with MongoDB as the database.
     }
     ```
 - Output:
-
     Success output:
-    
     ```javascript
     {
         "message": "Create retweet successfully",
@@ -477,17 +398,11 @@ Backend is constructed by NodeJS and Express with MongoDB as the database.
 #### `/tweet/tweetNum/:userId`
 
 - Usage: Return how many tweet or retweet a user has posted.
-
 - GET
-
 - Use scenario: display the num of tweets the logged-in user had posted before in the /personal/tweet and /personal/fav pages
-
 - Input: the id of the user whom you want to query about the num of tweets s/he posts
-
 - Output:
-
   Success output:
-
   ```javascript
   {
       "message": "retrieve tweet number successful.",
@@ -499,13 +414,9 @@ Backend is constructed by NodeJS and Express with MongoDB as the database.
 #### `/follow/add/:followId`[^1][^2]
 
 - Usage: Follow a user
-
 - GET
-
 - Output:
-
     Success output: 
-
     ```javascript
     {
         "message": "Follow user successfully. Followed user's fan list updated.",
@@ -537,13 +448,9 @@ Backend is constructed by NodeJS and Express with MongoDB as the database.
 #### `/follow/delete/:followId`[^1][^2]
 
 - Usage: Unfollow a user
-
 - GET
-
 - Output:
-
     Success output: 
-
     ```javascript
     {
         "message": "Unfollow user successfully. Followed user's fan list updated.",
@@ -555,9 +462,7 @@ Backend is constructed by NodeJS and Express with MongoDB as the database.
         ]
     }
     ```
-
     Failure output:
-
     ```javascript
     {
         "message": "FollowId not found. Can not unfollow an non-existing user."
@@ -573,13 +478,9 @@ Backend is constructed by NodeJS and Express with MongoDB as the database.
 #### `/follow/followList/:userId`
 
 - Usage: Return all account that userId is currently following. 
-
 - GET
-
 - Output:
-
     Success output:
-
     ```javascript
     {
         "message": "He/She followes no one."
@@ -619,9 +520,7 @@ Backend is constructed by NodeJS and Express with MongoDB as the database.
         }
     ]
     ```
-    
     Failure output:
-    
     ```javascript
     {
         "message": "Fail to retrieve follow information."
@@ -637,22 +536,16 @@ Backend is constructed by NodeJS and Express with MongoDB as the database.
 #### `/follow/followNum/:userId`
 
 - Usage: Return how many user the userId follows
-
 - GET
-
 - Output:
-
     Success output:
-
     ```javascript
     {
         "message": "User with ID 3 is following 3 users.",
         "following_count": 3
     }
     ```
-
     Failure output:
-
     ```javascript
     {
         "message": "User with ID 12 not found."
@@ -662,13 +555,9 @@ Backend is constructed by NodeJS and Express with MongoDB as the database.
 #### `/fan/delete/:fanId`[^1][^2]
 
 - Usage: Delete a fan
-
 - GET
-
 - Output:
-
     Success output: 
-
     ```javascript
     {
         "message": "Unfan user successfully. Fan's following list updated.",
@@ -682,15 +571,12 @@ Backend is constructed by NodeJS and Express with MongoDB as the database.
         ]
     }
     ```
-
     Failure output: 
-
     ```javascript
     {
         "message": "Can't unfan yourself"
     }
     ```
-
     ```javascript
     {
         "message": "FanId not found. Can not delete an non-existing fan."
@@ -700,13 +586,9 @@ Backend is constructed by NodeJS and Express with MongoDB as the database.
 #### `/fan/fanList/:userId`
 
 - Usage: Return all account in the userId 's fans list
-
 - GET
-
 - Output:
-
     Successful output:
-
     ```javascript
     [
         {
@@ -741,13 +623,11 @@ Backend is constructed by NodeJS and Express with MongoDB as the database.
         }
     ]
     ```
-
     ```javascript
     {
         "message": "He/She has no fan."
     }
     ```
-
     Failure output:
 
     ```javascript
@@ -755,7 +635,6 @@ Backend is constructed by NodeJS and Express with MongoDB as the database.
         "message": "User not found."
     }
     ```
-
     ````javascript
     {
         "message": "Fail to retrieve follow information."
@@ -766,13 +645,9 @@ Backend is constructed by NodeJS and Express with MongoDB as the database.
 
 
 - Usage: Return how many fans does userId has
-
 - GET
-
 - Output:
-
     Success output:
-
     ```javascript
     {
         "fansNum": 3
@@ -783,13 +658,9 @@ Backend is constructed by NodeJS and Express with MongoDB as the database.
 #### `/blacklist/add/:userId`
 
 - Usage: Add a user to the blacklist
-
 - GET
-
 - Output
-
     Success output: 
-    
     ```javascript
     {
                 "message": "User added to blacklist successfully",
@@ -801,9 +672,7 @@ Backend is constructed by NodeJS and Express with MongoDB as the database.
         "action_status": true
     },
     ```
-    
     Failure output: 
-    
     ```javascript
     {
                 "message": "User already in blacklist"
@@ -825,13 +694,9 @@ Backend is constructed by NodeJS and Express with MongoDB as the database.
 #### `/blacklist/delete/:userId`
 
 - Usage: Delete a user from blacklist
-
 - GET
-
 - Output: 
-
     Success output:
-
     ```javascript
     {
         "message": "User with ID 2 removed from your blacklist.",
@@ -842,15 +707,12 @@ Backend is constructed by NodeJS and Express with MongoDB as the database.
         "action_status": true
     }
     ```
-
     Failure output: 
-
     ```javascript
     {
         "message": "User is not in your blacklist."
     }
     ```
-
     ```javascript
     {
         "message": "You have no users in your blacklist."
@@ -861,13 +723,9 @@ Backend is constructed by NodeJS and Express with MongoDB as the database.
 
 
 - Usage: Return all user in the blacklist
-
 - GET
-
 - Output:
-
     Success output: 
-
     ```javascript
     [
         {
@@ -886,15 +744,12 @@ Backend is constructed by NodeJS and Express with MongoDB as the database.
         }
     ]
     ```
-
     ```javascript
     {
         "message": "No user found in the blacklist."
     }
     ```
-
     Failure output:
-
     ```javascript
     {
         "message": "Failed to retrieve blacklist.."
@@ -905,22 +760,16 @@ Backend is constructed by NodeJS and Express with MongoDB as the database.
 
 
 - Usage: Delete a user
-
 - GET
-
 - Output:
-
     Success output:
-
     ```javascript
     {
         "message": "User removed successfully.",
         "action_status": true
     }
     ```
-
     Failure output:
-
     ```javascript
     {
         "message": "User not found."
@@ -929,15 +778,10 @@ Backend is constructed by NodeJS and Express with MongoDB as the database.
 
 #### `/admin/ban/:userId`
 
-
 - Usage: Ban a user
-
 - GET
-
 - Output:
-
     Success output: 
-
     ```javascript
     {
         "message": "User banned",
@@ -945,9 +789,7 @@ Backend is constructed by NodeJS and Express with MongoDB as the database.
         "action_status": true
     }
     ```
-
     Failure output:
-
     ```javascript
     {
         "message": "User not found"
@@ -956,15 +798,10 @@ Backend is constructed by NodeJS and Express with MongoDB as the database.
 
 #### `/admin/unban/:userId`
 
-
 - Usage: Unban a user
-
 - GET
-
 - Output:
-
     Success output:
-
     ```javascript
     {
         "message": "User unbanned",
@@ -972,9 +809,7 @@ Backend is constructed by NodeJS and Express with MongoDB as the database.
         "action_status": true
     }
     ```
-
     Failure output:
-
     ```javascript
     {
         "message": "User not found"
@@ -985,13 +820,9 @@ Backend is constructed by NodeJS and Express with MongoDB as the database.
 #### `/admin/deleteTweet/:tweetId/:userId`
 
 - Usage: Delete a tweet by admin
-
 - GET
-
 - Output:
-
   Success output:
-
   ```javascript
   {
       "message": "Tweet removed successfully.",
@@ -1002,13 +833,9 @@ Backend is constructed by NodeJS and Express with MongoDB as the database.
 #### `/admin/commentList`
 
 - Usage: Retrieve all comment
-
 - GET
-
 - Output: 
-
   Success output:
-
   ```javascript
   [
       {
@@ -1044,7 +871,6 @@ Backend is constructed by NodeJS and Express with MongoDB as the database.
 #### `/favorite/add/:tweetId`
 
 - Usage: Add favorite
-
 - GET
 
 - Output:

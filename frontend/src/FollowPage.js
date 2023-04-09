@@ -24,9 +24,19 @@ export class FollowPage extends React.Component{
         .then(res=>res.json())
         .then(data=>{
             let new_file=[];
+            var followStatus='';
             if (data.message===undefined && data.length>0){
                 new_file = data.map((user)=>{
-                    return {userId: user.user_id, username: user.username, avatar: '../avatar.png', followStatus: user.follow_status}
+                    if (user.follow_status===0){
+                        followStatus = 'Follow';
+                   }
+                   else if (user.follow_status===1){
+                        followStatus = 'Following';
+                   }
+                   else if (user.follow_status===2){
+                        followStatus = 'Self';
+                   }
+                    return {userId: user.user_id, username: user.username, avatar: '../avatar.png', followStatus: followStatus}
                 })
                 
             }
@@ -83,31 +93,29 @@ class UserCard extends React.Component{
          this.user=this.props.user;
          this.state={follow: this.props.user.followStatus}
     }
-    handleFollow=()=>{
-         if (this.state.follow==="Follow"){
-              this.setState({follow:'Following'});
-              var url='/follow/';
-              fetch(url)
-              .then(res=>console.log(res))
-         }
-         else {
-              this.setState({follow:'Follow'});
-              var url='/unfollow/' + this.user.username;
-              fetch(url)
-              .then(res=>console.log(res))
-         }
+    handleFollow = () => {
+        if (this.state.follow === 'Following') {
+            this.setState({ follow: 'Follow' });
+            fetch('/follow/delete/'+this.user.userId)
+            .then(res=>console.log(res))
+        }
+         else if (this.state.follow === 'Follow'){
+            this.setState({ follow: 'Following' });
+            fetch('/follow/add/'+this.user.userId)
+            .then(res=>console.log(res))
+        }
     }
     render(){
          return(
               <>
               <div className="container m-3 p-2 d-flex row user-list-bar" >
                    <div className='col-2'> <img class='pg-avatar' src={this.user.avatar} alt="avatar" style={{width:'75px'}} /> </div>
-                   <div className="col-5 py-3 m-0 center" style={{fontSize:'x-large'}}>{this.user.username} </div>
+                   <div className="col-5 py-3 m-0 center" style={{fontSize:'x-large'}} onClick={()=>{window.location.href='/personal/tweet?userId='+this.user.userId}}>{this.user.username} </div>
                    <div className='col-5 d-flex flex-row-reverse'>
                         {this.state.follow==='Following'?
                         (<button className="btn btn-secondary m-3" style={{height:'48px'}}> Unfollow</button>):
                         (<button className="btn btn-primary m-3" style={{height:'48px'}}> Follow</button>)}
-                        <button className="btn message-button m-3" style={{height:'48px'}}> <i className="fa fa-comment"></i></button> 
+                       
                    </div> 
               </div>
               </>

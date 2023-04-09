@@ -9,6 +9,107 @@ Backend is constructed by NodeJS and Express with MongoDB as the database.
 
 ## Backend Router Design
 
+#### `/fan/delete/:fanId`[^1][^2]
+
+- Usage: Delete a fan
+- GET
+- Output:
+    Success output: 
+    ```javascript
+    {
+        "message": "Unfan user successfully. Fan's following list updated.",
+        "fanList": [
+            2
+        ],
+        "followList": [
+            2,
+            4,
+            5
+        ]
+    }
+    ```
+    Failure output: 
+    ```javascript
+    {
+        "message": "Can't unfan yourself"
+    }
+    ```
+    ```javascript
+    {
+        "message": "FanId not found. Can not delete an non-existing fan."
+    }
+    ```
+
+#### `/fan/fanList/:userId`
+
+- Usage: Return all account in the userId 's fans list
+- GET
+- Output:
+    Successful output:
+    ```javascript
+    [
+        {
+            "user_id": 4,
+            "username": 'Gavin',
+            "follow_status": 2,
+            "avatar": {
+                "contentType": 'image/vnd.microsoft.icon',
+                "data": {
+                    "type": 'Buffer',
+                    "data": [
+                        0,
+                        0
+                    ]
+                }
+            }
+        },
+        {
+            "user_id": 1,
+            'username': 'admin',
+            'follow_status': 0,
+            'avatar': {
+                'contentType': 'image/png',
+                'data': {
+                    'type': 'Buffer',
+                    'data': [
+                        0,
+                        0
+                    ]
+                }
+            }
+        }
+    ]
+    ```
+    ```javascript
+    {
+        "message": "He/She has no fan."
+    }
+    ```
+    Failure output:
+    ```javascript
+    {
+        "message": "User not found."
+    }
+    ```
+    ````javascript
+    {
+        "message": "Fail to retrieve follow information."
+    }
+    ````
+
+#### `/fan/fansNum/:userId`
+
+
+- Usage: Return how many fans does userId has
+- GET
+- Output:
+    Success output:
+    ```javascript
+    {
+        "fansNum": 3
+    }
+    ```
+
 #### `/feedback/retrieve/:feedbackId`
 
 - Usage: Retrieve feedback by feedbackId
@@ -547,107 +648,6 @@ Backend is constructed by NodeJS and Express with MongoDB as the database.
       "authorized": false
   }
   ```
-
-#### `/fan/delete/:fanId`[^1][^2]
-
-- Usage: Delete a fan
-- GET
-- Output:
-    Success output: 
-    ```javascript
-    {
-        "message": "Unfan user successfully. Fan's following list updated.",
-        "fanList": [
-            2
-        ],
-        "followList": [
-            2,
-            4,
-            5
-        ]
-    }
-    ```
-    Failure output: 
-    ```javascript
-    {
-        "message": "Can't unfan yourself"
-    }
-    ```
-    ```javascript
-    {
-        "message": "FanId not found. Can not delete an non-existing fan."
-    }
-    ```
-
-#### `/fan/fanList/:userId`
-
-- Usage: Return all account in the userId 's fans list
-- GET
-- Output:
-    Successful output:
-    ```javascript
-    [
-        {
-            "user_id": 4,
-            "username": 'Gavin',
-            "follow_status": 2,
-            "avatar": {
-                "contentType": 'image/vnd.microsoft.icon',
-                "data": {
-                    "type": 'Buffer',
-                    "data": [
-                        0,
-                        0
-                    ]
-                }
-            }
-        },
-        {
-            "user_id": 1,
-            'username': 'admin',
-            'follow_status': 0,
-            'avatar': {
-                'contentType': 'image/png',
-                'data': {
-                    'type': 'Buffer',
-                    'data': [
-                        0,
-                        0
-                    ]
-                }
-            }
-        }
-    ]
-    ```
-    ```javascript
-    {
-        "message": "He/She has no fan."
-    }
-    ```
-    Failure output:
-    ```javascript
-    {
-        "message": "User not found."
-    }
-    ```
-    ````javascript
-    {
-        "message": "Fail to retrieve follow information."
-    }
-    ````
-
-#### `/fan/fansNum/:userId`
-
-
-- Usage: Return how many fans does userId has
-- GET
-- Output:
-    Success output:
-    ```javascript
-    {
-        "fansNum": 3
-    }
-    ```
 
 
 #### `/blacklist/add/:userId`

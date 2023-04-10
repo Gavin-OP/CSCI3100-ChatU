@@ -94,4 +94,63 @@ router.get('/tweetIdList', (req, res) => {
 });
 
 
+// return two random user id and get the user information
+router.get('/userRecommendation', (req, res) => {
+    loggedInUser = req.cookies.userId;
+
+    User.find()
+        .then((users) => {
+            if (users.length == 0) {
+                return res.status(404).json({
+                    message: 'No user found.'
+                });
+            }
+
+            // get logged-in user's following list
+            axios.get(`/follow/followList/${loggedInUser}`, { headers: { 'Cookie': req.headers.cookie } })
+                .then(response => {
+                    const followingList = response.data.map((item, index) => {
+                        return item.user_id;
+                    })
+                    console.log(followingList);
+
+                    const randomUser = [];
+                    const randomIndex = [];
+                    for (let i = 0; i < 2; i++) {
+                        let index = Math.floor(Math.random() * users.length);
+                        while (followingList.includes(index) || randomIndex.includes(index) || users[index].user_id == loggedInUser) {
+                            index = Math.floor(Math.random() * users.length);
+                        }
+                        randomIndex.push(index);
+
+                        avatar = { contentType: users[index].avatar.contentType, data: users[index].avatar.data.toString('base64') }
+                        userInfo = {
+                            user_id: users[index].user_id,
+                            username: users[index].username,
+                            description: users[index].description,
+                            avatar: avatar,
+                        }
+
+                        randomUser.push(userInfo);
+                    }
+
+                    console.log(randomUser)
+                    res.json({ randomUser });
+                })
+                .catch(err => {
+                    console.log(err);
+                    res.status(500).json({
+                        message: 'Server error.'
+                    });
+                });
+        })
+        .catch((err) => {
+            console.log(err);
+            res.status(500).json({
+                message: 'Server error.'
+            });
+        });
+});
+
+
 module.exports = router;

@@ -94,9 +94,8 @@ router.get('/tweetIdList', (req, res) => {
 });
 
 
-// return two random user id and get the user information
 router.get('/userRecommendation', (req, res) => {
-    loggedInUser = req.cookies.userId;
+    const loggedInUser = req.cookies.userId; // Make sure to declare loggedInUser with const to avoid global scope
 
     User.find()
         .then((users) => {
@@ -111,8 +110,8 @@ router.get('/userRecommendation', (req, res) => {
                 .then(response => {
                     const followingList = response.data.map((item, index) => {
                         return item.user_id;
-                    })
-                    console.log(followingList);
+                    });
+                    console.log('The user\'s folloing list is:', followingList)
 
                     const randomUser = [];
                     const randomIndex = [];
@@ -123,18 +122,26 @@ router.get('/userRecommendation', (req, res) => {
                         }
                         randomIndex.push(index);
 
-                        avatar = { contentType: users[index].avatar.contentType, data: users[index].avatar.data.toString('base64') }
-                        userInfo = {
+                        if (users[index].avatar === null || users[index].avatar.data == undefined) {
+                            avatar = null;
+                        }
+                        else {
+                            avatar = {
+                                contentType: users[index].avatar.contentType,
+                                data: users[index].avatar.data.toString('base64')
+                            }
+                        }
+                        const userInfo = {
                             user_id: users[index].user_id,
                             username: users[index].username,
                             description: users[index].description,
                             avatar: avatar,
-                        }
+                        };
 
+                        console.log('Recommend users are:', index)
                         randomUser.push(userInfo);
                     }
 
-                    console.log(randomUser)
                     res.json({ randomUser });
                 })
                 .catch(err => {
@@ -151,6 +158,7 @@ router.get('/userRecommendation', (req, res) => {
             });
         });
 });
+
 
 
 module.exports = router;

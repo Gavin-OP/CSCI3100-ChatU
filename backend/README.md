@@ -764,7 +764,35 @@ Backend is constructed by NodeJS and Express with MongoDB as the database.
 
 #### `/home/userRecommendation`
 
-- Usage: 
+- Usage: Return random user recommentdation. It will not return the user him/herself, and user already in his/her following list
+
+- GET
+
+- Output:
+
+  Success output:
+
+  ```javascript
+  {
+      "randomUser": [
+          {
+              "user_id": 2,
+              "username": "Gavin",
+              "description": "perfectly balanced",
+              "avatar": {
+                  "contentType": "image/png",
+                  "data": "iVBO
+              }
+          },
+          {
+              "user_id": 10,
+              "username": "Sliver Fish",
+              "description": "",
+              "avatar": null
+          }
+      ]
+  }
+  ```
 
 #### ` /personal/tweet/:userId`
 

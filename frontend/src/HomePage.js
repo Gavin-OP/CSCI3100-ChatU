@@ -13,7 +13,6 @@ import { UserRecomBox } from './UserRecommendBox';
 import { useState, useEffect } from "react";
 
 
-
 // export const tweet_data = {
 //     avatarUrl: './avatar.png',
 //     username: 'Gavin OP',
@@ -50,75 +49,91 @@ import { useState, useEffect } from "react";
 //     tweetText: 'Welcome to ChatU. We are glad to announce that ChatU is officially release a brand new version!!',
 //     // tweetText: 'dfasdfanibh massa blandit orci, eget ultricies turpis lorem ut nulla.',
 // };
-
+function MapWithDelay(data, callback, delay) {
+    if (data.length === 0) {
+      return;
+    }
+  
+    const [currentItem, ...remainingItems] = data;
+  
+    callback(currentItem);
+  
+    setTimeout(() => {
+      MapWithDelay(remainingItems, callback, delay);
+    }, delay);
+  }
 
 
 export function HomePage() {
-    //fetch data from '/home/tweet'
+    //fetch data from '/home/tweetIdList'
     const [tweets, setTweets] = useState([]);
-
-    // Fetch the data from the API and update the state
+    //fetch the data from the API and update the state once
     useEffect(() => {
-    fetch('/home/tweet')
-        .then(response => response.json())
-        .then(data => {
-            setTweets(data);
-            console.log(tweets);
-        })
-        .catch(error => console.error(error));
-    }, [tweets]);
+    fetch('/home/tweetIdList')
+    .then(response => response.json())
+    .then(data => {
+        setTweets(data.tweetId);
+    })
+    .catch(error => console.error(error));}, []);
+    // Fetch the data from the API and update the state
 
-
-    return (
-        <div>
-            <ScrollToTop />
-            <div className="stiky-bar">
-                {/* NavigationBar */}
-                <NavigationBar page={'user'} />
+    MapWithDelay(tweets, (item) => {
+        console.log(item);
+    }, 1000);
+    
+    let table = (
+    <div>
+        <ScrollToTop />
+        <div className="stiky-bar">
+            {/* NavigationBar */}
+            <NavigationBar page={'user'} />
+        </div>
+        <div class="wrapper" id="homepage">
+            <div class="col col1">
+                <div class="col-content">
+                     <a href="/post"><button class="write-post-button" ><i class="fa fa-plus"></i>   Post my tweet!</button></a>
+                </div>
             </div>
-            <div class="wrapper" id="homepage">
-                <div class="col col1">
-                    <div class="col-content">
-                         <a href="/post"><button class="write-post-button" ><i class="fa fa-plus"></i>   Post my tweet!</button></a>
-                    </div>
+            <div class="col col2">
+                <SearchBar page={'homepage'} />
+                <div class="col-content">
+                    {/* map tweets with Tweetcard function */}
+                    {
+                        tweets.map((item) => {
+                            <TweetCard tweetID = {item}/>
+                        })
+                    }
+                    
+                    {/* <TweetCard {...tweet_data} />
+                    <RetweetCard {...retweet_data} />
+                    <TweetCard {...tweet_data} />
+                    <TweetCard {...tweet_data} />
+                    <TweetCard {...tweet_data} />
+                    <TweetCard {...tweet_data} />
+                    <TweetCard {...tweet_data} />
+                    <TweetCard {...tweet_data} />
+                    <TweetCard {...tweet_data} />
+                    <TweetCard {...tweet_data} />
+                    <TweetCard {...tweet_data} />
+                    <TweetCard {...tweet_data} /> */}
                 </div>
-                <div class="col col2">
-                    <SearchBar page={'homepage'} />
-                    <div class="col-content">
-                        {/* map tweets with May function */}
-                        {tweets.map((tweet) => {
-                            if(tweet.original === -1) {
-                                return <TweetCard {...tweet} />
-                            }
-                            else {
-                                return <RetweetCard {...tweet} />;
-                            }
-                        })}
-                        {/* <TweetCard {...tweet_data} />
-                        <RetweetCard {...retweet_data} />
-                        <TweetCard {...tweet_data} />
-                        <TweetCard {...tweet_data} />
-                        <TweetCard {...tweet_data} />
-                        <TweetCard {...tweet_data} />
-                        <TweetCard {...tweet_data} />
-                        <TweetCard {...tweet_data} />
-                        <TweetCard {...tweet_data} />
-                        <TweetCard {...tweet_data} />
-                        <TweetCard {...tweet_data} />
-                        <TweetCard {...tweet_data} /> */}
-                    </div>
-                </div>
-                <div class="col col3">
-                    <div class="col-content">
-                              <div class="user-rec-font">  <br/> &nbsp; &nbsp; 
-                                User Recommendation 
-                              </div>
-                              <br/> <br/>
-                              <UserRecomBox />
-                    </div>
+            </div>
+            <div class="col col3">
+                <div class="col-content">
+                          <div class="user-rec-font">  <br/> &nbsp; &nbsp; 
+                            User Recommendation 
+                          </div>
+                          <br/> <br/>
+                          <UserRecomBox />
                 </div>
             </div>
         </div>
+    </div>
+       
+    )
+
+    return (
+        table
     )
 }
 

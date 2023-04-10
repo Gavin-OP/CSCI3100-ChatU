@@ -134,14 +134,14 @@ export function AdminTable({ page, items }) {
 
 
     //UseEffect to update the ban status
-    useEffect(() => {
+    // useEffect(() => {
 
-        // const tableRows = document.querySelectorAll('.admin-table-column');
-        // tableRows.forEach((row) => {
-        //   const userId = row.querySelector('.table-userid').textContent;
-        //   const banStatus = row.querySelector('.table-ban-status');
-        // });
-      }, [items1]);
+    //     // const tableRows = document.querySelectorAll('.admin-table-column');
+    //     // tableRows.forEach((row) => {
+    //     //   const userId = row.querySelector('.table-userid').textContent;
+    //     //   const banStatus = row.querySelector('.table-ban-status');
+    //     // });
+    //   }, [items1]);
 
 
 

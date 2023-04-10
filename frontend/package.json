@@ -14,6 +14,7 @@
     "fontawesome": "^5.6.3",
     "fortawesome": "^0.0.1-security",
     "gh-pages": "^5.0.0",
+    "lazyload": "^2.0.0-rc.2",
     "react": "^18.2.0",
     "react-back-to-top-button": "^0.0.14",
     "react-bootstrap": "^2.7.2",

@@ -291,17 +291,16 @@ router.get('/dislike/:tweetId', (req, res) => {
             // check if the user has disliked the tweet
             if (tweet.dislike.includes(userId)) {
                 // doing nothing if the user has already disliked the tweet
-            } else {
-                // if the user has not disliked the tweet, then dislike it
-                tweet.dislike.push(userId);
-            }
-            // check if the user has liked the tweet
-            if (tweet.like.includes(userId)) {
+            } else if (tweet.like.includes(userId)) {
                 // remove the user from the like list if the user has liked the tweet
                 tweet.like.pull(userId);
                 //And add the user to the dislike list of this tweet
                 tweet.dislike.push(userId);
+            } else {
+                // if the user has not disliked the tweet, then dislike it
+                tweet.dislike.push(userId);
             }
+
 
             return tweet.save();
         })

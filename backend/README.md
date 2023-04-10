@@ -762,6 +762,10 @@ Backend is constructed by NodeJS and Express with MongoDB as the database.
   }
   ```
 
+#### `/home/userRecommendation`
+
+- Usage: 
+
 #### ` /personal/tweet/:userId`
 
 - Usage: return all tweet a user post

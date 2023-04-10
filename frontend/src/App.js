@@ -14,6 +14,7 @@ import { UnderDevelopment } from './UnderDevelopment';
 import { Post } from './Post'
 import { Retweet } from './Retweet'
 import { TweetPage } from './TweetPage'
+import { FollowPage } from './FollowPage'
 import { Settings } from "./Settings";
 // import { ChatPage } from "./ChatPage";
 function App() {
@@ -30,8 +31,8 @@ function App() {
           <Route path="/home" element={<HomePage />} />
           <Route path="/personal/tweet" element={<PersonalPage page="tweet" />} />
           <Route path="/personal/fav" element={<PersonalPage page="favourite" />} />
-          <Route path="/personal/following" element={<PersonalPage page="following" />} />
-          <Route path="/personal/fans" element={<PersonalPage page="fans" />} />
+          <Route path="/personal/following" element={<FollowPage page="following" />} />
+          <Route path="/personal/fans" element={<FollowPage page="fans" />} />
           <Route path="/personal/blacklist" element={<PersonalPage page="blacklist" />} />
           <Route path='/test' element={<Test />} />
           <Route path='/post' element={<Post />} />

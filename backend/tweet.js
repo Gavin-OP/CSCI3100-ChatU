@@ -64,7 +64,7 @@ router.post("/create", upload.any('image'), (req, res) => {
                 .then((user) => {
                     res.json({
                         message: 'Create tweet successfully',
-                        action_status: true 
+                        action_status: true
                     });
                 });
         })
@@ -192,7 +192,7 @@ router.get('/like/:tweetId', (req, res) => {
                 // if the user has not liked the tweet, then like it
                 tweet.like.push(userId);
             }
-            
+
             return tweet.save();
         })
         .then((tweet) => {
@@ -291,17 +291,16 @@ router.get('/dislike/:tweetId', (req, res) => {
             // check if the user has disliked the tweet
             if (tweet.dislike.includes(userId)) {
                 // doing nothing if the user has already disliked the tweet
-            } else {
-                // if the user has not disliked the tweet, then dislike it
-                tweet.dislike.push(userId);
-            }
-            // check if the user has liked the tweet
-            if (tweet.like.includes(userId)) {
+            } else if (tweet.like.includes(userId)) {
                 // remove the user from the like list if the user has liked the tweet
                 tweet.like.pull(userId);
                 //And add the user to the dislike list of this tweet
                 tweet.dislike.push(userId);
+            } else {
+                // if the user has not disliked the tweet, then dislike it
+                tweet.dislike.push(userId);
             }
+
 
             return tweet.save();
         })
@@ -402,33 +401,35 @@ router.get('/getTweet/:tweetId', (req, res) => {
             }
 
             User.findOne({ user_id: tweet.user })
-            .exec()
-            .then((user) => {
-                if (!user) {
-                    return res.status(404).json({
-                        message: 'Failed to retrieve user number. The user does not exist.'
-                    });
-                }
-                if (tweet.image!==undefined && tweet.image.length>0){
-                    let image_data = tweet.image[0].data.toString('base64');
-                    res.json({
-                        message: 'retrieve tweet information successful.',
-                        action_status: true,
-                        tweet: tweet,
-                        user: user,
-                        image: {contentType: tweet.image[0].contentType, data: image_data}
-                    });
-                }
-                else {
-                    res.json({
-                        message: 'retrieve tweet information successful.',
-                        action_status: true,
-                        tweet: tweet,
-                        user: user
-                    });
-                }
-            })
-            
+                .exec()
+                .then((user) => {
+                    if (!user) {
+                        return res.status(404).json({
+                            message: 'Failed to retrieve user number. The user does not exist.'
+                        });
+                    }
+                    if (tweet.image !== undefined && tweet.image.length > 0) {
+                        let image_data = tweet.image.map((i, index) => {
+                            return { contentType: i.contentType, data: i.data.toString('base64') }
+                        });
+                        res.json({
+                            message: 'retrieve tweet information successful.',
+                            action_status: true,
+                            tweet: tweet,
+                            favorite: user.favorite,
+                            image: image_data
+                        });
+                    }
+                    else {
+                        res.json({
+                            message: 'retrieve tweet information successful.',
+                            action_status: true,
+                            tweet: tweet,
+                            user: user
+                        });
+                    }
+                })
+
         })
         .catch((err) => {
             console.error(err);

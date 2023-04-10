@@ -129,7 +129,7 @@ router.get('/list', (req, res) => {
     Blacklist.findOne({ user_id: loggedInUserId })
         .then(blacklist => {
             if (!blacklist) {
-                return res.status(404).json({
+                return res.json({
                     message: 'No user found in the blacklist.'
                 });
             }

@@ -2,8 +2,9 @@ import {NavigationBar} from './NavBar';
 import React from "react";
 import ScrollToTop from 'react-scroll-to-top';
 import { Link } from "react-router-dom";
-import "./PersonalPage.css"
-import { TweetCard } from './TweetCard'
+import "./PersonalPage.css";
+import { TweetCard } from './TweetCard';
+import { Loading } from './Loading';
 
 
 const tweet_data = {
@@ -17,17 +18,6 @@ const tweet_data = {
     // imageSrc: '',
     tweetText: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed euismod ante at mi pharetra, quis blandit elit interdum. Cras vulputate, arcu eu sodales lucsdfasdf adfasdfasdfasdf dasdfasdfasdf sdfasdf asdfasdf asdfasdfasdfasdf sdfasdfasd asdfasdf asdftus, nibh massa blandit orci, eget ultricies turpis lorem ut nulla.',
 };
-const user_data1 = {
-     avatar: '../avatar2.png',
-     username: 'test user',
-     followStatus: 'Following'
-};
-const user_data2 = {
-     avatar: '../avatar.png',
-     username: 'user31',
-     followStatus: 0
-};
-
 
 const info = {
      username: 'Gavin OP',
@@ -39,21 +29,134 @@ const info = {
      followtype: 0
 };
 const tweets = [tweet_data, tweet_data, tweet_data];
-const users = [user_data2,user_data1, user_data2, user_data1];
-export function PersonalPage({page, userid}){
+export class PersonalPage extends React.Component{
+     constructor(props){
+          super(props);
+          this.page = this.props.page;
+          this.state = {isload: 0, info:{}};
+     }
+     componentDidMount(){
+          let params = (new URL(document.location)).searchParams;
+          let uid = params.get("userId");
+          fetch('/user/getUser/'+uid)
+          .then(res=>res.json())
+          .then(data=>{
+               let info = {
+                    username: data.username,
+                    userId: data.user_id,
+                    avatar: '../avatar.png',
+                    description: 'Hello ChatU',
+                    followStatus: '',
+                    blackStatus: 0,
+                    tweets: [],
+               }
+               console.log(data)
+               if (data.follow_status===0){
+                    info.followStatus = 'Follow';
+               }
+               else if (data.follow_status===1){
+                    info.followStatus = 'Following';
+               }
+               else if (data.follow_status===2){
+                    info.followStatus = 'Self';
+               }
+               if (data.description!=='' && data.description!==undefined){
+                    info.description=data.description;
+               }
+               fetch('/follow/followNum/'+uid)
+               .then(res=>res.json())
+               .then(res=>info.followNum=res.following_count)
+               .then(fetch('/fan/fansNum/'+uid)
+                    .then(res=>res.json())
+                    .then(res=>info.fansNum=res.fansNum))
+                    .then(fetch('/blacklist/list')
+                              .then(res=>res.json())
+                              .then(blacklist=>{
+                                   if (blacklist.message ===undefined && blacklist.length>0){
+                                        blacklist.map((b)=>{
+                                             if (b.user_id===data.user_id){
+                                                  info.blackStatus=1;
+                                             }
+                                        })
+                                   }
+                                   let url=''
+                                   if (this.page==='tweet'){
+                                        url='/personal/tweetid/'+uid;
+                                   }
+                                   else if (this.page ==='fav'){
+                                        url='/favorite/tweetid/'+uid;
+                                   }
+                                   fetch(url)
+                                   .then(res=>res.json())
+                                   .then(res=>{
+                                        console.log(res)
+                                        info.tweets=res;
+                                        this.setState({isload: 1, info: info})
+                                   })
+                                   .catch(err=>console.log(err))
+                              })
+                         )
+          })
+     }
+     render(){
+          return(
+               <>
+               {this.state.isload===0?<Loading/>: <PersonPage info={this.state.info}/>}
+               </>
+          )
+     }    
+}
 
-     // var url='/personalpage/'+userid+'/'+page;
-     // fetch(url)
-     // .then(res=>res.json())
-     // .then(res=>{
-     //      var info = res.userinfo;
-     //      var tweets = res.tweets;
-     // })
-     // .catch(err=>console.log(err))
+class PersonPage extends React.Component{
+     constructor(props){
+          super(props);
+          this.info = this.props.info;
+          this.state = {follow: this.props.info.followStatus, black: this.props.info.blackStatus}
 
-     if (page === 'tweet' || page === 'favourite') {
-        return (
-          <>
+     };
+     handleFollow = () => {
+          if (this.state.follow === 'Following') {
+              this.setState({ follow: 'Follow' });
+              fetch('/follow/delete/'+this.info.userId)
+              .then(res=>console.log(res))
+          }
+          else if (this.state.follow === 'Follow'){
+              this.setState({ follow: 'Following' });
+              fetch('/follow/add/'+this.info.userId)
+              .then(res=>console.log(res))
+          }
+      }
+      handleBlacklist = () =>{
+          if (this.state.follow === 'Self'){
+               window.location.href='/personal/blacklist';
+          }
+          else {
+               if (this.state.black===0){
+                    this.setState({black: 1})
+                    fetch('/blacklist/add/'+this.info.userId)
+                    .then(res=>res.json()).then(res=>console.log(res))
+               }
+               else if (this.state.black===1){
+                    this.setState({black: 0})
+                    fetch('/blacklist/delete/'+this.info.userId)
+                    .then(res=>res.json()).then(res=>console.log(res))
+               }
+
+          }
+      }
+     render(){
+          let blackmessage='';
+          if (this.state.follow==='Self'){
+               blackmessage = "See Blacklist";
+          }
+          else if (this.state.black===0){
+               blackmessage = "Add to Blacklist"; 
+          }
+          else {
+               blackmessage = "Remove from Blacklist";
+          }
+          return(
+               <>
               <ScrollToTop />
               <div>
               {/* NavigationBar */}
@@ -65,232 +168,38 @@ export function PersonalPage({page, userid}){
     
     
                    <div className="container p-2 d-flex row">
-                        <div className='col-2'> <img class='pg-avatar' src='../avatar.png' alt="avatar" style={{width:'75px'}} /> </div>
-                        <div className="col-3 py-3 m-0 center" style={{fontSize:'x-large'}}>{info.username} </div>
+                        <div className='col-2'> <img class='pg-avatar' src={this.info.avatar} alt="avatar" style={{width:'75px'}} /> </div>
+                        <div className="col-3 py-3 m-0 center" style={{fontSize:'x-large'}}>{this.info.username} </div>
                         <div className='col-7 d-flex flex-row-reverse'>
-                              {/* {()=>{
-                                   switch(info.followtype){
-                                        case 0: console.log(0);return (<button className="btn btn-primary p-2" style={{height:'48px'}}>Follow</button>)
-                                        case 1: return (<button className="btn btn-secondary p-2" style={{height:'48px'}}>Unfollow</button>)
-                                        case 2: return (<button className="btn blacklist-button m-3"  style={{height:'48px'}}> See Blacklist</button>)
-                                   }
-                              }}   */}
-                              <button className="btn blacklist-button m-3"  style={{height:'48px'}}> See Blacklist</button>
-                              <button className="btn message-button m-3" style={{height:'48px'}}> <i className="fa fa-comment"></i></button> 
+                              <button className="btn blacklist-button m-3" style={{height:'48px'}} onClick={this.handleBlacklist}>{blackmessage}</button>
+                              <button className="btn btn-primary m-3" style={{height:'48px'}} onClick={this.handleFollow}>{this.state.follow} </button> 
                         </div> 
                     </div>
-                    <div className='m-2 p-2'>NO. {info.userid}</div> 
-                    <div className='m-2 p-2' style={{fontSize:'large',backgroundColor:'white'}}>{info.description}</div>
+                    <div className='m-2 p-2'>NO. {this.info.userid}</div> 
+                    <div className='m-2 p-2' style={{fontSize:'large',backgroundColor:'white'}}>{this.info.description}</div>
              
 
                     <br/> <br/>
                     <div className='container d-flex flex-row justify-content-center'>
                          <div className='p-2 border-1 text-center'>
-                              <Link to='/personal/following' state={{userid:info.userid}} className='btn btn-outline-primary' style={{width:'12vw'}}>Followers <br/>{info.followers.length}</Link>
+                              <button className='btn btn-outline-primary' style={{width:'12vw'}} onClick={()=>{window.location.href='/personal/following?userId='+this.info.userId}}>Followers <br/>{this.info.followNum}</button>
                          </div>
                          <div className='p-2 border-1 text-center'>
-                              <Link to='/personal/fans' state={{userid:info.userid}} className='btn btn-outline-primary' style={{width:'12vw'}}>Fans <br/>{info.fans.length}</Link>
+                              <button className='btn btn-outline-primary' style={{width:'12vw'}} onClick={()=>{window.location.href='/personal/fan?userId='+this.info.userId}}>Fans <br/>{this.info.fansNum}</button>
                          </div>
                          <div className='p-2 border-1 text-center'>
-                              <a href='#tweetcontainer' className='btn btn-outline-primary' style={{width:'12vw'}}>Tweets <br/>{tweets.length}</a>
+                              <a href='#tweetcontainer' className='btn btn-outline-primary' style={{width:'12vw'}}>Tweets <br/>{this.info.tweets===undefined ? 0: this.info.tweets.length}</a>
                          </div>
                     </div>
                     <div className='horizontal-line'></div>
-                    <a href='./fav' class="btn fav-button"> <i class="fa fa-star"></i></a>
+                    <button class="btn fav-button" onClick={()=>{window.location.href='/personal/fav?userId='+this.info.userId}}> <i class="fa fa-star"></i></button>
                     <div class="tweet-container" id="tweetcontainer">
                     <br/>
-                    {tweets.map((tweet,i)=><TweetCard {...tweet}/>)}
+                    {this.info.tweets.map((tweet,i)=><TweetCard tweet_id={tweet}/>)}
                     </div>
                 </div>
          </>
         )
     }
-    else if (page === 'following') {
-        return (
-            <>
-                <ScrollToTop />
-                <div>
-                {/* NavigationBar */}
-                <NavigationBar page={'user'} />
-                </div> 
-      
-                <div className="container col-8 offset-2">
-                     <button class="return-button"> <i class="fa fa-arrow-left"></i></button>
-      
-                     <div className="container-fluid text-center">
-                         <h2>Following User List</h2>
-                     </div>
-                    <div className="container-fluid p-2">
-                         {users.map((user,index)=><UserCard user={user}/>)}
-                    </div>
-                     {/* <div class="user-list-bar">
-                          <div className="pg-avatar2">
-                              <img src='../avatar2.png' alt="1" /> 
-                              
-                              <div class="pg-username2">&nbsp; User7 
-                                   <button class="message-button"> Chat </button> &nbsp; &nbsp;
-                                   <button class="blacklist-button"> Unfollow</button>  
-                              </div> 
-                          
-               
-                          </div>
-                     </div> */}
-                     
-       
-      
-                </div>
-           </>
-          )
-    }
-    else if (page === 'fans') {
-     return (
-         <>
-             <ScrollToTop />
-             <div>
-             {/* NavigationBar */}
-             <NavigationBar page={'user'} />
-             </div> 
-   
-             <div className="container col-8 offset-2">
-                  <button class="return-button"> <i class="fa fa-arrow-left"></i></button>
-   
-                  <div className="container-fluid text-center">
-                      <h2>Fans List</h2>
-                  </div>
-                 <div className="container-fluid p-2">
-                      {users.map((user,index)=><UserCard user={user}/>)}
-                 </div>
-                  {/* <div class="user-list-bar">
-                       <div className="pg-avatar2">
-                           <img src='../avatar2.png' alt="1" /> 
-                           
-                           <div class="pg-username2">&nbsp; User7 
-                                <button class="message-button"> Chat </button> &nbsp; &nbsp;
-                                <button class="blacklist-button"> Unfollow</button>  
-                           </div> 
-                       
-            
-                       </div>
-                  </div> */}
-                  
-    
-   
-             </div>
-        </>
-       )
-     }
-    
-    else if (page === 'blacklist') {
-        return (
-            <>
-                <ScrollToTop />
-                <div>
-                {/* NavigationBar */}
-                <NavigationBar page={'user'} />
-                </div> 
-      
-                <div class="a">
-                     <button class="return-button"> <i class="fa fa-arrow-left"></i></button>
-      
-                     <div class="blacklist-title">Blacklist</div>
-
-                     <div class="user-list-bar">
-                          <div className="pg-avatar2">
-                              <img src='../avatar2.png' alt="1" /> 
-                              
-                              <div class="pg-username2">&nbsp; User13 
-                                   {/*<button class="message-button"> Chat </button> &nbsp; &nbsp;*/}
-                                   &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
-                                   &nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                   <button class="blacklist-button"> Remove from Blacklist</button>  
-                              </div> 
-                          
-               
-                          </div>
-                     </div>
-                    
-                     <br/> <br/>
-
-                     <div class="user-list-bar">
-                          <div className="pg-avatar2">
-                              <img src='../avatar2.png' alt="1" /> 
-                              
-                              <div class="pg-username2">&nbsp; User14 
-                                   {/*<button class="message-button"> Chat </button> &nbsp; &nbsp;*/}
-                                   &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
-                                   &nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                   <button class="blacklist-button"> Remove from Blacklist</button> 
-                              </div> 
-                          
-               
-                          </div>
-                     </div>
-                     
-                     <br/> <br/>
-
-                     <div class="user-list-bar">
-                          <div className="pg-avatar2">
-                              <img src='../avatar2.png' alt="1" /> 
-                              
-                              <div class="pg-username2">&nbsp; User15 
-                                   {/*<button class="message-button"> Chat </button> &nbsp; &nbsp;*/}
-                                   &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
-                                   &nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                   <button class="blacklist-button"> Remove from Blacklist</button>
-                              </div> 
-                          
-               
-                          </div>
-                     </div>
-                     
-       
-      
-                </div>
-           </>
-          )
-    }
-    
-
-    
 }
 
-class UserCard extends React.Component{
-     constructor(props){
-          super(props);
-          this.user=this.props.user;
-          this.state={follow: this.props.user.followStatus}
-     }
-     handleFollow=()=>{
-          if (this.state.follow==="Follow"){
-               this.setState({follow:'Following'});
-               var url='/follow/' + this.user.username;
-               fetch(url)
-               .then(res=>console.log(res))
-          }
-          else {
-               this.setState({follow:'Follow'});
-               var url='/unfollow/' + this.user.username;
-               fetch(url)
-               .then(res=>console.log(res))
-          }
-     }
-     render(){
-          return(
-               <>
-               <div className="container m-3 p-2 d-flex row user-list-bar" >
-                    <div className='col-2'> <img class='pg-avatar' src={this.user.avatar} alt="avatar" style={{width:'75px'}} /> </div>
-                    <div className="col-5 py-3 m-0 center" style={{fontSize:'x-large'}}>{this.user.username} </div>
-                    <div className='col-5 d-flex flex-row-reverse'>
-                         {this.state.follow==='Following'?
-                         (<button className="btn btn-secondary m-3" style={{height:'48px'}}> Unfollow</button>):
-                         (<button className="btn btn-primary m-3" style={{height:'48px'}}> Follow</button>)}
-                         <button className="btn message-button m-3" style={{height:'48px'}}> <i className="fa fa-comment"></i></button> 
-                    </div> 
-               </div>
-               </>
-          )
-     }
-}

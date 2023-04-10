@@ -79,7 +79,7 @@ router.get('/add/:followId', (req, res) => {
         })
 });
 
-router.get('/get/:foollowId', (req, res) => {////////////////////////////////////////////////
+router.get('/get/:followId', (req, res) => {
     const loggedInUserId = req.cookies.userId;
     const followId = req.params['followId'];
 
@@ -91,7 +91,7 @@ router.get('/get/:foollowId', (req, res) => {///////////////////////////////////
     }
 
     // check whether followId is an existing user
-    Follow.findOne({ user_id: loggedInUserId, follow_id: followId })
+    Follow.findOne({ user_id: loggedInUserId, follow_id: followId})
         .then(follow => {
             console.log(follow)
             if (!follow) {
@@ -99,7 +99,7 @@ router.get('/get/:foollowId', (req, res) => {///////////////////////////////////
                     status: 'Follow'
                 });
             }
-            else return res.json({ status: 'Following' })
+            else return res.json({status:'Following'})
         })
 })
 // unfollow a user for the currently logged-in user
@@ -187,7 +187,7 @@ router.get('/followList/:userId', (req, res) => {
             Follow.findOne({ user_id: requestedUserId })
                 .then((follow) => {
                     if (!follow) {
-                        return res.status(404).json({
+                        return res.json({
                             message: 'He/She followes no one.'
                         });
                     }
@@ -216,7 +216,7 @@ router.get('/followList/:userId', (req, res) => {
                             user_info_list = user_info_list.filter((user_info) => user_info !== null);
 
                             if (user_info_list.length === 0) {
-                                return res.status(404).json({
+                                return res.json({
                                     message: 'No users found in his/her follow list.'
                                 });
                             }
@@ -262,8 +262,9 @@ router.get('/followNum/:userId', (req, res) => {
                     following_count: result.follow_id.length,
                 });
             } else {
-                res.status(404).json({
+                res.json({
                     message: `User with ID ${userId} not found.`,
+                    following_count: 0,
                 });
             }
         })

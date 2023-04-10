@@ -30,7 +30,7 @@ export const retweet_data = {
     likeStatus: 1,
     dislikeStatus: 0,
     starStatus: 1,
-    likeCount: 235,
+    likeCount: 234,
     starCount: 387,
     commentCount: 2344,
     followStatus: 'Follow',

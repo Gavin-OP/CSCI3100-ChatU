@@ -4,6 +4,7 @@ import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHeart, faShare, faHeartBroken, faComment, faStar, faPaperPlane } from '@fortawesome/free-solid-svg-icons';
 import './TweetPage.css';
+import { Loading } from './Loading'
 
 let test_file = {
     username: 'David',
@@ -49,48 +50,56 @@ export class TweetPage extends React.Component{
         .then(res=>res.json())
         .then(data=>{
             console.log(data);
-            
-            let new_file={
-                username: data.user.username,
-                avatar: "./avatar.png",
-                time: data.tweet.time,
-                tweetId: data.tweet.tweet_id,
-                content: data.tweet.content,
-                likes: data.tweet.like.length-data.tweet.dislike.length,
-                comments: [],
-                likeStatus: 0,
-                favorStatus: 0,
-                followStatus: 'Follow', 
-                image: data.image,
-                original: data.tweet.original
-            }
-            console.log(data.tweet.like)
-            if (data.tweet.like.includes(Number(uid))){
-                new_file.likeStatus = 1;
-            }
-            if (data.tweet.dislike.includes(Number(uid))){
-                new_file.likeStatus = -1;
-            }
-            if (data.user.favorite.includes(Number(uid))){
-                new_file.favorStatus = 1;
-            }
-            fetch('/follow/get/'+uid)
+            fetch('/user/getUser/'+data.tweet.user)
             .then(res=>res.json())
-            .then(follow=>{
-                new_file.followStatus = follow.status;
+            .then(user=>{
+                let new_file={
+                    username: user.username,
+                    userId: user.user_id,
+                    avatar: "./avatar.png",
+                    time: data.tweet.time,
+                    tweetId: data.tweet.tweet_id,
+                    content: data.tweet.content,
+                    likes: data.tweet.like.length-data.tweet.dislike.length,
+                    comments: [],
+                    likeStatus: 0,
+                    favorStatus: 0,
+                    followStatus: 'Follow', 
+                    image: data.image,
+                    original: data.tweet.original,
+                    tag: ''
+                }
+                console.log(data.tweet.like)
+                if (data.tweet.tag!=='None'){
+                    new_file.tag = '#' + data.tweet.tag;
+                }
+                if (data.tweet.like.includes(Number(uid))){
+                    new_file.likeStatus = 1;
+                }
+                if (data.tweet.dislike.includes(Number(uid))){
+                    new_file.likeStatus = -1;
+                }
+                if (data.favorite!== undefined && data.favorite.includes(Number(uid))){
+                    new_file.favorStatus = 1;
+                }
+                if (user.follow_status===1){
+                    new_file.followStatus = 'Following';
+                }
+                else if (user.follow_status===2){
+                    new_file.followStatus = 'Self';
+                }
+                fetch('/comment/commentList/'+tid)
+                    .then(res=>res.json())
+                    .then(res=>{
+                        console.log(res);
+                        new_file.comments = res;
+                    })
+                    .then(()=>{
+                        this.setState({loaded: 1, file: new_file})
+                    })
+                .catch(err=>console.log(err))
             })
-            .then(fetch('/comment/commentList/'+tid)
-                .then(res=>res.json())
-                .then(res=>{
-                    console.log(res);
-                    new_file.comments = res;
-                })
-                .then(()=>{
-                    this.setState({loaded: 1, file: new_file})
-                }))
-            .catch(err=>console.log(err))
-
-
+            
         })
     }
     render(){
@@ -102,17 +111,7 @@ export class TweetPage extends React.Component{
     }
 }
 
-class Loading extends React.Component{
-    render(){
-        return(
-            <>
-            <div className="container col-8 offset-2">
-                <h2>Loading the page ....</h2>
-            </div>
-            </>
-        )
-    }
-}
+
 
 class Page extends React.Component {
     constructor(props) {
@@ -124,8 +123,9 @@ class Page extends React.Component {
     componentDidMount() {
         if (this.file.image !== undefined) {
             addPic(this.file);
+            console.log("Has picture")
         }
-        if (this.file.tweet_data !== undefined && this.file.tweet_data !== "") {
+        if (this.file.original > 0) {
             this.setState({ type: 1 });
         }
     }
@@ -185,12 +185,12 @@ class Page extends React.Component {
     handleFollow = () => {
         if (this.state.follow === 'Following') {
             this.setState({ follow: 'Follow' });
-            fetch('/favorite/delete/'+this.file.tweetId)
+            fetch('/follow/delete/'+this.file.userId)
             .then(res=>console.log(res))
         }
-        else {
+        else if (this.state.follow === 'Follow'){
             this.setState({ follow: 'Following' });
-            fetch('/favorite/add/'+this.file.tweetId)
+            fetch('/follow/add/'+this.file.userId)
             .then(res=>console.log(res))
         }
     }
@@ -203,7 +203,12 @@ class Page extends React.Component {
         var min=time.getMinutes();
         var t = yr + '-' + mon + '-' + day + ' ' + hr + ':' + min;
         let con= document.getElementById("input").value;
-        console.log(time);
+        fetch('/comment/create',
+        { method:'POST',
+         body: JSON.stringify({ user_id: this.file.userId, tweet_id: this.file.tweetId, content: con, time: t}),
+         headers: {'content-type': 'application/json'}})
+        .then(res=>console.log(res))
+        .catch(err=>console.log(err))
         let new_comment={user: this.file.username, avatar: this.file.avatar, content: con, time: t};
         console.log(new_comment);
         this.file.comments.push(new_comment);
@@ -243,8 +248,9 @@ class Page extends React.Component {
                                         </div>
                                     </div>
                                 </div>
+                                <div className="container m-4" style={{ fontSize: '22px', width: '92%' }}>{this.file.tag}</div>
                                 <div className="container m-4" style={{ fontSize: '22px', width: '92%' }}>{this.file.content}</div>
-                                <div className="container m-4 d-flex justify-content-center" id="imgbox" style={{ width: '92%' }}>
+                                <div className="container m-2 d-flex justify-content-center" id="imgbox" style={{ width: '92%' }}>
                                     {this.state.type === 1 ? <TweetCard {...this.file.tweet_data} /> : <div></div>}
                                 </div>
 
@@ -253,7 +259,7 @@ class Page extends React.Component {
                                         <div className="col-6 p-2" >{this.file.time}</div>
                                         <div className="col-6 py-0  d-flex flex-row-reverse">
                                             
-                                            <button className="p-2 likebuttons" alt="Retweet"><FontAwesomeIcon icon={faShare} /></button>
+                                            <button className="p-2 likebuttons" alt="Retweet" onClick={()=>{window.location.href='/retweet?tweetId='+this.file.tweetId}}><FontAwesomeIcon icon={faShare} /></button>
                                             <button className="p-3 likebuttons" alt="Comment" style={{ color: "#657786" }} ><FontAwesomeIcon icon={faComment} /> {this.file.comments.length}</button>
                                             <button className="p-2 likebuttons" alt="Favorite" onClick={this.handleFavor} style={this.state.favor == 1 ? { color: "goldenrod" } : { color: '#657786' }} ><FontAwesomeIcon icon={faStar} /></button>
                                             <button className="p-3 likebuttons" alt="Dislike" onClick={this.handleDislike} style={this.state.like == -1 ? { color: "#39aaf9" } : { color: '#657786' }}><FontAwesomeIcon icon={faHeartBroken} /></button>
@@ -280,12 +286,15 @@ class Page extends React.Component {
 }
 
 function addPic(file) {
-    var type = file.image.contentType;
-    var data = file.image.data;
+
     var code='';
 
     let div = document.getElementById("imgbox");
-    code += "<image src='data:"+type+";base64, " + data + "' style='max-width:100%'/>";
+    for (let i = 0; i < file.image.length; i++){
+        var type = file.image[i].contentType;
+        var data = file.image[i].data;
+        code += "<image className='p-1' src='data:" + type + ";base64, " + data + "' style='max-height:"+1000/file.image.length+"px;max-width:" + 98/file.image.length + "%'/> ";
+    }
     //console.log(data)
     div.innerHTML = code;
 }

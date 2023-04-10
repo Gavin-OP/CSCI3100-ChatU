@@ -91,7 +91,7 @@ router.get('/get/:followId', (req, res) => {
     }
 
     // check whether followId is an existing user
-    Follow.findOne({ user_id: loggedInUserId, follow_id: followId})
+    Follow.findOne({ user_id: loggedInUserId, follow_id: followId })
         .then(follow => {
             console.log(follow)
             if (!follow) {
@@ -99,7 +99,7 @@ router.get('/get/:followId', (req, res) => {
                     status: 'Follow'
                 });
             }
-            else return res.json({status:'Following'})
+            else return res.json({ status: 'Following' })
         })
 })
 // unfollow a user for the currently logged-in user

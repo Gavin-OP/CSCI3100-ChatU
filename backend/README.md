@@ -250,6 +250,7 @@ Backend is constructed by NodeJS and Express with MongoDB as the database.
   {
       tweet_id: Num,
       content: Str,
+      time: Date,
   }
   ```
 - Output:
@@ -685,6 +686,21 @@ Backend is constructed by NodeJS and Express with MongoDB as the database.
         "message": "User with ID 12 not found."
     }
     ```
+
+#### `/follow/get/:followId`
+
+- Usage: Return follow status
+
+- GET
+
+- Output:
+
+  Success output:
+
+  ```javascript
+  ```
+
+  
 
 #### `/home/tweet`
 

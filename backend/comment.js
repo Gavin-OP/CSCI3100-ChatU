@@ -9,8 +9,8 @@ const Tweet = require('./tweetSchema');
 
 // create a comment
 router.post('/create', (req, res) => {
-    const tweet_id = req.body.tweet_id;
     const user_id = req.cookies.userId;
+    const tweet_id = req.body.tweet_id;
     const content = req.body.content;
     const time = req.body.time;
 

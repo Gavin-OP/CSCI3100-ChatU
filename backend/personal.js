@@ -70,7 +70,8 @@ router.get('/tweet/:userId', (req, res) => {
         });
 });
 
-router.get('/tweetid/:userId', (req, res) => {
+
+router.get('/tweetId/:userId', (req, res) => {
     const userId = req.params['userId'];
 
     User.findOne({ user_id: userId })
@@ -84,7 +85,6 @@ router.get('/tweetid/:userId', (req, res) => {
             res.json(user.tweet);
         })
 })
-
 
 
 module.exports = router;

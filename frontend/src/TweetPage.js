@@ -210,7 +210,7 @@ class Page extends React.Component {
          headers: {'content-type': 'application/json'}})
         .then(res=>console.log(res))
         .catch(err=>console.log(err))
-        let new_comment={user: this.file.username, avatar: this.file.avatar, content: con, time: t};
+        let new_comment={user: "NO. "+uid, avatar: this.file.avatar, content: con, time: t};
         console.log(new_comment);
         this.file.comments.push(new_comment);
         this.setState({updated:1});
@@ -232,11 +232,12 @@ class Page extends React.Component {
                             <div className="container-fluid d-block my-5">
                                 <div className="container-fluid row">
                                     <div className="col-1">
-                                        <img src={this.file.avatar} alt="Avatar" style={{ width: '48px', height: '48px', borderRadius: '50%', marginRight: '10px' }} />
+                                        <img src={this.file.avatar} alt="Avatar" onClick={()=>{window.location.href='/personal/tweet?userId='+this.file.userId}}
+                                        style={{ width: '48px', height: '48px', borderRadius: '50%', marginRight: '10px' }} />
                                     </div>
                                     <div className="col-7 container offset-0 d-inline-block">
                                         <div className="container row" style={{ fontSize: '24px' }}>
-                                            <div className="col-6">{this.file.username}</div>
+                                            <div className="col-6" onClick={()=>{window.location.href='/personal/tweet?userId='+this.file.userId}}>{this.file.username}</div>
                                             <div className='col-5'>
                                                 <button className="btn btn-primary" onClick={this.handleFollow}>{this.state.follow}</button>
                                             </div>

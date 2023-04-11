@@ -251,7 +251,7 @@ class Page extends React.Component {
                                 <div className="container m-4" style={{ fontSize: '22px', width: '92%' }}>{this.file.tag}</div>
                                 <div className="container m-4" style={{ fontSize: '22px', width: '92%' }}>{this.file.content}</div>
                                 <div className="container m-2 d-flex justify-content-center" id="imgbox" style={{ width: '92%' }}>
-                                    {this.state.type === 1 ? <TweetCard {...this.file.tweet_data} /> : <div></div>}
+                                    {this.state.type === 1 ? <TweetCard tweet_id={this.file.original} /> : <div></div>}
                                 </div>
 
                                 <div className="container m-4" style={{ fontSize: '16px', width: '95%' }}>

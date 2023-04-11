@@ -211,7 +211,7 @@ router.get('/getUser/:userId', (req, res) => {
 
 
 
-// test to upload avatar
+// test to upload avatar it will change to setting if needed
 router.post('/create', upload.single("file"), (req, res) => {
     // req.file can be used to access all file properties
     User.findOne({})

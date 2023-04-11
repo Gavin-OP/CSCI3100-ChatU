@@ -3,14 +3,10 @@ import ScrollToTop from 'react-scroll-to-top';
 import { NavigationBar } from './NavBar';
 import { SearchBar } from './SearchBar';
 import { TweetCard } from './TweetCard'
-import { RetweetCard } from "./RetweetCard";
 import "./HomePage.css"
-import { retweet_data, tweet_data } from "./Test";
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faPlus, faRotateRight } from '@fortawesome/free-solid-svg-icons'
-import ReactDOM from 'react-dom';
 import { UserRecomBox } from './UserRecommendBox';
 import { useState, useEffect } from "react";
+import { createRoot } from 'react-dom/client';
 
 
 // export const tweet_data = {
@@ -77,10 +73,25 @@ export function HomePage() {
     .catch(error => console.error(error));}, []);
     // Fetch the data from the API and update the state
 
-    MapWithDelay(tweets, (item) => {
-        console.log(item);
-    }, 1000);
-    
+
+
+    // function InsertTweetCard(item){
+    //     // Create a div element to hold the tweet card
+    //     const tweetCardContainer = document.createElement('div');
+    //     tweetCardContainer.className = 'tweetCard-home';
+        
+    //     // Create the TweetCard component with the tweet ID passed as prop
+    //     const tweetCard = <TweetCard tweetID={item} />;
+        
+    //     // Render the component inside the tweetCardContainer
+    //     const root = createRoot(tweetCardContainer);
+    //     root.render(tweetCard);
+      
+    //     // Insert the tweet card container after the tweetCardBox
+    //     const tweetCardBox = document.querySelector('.tweetCard-container');
+    //     tweetCardBox.insertAdjacentElement('afterend', tweetCardContainer);
+    //   }
+     
     let table = (
     <div>
         <ScrollToTop />
@@ -96,26 +107,11 @@ export function HomePage() {
             </div>
             <div class="col col2">
                 <SearchBar page={'homepage'} />
-                <div class="col-content">
+                <div class="col-content tweetCard-container">
                     {/* map tweets with Tweetcard function */}
                     {
-                        tweets.map((item) => {
-                            <TweetCard tweetID = {item}/>
-                        })
+                        tweets.map((tweet,i)=><TweetCard tweet_id={tweet}/>)
                     }
-                    
-                    {/* <TweetCard {...tweet_data} />
-                    <RetweetCard {...retweet_data} />
-                    <TweetCard {...tweet_data} />
-                    <TweetCard {...tweet_data} />
-                    <TweetCard {...tweet_data} />
-                    <TweetCard {...tweet_data} />
-                    <TweetCard {...tweet_data} />
-                    <TweetCard {...tweet_data} />
-                    <TweetCard {...tweet_data} />
-                    <TweetCard {...tweet_data} />
-                    <TweetCard {...tweet_data} />
-                    <TweetCard {...tweet_data} /> */}
                 </div>
             </div>
             <div class="col col3">

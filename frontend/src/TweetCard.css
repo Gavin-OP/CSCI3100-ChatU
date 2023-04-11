@@ -216,3 +216,60 @@
     border-radius: 6px;
     cursor: pointer;
 }
+
+.retweet-card-container {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    margin: 20px;
+}
+
+.retweet-card {
+    background-color: #e0e5ec;
+    border-radius: 10px;
+    padding-top: 20px;
+    box-shadow: 5px 5px 10px #bebebe, -5px -5px 10px #ffffff;
+    max-width: 600px;
+    min-height: 225px;
+    overflow: hidden;
+}
+
+
+/* Retweet header with user information and retweet */
+.retweet-header {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    height: 28px;
+    padding-left: 20px;
+    background-color: #e0e5ec;
+}
+
+.retweet-sign {
+    height: 28px;
+    font-size: 14px;
+    margin-top: 3px;
+    color: #657786;
+    padding-left: 13px;
+    text-transform: uppercase;
+}
+
+.retweet-body {
+    display: flex;
+    flex-direction: column;
+    background-color: #e0e5ec;
+    overflow: auto;
+}
+
+
+/* TweetCard styles */
+.retweet-body .tweet-card {
+    padding: 20px;
+    border-radius: 20px;
+    box-shadow: 5px 5px 10px #bebebec9, -5px -5px 10px #ffffffad;
+}
+.retweet-content{
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-top: 20px;
+}

@@ -62,7 +62,7 @@ export function NavigationBar({ page }) {
                         <ul>
                             {/* <li><a href="/personal/tweet">Personal Page</a></li> */}
                             {/* <li><a href="#">Settings</a></li> */}
-                            <li><a id='logout' href='#' onClick={handleLogout}>Log out</a></li>
+                            <li><button id='logout' onClick={handleLogout}>Log out</button></li>
                         </ul>
                     </div>
                 </div>

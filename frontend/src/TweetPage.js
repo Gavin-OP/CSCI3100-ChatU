@@ -56,7 +56,7 @@ export class TweetPage extends React.Component{
                 let new_file={
                     username: user.username,
                     userId: user.user_id,
-                    avatar: "./avatar.png",
+                    avatar: "../avatar.png",
                     time: data.tweet.time,
                     tweetId: data.tweet.tweet_id,
                     content: data.tweet.content,
@@ -203,13 +203,14 @@ class Page extends React.Component {
         var min=time.getMinutes();
         var t = yr + '-' + mon + '-' + day + ' ' + hr + ':' + min;
         let con= document.getElementById("input").value;
+        let uid = getCookieValue("userId");
         fetch('/comment/create',
         { method:'POST',
-         body: JSON.stringify({ user_id: this.file.userId, tweet_id: this.file.tweetId, content: con, time: t}),
+         body: JSON.stringify({ user_id: Number(uid), tweet_id: this.file.tweetId, content: con, time: t}),
          headers: {'content-type': 'application/json'}})
         .then(res=>console.log(res))
         .catch(err=>console.log(err))
-        let new_comment={user: this.file.username, avatar: this.file.avatar, content: con, time: t};
+        let new_comment={user: "NO. "+uid, avatar: this.file.avatar, content: con, time: t};
         console.log(new_comment);
         this.file.comments.push(new_comment);
         this.setState({updated:1});
@@ -231,11 +232,12 @@ class Page extends React.Component {
                             <div className="container-fluid d-block my-5">
                                 <div className="container-fluid row">
                                     <div className="col-1">
-                                        <img src={this.file.avatar} alt="Avatar" style={{ width: '48px', height: '48px', borderRadius: '50%', marginRight: '10px' }} />
+                                        <img src={this.file.avatar} alt="Avatar" onClick={()=>{window.location.href='/personal/tweet?userId='+this.file.userId}}
+                                        style={{ width: '48px', height: '48px', borderRadius: '50%', marginRight: '10px' }} />
                                     </div>
                                     <div className="col-7 container offset-0 d-inline-block">
                                         <div className="container row" style={{ fontSize: '24px' }}>
-                                            <div className="col-6">{this.file.username}</div>
+                                            <div className="col-6" onClick={()=>{window.location.href='/personal/tweet?userId='+this.file.userId}}>{this.file.username}</div>
                                             <div className='col-5'>
                                                 <button className="btn btn-primary" onClick={this.handleFollow}>{this.state.follow}</button>
                                             </div>
@@ -251,7 +253,7 @@ class Page extends React.Component {
                                 <div className="container m-4" style={{ fontSize: '22px', width: '92%' }}>{this.file.tag}</div>
                                 <div className="container m-4" style={{ fontSize: '22px', width: '92%' }}>{this.file.content}</div>
                                 <div className="container m-2 d-flex justify-content-center" id="imgbox" style={{ width: '92%' }}>
-                                    {this.state.type === 1 ? <TweetCard {...this.file.tweet_data} /> : <div></div>}
+                                    {this.state.type === 1 ? <TweetCard tweet_id={this.file.original} /> : <div></div>}
                                 </div>
 
                                 <div className="container m-4" style={{ fontSize: '16px', width: '95%' }}>
@@ -304,10 +306,15 @@ class CommentCard extends React.Component {
     constructor(props) {
         super(props);
         this.comment = this.props.comment;
-        this.state = { isload: 0 };
-        this.avatar = './avatar.png';
+        this.state = { isload: 0, username: 'Loading', avatar: '../avatar.png' };
+
     }
     componentDidMount() {
+        fetch('/user/getUser/'+this.comment.user_id)
+        .then(res=>res.json())
+        .then(data=>{
+            this.setState({username: data.username})
+        })
         this.setState({ isload: 1 });
     }
     addCom() {
@@ -327,13 +334,12 @@ class CommentCard extends React.Component {
                 <div className="container-fluid commentcard">
                     <div className="container row p-2">
                         <div className="col-1">
-                            <img src={this.avatar} alt="Avatar" style={{ width: '32px', height: '32px', borderRadius: '50%', marginRight: '10px' }} />
+                            <img src={this.state.avatar} alt="Avatar" style={{ width: '32px', height: '32px', borderRadius: '50%', marginRight: '10px' }} />
                         </div>
                         <div className="col-5 container offset-0 d-inline-block">
                             <div className="container row" style={{ fontSize: '18px' }}>
-                                <div className="col-6 p-2">{this.comment.user}</div>
-
-                                
+                                <div className="col-6 p-2">{this.state.username}</div>
+ 
                             </div>
                         </div>
                         <div className="col-6 container">

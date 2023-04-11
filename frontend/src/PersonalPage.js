@@ -185,7 +185,7 @@ class PersonPage extends React.Component{
                               <button className='btn btn-outline-primary' style={{width:'12vw'}} onClick={()=>{window.location.href='/personal/following?userId='+this.info.userId}}>Followers <br/>{this.info.followNum}</button>
                          </div>
                          <div className='p-2 border-1 text-center'>
-                              <button className='btn btn-outline-primary' style={{width:'12vw'}} onClick={()=>{window.location.href='/personal/fan?userId='+this.info.userId}}>Fans <br/>{this.info.fansNum}</button>
+                              <button className='btn btn-outline-primary' style={{width:'12vw'}} onClick={()=>{window.location.href='/personal/fans?userId='+this.info.userId}}>Fans <br/>{this.info.fansNum}</button>
                          </div>
                          <div className='p-2 border-1 text-center'>
                               <a href='#tweetcontainer' className='btn btn-outline-primary' style={{width:'12vw'}}>Tweets <br/>{this.info.tweets===undefined ? 0: this.info.tweets.length}</a>

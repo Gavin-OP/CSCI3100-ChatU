@@ -15,7 +15,8 @@ import { Post } from './Post'
 import { Retweet } from './Retweet'
 import { TweetPage } from './TweetPage'
 import { FollowPage } from './FollowPage'
-import { Settings } from "./Settings";
+import { Setting } from "./Setting";
+import { BlackList } from './BlackList'
 // import { ChatPage } from "./ChatPage";
 function App() {
   return (
@@ -33,13 +34,13 @@ function App() {
           <Route path="/personal/fav" element={<PersonalPage page="favourite" />} />
           <Route path="/personal/following" element={<FollowPage page="following" />} />
           <Route path="/personal/fans" element={<FollowPage page="fans" />} />
-          <Route path="/personal/blacklist" element={<PersonalPage page="blacklist" />} />
+          <Route path="/personal/blacklist" element={<BlackList />} />
           <Route path='/test' element={<Test />} />
           <Route path='/post' element={<Post />} />
           <Route path='/retweet' element={<Retweet />} />
           <Route path='/tweet' element={<TweetPage />} />
-          {/* <Route path="/settings" element={<Settings />} />
-          <Route path="/chat" element={<ChatPage />} /> */}
+          <Route path="/setting" element={<Setting />} />
+
           <Route path='/*' element={<UnderDevelopment />} />
         </Routes>
       </BrowserRouter>

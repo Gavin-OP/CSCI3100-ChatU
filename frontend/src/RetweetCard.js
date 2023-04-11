@@ -22,9 +22,8 @@ export function RetweetCard(props) {
                         <div className="retweet-sign">retweet</div>
                     </div>
                     <div className='horizontal-line'></div>
-
                     <div className="retweet-body">
-                        <TweetCard {...props} />
+                        <TweetCard tweet_id={props.OriginalTweetId} />
                     </div>
                 </div>
             </div>

@@ -31,7 +31,6 @@ export function Retweet() {
     const handlePost=()=>{
         let content = document.getElementById('formContent').value;
         let tag = document.getElementById('formTag').value;
-        let picture = document.getElementById('formPictures').files[0];
         let privacy = document.getElementById('formPrivacy').value;
         const time = new Date();
         var yr = time.getFullYear();
@@ -43,7 +42,6 @@ export function Retweet() {
         let formdata = new FormData();
         formdata.append("content", content);
         formdata.append("tag", tag);
-        formdata.append("image", picture);
         formdata.append("privacy", privacy);
         formdata.append("time", t);
         formdata.append("original",  tid);
@@ -64,7 +62,7 @@ export function Retweet() {
                     <Col md={{ span: 8, offset: 2 }} style={{ backgroundColor: '#F7F7F7' }}>
                         <Container fluid >
                             <Container fluid>
-                                <TweetCard {...tweet_data} />
+                                <TweetCard tweetId={tid} />
                             </Container>
                             <Form>
                                 <Form.Group className="m-3" controlId="formContent" size='lg'>

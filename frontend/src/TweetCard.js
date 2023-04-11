@@ -17,6 +17,8 @@ function addPic(file) {
 }
 
 export function TweetCard(tweetID){
+
+
     
     //Handle tweet card state
     const [state, setState] = useState({
@@ -53,9 +55,14 @@ export function TweetCard(tweetID){
             if(data.tweet.dislike.includes(current_user_id)){setProps(preProps=>({...preProps,dislikeStatus:1, dislikeLight: '#39aaf9'})); setState({...state, dislikeLight: '#39aaf9',});} 
             else {setProps(preProps=>({...preProps,dislikeStatus:0,dislikeLight: '#657786'}));setState(prevState=>({...prevState, dislikeLight: '#657786',}));}
             //Set the star status
-            if (data.user.favorite.includes(Number(current_user_id))){
-                setProps(preProps=>({...preProps,starStatus:1}));
-            }
+            fetch('/user/getUser/'+current_user_id)
+            .then(res=>res.json())
+            .then(data=>{
+                if (data.favorite.includes(Number(tweetID.tweet_id))){
+                    setProps(preProps=>({...preProps,starStatus:1, starLight: '#d92534'})); setState(prevState=>({...prevState, starLight: '#d92534',}));
+                }
+            })
+            
             setProps(preProps=>({...preProps,
                 userId:data.tweet.user,
                 tweetId:data.tweet.tweet_id,
@@ -308,66 +315,141 @@ export function TweetCard(tweetID){
     function handleOpen(){
         window.location.href='/tweet?tweetId='+props.tweetId;
     }
+    // function to open user page
+    function handleOpenUser(){
+        window.location.href='/user?userId='+props.userId;
+    }
+    // return to the login page if user is not logged in
+    function handleLogin(){
+        window.location.href='/login';
+    }
+    // card for logged in user
+    if(getCookieValue('userId') !== ""){
+        return (
+            <div className='tweet-card-container'>
+                <div className="tweet-card" >
+
+                    {/* User information and Tweet Information */}
+                    <div className="tweet-header">
+                        <div className="avatar">
+                            <img src={props.avatarUrl} alt="Avatar" />
+                        </div>
+                        <div className="user-info">
+                            <div className="username">{props.username}</div>
+                            <div className='follow'>
+                                <button className="follow-button" onClick={handleFollow} style={{'background':state.followLight}}>{props.followStatus}</button>
+                            </div>
+                            <div className='vertical-line'></div>
+                        </div>
+                        <div className="tweet-id">{props.tweetId}</div>
+                    </div>
+                    <div className='horizontal-line'></div>
+
+
+                    {/* Tweet Content */}
+                    <div className="tweet-content">
+                        {/* Tweet Image */}
+                        <div className='squared-image-container' style={{ display: state.picDisplay }}>
+                            <div className="tweet-image">
+                                <img src={props.imageSrc} alt="Tweet Pic" />
+                            </div>
+                        </div>
+                        {/* Tweet content and action buttons */}
+                        <div className='tweet-text-container'>
+                            <div className="tweet-text" onClick={handleOpen}>{props.tweetText}</div>
+                            <div className="tweet-actions">
+                                <button className="like-button" style={{ color: state.likeLight }} onClick={handleLike}><FontAwesomeIcon icon={faHeart} /></button>
+                                <div className="action-number">{props.likeCount}</div>
+                                <button className="dislike-button" style={{ color: state.dislikeLight }} onClick={handleDislike}><FontAwesomeIcon icon={faHeartBroken} /></button>
+                                <div className="action-number">{}</div>
+                                <button className="favorite-button" style={{ color: state.starLight }} onClick={handleStar}><FontAwesomeIcon icon={faStar} /></button>
+                                <div className="action-number">{}</div>
+                                <button className="comment-button" style={{ color: state.commentLight }} onClick={toggleCommentInput}><FontAwesomeIcon icon={faComment} /></button>
+                                <div className="action-number">{props.commentCount}</div>
+                                <button className="retweet-button"><FontAwesomeIcon icon={faShare} /></button>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    {/* Comment input */}
+                    <div className="comment-input" style={{ display: state.commentDisplay }}>
+                        <input type="text" placeholder="Comment..." value={comment} onChange={HandleComment}/>
+                        <button type='submit' onClick={event=>sendComment(event)} className='send-comment'><FontAwesomeIcon icon={faPaperPlane} /></button>
+                    </div>
+
+                </div >
+            </div>
+        );
+    }
+
+//card for not logged in user
+else{
     return (
         <div className='tweet-card-container'>
-            <div className="tweet-card" >
+        <div className="tweet-card" >
 
-                {/* User information and Tweet Information */}
-                <div className="tweet-header">
-                    <div className="avatar">
-                        <img src={props.avatarUrl} alt="Avatar" />
-                    </div>
-                    <div className="user-info">
-                        <div className="username">{props.username}</div>
-                        <div className='follow'>
-                            <button className="follow-button" onClick={handleFollow} style={{'background':state.followLight}}>{props.followStatus}</button>
-                        </div>
-                        <div className='vertical-line'></div>
-                    </div>
-                    <div className="tweet-id">{props.tweetId}</div>
+            {/* User information and Tweet Information */}
+            <div className="tweet-header">
+                <div className="avatar">
+                    <img src={props.avatarUrl} alt="Avatar" />
                 </div>
-                <div className='horizontal-line'></div>
-
-
-                {/* Tweet Content */}
-                <div className="tweet-content">
-                    {/* Tweet Image */}
-                    <div className='squared-image-container' style={{ display: state.picDisplay }}>
-                        <div className="tweet-image">
-                            <img src={props.imageSrc} alt="Tweet Pic" />
-                        </div>
+                <div className="user-info">
+                    <div className="username">{props.username}</div>
+                    <div className='follow'>
+                        <button className="follow-button" onClick={handleLogin} style={{'background':'#ff4444' }}>{'follow'}</button>
                     </div>
-                    {/* Tweet content and action buttons */}
-                    <div className='tweet-text-container'>
-                        <div className="tweet-text" onClick={handleOpen}>{props.tweetText}</div>
-                        <div className="tweet-actions">
-                            <button className="like-button" style={{ color: state.likeLight }} onClick={handleLike}><FontAwesomeIcon icon={faHeart} /></button>
-                            <div className="action-number">{props.likeCount}</div>
-                            <button className="dislike-button" style={{ color: state.dislikeLight }} onClick={handleDislike}><FontAwesomeIcon icon={faHeartBroken} /></button>
-                            <div className="action-number">{}</div>
-                            <button className="favorite-button" style={{ color: state.starLight }} onClick={handleStar}><FontAwesomeIcon icon={faStar} /></button>
-                            <div className="action-number">{}</div>
-                            <button className="comment-button" style={{ color: state.commentLight }} onClick={toggleCommentInput}><FontAwesomeIcon icon={faComment} /></button>
-                            <div className="action-number">{props.commentCount}</div>
-                            <button className="retweet-button"><FontAwesomeIcon icon={faShare} /></button>
-                        </div>
+                    <div className='vertical-line'></div>
+                </div>
+                <div className="tweet-id">{props.tweetId}</div>
+            </div>
+            <div className='horizontal-line'></div>
+
+
+            {/* Tweet Content */}
+            <div className="tweet-content">
+                {/* Tweet Image */}
+                <div className='squared-image-container' style={{ display: state.picDisplay }}>
+                    <div className="tweet-image">
+                        <img src={props.imageSrc} alt="Tweet Pic" />
                     </div>
                 </div>
-
-
-                {/* Comment input */}
-                <div className="comment-input" style={{ display: state.commentDisplay }}>
-                    <input type="text" placeholder="Comment..." value={comment} onChange={HandleComment}/>
-                    <button type='submit' onClick={event=>sendComment(event)} className='send-comment'><FontAwesomeIcon icon={faPaperPlane} /></button>
+                {/* Tweet content and action buttons */}
+                <div className='tweet-text-container'>
+                    <div className="tweet-text" onClick={handleOpen}>{props.tweetText}</div>
+                    <div className="tweet-actions">
+                        <button className="like-button" style={{ color: '#657786' }} onClick={handleLogin}><FontAwesomeIcon icon={faHeart} /></button>
+                        <div className="action-number">{props.likeCount}</div>
+                        <button className="dislike-button" style={{ color: '#657786' }} onClick={handleLogin}><FontAwesomeIcon icon={faHeartBroken} /></button>
+                        <div className="action-number">{}</div>
+                        <button className="favorite-button" style={{ color: '#657786' }} onClick={handleLogin}><FontAwesomeIcon icon={faStar} /></button>
+                        <div className="action-number">{}</div>
+                        <button className="comment-button" style={{ color: '#657786' }} onClick={handleLogin}><FontAwesomeIcon icon={faComment} /></button>
+                        <div className="action-number">{props.commentCount}</div>
+                        <button className="retweet-button"><FontAwesomeIcon icon={faShare} /></button>
+                    </div>
                 </div>
+            </div>
 
-            </div >
-        </div>
-    );
+
+            {/* Comment input */}
+            <div className="comment-input" style={{ display: state.commentDisplay }}>
+                <input type="text" placeholder="Comment..." value={comment} onChange={HandleComment}/>
+                <button type='submit' onClick={event=>sendComment(event)} className='send-comment'><FontAwesomeIcon icon={faPaperPlane} /></button>
+            </div>
+
+        </div >
+    </div>
+    )
 }
+}
+
+
+// Get cookie value
 function getCookieValue(name) {
     let result = document.cookie.match("(^|[^;]+)\\s*" + name + "\\s*=\\s*([^;]+)")
     return result ? result.pop() : ""
 }
+
 
 

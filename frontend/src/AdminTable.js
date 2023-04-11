@@ -9,35 +9,23 @@ import { useState, useEffect } from 'react';
 //Delete a tweet
 
 export function DeleteTweet(tweetID, userID) {
-    console.log('/admin/deleteTweet1/' + String(tweetID) + '/' + String(userID))
-    fetch('/tweet/delete####/' + String(tweetID) + '/' + String(userID), {
+    fetch('/admin/deleteTweet/' + String(tweetID)+'/'+userID, {
         method: 'GET'
     })
-        .then(response => response.json())
-        .then(data => {
-            console.log(data)
-            // update the search result
-            alert('Delete successfully!')
-        })
-        .catch(error => {
-            console.error(error);
-        });
-
+    .then(response => response.json())
+    .then(data=>alert(data.message))
+    .catch(error => {
+        console.error(error);
+    });
 }
 
 //Delete a comment
 export function DeleteComment(commentID) {
-    console.log('/commnet/delete/' + String(commentID))
     fetch('/comment/delete/' + String(commentID), {
-        method: 'DELETE'
+        method: 'GET'
     })
-        .then(response => {
-            if (!response.ok) {
-                throw new Error('Failed to delete comment');
-            }
-            // update the search result
-            alert('Delete successfully!')
-        })
+        .then(response => response.json())
+        .then(data=>alert(data.message))
         .catch(error => {
             console.error(error);
         });
@@ -45,21 +33,14 @@ export function DeleteComment(commentID) {
 }
 //Delete a user
 export function DeleteUser(userID) {
-    console.log('/user/delete/' + String(userID))
-    fetch('/user/delete/' + String(userID), {
-        method: 'DELETE'
+    fetch('/admin/deleteUser/' + String(userID), {
+        method: 'GET'
     })
-        .then(response => {
-            if (!response.ok) {
-                throw new Error('Failed to delete comment');
-            }
-            // update the search result
-            alert('Delete successfully!')
-        })
-        .catch(error => {
-            console.error(error);
-        });
-
+    .then(response => response.json())
+    .then(data=>alert(data.message))
+    .catch(error => {
+        console.error(error);
+    });
 }
 //Ban a user
 function BanUser(userID) {

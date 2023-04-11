@@ -159,6 +159,7 @@ router.get('/getUser/:userId', (req, res) => {
                         }
 
                         const user_info = {
+                            favorite: user.favorite,
                             user_id: user.user_id,
                             username: user.username,
                             description: user.description,
@@ -182,6 +183,7 @@ router.get('/getUser/:userId', (req, res) => {
                     });
             } else {
                 const user_info = {
+                    favorite: user.favorite,
                     user_id: user.user_id,
                     username: user.username,
                     description: user.description,

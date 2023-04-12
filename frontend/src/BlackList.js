@@ -51,8 +51,10 @@ class BlackPage extends React.Component{
                <NavigationBar page={'user'} />
                </div> 
      
-               <div className="container col-8 offset-2">
-                    <button class="return-button"> <i class="fa fa-arrow-left"></i></button>
+               <div className="container col-8 offset-2" style={{backgroundColor:'#e0e5ec'}}>
+                    <div className="container m-2"><button className='btn m-3' onClick={() => { window.history.back() }} style={{color:'#db2431',borderColor:'#a6366a'}}>
+                         <i className="bi bi-arrow-left"></i> Back to Previous Page</button>
+                    </div>
      
                     <div className="container-fluid text-center">
                         <h2>Black List</h2>

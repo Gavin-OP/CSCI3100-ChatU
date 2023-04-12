@@ -129,7 +129,18 @@ class Page extends React.Component {
             this.setState({ type: 1 });
         }
     }
+    componentDidUpdate(){
+        if (this.state.follow === 'Self'){
+             document.getElementById('followbtn').style.background='#c9c9c9';
+        }
+        else if (this.state.follow === 'Following'){
+             document.getElementById('followbtn').style.background='#c9c9c9';
+        }
+        else {
+             document.getElementById('followbtn').style.background='#ff4444';
+        }
 
+   }
     handleLike = () => {
         if (this.state.like === 1) {
             this.setState({ like: 0 });
@@ -225,7 +236,7 @@ class Page extends React.Component {
                         <div className="container d-block col-8 offset-2" style={{ backgroundColor: '#F7F7F7', minHeight: '90vh' }}>
                             <br></br>
                             <div className='container'>
-                                <button className='btn btn-outline-primary' onClick={() => { window.history.back() }}><i className="bi bi-arrow-left"></i> Back to Homepage</button>
+                                <button className='btn btn-outline-danger' onClick={() => { window.history.back() }}><i className="bi bi-arrow-left"></i> Back to Homepage</button>
                                 <br></br>
 
                             </div>
@@ -239,7 +250,7 @@ class Page extends React.Component {
                                         <div className="container row" style={{ fontSize: '24px' }}>
                                             <div className="col-6" onClick={()=>{window.location.href='/personal/tweet?userId='+this.file.userId}}>{this.file.username}</div>
                                             <div className='col-5'>
-                                                <button className="btn btn-primary" onClick={this.handleFollow}>{this.state.follow}</button>
+                                                <button id="followbtn" className="btn" onClick={this.handleFollow} style={{color:'white'}}>{this.state.follow}</button>
                                             </div>
                                             <div className='col-1 container d-block'><div style={{ width: '1.5px', height: '100%', backgroundColor: 'gray' }}></div></div>
                                         </div>
@@ -271,7 +282,7 @@ class Page extends React.Component {
                                 </div>
                                 <div className="container m-4" style={{ fontSize: '22px', width: '92%' }}>
                                     <div className="container-fluid comment-input" id="inputcomment">
-                                        <input type="text" id="input" placeholder="Comment..." />
+                                        <input type="text" id="input" placeholder="Comment..." required/>
                                         <button type='submit' onClick={this.sendComment} className='btn pull-right'><FontAwesomeIcon icon={faPaperPlane} /></button>
                                     </div>
                                 </div>

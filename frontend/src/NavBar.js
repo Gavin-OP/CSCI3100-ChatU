@@ -7,13 +7,14 @@ export function NavigationBar({ page }) {
         settingDisplay: ''
     });
     let uid = getCookieValue("userId");
+    let isadmin = getCookieValue("isAdmin");
     function handleLogout(){
         fetch('/user/logout',{
             method: 'POST'
         })
         .then(response => response.json())
         .then(data => {
-            alert(data.message);
+            //alert(data.message);
             window.location.href = "/login";
         })
         .catch(error => {
@@ -25,24 +26,47 @@ export function NavigationBar({ page }) {
 
     // Navigation bar for user
     if (page === "user") {
-        navContent = (
-            <nav>
-                <img src="../logo_colorful.svg" alt="Logo" />
-                <ul>
-                    <li><a href="/home">Home</a></li>
-                    <li><a href={"/personal/tweet?userId="+uid}>Personal page</a></li>
-                </ul>
-                <div className="user-avatar">
-                    <img src="../avatar.png" alt="User Avatar" />
-                    <div className="dropdown-menu">
-                        <ul>
-                            <li><a href="/setting">Settings</a></li>
-                            <li><button id='logout' onClick={handleLogout}>Log out</button></li>
-                        </ul>
+        if (isadmin === 'true') {
+            navContent = (
+                <nav>
+                    <img src="../logo_colorful.svg" alt="Logo" />
+                    <ul>
+                        <li><a href="/home">Home</a></li>
+                        <li><a href={"/personal/tweet?userId="+uid}>Personal page</a></li>
+                        <li><a href="/admin/tweet">Admin</a></li>
+                    </ul>
+                    <div className="user-avatar">
+                        <img src="../avatar.png" alt="User Avatar" />
+                        <div className="dropdown-menu">
+                            <ul>
+                                <li><a href="/setting">Settings</a></li>
+                                <li><div id='logout' onClick={handleLogout}>Log out</div></li>
+                            </ul>
+                        </div>
                     </div>
-                </div>
-            </nav >
-        );
+                </nav >
+            );
+        }
+        else {
+            navContent = (
+                <nav>
+                    <img src="../logo_colorful.svg" alt="Logo" />
+                    <ul>
+                        <li><a href="/home">Home</a></li>
+                        <li><a href={"/personal/tweet?userId="+uid}>Personal page</a></li>
+                    </ul>
+                    <div className="user-avatar">
+                        <img src="../avatar.png" alt="User Avatar" />
+                        <div className="dropdown-menu">
+                            <ul>
+                                <li><a href="/setting">Settings</a></li>
+                                <li><div id='logout' onClick={handleLogout}>Log out</div></li>
+                            </ul>
+                        </div>
+                    </div>
+                </nav >
+            );
+        }
     }
 
     // Navigation bar for admin
@@ -54,6 +78,7 @@ export function NavigationBar({ page }) {
                     <li><a href="/admin/tweet">Tweet</a></li>
                     <li><a href="/admin/comment">Comment</a></li>
                     <li><a href="/admin/user">User</a></li>
+                    <li><a href="/home">Home</a></li>
                 </ul>
                 <div className="user-avatar">
                     <img src="../avatar.png" alt="User Avatar" />
@@ -61,7 +86,7 @@ export function NavigationBar({ page }) {
                         <ul>
                             {/* <li><a href="/personal/tweet">Personal Page</a></li> */}
                             {/* <li><a href="#">Settings</a></li> */}
-                            <li><button id='logout' onClick={handleLogout}>Log out</button></li>
+                            <li><div id='logout' onClick={handleLogout}>Log out</div></li>
                         </ul>
                     </div>
                 </div>
@@ -71,46 +96,92 @@ export function NavigationBar({ page }) {
 
     // Navigation bar for homepage
     else if (page === "homepage") {
-        navContent = (
-            <nav>
-                <img src="../logo_colorful.svg" alt="Logo" />
-                <ul>
-                    <li><a href="/home">Home</a></li>
-                    <li><a href={"/personal/tweet?userId="+uid}>Personal page</a></li>
-                </ul>
-                <div className="user-avatar">
-                    <img src="../avatar.png" alt="User Avatar" />
-                    <div className="dropdown-menu">
-                        <ul>
-                            <li><a href="/setting">Settings</a></li>
-                            <li><button id='logout' onClick={handleLogout}>Log out</button></li>
-                        </ul>
+        if (isadmin === 'true') {
+            navContent = (
+                <nav>
+                    <img src="../logo_colorful.svg" alt="Logo" />
+                    <ul>
+                        <li><a href="/home">Home</a></li>
+                        <li><a href={"/personal/tweet?userId="+uid}>Personal page</a></li>
+                        <li><a href="/admin/tweet">Admin</a></li>
+                    </ul>
+                    <div className="user-avatar">
+                        <img src="../avatar.png" alt="User Avatar" />
+                        <div className="dropdown-menu">
+                            <ul>
+                                <li><a href="/setting">Settings</a></li>
+                                <li><div id='logout' onClick={handleLogout}>Log out</div></li>
+                            </ul>
+                        </div>
                     </div>
-                </div>
-            </nav >
-        );
+                </nav >
+            );
+        }
+        else {
+            navContent = (
+                <nav>
+                    <img src="../logo_colorful.svg" alt="Logo" />
+                    <ul>
+                        <li><a href="/home">Home</a></li>
+                        <li><a href={"/personal/tweet?userId="+uid}>Personal page</a></li>
+                    </ul>
+                    <div className="user-avatar">
+                        <img src="../avatar.png" alt="User Avatar" />
+                        <div className="dropdown-menu">
+                            <ul>
+                                <li><a href="/setting">Settings</a></li>
+                                <li><div id='logout' onClick={handleLogout}>Log out</div></li>
+                            </ul>
+                        </div>
+                    </div>
+                </nav >
+            );
+        }
     }
 
     // Navigation bar for personalpage
     else if (page === "personalpage") {
-        navContent = (
-            <nav>
-                <img src="../logo_colorful.svg" alt="Logo" />
-                <ul>
-                    <li><a href="/home">Home</a></li>
-                    <li><a href={"/personal/tweet?userId="+uid}>Personal page</a></li>
-                </ul>
-                <div className="user-avatar">
-                    <img src="../avatar.png" alt="User Avatar" />
-                    <div className="dropdown-menu">
-                        <ul>
-                            <li><a href="/setting">Settings</a></li>
-                            <li><button id='logout' onClick={handleLogout}>Log out</button></li>
-                        </ul>
+        if (isadmin === 'true') {
+            navContent = (
+                <nav>
+                    <img src="../logo_colorful.svg" alt="Logo" />
+                    <ul>
+                        <li><a href="/home">Home</a></li>
+                        <li><a href={"/personal/tweet?userId="+uid}>Personal page</a></li>
+                        <li><a href="/admin/tweet">Admin</a></li>
+                    </ul>
+                    <div className="user-avatar">
+                        <img src="../avatar.png" alt="User Avatar" />
+                        <div className="dropdown-menu">
+                            <ul>
+                                <li><a href="/setting">Settings</a></li>
+                                <li><div id='logout' onClick={handleLogout}>Log out</div></li>
+                            </ul>
+                        </div>
                     </div>
-                </div>
-            </nav >
-        );
+                </nav >
+            );
+        }
+        else {
+            navContent = (
+                <nav>
+                    <img src="../logo_colorful.svg" alt="Logo" />
+                    <ul>
+                        <li><a href="/home">Home</a></li>
+                        <li><a href={"/personal/tweet?userId="+uid}>Personal page</a></li>
+                    </ul>
+                    <div className="user-avatar">
+                        <img src="../avatar.png" alt="User Avatar" />
+                        <div className="dropdown-menu">
+                            <ul>
+                                <li><a href="/setting">Settings</a></li>
+                                <li><div id='logout' onClick={handleLogout}>Log out</div></li>
+                            </ul>
+                        </div>
+                    </div>
+                </nav >
+            );
+        }
     }
 
     // Navigation bar for login page

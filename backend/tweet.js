@@ -382,14 +382,14 @@ router.get('/getTweet/:tweetId', (req, res) => {
         });
     }
 
-    if (!req.params['tweetId']) {
+    if (!parseInt(req.params['tweetId'])) {
         return res.status(400).json({
             message: 'Failed to retrieve tweet information. The tweet_id given is not valid.'
         });
     }
 
     Tweet.findOne({
-        tweet_id: req.params['tweetId']
+        tweet_id: parseInt(req.params['tweetId'])
     })
 
         .exec()

@@ -128,7 +128,7 @@ Backend is constructed by NodeJS and Express with MongoDB as the database.
   Success output:
   ```javascript
   [
-      {
+    {
           "user_id": 1,
           "username": "admin",
           "email": "admin",
@@ -142,6 +142,150 @@ Backend is constructed by NodeJS and Express with MongoDB as the database.
       }
   ]
   ```
+
+#### `/search/searchTweet`
+
+- Usage: return list of tweet_id or the details of a tweet given a search string called 'search'
+- POST
+- If 'search' consists of numbers only, search tweets by user_id given in 'search' (exact match), return list of tweet_ids as result:
+    - Input:
+ ```javascript
+  [
+      {
+        "search": "2"
+      } 
+  ]
+  ```
+   - Output:
+   ```javascript
+  [
+    {
+    "tweetId": [
+        1,
+        2,
+        3
+      ]
+    }
+  ]
+  ```
+  - If 'search' start with a '$' and follows with a string that contains only letter, search tweets by tag given in 'search' (exact match, case-insensitive), return list of tweet_ids as results:
+    - Input:
+     ```javascript
+  [
+    {
+    "search": "$discussion"
+    }
+  ]
+  ```
+    - Output:
+    ```javascript
+  [
+     {
+        "tweetId": [
+            13,
+            14
+        ]
+     }
+  ]
+  ```
+  - If 'search' starts with a '#' and follows with a string that contains only numbers, search tweets by tweet_id given in 'search' (exact match, can only return one result):
+   - Input:
+   ```javascript
+  [
+    {
+    "search": "#1"
+    }
+  ]
+  ```
+   - Output:
+   ```javascript
+  [
+    {
+    "tweet_id": "1",
+    "content": "This is the first tweet of ChatU",
+    "user": "2",
+    "time": "2023-04-06T01:38:28.052Z",
+    "original": -1,
+    "privacy_state": false,
+    "like": [
+        8
+    ],
+    "dislike": [
+        4
+    ],
+    "tag": "life"
+    }
+  ]
+  ```
+- If it is none of the 3 cases above, search tweets by keyword(s) in the string 'search' (partial match), return the list of tweet_ids of the matched tweets as result
+  - Input:
+    ```javascript
+  [
+    {
+    "search": "hat"
+    }
+  ]
+  ```
+  - Output:
+   ```javascript
+  [
+    {
+    "tweetId": [
+        1,
+        2,
+        13
+    ]
+    }
+  ]
+  ```
+
+
+#### `/search/searchUser`
+- Usage: search user by keyword given in a string called 'search'
+- POST
+- Input:
+```javascript
+  [
+    {
+    "search": "Gol"
+    }
+  ]
+```
+- Output:
+```javascript
+  [
+    {
+        "user_id": 8,
+        "username": "Golden Fish",
+        "email": "123456@com",
+        "ban": false
+    }
+  ]
+```
+
+#### `/search/searchComment`
+- Usage: search comment by keyword given in a string called 'search'
+- POST
+- Input:
+```javascript
+  [
+    {
+    "search": "con"
+    }
+  ]
+```
+- Output:
+```javascript
+  [
+    {
+        "comment_id": 1,
+        "tweet_id": 1,
+        "user_id": 4,
+        "time": "2023-04-07T10:55:47.276Z",
+        "content": "Congrats"
+    }
+  ]
+```
 
 #### `/blacklist/add/:userId`
 

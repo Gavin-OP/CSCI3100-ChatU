@@ -24,7 +24,7 @@ router.post('/searchTweet', (req, res) =>{
                 list = []
                 i = 0
                 while(i < matchedTweets.length) {
-                    list.push({id: matchedTweets[i].tweet_id, user_id: matchedTweets[i].user})
+                    list.push(matchedTweets[i].tweet_id)
                     i++
                 }
 
@@ -103,7 +103,7 @@ router.post('/searchTweet', (req, res) =>{
                         time: matchedTweet.time,
                         original: matchedTweet.original,
                         privacy_state: matchedTweet.privacy_state,
-                        image: matchedTweet.image,
+                        //image: matchedTweet.image,
                         like: matchedTweet.like,
                         dislike: matchedTweet.dislike,
                         tag: matchedTweet.tag 
@@ -129,7 +129,7 @@ router.post('/searchTweet', (req, res) =>{
                         list = []
                         i = 0
                         while(i < matchedTweets.length) {
-                            list.push({id: matchedTweets[i].tweet_id, tag: matchedTweets[i].tag})
+                            list.push(matchedTweets[i].tweet_id)
                             i++
                         }
 

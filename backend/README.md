@@ -184,7 +184,7 @@ Backend is constructed by NodeJS and Express with MongoDB as the database.
             "tweetId": [
                  13,
                  14
-            ]
+              ]
           }
        ]
     ```
@@ -220,12 +220,12 @@ Backend is constructed by NodeJS and Express with MongoDB as the database.
 - If it is none of the 3 cases above, search tweets by keyword(s) in the string 'search' (partial match), return the list of tweet_ids of the matched tweets as result
   - Input:
     ```javascript
-  [
-    {
-    "search": "hat"
-    }
-  ]
-  ```
+         [
+            {
+               "search": "hat"
+            }
+         ]
+     ```
   - Output:
    ```javascript
   [

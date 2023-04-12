@@ -62,7 +62,7 @@ export function Retweet() {
                     <Col md={{ span: 8, offset: 2 }} style={{ backgroundColor: '#F7F7F7' }}>
                         <Container fluid >
                             <Container fluid>
-                                <TweetCard tweetId={tid} />
+                                <TweetCard tweet_id={tid} />
                             </Container>
                             <Form>
                                 <Form.Group className="m-3" controlId="formContent" size='lg'>

@@ -452,6 +452,11 @@ export function TweetCard(tweetID){
     function handleLogin(){
         window.location.href='/login';
     }
+    //handle retweet
+    function handleRetweetBtn(){
+        window.location.href='/retweet?tweetId='+props.tweetId;
+    } 
+
     // card for logged in user
     if(!isRetweet){
         if(getCookieValue('userId') !== ""){
@@ -496,7 +501,7 @@ export function TweetCard(tweetID){
                                     <div className="action-number">{}</div>
                                     <button className="comment-button" style={{ color: state.commentLight }} onClick={toggleCommentInput}><FontAwesomeIcon icon={faComment} /></button>
                                     <div className="action-number">{props.commentCount}</div>
-                                    <button className="retweet-button"><FontAwesomeIcon icon={faShare} /></button>
+                                    <button className="retweet-button" onClick={handleRetweetBtn}><FontAwesomeIcon icon={faShare} /></button>
                                 </div>
                             </div>
                         </div>
@@ -556,7 +561,7 @@ export function TweetCard(tweetID){
                                 <div className="action-number">{}</div>
                                 <button className="comment-button" style={{ color: '#657786' }} onClick={handleLogin}><FontAwesomeIcon icon={faComment} /></button>
                                 <div className="action-number">{props.commentCount}</div>
-                                <button className="retweet-button" ><FontAwesomeIcon icon={faShare} /></button>
+                                <button className="retweet-button" onClick={handleRetweetBtn}><FontAwesomeIcon icon={faShare} /></button>
                             </div>
                         </div>
                     </div>
@@ -639,7 +644,7 @@ export function TweetCard(tweetID){
                                             <div className="action-number">{}</div>
                                             <button className="comment-button" style={{ color: state.commentLight }} onClick={toggleCommentInput}><FontAwesomeIcon icon={faComment} /></button>
                                             <div className="action-number">{props.commentCount}</div>
-                                            <button className="retweet-button"><FontAwesomeIcon icon={faShare} /></button>
+                                            <button className="retweet-button" onClick={handleRetweetBtn}><FontAwesomeIcon icon={faShare} /></button>
                                         </div>
                                     </div>
                                 </div>
@@ -723,7 +728,7 @@ export function TweetCard(tweetID){
                                                     <div className="action-number">{}</div>
                                                     <button className="comment-button" style={{ color: '#657786' }} onClick={handleLogin}><FontAwesomeIcon icon={faComment} /></button>
                                                     <div className="action-number">{props.commentCount}</div>
-                                                    <button className="retweet-button" ><FontAwesomeIcon icon={faShare} /></button>
+                                                    <button className="retweet-button" onClick={handleRetweetBtn}><FontAwesomeIcon icon={faShare} /></button>
                                                 </div>
                                             </div>
                                         </div>

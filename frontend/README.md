@@ -229,7 +229,7 @@ Requierd response example
               tweetText: 'dfasdfanibh massa blandit orci, eget ultricies turpis lorem ut nulla.',
            }
         }
-         ```
+        ```
 
   
 
@@ -251,7 +251,15 @@ Requierd response example
 
 ## To Do
 
-
+- [ ] Color consistent. post button, tweet, retweet page button, search bar font family
+- [ ] Search bar search button
+- [ ] Admin logout css
+- [ ] Sign up do not need email
+- [ ] TypeError: response.data.map is not a function,home.js 111, followlist???? If user do not have follower???
+- [ ] Signup, login enter keydown
+- [ ] retweet card css problem
+- [ ] Admin add user in admin management
+- [ ] Search for user based on usernam
 
 
 ## Available Scripts

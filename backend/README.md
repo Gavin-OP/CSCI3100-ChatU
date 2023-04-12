@@ -155,7 +155,7 @@ Backend is constructed by NodeJS and Express with MongoDB as the database.
         "search": "2"
       } 
   ]
-  ```
+ ```
    - Output:
    ```javascript
   [
@@ -167,7 +167,7 @@ Backend is constructed by NodeJS and Express with MongoDB as the database.
       ]
     }
   ]
-  ```
+   ```
   - If 'search' start with a '$' and follows with a string that contains only letter, search tweets by tag given in 'search' (exact match, case-insensitive), return list of tweet_ids as results:
     - Input:
     ```javascript
@@ -196,7 +196,7 @@ Backend is constructed by NodeJS and Express with MongoDB as the database.
     "search": "#1"
     }
   ]
-  ```
+   ```
    - Output:
    ```javascript
   [
@@ -216,7 +216,7 @@ Backend is constructed by NodeJS and Express with MongoDB as the database.
     "tag": "life"
     }
   ]
-  ```
+   ```
 - If it is none of the 3 cases above, search tweets by keyword(s) in the string 'search' (partial match), return the list of tweet_ids of the matched tweets as result
   - Input:
     ```javascript
@@ -225,7 +225,7 @@ Backend is constructed by NodeJS and Express with MongoDB as the database.
                "search": "hat"
             }
          ]
-     ```
+    ```
   - Output:
    ```javascript
   [
@@ -237,7 +237,7 @@ Backend is constructed by NodeJS and Express with MongoDB as the database.
     ]
     }
   ]
-  ```
+   ```
 
 
 #### `/search/searchUser`
@@ -1385,12 +1385,13 @@ Backend is constructed by NodeJS and Express with MongoDB as the database.
 12. Avatar schema, use_id: string, avatar_url: trings
 13. Delete user
 14. user recommendation close icon
+- [ ] TypeError: response.data.map is not a function,home.js 111, followlist???? If user do not have follower???
 
 
 
 
 
-``
+
 
 
 

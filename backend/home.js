@@ -108,11 +108,20 @@ router.get('/userRecommendation', (req, res) => {
             // get logged-in user's following list
             axios.get(`/follow/followList/${loggedInUser}`, { headers: { 'Cookie': req.headers.cookie } })
                 .then(response => {
-                    const followingList = response.data.map((item, index) => {
-                        return item.user_id;
-                    });
-                    console.log('The user\'s folloing list is:', followingList)
+                    let followingList = [];
+                    if (response.data.message == 'He/She followes no one.') {
+                        console.log('The user\'s folloing list is:', response.data)
+                    }
+                    else {
+                        console.log('The user\'s folloing list is:', response.data)
+                        followingList = response.data.map((item, index) => {
+                            return item.user_id;
+                        });
+                        console.log('The user\'s folloing list is:', followingList)
+                    }
 
+
+                    console.log(followingList)
                     const randomUser = [];
                     const randomIndex = [];
                     for (let i = 0; i < 2; i++) {

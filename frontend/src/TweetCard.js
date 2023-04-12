@@ -148,8 +148,8 @@ export function TweetCard(tweetID){
                 setProps(preProps=>({...preProps,
                     username:userData.username,
                 }))
-            .catch(error => {console.log(error)})
             })
+            .catch(error => {console.log(error)})
             fetch('/comment/commentList/'+data.tweet.tweet_id)
             .then(response => response.json())
             .then(commentData => {

@@ -71,7 +71,7 @@ class UserPage extends React.Component{
                </div> 
      
                <div className="container col-8 offset-2">
-                    <button class="return-button"> <i class="fa fa-arrow-left"></i></button>
+                    <button className="return-button"> <i className="fa fa-arrow-left"></i></button>
      
                     <div className="container-fluid text-center">
                         <h2>{this.page==='following'?"Following User List" : "Fans List"}</h2>
@@ -79,7 +79,7 @@ class UserPage extends React.Component{
                     
                    <div className="container-fluid p-2">
                         {this.file.length===0? <div className="p-2 container-fluid text-center"><h3>No Result!</h3></div>:<div></div>}
-                        {this.file.map((user,index)=><UserCard user={user}/>)}
+                        {this.file.map((user,index)=><UserCard key={index} user={user}/>)}
                    </div>
                     
                </div>

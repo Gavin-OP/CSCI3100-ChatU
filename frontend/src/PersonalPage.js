@@ -19,16 +19,7 @@ const tweet_data = {
     tweetText: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed euismod ante at mi pharetra, quis blandit elit interdum. Cras vulputate, arcu eu sodales lucsdfasdf adfasdfasdfasdf dasdfasdfasdf sdfasdf asdfasdf asdfasdfasdfasdf sdfasdfasd asdfasdf asdftus, nibh massa blandit orci, eget ultricies turpis lorem ut nulla.',
 };
 
-const info = {
-     username: 'Gavin OP',
-     userid: 852,
-     avatar: '../avatar.png',
-     description: 'This is a test message',
-     followers: ['user1', 'user82', 'user912'],
-     fans: ['user1', 'user82'],
-     followtype: 0
-};
-const tweets = [tweet_data, tweet_data, tweet_data];
+
 export class PersonalPage extends React.Component{
      constructor(props){
           super(props);
@@ -164,18 +155,18 @@ class PersonPage extends React.Component{
               </div> 
     
               <div className="a container col-8 offset-2">
-                   <button class="return-button" onClick={()=>window.history.back()}> <i class="fa fa-arrow-left"></i></button>
+                   <button className="return-button" onClick={()=>window.history.back()}> <i className="fa fa-arrow-left"></i></button>
     
     
                    <div className="container p-2 d-flex row">
-                        <div className='col-2'> <img class='pg-avatar' src={this.info.avatar} alt="avatar" style={{width:'75px'}} /> </div>
+                        <div className='col-2'> <img className='pg-avatar' src={this.info.avatar} alt="avatar" style={{width:'75px'}} /> </div>
                         <div className="col-3 py-3 m-0 center" style={{fontSize:'x-large'}}>{this.info.username} </div>
                         <div className='col-7 d-flex flex-row-reverse'>
                               <button className="btn blacklist-button m-3" style={{height:'48px'}} onClick={this.handleBlacklist}>{blackmessage}</button>
                               <button className="btn btn-primary m-3" style={{height:'48px'}} onClick={this.handleFollow}>{this.state.follow} </button> 
                         </div> 
                     </div>
-                    <div className='m-2 p-2'>NO. {this.info.userid}</div> 
+                    <div className='m-2 p-2'>NO. {this.info.userId}</div> 
                     <div className='m-2 p-2' style={{fontSize:'large',backgroundColor:'white'}}>{this.info.description}</div>
              
 
@@ -192,10 +183,10 @@ class PersonPage extends React.Component{
                          </div>
                     </div>
                     <div className='horizontal-line'></div>
-                    <button class="btn fav-button" onClick={()=>{window.location.href='/personal/fav?userId='+this.info.userId}}> <i class="fa fa-star"></i></button>
-                    <div class="tweet-container" id="tweetcontainer">
+                    <button className="btn fav-button" onClick={()=>{window.location.href='/personal/fav?userId='+this.info.userId}}> <i className="fa fa-star"></i></button>
+                    <div className="tweet-container" id="tweetcontainer">
                     <br/>
-                    {this.info.tweets.map((tweet,i)=><TweetCard tweet_id={tweet}/>)}
+                    {this.info.tweets.map((tweet,i)=><TweetCard key={i} tweet_id={tweet}/>)}
                     </div>
                 </div>
          </>

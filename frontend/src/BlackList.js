@@ -60,7 +60,7 @@ class BlackPage extends React.Component{
                     
                    <div className="container-fluid p-2">
                         {this.file.length===0? <div className="p-2 container-fluid text-center"><h3>No Result!</h3></div>:<div></div>}
-                        {this.file.map((user,index)=><BlackCard user={user}/>)}
+                        {this.file.map((user,index)=><BlackCard key={index} user={user}/>)}
                    </div>
                     
                </div>

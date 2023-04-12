@@ -6,7 +6,7 @@ export function NavigationBar({ page }) {
         personalDisplay: '',
         settingDisplay: ''
     });
-
+    let uid = getCookieValue("userId");
     function handleLogout(){
         fetch('/user/logout',{
             method: 'POST'
@@ -30,15 +30,14 @@ export function NavigationBar({ page }) {
                 <img src="../logo_colorful.svg" alt="Logo" />
                 <ul>
                     <li><a href="/home">Home</a></li>
-                    <li><a href="/chat">Message</a></li>
+                    <li><a href={"/personal/tweet?userId="+uid}>Personal page</a></li>
                 </ul>
                 <div className="user-avatar">
                     <img src="../avatar.png" alt="User Avatar" />
                     <div className="dropdown-menu">
                         <ul>
-                            <li><a href="/personal/tweet">Personal Page</a></li>
-                            <li><a href="#">Settings</a></li>
-                            <li><a id='logout' href="#">Log out</a></li>
+                            <li><a href="/setting">Settings</a></li>
+                            <li><button id='logout' onClick={handleLogout}>Log out</button></li>
                         </ul>
                     </div>
                 </div>
@@ -77,15 +76,14 @@ export function NavigationBar({ page }) {
                 <img src="../logo_colorful.svg" alt="Logo" />
                 <ul>
                     <li><a href="/home">Home</a></li>
-                    <li><a href="/message">Message</a></li>
+                    <li><a href={"/personal/tweet?userId="+uid}>Personal page</a></li>
                 </ul>
                 <div className="user-avatar">
                     <img src="../avatar.png" alt="User Avatar" />
                     <div className="dropdown-menu">
                         <ul>
-                            <li><a id='logout' href="#">Log out</a></li>
-                            <li><a id='setting' href="##">Setting</a></li>
-                            <li><a id='personal-page' href="/personal/tweet">Personal Page</a></li>
+                            <li><a href="/setting">Settings</a></li>
+                            <li><button id='logout' onClick={handleLogout}>Log out</button></li>
                         </ul>
                     </div>
                 </div>
@@ -100,15 +98,14 @@ export function NavigationBar({ page }) {
                 <img src="../logo_colorful.svg" alt="Logo" />
                 <ul>
                     <li><a href="/home">Home</a></li>
-                    <li><a href="/message">Message</a></li>
+                    <li><a href={"/personal/tweet?userId="+uid}>Personal page</a></li>
                 </ul>
                 <div className="user-avatar">
                     <img src="../avatar.png" alt="User Avatar" />
                     <div className="dropdown-menu">
                         <ul>
-                            <li><a id='logout' href="#">Log out</a></li>
-                            <li><a id='setting' href="##">Setting</a></li>
-                            <li><a id='personal-page' href="/personal/tweet">Personal Page</a></li>
+                            <li><a href="/setting">Settings</a></li>
+                            <li><button id='logout' onClick={handleLogout}>Log out</button></li>
                         </ul>
                     </div>
                 </div>
@@ -137,4 +134,9 @@ export function NavigationBar({ page }) {
 
     console.log(window.location['pathname'])
     return navContent;
+}
+
+function getCookieValue(name) {
+    let result = document.cookie.match("(^|[^;]+)\\s*" + name + "\\s*=\\s*([^;]+)")
+    return result ? result.pop() : ""
 }

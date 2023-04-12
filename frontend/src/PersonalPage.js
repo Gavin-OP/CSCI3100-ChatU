@@ -105,6 +105,18 @@ class PersonPage extends React.Component{
           this.state = {follow: this.props.info.followStatus, black: this.props.info.blackStatus}
 
      };
+     componentDidUpdate(){
+          if (this.state.follow === 'Self'){
+               document.getElementById('followbtn').style.background='#c9c9c9';
+          }
+          else if (this.state.follow === 'Following'){
+               document.getElementById('followbtn').style.background='#c9c9c9';
+          }
+          else {
+               document.getElementById('followbtn').style.background='#ff4444';
+          }
+
+     }
      handleFollow = () => {
           if (this.state.follow === 'Following') {
               this.setState({ follow: 'Follow' });
@@ -117,7 +129,7 @@ class PersonPage extends React.Component{
               .then(res=>console.log(res))
           }
       }
-      handleBlacklist = () =>{
+     handleBlacklist = () =>{
           if (this.state.follow === 'Self'){
                window.location.href='/personal/blacklist';
           }
@@ -154,16 +166,18 @@ class PersonPage extends React.Component{
               <NavigationBar page={'user'} />
               </div> 
     
-              <div className="a container col-8 offset-2">
-                   <button className="return-button" onClick={()=>window.history.back()}> <i className="fa fa-arrow-left"></i></button>
+              <div className="container col-8 offset-2" style={{backgroundColor:'#e0e5ec'}}>
+                    <div className="container m-2"><button className='btn m-3' onClick={() => { window.history.back() }} style={{color:'#db2431',borderColor:'#a6366a'}}>
+                         <i className="bi bi-arrow-left"></i> Back to Previous Page</button>
+                    </div>
     
     
                    <div className="container p-2 d-flex row">
                         <div className='col-2'> <img className='pg-avatar' src={this.info.avatar} alt="avatar" style={{width:'75px'}} /> </div>
                         <div className="col-3 py-3 m-0 center" style={{fontSize:'x-large'}}>{this.info.username} </div>
                         <div className='col-7 d-flex flex-row-reverse'>
-                              <button className="btn blacklist-button m-3" style={{height:'48px'}} onClick={this.handleBlacklist}>{blackmessage}</button>
-                              <button className="btn btn-primary m-3" style={{height:'48px'}} onClick={this.handleFollow}>{this.state.follow} </button> 
+                              <button className="btn m-2" style={{height:'48px', color:'white', background:'linear-gradient( #a6366a, #db2431)'}} onClick={this.handleBlacklist}>{blackmessage}</button>
+                              <button id='followbtn' className="btn m-2" style={{height:'48px', color:'white', background:'#db2431'}} onClick={this.handleFollow}>{this.state.follow} </button> 
                         </div> 
                     </div>
                     <div className='m-2 p-2'>NO. {this.info.userId}</div> 
@@ -173,13 +187,13 @@ class PersonPage extends React.Component{
                     <br/> <br/>
                     <div className='container d-flex flex-row justify-content-center'>
                          <div className='p-2 border-1 text-center'>
-                              <button className='btn btn-outline-primary' style={{width:'12vw'}} onClick={()=>{window.location.href='/personal/following?userId='+this.info.userId}}>Followers <br/>{this.info.followNum}</button>
+                              <button className='btn btn-outline-danger' style={{width:'12vw'}} onClick={()=>{window.location.href='/personal/following?userId='+this.info.userId}}>Following <br/>{this.info.followNum}</button>
                          </div>
                          <div className='p-2 border-1 text-center'>
-                              <button className='btn btn-outline-primary' style={{width:'12vw'}} onClick={()=>{window.location.href='/personal/fans?userId='+this.info.userId}}>Fans <br/>{this.info.fansNum}</button>
+                              <button className='btn btn-outline-danger' style={{width:'12vw'}} onClick={()=>{window.location.href='/personal/fans?userId='+this.info.userId}}>Fans <br/>{this.info.fansNum}</button>
                          </div>
                          <div className='p-2 border-1 text-center'>
-                              <a href='#tweetcontainer' className='btn btn-outline-primary' style={{width:'12vw'}}>Tweets <br/>{this.info.tweets===undefined ? 0: this.info.tweets.length}</a>
+                              <a href='#tweetcontainer' className='btn btn-outline-danger' style={{width:'12vw'}}>Tweets <br/>{this.info.tweets===undefined ? 0: this.info.tweets.length}</a>
                          </div>
                     </div>
                     <div className='horizontal-line'></div>

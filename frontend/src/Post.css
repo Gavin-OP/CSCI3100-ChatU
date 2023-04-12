@@ -1,0 +1,62 @@
+.postpage-postbutton{
+    background-color: #F0F0F0;
+    border: none;
+    border-radius: 30px;
+    box-shadow: inset 5px 5px 5px #bebebe,
+                inset -5px -5px 5px #ffffff;
+    color: #333333;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: bold;
+    margin: 10px;
+    padding: 10px 20px;
+    transition: all 0.2s ease-in-out;
+}
+
+.postpage-postbutton:hover {
+    background: linear-gradient( #a6366a, #db2431);
+    box-shadow: inset 2px 2px 2px #a6366a,
+                inset -2px -2px 2px #db2431;
+}
+
+.postpage-clearbutton{
+    background-color: #F0F0F0;
+    border: none;
+    border-radius: 30px;
+    box-shadow: inset 5px 5px 5px #bebebe,
+                inset -5px -5px 5px #ffffff;
+    color: #333333;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: bold;
+    margin: 10px;
+    padding: 10px 20px;
+    transition: all 0.2s ease-in-out;
+}
+
+.postpage-clearbutton:hover {
+    background: linear-gradient( #f61818aa, #ff021286);
+    box-shadow: inset 2px 2px 2px #f61818aa,
+                inset -2px -2px 2px #ff021286;
+}
+
+.postpage-backbutton{
+    background-color: #F0F0F0;
+    border: none;
+    border-radius: 30px;
+    box-shadow: inset 5px 5px 5px #bebebe,
+                inset -5px -5px 5px #ffffff;
+    color: #333333;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: bold;
+    margin: 10px;
+    padding: 10px 20px;
+    transition: all 0.2s ease-in-out;
+}
+
+.postpage-backbutton:hover {
+    background: linear-gradient( #9fa09faa, #7c7b7b86);
+    box-shadow: inset 2px 2px 2px #9fa09faa,
+                inset -2px -2px 2px #7c7b7b86;
+}

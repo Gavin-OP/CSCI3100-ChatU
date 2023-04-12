@@ -2,7 +2,8 @@
     position: relative;
     display: flex;
     justify-content: center;
-    margin: 20px;
+    margin: 5px;
+    width: 98%;
 }
 
 .retweet-card {
@@ -10,8 +11,7 @@
     border-radius: 10px;
     padding-top: 20px;
     box-shadow: 5px 5px 10px #bebebe, -5px -5px 10px #ffffff;
-    max-width: 600px;
-    min-height: 225px;
+    width: 96%;
     overflow: hidden;
 }
 

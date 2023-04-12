@@ -101,8 +101,8 @@ export function TweetCard(tweetID){
                     setProps(preProps=>({...preProps,
                         username:userData.username,
                     }))
-                .catch(error => {console.log(error)})
                 })
+                .catch(error => {console.log(error)})
                 fetch('/comment/commentList/'+data.tweet.tweet_id)
                 .then(response => response.json())
                 .then(commentData => {
@@ -461,7 +461,7 @@ export function TweetCard(tweetID){
     if(!isRetweet){
         if(getCookieValue('userId') !== ""){
             return (
-                <div className='tweet-card-container'>
+                <div className='tweet-card-container my-3'>
                     <div className="tweet-card" >
 
                         {/* User information and Tweet Information */}
@@ -521,7 +521,7 @@ export function TweetCard(tweetID){
     //card for not logged in user
         else{
             return (
-                <div className='tweet-card-container'>
+                <div className='tweet-card-container my-3'>
                 <div className="tweet-card" >
 
                     {/* User information and Tweet Information */}

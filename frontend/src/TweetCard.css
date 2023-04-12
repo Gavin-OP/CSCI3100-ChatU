@@ -2,7 +2,8 @@
     position: relative;
     display: flex;
     justify-content: center;
-    margin: 20px;
+    margin: 12px;
+    width: 96%;
 }
 
 .tweet-card {
@@ -12,8 +13,9 @@
     border-radius: 10px;
     padding: 16px;
     box-shadow: 5px 5px 10px #bebebe, -5px -5px 10px #ffffff;
-    max-width: 600px;
-    width: 90%;
+    /* max-width: 600px;
+    min-width: 600px; */
+    width: 96%;
     min-height: 225px;
 }
 
@@ -217,7 +219,7 @@
     cursor: pointer;
 }
 
-.retweet-card-container {
+/* .retweet-card-container {
     position: relative;
     display: flex;
     justify-content: center;
@@ -232,7 +234,7 @@
     max-width: 600px;
     min-height: 225px;
     overflow: hidden;
-}
+} */
 
 
 /* Retweet header with user information and retweet */

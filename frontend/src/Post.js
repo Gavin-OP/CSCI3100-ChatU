@@ -5,6 +5,7 @@ import Col from 'react-bootstrap/Col';
 import React from 'react';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
+import './Post.css'
 
 const tags=["None", "Food", "Discussion", "Study", "Music", "Game", "Life", "Art", "Love", "Travel", "Sports", "Stars", "Photography"];
 
@@ -43,7 +44,7 @@ export function Post() {
         {method:'POST', body: formdata})
         .then(res=>{
             console.log(res);
-            window.history.href='/home';
+            window.location.href='/home';
         })
         .catch(error=>console.log(error))
     }
@@ -77,13 +78,13 @@ export function Post() {
                             </Form.Select>
                         </Form.Group>
                         <Container className="d-flex offset-1">
-                            <Button className="m-3" variant="outline-dark" onClick={()=>{window.history.back()}}>
+                            <Button className="m-3 postpage-backbutton" variant="outline-dark" onClick={()=>{window.history.back()}}>
                                 Cancel and Back
                             </Button>
-                            <Button className="m-3" variant="outline-danger" type="reset">
+                            <Button className="m-3  postpage-clearbutton" variant="outline-danger" type="reset">
                                 Clear
                             </Button>
-                            <Button className="m-3" variant="outline-primary" onClick={handlePost}>
+                            <Button className="m-3 postpage-postbutton" variant="outline-primary" onClick={handlePost}>
                                 Submit
                             </Button>
 

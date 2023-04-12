@@ -70,8 +70,10 @@ class UserPage extends React.Component{
                <NavigationBar page={'user'} />
                </div> 
      
-               <div className="container col-8 offset-2">
-                    <button className="return-button"> <i className="fa fa-arrow-left"></i></button>
+               <div className="container col-8 offset-2" style={{backgroundColor:'#e0e5ec'}}>
+                    <div className="container m-2"><button className='btn m-3' onClick={() => { window.history.back() }} style={{color:'#db2431',borderColor:'#a6366a'}}>
+                         <i className="bi bi-arrow-left"></i> Back to Previous Page</button>
+                    </div>
      
                     <div className="container-fluid text-center">
                         <h2>{this.page==='following'?"Following User List" : "Fans List"}</h2>
@@ -94,6 +96,13 @@ class UserCard extends React.Component{
          this.user=this.props.user;
          this.state={follow: this.props.user.followStatus}
     }
+    componentDidMount(){
+        let uid = getCookieValue("userId");
+        if (uid === String(this.user.user_id)){
+            this.setState({follow: 'Self'});
+        }
+    }
+
     handleFollow = () => {
         if (this.state.follow === 'Following') {
             this.setState({ follow: 'Follow' });
@@ -110,16 +119,21 @@ class UserCard extends React.Component{
          return(
               <>
               <div className="container m-3 p-2 d-flex row user-list-bar" >
-                   <div className='col-2'> <img class='pg-avatar' src={this.user.avatar} alt="avatar" style={{width:'75px'}} /> </div>
+                   <div className='col-2'> <img class='pg-avatar' src={this.user.avatar} alt="avatar" style={{width:'75px'}} onClick={()=>{window.location.href='/personal/tweet?userId='+this.user.userId}} /> </div>
                    <div className="col-5 py-3 m-0 center" style={{fontSize:'x-large'}} onClick={()=>{window.location.href='/personal/tweet?userId='+this.user.userId}}>{this.user.username} </div>
                    <div className='col-5 d-flex flex-row-reverse'>
-                        {this.state.follow==='Following'?
-                        (<button className="btn btn-secondary m-3" style={{height:'48px'}}> Unfollow</button>):
-                        (<button className="btn btn-primary m-3" style={{height:'48px'}}> Follow</button>)}
+                        {this.state.follow==='Follow'?
+                        (<button className="btn btn-danger m-3" style={{height:'48px'}} onClick={this.handleFollow}> {this.state.follow}</button>):
+                        (<button className="btn btn-secondary m-3" style={{height:'48px'}} onClick={this.handleFollow}> {this.state.follow}</button>)}
                        
                    </div> 
               </div>
               </>
          )
     }
+}
+
+function getCookieValue(name) {
+    let result = document.cookie.match("(^|[^;]+)\\s*" + name + "\\s*=\\s*([^;]+)")
+    return result ? result.pop() : ""
 }

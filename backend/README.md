@@ -1375,12 +1375,24 @@ Backend is constructed by NodeJS and Express with MongoDB as the database.
 2. recommend user to follow on homepage，可以分进reccomendation
 3. 一个精简版的getUser, 用user id 去get user name和avatar（这样tweet card, view tweet, comment, following/fan/ban list等等都可以用这个精简版getUser
 4. (!!!重要，用于tweet recommedation) 给定user id和tag (type: string),将此用户喜欢的tag设为input的tag，可以分进setting
-5. tweet reccommendation on homepage, 可以分进reccomendation
-6. get list of tweet ids of tweets posted by all following users (用于首页的tweet 推送)  
-4. 给定user id,修改用户名，可以分进setting
-5. 给定user id,修改个人介绍，可以分进setting
-6. 给定user id,修改email，可以分进setting
-7. 给定user id,修改password，可以分进setting
+5. get list of tweet ids of tweets posted by all following users (用于首页的tweet 推送)  
+6. 给定user id,修改用户名，可以分进setting
+7. 给定user id,修改个人介绍，可以分进setting
+8. 给定user id,修改email，可以分进setting
+9. 给定user id,修改password，可以分进setting
+10. API for tweets only posted by following user
+11. Create new user no follow list
+12. Avatar schema, use_id: string, avatar_url: trings
+13. Delete user
+14. user recommendation close icon
+
+
+
+
+
+``
+
+
 
 
 [^1]: action_status

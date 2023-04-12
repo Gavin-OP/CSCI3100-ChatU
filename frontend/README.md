@@ -259,8 +259,20 @@ Requierd response example
 - [ ] Signup, login enter keydown
 - [ ] retweet card css problem
 - [ ] Admin add user in admin management
-- [ ] Search for user based on usernam
-
+- [ ] Search for user based on username and userId
+- [ ] Comment focus black box
+- [ ] should not send empty comment 
+- [ ] refresh home page when click the retweet submit button
+- [ ] post tweet but nothing happen
+- [ ] Click anywhere to view the tweet detail
+- [ ] more images to show as slides
+- [ ] admin click user to view user personal page
+- [ ] admin click tweet to view tweet detail page
+- [ ] amin view home page and back to admin page
+- [ ] personal page css
+- [ ] following user list back button
+- [ ] persoanal page unfollow user
+- [ ] General Schema, usercount
 
 ## Available Scripts
 

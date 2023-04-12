@@ -323,7 +323,7 @@ class CommentCard extends React.Component {
             var div;
             div = document.getElementById("input");
             // if (div !== undefined){
-            div.value = "@" + this.comment.user + ": ";
+            div.value = "@" + this.state.username + ": ";
             // }
             // div.setAttribute("placeholder")
         }

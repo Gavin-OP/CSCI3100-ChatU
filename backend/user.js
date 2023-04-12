@@ -270,10 +270,4 @@ router.post('/create', upload.single("file"), (req, res) => {
         })
 });
 
-//to-do
-//ban user
-
-//delete user
-
-
 module.exports = router;

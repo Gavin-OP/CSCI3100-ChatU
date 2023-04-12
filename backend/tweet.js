@@ -12,14 +12,17 @@ const upload = multer({ storage: storage });
 
 // Create a new tweet
 router.post("/create", upload.any('image'), (req, res) => {
-    const userId = req.cookies.userId;
-
+    const userId = 1;
+    //    const userId = req.cookies.userId;
+/*
     if (!userId) {
         return res.status(401).json({
             message: 'Failed to create tweet. Maybe the user has not logged in or the log in is unauthorized.'
         });
     }
+*/
 
+    
     Tweet.findOne({})
         .sort('-tweet_id')
         .exec()
@@ -376,13 +379,13 @@ router.get('/undislike/:tweetId', (req, res) => {
 router.get('/getTweet/:tweetId', (req, res) => {
     const userId = req.cookies.userId;
     const tweetId = parseInt(req.params['tweetId']);
-
+/*
     if (!userId) {
         return res.status(401).json({
             message: 'Failed to retrieve tweet information. Maybe the user has not logged in or the log in is unauthorized.'
         });
     }
-
+*/
     if (!tweetId) {
         return res.status(400).json({
             message: 'Failed to retrieve tweet information. The tweet_id given is not valid.'

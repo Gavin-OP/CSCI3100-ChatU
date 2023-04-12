@@ -10,16 +10,16 @@ const { json } = require('body-parser');
 router.post('/searchTweet', (req, res) =>{
        const keyword = req.body['search']
 
-       Tweet.find( { content: { $regex: /.*keyword.*/, $options: 'i' } } )
+       Tweet.find( { "content": {"$regex": keyword, "$options": "i" } } )
             .then((matchedTweets) => {
-                    if(matchedTweets === []) {
+                    if(!matchedTweets) {
                           return res.status(404).json({
                                 message: 'No tweet matches the keyword(s) you gave'
                           })
                        }
 
                     res.set('Content-Type', 'application/json');
-                    res.json(matchedTweets.map((tweet) => {
+                    const promises = matchedTweets.map((tweet) => {
                           return {
                             tweet_id: tweet.tweet_id,
                             content: tweet.content,
@@ -32,13 +32,13 @@ router.post('/searchTweet', (req, res) =>{
                             dislike: tweet.dislike,
                             tag: tweet.tag
                           };
-                    }));
-/*
+                    })
+
                     Promise.all(promises)
                     .then(tweets => {
                         res.status(200).json(tweets);
                     })
-  */          
+          
             })
             .catch(error => {
                 console.error(`Error retrieving details of tweets that match the keyword ${keyword}:`, error);

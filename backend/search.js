@@ -10,7 +10,7 @@ const { json } = require('body-parser');
 router.post('/searchTweet', (req, res) =>{
        const keyword = req.body['search']
 
-       Tweet.find( { "content": { $regex:/.*keyword.*/, $options: 'i' } } )
+       Tweet.find( { "content": { $regex: /.*keyword.*/, $options: 'i' } } )
             .then((matchedTweets) => {
                 if(!matchedTweets) {
                     return res.status(404).json({
@@ -46,3 +46,5 @@ router.post('/searchTweet', (req, res) =>{
                 });
             });  
 });
+
+module.exports = router;

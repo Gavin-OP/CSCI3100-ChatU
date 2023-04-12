@@ -6,7 +6,7 @@
 }
 
 .search-input {
-    padding-left: 45px;
+    padding-left: 50px;
     width: 260px;
     height: 60px;
     background: linear-gradient(to right, #a6366a, #db2431);
@@ -14,9 +14,9 @@
     border-style: inset;
     border-radius: 50px;
     box-sizing: border-box;
-    font-family: Comic Sans MS;
-    font-size: 26px;
-    font-variant-position: ;
+    /* font-family: Comic Sans MS; */
+    font-size: 18px;
+    /* font-variant-position: ; */
     color: #ffffff;
     outline: none;
     transition: 1.5s;
@@ -52,6 +52,6 @@
 }
 
 .search-box:hover i {
-    opacity: 0;
+    opacity: 1;
     /* z-index: -1; */
 }

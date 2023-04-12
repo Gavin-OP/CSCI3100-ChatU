@@ -375,6 +375,7 @@ router.get('/undislike/:tweetId', (req, res) => {
 // retrieve tweet information by tweetId
 router.get('/getTweet/:tweetId', (req, res) => {
     const userId = req.cookies.userId;
+    const tweetId = parseInt(req.params['tweetId']);
 
     if (!userId) {
         return res.status(401).json({
@@ -382,14 +383,14 @@ router.get('/getTweet/:tweetId', (req, res) => {
         });
     }
 
-    if (!parseInt(req.params['tweetId'])) {
+    if (!tweetId) {
         return res.status(400).json({
             message: 'Failed to retrieve tweet information. The tweet_id given is not valid.'
         });
     }
 
     Tweet.findOne({
-        tweet_id: parseInt(req.params['tweetId'])
+        tweet_id: tweetId
     })
 
         .exec()

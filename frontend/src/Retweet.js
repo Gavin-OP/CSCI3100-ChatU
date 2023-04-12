@@ -28,6 +28,7 @@ const tweet_data = {
 export function Retweet() {
     let params = (new URL(document.location)).searchParams;
     let tid = params.get("tweetId");
+
     const handlePost=()=>{
         let content = document.getElementById('formContent').value;
         let tag = document.getElementById('formTag').value;
@@ -39,15 +40,21 @@ export function Retweet() {
         var hr = time.getHours();
         var min = time.getMinutes();
         var t = yr + '-' + mon + '-' + day + ' ' + hr + ':' + min;
-        let formdata = new FormData();
-        formdata.append("content", content);
-        formdata.append("tag", tag);
-        formdata.append("privacy", privacy);
-        formdata.append("time", t);
-        formdata.append("original",  tid);
-        console.log(formdata.time)
+        // let formData = new FormData();
+        // formData.set("content", content);
+        // formData.set("tag", tag);
+        // formData.set("privacy", privacy);
+        // formData.set("time", t);
+        // formData.set("original",  tid);
+        // console.log(formData.get('content'))
         fetch('/tweet/retweet',
-        {method:'POST', body: formdata})
+        {method:'POST', body: JSON.stringify({
+            content: content,
+            tag: tag,
+            privacy_state: privacy,
+            time : t,
+            original: tid,
+        }), headers:{'Content-Type': 'application/json'}})
         .then(res=>{
             console.log(res);
             window.history.back();

@@ -37,7 +37,7 @@ export function Post() {
         for (let i=0;i<picture.length;i++){
             formdata.append("image", picture[i]);
         }
-        formdata.append("privacy", privacy);
+        formdata.append("privacy_state", privacy);
         formdata.append("time", t);
         fetch('/tweet/create',
         {method:'POST', body: formdata})
@@ -72,8 +72,8 @@ export function Post() {
                         <Form.Group className="m-3" size='lg' controlId="formPrivacy">
                             <Form.Label>Privacy</Form.Label>
                             <Form.Select>
-                                <option value={1}>Visible to everyone</option>
-                                <option value={0}>Only visible to yourself</option>
+                                <option value={0}>Visible to everyone</option>
+                                <option value={1}>Only visible to yourself</option>
                             </Form.Select>
                         </Form.Group>
                         <Container className="d-flex offset-1">

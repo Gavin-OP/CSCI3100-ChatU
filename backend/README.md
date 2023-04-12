@@ -170,7 +170,7 @@ Backend is constructed by NodeJS and Express with MongoDB as the database.
   ```
   - If 'search' start with a '$' and follows with a string that contains only letter, search tweets by tag given in 'search' (exact match, case-insensitive), return list of tweet_ids as results:
     - Input:
-     ```javascript
+    ```javascript
   [
     {
     "search": "$discussion"

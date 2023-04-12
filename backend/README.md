@@ -179,15 +179,15 @@ Backend is constructed by NodeJS and Express with MongoDB as the database.
     ```
     - Output:
     ```javascript
-  [
-     {
-        "tweetId": [
-            13,
-            14
-        ]
-     }
-  ]
-  ```
+       [
+          {
+            "tweetId": [
+                 13,
+                 14
+            ]
+          }
+       ]
+    ```
   - If 'search' starts with a '#' and follows with a string that contains only numbers, search tweets by tweet_id given in 'search' (exact match, can only return one result):
    - Input:
    ```javascript

@@ -30,6 +30,7 @@
 .avatar img {
     width: 28px;
     height: 28px;
+    margin-bottom: 7px;
     border-radius: 50%;
     margin-right: 10px;
 }
@@ -117,7 +118,7 @@
     position: relative;
     min-height: 150px;
     width: 398px;
-    
+
 }
 
 .tweet-text {
@@ -158,6 +159,7 @@
     cursor: pointer;
     transition: all 0.3s ease;
 }
+
 .favorite-button {
     width: 40px;
 }
@@ -270,7 +272,8 @@
     border-radius: 20px;
     box-shadow: 5px 5px 10px #bebebec9, -5px -5px 10px #ffffffad;
 }
-.retweet-content{
+
+.retweet-content {
     padding-left: 20px;
     padding-right: 20px;
     padding-top: 20px;

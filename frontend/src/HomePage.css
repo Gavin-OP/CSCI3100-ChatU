@@ -49,17 +49,18 @@
 
 .write-post-button,
 .reload-button {
-  position: relative;
-  background: linear-gradient(to right, #a6366a, #db2431);
-  border: none;
-  color: white;
   padding: 12px 16px;
   font-size: 20px;
+  border-radius: 8px;
+  background: linear-gradient(to right, #d42a7ae8, #e90413e3);
+  color: white;
+  border: none;
+  position: relative;
   cursor: pointer;
-  border-radius: 10px;
+  box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.1), -4px -4px 8px rgba(255, 255, 255, 0.5);
   left: 20%;
   top: 40px;
-  transition: all 0.5s ease;
+  transition: all 0.2s ease;
 }
 
 .user-rec-follow {
@@ -81,8 +82,7 @@
 
 /* Darker background on mouse-over */
 .write-post-button:hover {
-  background: linear-gradient(to right, #75264b, #8d171e);
-  border-radius: 30px;
+  background: linear-gradient(to right, #a6366a, #db2431);
 }
 
 /* Darker background on mouse-over */
@@ -106,7 +106,7 @@
   font-size: 20px;
   /*margin-right: 2px; */
   height: 28px;
-  
+
 }
 
 .user-rec-box {

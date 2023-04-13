@@ -3,7 +3,9 @@ const router = express.Router();
 const Blacklist = require('./blacklistSchema');
 const User = require('./userSchema');
 const Avatar = require('./avatarSchema');
-
+const axios = require('axios').create({
+    baseURL: 'http://localhost:5555'
+});
 
 // add a user to blacklist
 router.get('/add/:userId', (req, res) => {
@@ -137,30 +139,20 @@ router.get('/list', (req, res) => {
 
             const blacklistUsers = blacklist.blacklist;
             const promises = blacklistUsers.map((userId) => {
-                return User.findOne({ user_id: userId })
-                    .then(user => {
-                        if (!user) {
-                            return null;
-                        }
-                        
-                        Avatar.findOne({ user_id: user.user_id })
-                        .then((avatar) => {
-                            if (!avatar) {
-                                return {
-                                    user_id: user.user_id,
-                                    username: user.username,
-                                    avatar: user.avatar,
-                                    avatar_url: '../avatar.png',
-                                };
-                            }
-                            return {
-                                user_id: user.user_id,
-                                username: user.username,
-                                avatar: user.avatar,
-                                avatar_url: avatar.avatar_url,
-                            };
-                        })
-                        
+                return axios.get(`/user/getUser/${userId}`, { headers: { 'Cookie': req.headers.cookie } })
+                    .then((response) => {
+                        const user_info = {
+                            user_id: response.data.user_id,
+                            username: response.data.username,
+                            avatar: response.data.avatar,
+                            avatar_url: response.data.avatar_url,
+                        };
+                        console.log(user_info);
+                        return user_info;
+                    })
+                    .catch((err) => {
+                        console.error(err);
+                        return null;
                     });
             });
 

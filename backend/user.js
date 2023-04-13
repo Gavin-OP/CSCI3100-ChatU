@@ -93,6 +93,14 @@ router.post('/login', (req, res) => {
                 });
             }
 
+            // Check if user is banned
+            if (user.ban === true) {
+                return res.status(400).json({
+                    message: 'User banned.',
+                    login_status: 3     // 0: wrong email, 1: wrong password, 2: login successful, 3: user banned
+                });
+            }
+
             // Set cookie to identify user
             res.cookie('userId', user.user_id, { httpOnly: false });
             res.cookie('userDbId', user._id, { httpOnly: true });

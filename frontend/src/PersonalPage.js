@@ -72,10 +72,10 @@ export class PersonalPage extends React.Component{
                                    }
                                    let url=''
                                    if (this.page==='tweet'){
-                                        url='/personal/tweetid/'+uid;
+                                        url='/personal/tweetId/'+uid;
                                    }
                                    else if (this.page ==='fav'){
-                                        url='/favorite/tweetid/'+uid;
+                                        url='/favorite/tweetId/'+uid;
                                    }
                                    fetch(url)
                                    .then(res=>res.json())

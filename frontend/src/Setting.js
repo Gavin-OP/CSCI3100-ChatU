@@ -64,7 +64,10 @@ class SettingPage extends React.Component{
         let name = document.getElementById('formName').value;
         let des = document.getElementById('formDescription').value;
         let avatar = document.getElementById('formAvatar').value;
-        
+        if (name === '' || des === '' ){
+            alert("Can not be blank!")
+            return false;
+        }
         //window.alert("Haven't connect to database now!")
         fetch('/user/update',
         {method:'POST', body: JSON.stringify({
@@ -84,7 +87,7 @@ class SettingPage extends React.Component{
         let content = document.getElementById('formFeedback').value;
 
         //window.alert("Haven't connect to database now!")
-        fetch('/feedback/creat',
+        fetch('/feedback/create',
         {method:'POST', body: JSON.stringify({
             content: content
             }), headers:{'Content-Type': 'application/json'}})

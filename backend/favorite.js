@@ -220,5 +220,21 @@ router.get('/favoriteList', (req, res) => {
         });
 });
 
+router.get('/tweetId/:userId', (req, res) => {
+    const userId = req.params['userId'];
+
+    Favorite.findOne({ user_id: userId })
+        .then((favor) => {
+            if (!favor) {
+                return res.status(404).json({
+                    message: 'User not found.'
+                });
+            }
+            res.json(favor.favorite_id);
+
+            
+        })
+})
+
 
 module.exports = router;

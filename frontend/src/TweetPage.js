@@ -96,6 +96,7 @@ class Page extends React.Component {
         }
         if (this.file.original > 0) {
             this.setState({ type: 1 });
+            document.getElementById('retweetbtn').display = 'none';
         }
         if (this.state.follow === 'Self'){
             document.getElementById('followbtn').style.background='#c9c9c9';
@@ -261,7 +262,6 @@ class Page extends React.Component {
             <>
                 <div className='container-fluid p-0' id="top" style={{ minWidth: '768px' }}>
                     <NavigationBar page='user' />
-                    <div className="topbutton"><a href='#top'><i className="bi bi-arrow-up-square"></i></a></div>
                     <div className="container-fluid m-0 py-3 row">
                         <div className="container d-block col-8 offset-2" style={{ backgroundColor: '#F7F7F7', minHeight: '90vh' }}>
                             <br></br>
@@ -317,7 +317,7 @@ class Page extends React.Component {
                                         <div className="col-6 p-2" >{this.file.time}</div>
                                         <div className="col-6 py-0  d-flex flex-row-reverse">
                                             
-                                            <button className="p-2 likebuttons" alt="Retweet" onClick={()=>{window.location.href='/retweet?tweetId='+this.file.tweetId}}><FontAwesomeIcon icon={faShare} /></button>
+                                            <button className="p-2 likebuttons" id="retweetbtn" alt="Retweet" onClick={()=>{window.location.href='/retweet?tweetId='+this.file.tweetId}}><FontAwesomeIcon icon={faShare} /></button>
                                             <button className="p-3 likebuttons" alt="Comment" style={{ color: "#657786" }} ><FontAwesomeIcon icon={faComment} /> {this.file.comments.length}</button>
                                             <button className="p-2 likebuttons" alt="Favorite" onClick={this.handleFavor} style={this.state.favor == 1 ? { color: "goldenrod" } : { color: '#657786' }} ><FontAwesomeIcon icon={faStar} /></button>
                                             <button className="p-3 likebuttons" alt="Dislike" onClick={this.handleDislike} style={this.state.like == -1 ? { color: "#39aaf9" } : { color: '#657786' }}><FontAwesomeIcon icon={faHeartBroken} /></button>

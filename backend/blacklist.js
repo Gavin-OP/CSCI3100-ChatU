@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const Blacklist = require('./blacklistSchema');
 const User = require('./userSchema');
+const Avatar = require('./avatarSchema');
 
 
 // add a user to blacklist
@@ -141,13 +142,25 @@ router.get('/list', (req, res) => {
                         if (!user) {
                             return null;
                         }
-
-                        return {
-                            user_id: user.user_id,
-                            username: user.username,
-                            avatar: user.avatar,
-                            avatar_url: user.avatar_url,
-                        };
+                        
+                        Avatar.findOne({ user_id: user.user_id })
+                        .then((avatar) => {
+                            if (!avatar) {
+                                return {
+                                    user_id: user.user_id,
+                                    username: user.username,
+                                    avatar: user.avatar,
+                                    avatar_url: '../avatar.png',
+                                };
+                            }
+                            return {
+                                user_id: user.user_id,
+                                username: user.username,
+                                avatar: user.avatar,
+                                avatar_url: avatar.avatar_url,
+                            };
+                        })
+                        
                     });
             });
 

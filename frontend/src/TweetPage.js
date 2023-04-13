@@ -212,7 +212,7 @@ class Page extends React.Component {
             console.log(this.file.image.length)
             var type = this.file.image[0].contentType;
             var data = this.file.image[0].data;
-            let code = "<div class='container-fluid justify-content-center'><image class='p-1' src='data:" + type + ";base64, " + data + "' style='max-height:500px; max-width:98%'/></div> ";
+            let code = "<div class='container-fluid d-flex justify-content-center'><image class='p-1' src='data:" + type + ";base64, " + data + "' style='max-height:500px; max-width:98%'/></div> ";
             document.getElementById('imgbox').innerHTML = code;
         }
     }

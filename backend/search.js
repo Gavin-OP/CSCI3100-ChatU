@@ -75,7 +75,7 @@ router.get('/homeSearch', (req, res) =>{
        
        } 
        /*
-       else if ( (keyword[0] == '#') && ( keyword.slice(1).match(/^[0-9]+$/) != null ) ) {
+       else if ( (keyword[0] == '*') && ( keyword.slice(1).match(/^[0-9]+$/) != null ) ) {
              const id = keyword.slice(1)
         
              Tweet.findOne( { tweet_id: id } )
@@ -189,6 +189,142 @@ router.get('/homeSearch', (req, res) =>{
     }
 });
 
+router.get('/searchTweet', (req, res) =>{
+    const keyword = req.query.txt
+
+    if (keyword.match(/^[0-9]+$/) != null) {
+        Tweet.find( { user: keyword } )
+             .then((matchedTweets) => {
+                  if(!matchedTweets) {
+                      return res.status(404).json({
+                         message: "Either the user doesn't exist or he/she never posted a tweet before"
+                      })
+                  }
+
+                  res.set('Content-Type', 'application/json');
+              
+                  const promises = matchedTweets.map((tweet) => {
+                          return {
+                             tweet_id: tweet.tweet_id,
+                             content: tweet.content,
+                             user: tweet.user,
+                             time: tweet.time
+                          };
+                     })
+
+                  Promise.all(promises)
+                             .then(tweets => {
+                                  res.status(200).json(tweets);
+                             })
+                    
+         })
+         .catch(error => {
+             console.error(`Error retrieving details of tweets with the user id ${keyword}:`, error);
+             res.status(500).json({
+                 message: 'Failed to retrieve matched tweet(s) from the db.'
+             }); 
+         }); 
+
+    } else if ( (keyword[0] == '#') && ( keyword.slice(1).match(/^[a-zA-Z]+$/) != null )  ) {
+           const givenTag = keyword.slice(1)
+     
+           Tweet.find( { "tag": {"$regex": givenTag, "$options": "i" } } )
+                .then((matchedTweets) => {
+                      if(!matchedTweets) {
+                         return res.status(404).json({
+                               message: "Either the input is not a valid tag, or no tweets under this tag have been posted"
+                        })
+                      }
+
+                      res.set('Content-Type', 'application/json');
+              
+                      const promises = matchedTweets.map((tweet) => {
+                              return {
+                                 tweet_id: tweet.tweet_id,
+                                 content: tweet.content,
+                                 user: tweet.user,
+                                 time: tweet.time
+                              };
+                         })
+    
+                      Promise.all(promises)
+                                 .then(tweets => {
+                                      res.status(200).json(tweets);
+                                 })
+              
+
+
+         })
+         .catch(error => {
+                   console.error(`Error retrieving details of tweets with the tag ${givenTag}:`, error);
+                   res.status(500).json({
+                       message: 'Failed to retrieve matched tweet from the db.'
+                   }); 
+          }); 
+    
+    
+    } else if ( (keyword[0] == '*') && ( keyword.slice(1).match(/^[0-9]+$/) != null ) ) {
+          const id = keyword.slice(1)
+     
+          Tweet.findOne( { tweet_id: id } )
+               .then((matchedTweet) => {
+                      if(!matchedTweet) {
+                        return res.status(404).json({
+                               message: "The tweet id given doesn't exist"
+                        })
+                      }
+
+                      res.set('Content-Type', 'application/json');
+                      res.json({
+                                 tweet_id: matchedTweet.tweet_id,
+                                 content: matchedTweet.content,
+                                 user: matchedTweet.user,
+                                 time: matchedTweet.time
+                              })
+    
+                  
+              })
+              .catch(error => {
+                        console.error(`Error retrieving details of tweet with the tweet id ${id}:`, error);
+                        res.status(500).json({
+                            message: 'Failed to retrieve matched tweet from the db.'
+                        }); 
+               }); 
+    } else {
+         Tweet.find(  { "content": {"$regex": keyword, "$options": "i" } } )
+              .then((matchedTweets) => {
+                     if(!matchedTweets) {
+                         return res.status(404).json({
+                               message: "No tweet's content matches the keyword(s) you gave"
+                          })
+                     }
+
+                     res.set('Content-Type', 'application/json');
+              
+                      const promises = matchedTweets.map((tweet) => {
+                              return {
+                                 tweet_id: tweet.tweet_id,
+                                 content: tweet.content,
+                                 user: tweet.user,
+                                 time: tweet.time
+                              };
+                         })
+    
+                      Promise.all(promises)
+                                 .then(tweets => {
+                                      res.status(200).json(tweets);
+                                 })
+       
+              })
+              .catch(error => {
+                    console.error(`Error retrieving details of tweets that match the keyword ${keyword}:`, error);
+                    res.status(500).json({
+                        message: 'Failed to retrieve matched tweet(s) from the db.'
+                    }); 
+              }); 
+ }
+});
+
 //search for user(s) by username (partial search)
 // input: a string, called 'search', that contains the keyword inputted by user
 // output: the user_id, username, ban status, and avatar of all user(s) whose usernames contain the string 'search' 
@@ -207,8 +343,8 @@ router.get('/searchUser', (req, res) => {
                     const promises = matchedUsers.map((user) => {
                                  return {
                                      user_id: user.user_id,
-                                     username: user.username,
                                      email: user.email,
+                                     username: user.username,
                                      ban: user.ban,
                                     // tweet: user.tweet
                                  };
@@ -244,12 +380,10 @@ router.get('/searchComment', (req, res) => {
                     res.set('Content-Type', 'application/json');
                     const promises = matchedComments.map((comment) => {
                                  return {
-                                     _id: comment._id,
-                                     comment_id: comment.comment_id,
-                                     tweet_id: comment.tweet_id,
-                                     user_id: comment.user_id,
-                                     content: comment.content,
-                                     time: comment.time,
+                                           comment_id: comment.comment_id,
+                                           content: comment.content,
+                                           user_id: comment.user_id,
+                                           time: comment.time
                                  };
                             })
 

@@ -1,10 +1,26 @@
 import './NavBar.css';
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
+
 
 export function NavigationBar({ page }) {
+    let current_user_id = -1;
+
+    if (getCookieValue('userId') !== "") {
+        current_user_id = Number(getCookieValue('userId'));
+    }
+    
     const [state, setState] = useState({
-        personalDisplay: '',
-        settingDisplay: ''
+        avatar: '../avatar.png',
+    });
+    useEffect(() => {
+        if (current_user_id !== -1) {
+            fetch('/user/getUser/' + current_user_id)
+            .then(response => response.json())
+            .then(userData => {
+                console.log(userData);
+                setState(state=>({...state,avatar: userData.avatar_url}))
+                });
+        }
     });
     let uid = getCookieValue("userId");
     let isadmin = getCookieValue("isAdmin");
@@ -27,6 +43,7 @@ export function NavigationBar({ page }) {
     // Navigation bar for user
     if (page === "user") {
         if (isadmin === 'true') {
+            fetch()
             navContent = (
                 <nav>
                     <img src="../logo_colorful.svg" alt="Logo" />
@@ -36,7 +53,7 @@ export function NavigationBar({ page }) {
                         <li><a href="/admin/tweet">Admin</a></li>
                     </ul>
                     <div className="user-avatar">
-                        <img src="../avatar.png" alt="User Avatar" />
+                        <img src={state.avatar} alt="User Avatar" />
                         <div className="dropdown-menu">
                             <ul>
                                 <li><a href="/setting">Settings</a></li>
@@ -56,7 +73,7 @@ export function NavigationBar({ page }) {
                         <li><a href={"/personal/tweet?userId="+uid}>Personal page</a></li>
                     </ul>
                     <div className="user-avatar">
-                        <img src="../avatar.png" alt="User Avatar" />
+                        <img src={state.avatar} alt="User Avatar" />
                         <div className="dropdown-menu">
                             <ul>
                                 <li><a href="/setting">Settings</a></li>
@@ -81,7 +98,7 @@ export function NavigationBar({ page }) {
                     <li><a href="/home">Home</a></li>
                 </ul>
                 <div className="user-avatar">
-                    <img src="../avatar.png" alt="User Avatar" />
+                    <img src={state.avatar} alt="User Avatar" />
                     <div className="dropdown-menu">
                         <ul>
                             {/* <li><a href="/personal/tweet">Personal Page</a></li> */}
@@ -106,7 +123,7 @@ export function NavigationBar({ page }) {
                         <li><a href="/admin/tweet">Admin</a></li>
                     </ul>
                     <div className="user-avatar">
-                        <img src="../avatar.png" alt="User Avatar" />
+                        <img src={state.avatar} alt="User Avatar" />
                         <div className="dropdown-menu">
                             <ul>
                                 <li><a href="/setting">Settings</a></li>
@@ -126,7 +143,7 @@ export function NavigationBar({ page }) {
                         <li><a href={"/personal/tweet?userId="+uid}>Personal page</a></li>
                     </ul>
                     <div className="user-avatar">
-                        <img src="../avatar.png" alt="User Avatar" />
+                        <img src={state.avatar} alt="User Avatar" />
                         <div className="dropdown-menu">
                             <ul>
                                 <li><a href="/setting">Settings</a></li>
@@ -151,7 +168,7 @@ export function NavigationBar({ page }) {
                         <li><a href="/admin/tweet">Admin</a></li>
                     </ul>
                     <div className="user-avatar">
-                        <img src="../avatar.png" alt="User Avatar" />
+                        <img src={state.avatar} alt="User Avatar" />
                         <div className="dropdown-menu">
                             <ul>
                                 <li><a href="/setting">Settings</a></li>
@@ -171,7 +188,7 @@ export function NavigationBar({ page }) {
                         <li><a href={"/personal/tweet?userId="+uid}>Personal page</a></li>
                     </ul>
                     <div className="user-avatar">
-                        <img src="../avatar.png" alt="User Avatar" />
+                        <img src={state.avatar} alt="User Avatar" />
                         <div className="dropdown-menu">
                             <ul>
                                 <li><a href="/setting">Settings</a></li>

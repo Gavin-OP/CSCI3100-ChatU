@@ -123,7 +123,13 @@ export function AdminTable({ page, items }) {
     //     //   const banStatus = row.querySelector('.table-ban-status');
     //     // });
     //   }, [items1]);
-
+    // function to open user page
+    function handleOpenUser(id) {
+        window.location.href = '/personal/tweet?userId=' + id;
+    }
+    function handleOpen(id) {
+        window.location.href = '/tweet?tweetId=' + id;
+    }
 
 
     // Table for tweet
@@ -136,9 +142,9 @@ export function AdminTable({ page, items }) {
                     <table className="tweet-table" id="admin-tweet-table">
                         {items1.map((item) => (
                             <tr className='admin-table-column'>
-                                <td className='table-tweetid'>#{item.tweet_id}</td>
-                                <div className='table-tweet-content'><td className='table-tweetcontent'>{item.content}</td></div>
-                                <td className='table-tweet-username'>UserID:{item.user}</td>
+                                <td className='table-tweetid' onClick={()=>{handleOpen(item.tweet_id)}}>#{item.tweet_id}</td>
+                                <div className='table-tweet-content'><td className='table-tweetcontent' onClick={()=>{handleOpen(item.tweet_id)}}>{item.content}</td></div>
+                                <td className='table-tweet-username' onClick={()=>{handleOpenUser(item.user)}}>UserID:{item.user}</td>
                                 <td className='table-date'>{item.time.substring(0, 10) + '  ' + item.time.substring(11, 19)}</td>
                                 <button className="admin-tweet-delele-button" id="delete-button" onClick={() => handleTweetDeleteClick(item.tweet_id,item.user)}>Delete</button>
                             </tr>
@@ -158,7 +164,7 @@ export function AdminTable({ page, items }) {
                         <tr className='admin-table-column'>
                             <td className='table-commentid'>#{item.comment_id}</td>
                             <div className='table-tweet-content'><td className="table-commentcontent">{item.content}</td></div>
-                            <td className='table-comment-username'>UserID:{item.user_id}</td>
+                            <td className='table-comment-username' onClick={()=>{handleOpenUser(item.user_id)}}>UserID:{item.user_id}</td>
                             <td className='table-comment-date'>{item.time.substring(0, 10) + '  ' + item.time.substring(11, 19)}</td>
                             <button className="admin-comment-delele-button" id="delete-button" onClick={() => handleCommentDeleteClick(item.comment_id)}>Delete</button>
                         </tr>
@@ -175,9 +181,9 @@ export function AdminTable({ page, items }) {
                 <table className="user-table" id="admin-user-table">
                     {items1.map((item) => (
                         <tr className='admin-table-column'>
-                            <td className='table-userid'>{item.user_id}</td>
+                            <td className='table-userid' onClick={()=>{handleOpenUser(item.user_id)}}>{item.user_id}</td>
                             <td className='table-user-email'>{item.email}</td>
-                            <td className='table-username'>{item.username}</td>
+                            <td className='table-username' onClick={()=>{handleOpenUser(item.user_id)}}>{item.username}</td>
                             <td className='table-ban-status'>{item.ban ? 'Banned' : 'Normal'}</td>
                             <button className="ban-button" onClick={() => { handleBanClick(item) }}>ban</button>
                             <button className='unban-btn' onClick={() => { handleUnbanClick(item) }}>Unban</button>

@@ -273,6 +273,7 @@ Requierd response example
 - [ ] following user list back button
 - [ ] persoanal page unfollow user
 - [ ] General Schema, usercount
+- [x] user recommendation close icon
 
 ## Available Scripts
 

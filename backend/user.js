@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const User = require('./userSchema');
 const Follow = require('./followSchema');
+const Avatar = require('./avatarSchema');
 
 const multer = require('multer');
 const bodyParser = require('body-parser');      // is this really necessary???
@@ -24,6 +25,13 @@ router.post('/signUp', (req, res) => {
                     is_admin: false,
                 })
             return newUser.save();
+        })
+        .then((newUser) => {
+            const newAvatar = new Avatar(
+                {
+                    user_id: newUser.user_id,
+                })
+            return newAvatar.save();
         })
         .then((newUser) => {
             console.log('user created:', newUser);

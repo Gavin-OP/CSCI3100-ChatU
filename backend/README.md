@@ -1260,7 +1260,9 @@ Backend is constructed by NodeJS and Express with MongoDB as the database.
 #### `/user/signUp`
 
 - Usage: Create new user and send cookie
+
 - POST
+
 - Input:
   ```javascript
   {
@@ -1269,8 +1271,13 @@ Backend is constructed by NodeJS and Express with MongoDB as the database.
       username: 'Gavin OP',
   }
   ```
+  
 - Output: 
+  
+  Default avatar: `../avatar.png`
+  
   Success output:
+  
   ```javascript
   {
       "message": "Sign up successful. User will automatically login.",
@@ -1381,11 +1388,9 @@ Backend is constructed by NodeJS and Express with MongoDB as the database.
 8. 给定user id,修改email，可以分进setting
 9. 给定user id,修改password，可以分进setting
 10. API for tweets only posted by following user
-11. Create new user no follow list
-12. Avatar schema, use_id: string, avatar_url: trings
-13. Delete user
-14. user recommendation close icon
-- [ ] TypeError: response.data.map is not a function,home.js 111, followlist???? If user do not have follower???
+11. Delete user
+- [x] TypeError: response.data.map is not a function,home.js 111, followlist???? If user do not have follower???
+- [ ] Avatar schema, use_id: string, avatar_url: trings
 
 
 

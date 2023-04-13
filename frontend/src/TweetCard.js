@@ -31,8 +31,9 @@ export function TweetCard(tweetID) {
         forwardLight: '#657786',
         starLight: '#657786',
         commentLight: '#657786',
-        followLight: '#ff4444',
-        followRetweetLight: '#ff4444',
+        followLight: 'linear-gradient(to right, #d42a7ae8, #e90413e3)',
+        followRetweetLight: 'linear-gradient(to right, #d42a7ae8, #e90413e3)',
+        // followRetweetLight: '#ff4444',
     });
     //process the fetched data
     useEffect(() => {

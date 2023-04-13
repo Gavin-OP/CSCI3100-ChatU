@@ -29,6 +29,9 @@ export class Login extends React.Component {
                 }
                 
             }
+            else {
+                alert("You have been banned! ")
+            }
         })
         .catch(error=>{
             console.log(error);

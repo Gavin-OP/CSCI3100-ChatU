@@ -274,13 +274,21 @@ router.get('/searchTweet', (req, res) =>{
                         })
                       }
 
-                      res.set('Content-Type', 'application/json');
-                      res.json({
+                      //res.set('Content-Type', 'application/json');
+                      let o = []
+                      o.push({
+                        tweet_id: matchedTweet.tweet_id,
+                        content: matchedTweet.content,
+                        user: matchedTweet.user,
+                        time: matchedTweet.time
+                     })
+                     res.send(o)
+                     /* res.send([{
                                  tweet_id: matchedTweet.tweet_id,
                                  content: matchedTweet.content,
                                  user: matchedTweet.user,
                                  time: matchedTweet.time
-                              })
+                              }]) */
     
                   
               })

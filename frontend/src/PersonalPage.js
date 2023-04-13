@@ -70,18 +70,21 @@ export class PersonalPage extends React.Component{
                                              }
                                         })
                                    }
-                                   let url=''
-                                   if (this.page==='tweet'){
-                                        url='/personal/tweetId/'+uid;
+                                   let page_url='';
+                                   if (this.page === 'tweet'){
+                                        page_url='/personal/tweetId/'+uid;
                                    }
-                                   else if (this.page ==='fav'){
-                                        url='/favorite/tweetId/'+uid;
+                                   else {
+                                        page_url='/favorite/tweetId/'+uid;
                                    }
-                                   fetch(url)
+                                   fetch(page_url)
                                    .then(res=>res.json())
                                    .then(res=>{
                                         console.log(res)
-                                        info.tweets=res;
+                                        if (res!==undefined && res.length>0){
+                                             info.tweets=res;
+                                        }
+                                        
                                         this.setState({isload: 1, info: info})
                                    })
                                    .catch(err=>console.log(err))
@@ -200,6 +203,7 @@ class PersonPage extends React.Component{
                     <button className="btn fav-button" onClick={()=>{window.location.href='/personal/fav?userId='+this.info.userId}}> <i className="fa fa-star"></i></button>
                     <div className="tweet-container" id="tweetcontainer">
                     <br/>
+                    {this.info.tweets.length===0? <div className="p-2 container-fluid text-center"><h3>No Result!</h3></div>:<div></div>}
                     {this.info.tweets.map((tweet,i)=><TweetCard key={i} tweet_id={tweet}/>)}
                     </div>
                 </div>

@@ -273,12 +273,26 @@ Backend is constructed by NodeJS and Express with MongoDB as the database.
    ```
 
 #### `/search/searchUser?txt=`
-- Usage: search user(s) by username keyword given in txt (partial match)
+- Usage: search user(s) by user id (exact match) or username keyword (partial match) given in txt 
 - GET
-- Input: txt=ol
-- Output:
-```javascript
-  [
+- If txt consists of numbers only:
+    - Input: txt=3
+    - Output:
+  ```javascript
+    [
+      {
+        "user_id": 3,
+        "email": "gavin@cuhk.com",
+        "username": "Gavin",
+        "ban": false
+      }
+    ]
+  ```
+- Otherwise:
+    - Input: txt=ol
+    - Output:
+    ```javascript
+    [
     {
         "user_id": 8,
         "email": "123456@com",
@@ -297,26 +311,40 @@ Backend is constructed by NodeJS and Express with MongoDB as the database.
         "username": "followtest",
         "ban": false
     }
-  ]
-```
+    ]
+    ```
 
 
 
 #### `/search/searchComment?txt=`
-- Usage: search comment(s) by keyword given in txt (partial match)
+- Usage: search comment(s) by comment id (exact match) or keyword (partial match) given in txt
 - GET
-- Input: txt=con
-- Output:
-```javascript
-  [
-    {
+- If txt consists of numbers only:
+  - Input: txt=3
+  - Output:
+    ```javascript
+       [
+          {
+             "comment_id": 3,
+             "content": "Me too",
+             "user_id": 4,
+             "time": "2023-04-07T10:59:00.306Z"
+          }
+       ]
+    ```
+- Otherwise:
+   - Input: txt=con
+   - Output:
+   ```javascript
+     [
+      {
         "comment_id": 1,
         "content": "Congrats",
         "user_id": 4,
         "time": "2023-04-07T10:55:47.276Z"
-    }
-  ]
-```
+      }
+     ]
+   ```
 
 #### `/blacklist/add/:userId`
 

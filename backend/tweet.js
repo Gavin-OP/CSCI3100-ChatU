@@ -124,31 +124,39 @@ router.post('/retweet', (req, res) => {
         .sort('-tweet_id')
         .exec()
         .then((tweet) => {
-            const newTweet = new Tweet(
-                {
-                    tweet_id: tweet ? tweet.tweet_id + 1 : 1,
-                    content: req.body['content'],
-                    user: userId,
-                    privacy_state: req.body['privacy_state'], // 0 if everyone can see the tweet; 1 if only self can see the tweet
-                    original: req.body['original'],
-                    tag: req.body['tag'],
-                });
-            // saving the object into the database
-            return newTweet.save();
-        })
-        .then((newTweet) => {
-            console.log('retweet created');
+            General.find()
+                .then((general) => {
+                    general[0].tweet_cnt = general[0].tweet_cnt + 1;
+                    return general[0].save();
+                })
 
-            User.findOneAndUpdate(
-                { user_id: userId },
-                { $push: { tweet: newTweet.tweet_id } },
-                { upsert: true, new: true },
-            )
-                .then((user) => {
-                    res.json({
-                        message: 'Create retweet successfully',
-                        action_status: true
-                    });
+                .then((general) => {
+                    const newTweet = new Tweet(
+                        {
+                            tweet_id: tweet ? tweet.tweet_id + 1 : 1,
+                            content: req.body['content'],
+                            user: userId,
+                            privacy_state: req.body['privacy_state'], // 0 if everyone can see the tweet; 1 if only self can see the tweet
+                            original: req.body['original'],
+                            tag: req.body['tag'],
+                        });
+                    // saving the object into the database
+                    return newTweet.save();
+                })
+                .then((newTweet) => {
+                    console.log('retweet created');
+
+                    User.findOneAndUpdate(
+                        { user_id: userId },
+                        { $push: { tweet: newTweet.tweet_id } },
+                        { upsert: true, new: true },
+                    )
+                        .then((user) => {
+                            res.json({
+                                message: 'Create retweet successfully',
+                                action_status: true
+                            });
+                        })
                 })
         })
         .catch((err) => {

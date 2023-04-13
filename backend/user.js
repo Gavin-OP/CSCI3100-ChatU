@@ -339,6 +339,7 @@ router.post('/create', upload.single("file"), (req, res) => {
                         ban: 0,
                         favorite_visibility: 0,
                         global_visibility: 2,
+                        is_admin: true,
                         avatar: {
                             data: req.file.buffer,
                             contentType: req.file.mimetype
@@ -364,30 +365,32 @@ router.post('/update', (req, res) => {
 
     User.findOneAndUpdate(
         { user_id: loggedInUserId },
-        { username: req.body['username'],
-          description: req.body['description']} )
-        .then((user)=>{
+        {
+            username: req.body['username'],
+            description: req.body['description']
+        })
+        .then((user) => {
             if (!user) {
                 return res.status(404).json({
-                message: 'User not found.'
-            });
+                    message: 'User not found.'
+                });
             }
             Avatar.findOneAndUpdate(
                 { user_id: loggedInUserId },
-                { avatar_url: req.body['avatar_url']},
+                { avatar_url: req.body['avatar_url'] },
                 { upsert: true, new: true }
             )
-             .then(result=>{
-                console.log(req.body)
-                console.log(`Update user information with ID ${loggedInUserId}`);
-                res.send('Update user successfully');
-             })
-             .catch(error => {
-                console.error(`Error updating avatar for user with ID ${loggedInUserId}`, error);
-                res.status(500).json({
-                    message: "Failed to update the avatar"
+                .then(result => {
+                    console.log(req.body)
+                    console.log(`Update user information with ID ${loggedInUserId}`);
+                    res.send('Update user successfully');
+                })
+                .catch(error => {
+                    console.error(`Error updating avatar for user with ID ${loggedInUserId}`, error);
+                    res.status(500).json({
+                        message: "Failed to update the avatar"
+                    });
                 });
-            });
         })
         .catch(error => {
             console.error(`Error updating user information with user ID ${loggedInUserId}`, error);
@@ -395,7 +398,7 @@ router.post('/update', (req, res) => {
                 message: "Failed to update user information"
             });
         });
-        
+
 })
 
 module.exports = router;

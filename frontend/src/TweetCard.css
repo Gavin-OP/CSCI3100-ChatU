@@ -65,6 +65,10 @@
     transition: all 0.3s ease;
 }
 
+.follow-button:hover {
+    background: linear-gradient(to right, #a6366a, #db2431);
+}
+
 .vertical-line {
     height: 23px;
     width: 0.5px;

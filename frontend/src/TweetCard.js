@@ -33,7 +33,7 @@ export function TweetCard(tweetID) {
         commentLight: '#657786',
         followLight: 'linear-gradient(to right, #d42a7ae8, #e90413e3)',
         followRetweetLight: 'linear-gradient(to right, #d42a7ae8, #e90413e3)',
-        // followRetweetLight: '#ff4444',
+        // followRetweetLight: 'linear-gradient(to right, #d42a7ae8, #e90413e3)',
     });
     //process the fetched data
     useEffect(() => {
@@ -211,7 +211,7 @@ export function TweetCard(tweetID) {
         const isRetweetFollow = props.retweetFollowStatus;
         //Check whether the user have already follow the retweet user, if so, light the follow button, else grey the button.
         if (isRetweetFollow === 'follow') {
-            setState(prevState => ({ ...prevState, followRetweetLight: '#ff4444' }))
+            setState(prevState => ({ ...prevState, followRetweetLight: 'linear-gradient(to right, #d42a7ae8, #e90413e3)' }))
         }
         else if (isRetweetFollow === 'following') {
             setState(prevState => ({ ...prevState, followRetweetLight: '#c9c9c9' }))
@@ -221,7 +221,7 @@ export function TweetCard(tweetID) {
         }
         //Check whether the user have already follow the user, if so, light the follow button, else grey the button.
         if (isFollow === 'follow') {
-            setState(prevState => ({ ...prevState, followLight: '#ff4444' }))
+            setState(prevState => ({ ...prevState, followLight: 'linear-gradient(to right, #d42a7ae8, #e90413e3)' }))
         }
         else if (isFollow === 'following') {
             setState(prevState => ({ ...prevState, followLight: '#c9c9c9' }))
@@ -364,7 +364,7 @@ export function TweetCard(tweetID) {
                 .catch(err => console.log(err))
         }
         else if (props.followStatus === 'following') {
-            setState({ ...state, followLight: '#ff4444' });
+            setState({ ...state, followLight: 'linear-gradient(to right, #d42a7ae8, #e90413e3)' });
             setProps(preProps => ({ ...preProps, followStatus: 'follow' }))
             fetch('/follow/delete/' + props.userId)
                 .then(res => res.json())
@@ -383,7 +383,7 @@ export function TweetCard(tweetID) {
                 .catch(err => console.log(err))
         }
         else if (props.retweetFollowStatus === 'following') {
-            setState({ ...state, followRetweetLight: '#ff4444' });
+            setState({ ...state, followRetweetLight: 'linear-gradient(to right, #d42a7ae8, #e90413e3)' });
             setProps(preProps => ({ ...preProps, retweetFollowStatus: 'follow' }))
             fetch('/follow/delete/' + props.retweetUserId)
                 .then(res => res.json())
@@ -539,7 +539,7 @@ export function TweetCard(tweetID) {
                             <div className="user-info">
                                 <div className="username">{props.username}</div>
                                 <div className='follow'>
-                                    <button className="follow-button" onClick={handleLogin} style={{ 'background': '#ff4444' }}>{'follow'}</button>
+                                    <button className="follow-button" onClick={handleLogin} style={{ 'background': 'linear-gradient(to right, #d42a7ae8, #e90413e3)' }}>{'follow'}</button>
                                 </div>
                                 <div className='vertical-line'></div>
                             </div>

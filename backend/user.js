@@ -14,37 +14,53 @@ const upload = multer({ storage: storage });
 // sign up a new user
 router.post('/signUp', (req, res) => {
     User.findOne({})
-        .sort('-user_id')
         .exec()
         .then((user) => {
-            const newUser = new User(
-                {
-                    user_id: user ? user.user_id + 1 : 1,
-                    email: req.body['email'],
-                    pwd: req.body['pwd'],
-                    username: req.body['username'],
-                    is_admin: false,
+            General.find()
+                .then((general) => {
+                    general[0].user_cnt += 1;
+                    return general[0].save();
                 })
-            return newUser.save();
-        })
-        .then((newUser) => {
-            const newAvatar = new Avatar(
-                {
-                    user_id: newUser.user_id,
-                })
-            return newAvatar.save();
-        })
-        .then((newUser) => {
-            console.log('user created:', newUser);
 
-            // Set cookie to identify user
-            res.cookie('userId', newUser.user_id, { httpOnly: false });
-            res.cookie('userDbId', newUser._id, { httpOnly: true });
-            res.cookie('isAdmin', newUser.is_admin, { httpOnly: false });
-            res.json({
-                message: 'Sign up successful. User will automatically login.',
-                login_status: 2     // 0: wrong email, 1: wrong password, 2: login successful
-            });
+                .then((general) => {
+                    console.log('general data:', general)
+                    const newUser = new User(
+                        {
+                            user_id: general.user_cnt,
+                            email: req.body['email'],
+                            pwd: req.body['pwd'],
+                            username: req.body['username'],
+                            is_admin: false,
+                        })
+                    return newUser.save();
+                })
+
+                .then((newUser) => {
+                    console.log('user created:', newUser)
+
+                    // Set cookie to identify user
+                    res.cookie('userId', newUser.user_id, { httpOnly: false });
+                    res.cookie('userDbId', newUser._id, { httpOnly: true });
+                    res.cookie('isAdmin', newUser.is_admin, { httpOnly: false });
+
+                    const newAvatar = new Avatar(
+                        {
+                            user_id: newUser.user_id,
+                        })
+                    return newAvatar.save();
+                })
+
+                .then((newUser) => {
+                    console.log('avatar created:', newUser);
+
+                    res.json({
+                        message: 'Sign up successful. User will automatically login.',
+                        login_status: 2     // 0: wrong email, 1: wrong password, 2: login successful
+                    });
+
+                })
+
+
         })
         .catch((err) => {
             console.error(err);

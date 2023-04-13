@@ -274,6 +274,7 @@ Requierd response example
 - [ ] persoanal page unfollow user
 - [ ] General Schema, usercount
 - [x] user recommendation close icon
+- [ ] sign up的时候后端崩了，但是前端依然可以跳转到home page。
 
 ## Available Scripts
 

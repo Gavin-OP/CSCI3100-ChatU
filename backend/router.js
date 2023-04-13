@@ -27,6 +27,7 @@ const personalRoutes = require('./personal')
 const homeRoutes = require('./home')
 const commentRoutes = require('./comment')
 const searchRoutes = require('./search')
+const generalRoutes = require('./general')
 
 
 app.use('/feedback', feedbackRoutes)
@@ -41,5 +42,6 @@ app.use('/personal', personalRoutes)
 app.use('/home', homeRoutes)
 app.use('/comment', commentRoutes)
 app.use('/search', searchRoutes)
+app.use('/general', generalRoutes)
 
 module.exports = app;

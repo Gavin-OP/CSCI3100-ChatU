@@ -339,6 +339,51 @@ router.get('/searchTweet', (req, res) =>{
 router.get('/searchUser', (req, res) => {
     const keyword = req.query.txt
 
+    if (keyword.match(/^[0-9]+$/) != null) {
+        User.findOne( { user_id: keyword } )
+             .then((matchedUser) => {
+                  if(!matchedUser) {
+                      return res.status(404).json({
+                         message: "No user has the provided user_id"
+                      })
+                  }
+
+                  let o = []
+                  o.push({
+                            user_id: matchedUser.user_id,
+                            email: matchedUser.email,
+                            username: matchedUser.username,
+                            ban: matchedUser.ban
+                 })
+                 res.send(o)
+
+
+
+                  //res.set('Content-Type', 'application/json');
+              /*
+                  const promises = matchedTweets.map((tweet) => {
+                          return {
+                             tweet_id: tweet.tweet_id,
+                             content: tweet.content,
+                             user: tweet.user,
+                             time: tweet.time
+                          };
+                     })
+
+                  Promise.all(promises)
+                             .then(tweets => {
+                                  res.status(200).json(tweets);
+                             })
+              */      
+         })
+         .catch(error => {
+             console.error(`Error retrieving details of user with the user id ${keyword}:`, error);
+             res.status(500).json({
+                 message: 'Failed to retrieve matched user from the db.'
+             }); 
+         }); 
+
+    } else {   
        User.find( { "username": {"$regex": keyword, "$options": "i" } } )
             .then((matchedUsers) => {
                     if(!matchedUsers) {
@@ -353,7 +398,7 @@ router.get('/searchUser', (req, res) => {
                                      user_id: user.user_id,
                                      email: user.email,
                                      username: user.username,
-                                     ban: user.ban,
+                                     ban: user.ban
                                     // tweet: user.tweet
                                  };
                             })
@@ -370,13 +415,56 @@ router.get('/searchUser', (req, res) => {
                     message: 'Failed to retrieve matched user(s) from the db.'
                 }); 
         }); 
-
+    }
 });
 
 //search for comment(s) by keyword (partial search)
 router.get('/searchComment', (req, res) => {
     const keyword = req.query.txt
 
+    if (keyword.match(/^[0-9]+$/) != null) {
+        Comment.findOne( { comment_id: keyword } )
+             .then((matchedComment) => {
+                  if(!matchedComment) {
+                      return res.status(404).json({
+                         message: "No comment has the provided comment_id"
+                      })
+                  }
+
+                  let o = []
+                  o.push({
+                            comment_id: matchedComment.comment_id,
+                            content: matchedComment.content,
+                            user_id: matchedComment.user_id,
+                            time: matchedComment.time
+                 })
+                 res.send(o)
+
+                  //res.set('Content-Type', 'application/json');
+              /*
+                  const promises = matchedTweets.map((tweet) => {
+                          return {
+                             tweet_id: tweet.tweet_id,
+                             content: tweet.content,
+                             user: tweet.user,
+                             time: tweet.time
+                          };
+                     })
+
+                  Promise.all(promises)
+                             .then(tweets => {
+                                  res.status(200).json(tweets);
+                             })
+              */      
+         })
+         .catch(error => {
+             console.error(`Error retrieving details of comment with the comment id ${keyword}:`, error);
+             res.status(500).json({
+                 message: 'Failed to retrieve matched comment from the db.'
+             }); 
+         }); 
+
+    } else {
        Comment.find( { "content": {"$regex": keyword, "$options": "i" } } )
             .then((matchedComments) => {
                     if(!matchedComments) {
@@ -407,7 +495,7 @@ router.get('/searchComment', (req, res) => {
                     message: 'Failed to retrieve matched comment(s) from the db.'
                 }); 
         }); 
-
+    }
 });
 
 

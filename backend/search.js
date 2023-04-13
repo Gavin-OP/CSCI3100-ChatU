@@ -8,8 +8,8 @@ const { json } = require('body-parser');
 
 //Search for tweets by keyword(s) (partial search)
 // Input: a string, called "search", that contains the search string inputted by the user
-router.post('/searchTweet', (req, res) =>{
-       const keyword = req.body['search']
+router.get('/homeSearch', (req, res) =>{
+       const keyword = req.query.txt
 
        if (keyword.match(/^[0-9]+$/) != null) {
            Tweet.find( { user: keyword } )
@@ -73,7 +73,9 @@ router.post('/searchTweet', (req, res) =>{
              }); 
        
        
-       } else if ( (keyword[0] == '#') && ( keyword.slice(1).match(/^[0-9]+$/) != null ) ) {
+       } 
+       /*
+       else if ( (keyword[0] == '#') && ( keyword.slice(1).match(/^[0-9]+$/) != null ) ) {
              const id = keyword.slice(1)
         
              Tweet.findOne( { tweet_id: id } )
@@ -96,6 +98,7 @@ router.post('/searchTweet', (req, res) =>{
 
                         res.status(200).send(o);
                       */
+                     /*
                      res.json({
                         tweet_id: id,
                         content: matchedTweet.content,
@@ -116,7 +119,8 @@ router.post('/searchTweet', (req, res) =>{
                                message: 'Failed to retrieve matched tweet from the db.'
                            }); 
                   }); 
-       } else {
+       } */
+        else {
             Tweet.find(  { "content": {"$regex": keyword, "$options": "i" } } )
                  .then((matchedTweets) => {
                         if(!matchedTweets) {
@@ -127,12 +131,36 @@ router.post('/searchTweet', (req, res) =>{
 
                         // res.set('Content-Type', 'application/json');
                         list = []
-                        i = 0
-                        while(i < matchedTweets.length) {
+                        for(i = 0; i < matchedTweets.length; i++) {
                             list.push(matchedTweets[i].tweet_id)
-                            i++
                         }
 
+                        /*
+                        User.find( {"username": { "$regex": keyword, "$options": "i" } } )
+                            .exec()
+                            .then((matchedUsers) => {
+                                if(!matchedUsers) {
+                                    return res.json({
+                                          message: "No username matches the keyword(s) you gave"
+                                     })
+                                }
+
+                                for(let i=0; i < matchedUsers.length; i++) {
+                                      let tweetSent = matchedUsers[i].tweet
+                                      for(let j=0; j < tweetSent.length; j++) {
+                                           if (!(list.includes(tweetSent[j])))  {
+                                               list.push(tweetSent[j])
+                                           }    
+                                      }
+                                }
+                            })
+                            .catch(error => {
+                                console.error(`Error retrieving details of tweets that match the username ${keyword}:`, error);
+                                res.status(500).json({
+                                    message: 'Failed to retrieve matched tweet(s) from the db.'
+                                }); 
+                          }); 
+                        */
                         o = { "tweetId": list }
 
                         res.status(200).send(o);
@@ -164,8 +192,8 @@ router.post('/searchTweet', (req, res) =>{
 //search for user(s) by username (partial search)
 // input: a string, called 'search', that contains the keyword inputted by user
 // output: the user_id, username, ban status, and avatar of all user(s) whose usernames contain the string 'search' 
-router.post('/searchUser', (req, res) => {
-    const keyword = req.body['search']
+router.get('/searchUser', (req, res) => {
+    const keyword = req.query.txt
 
        User.find( { "username": {"$regex": keyword, "$options": "i" } } )
             .then((matchedUsers) => {
@@ -182,6 +210,7 @@ router.post('/searchUser', (req, res) => {
                                      username: user.username,
                                      email: user.email,
                                      ban: user.ban,
+                                    // tweet: user.tweet
                                  };
                             })
 
@@ -201,8 +230,8 @@ router.post('/searchUser', (req, res) => {
 });
 
 //search for comment(s) by keyword (partial search)
-router.post('/searchComment', (req, res) => {
-    const keyword = req.body['search']
+router.get('/searchComment', (req, res) => {
+    const keyword = req.query.txt
 
        Comment.find( { "content": {"$regex": keyword, "$options": "i" } } )
             .then((matchedComments) => {

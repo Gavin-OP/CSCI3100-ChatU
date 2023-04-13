@@ -242,7 +242,9 @@ class Page extends React.Component {
         var day=time.getDate();
         var hr=time.getHours();
         var min=time.getMinutes();
+        var sec=time.getSeconds();
         var t = yr + '-' + mon + '-' + day + ' ' + hr + ':' + min;
+        var t2 = yr + '-' + mon + '-' + day + 'T' + hr + ':' + min + ':' + sec;
         let con= document.getElementById("input").value;
         let uid = getCookieValue("userId");
         fetch('/comment/create',
@@ -251,7 +253,7 @@ class Page extends React.Component {
          headers: {'content-type': 'application/json'}})
         .then(res=>console.log(res))
         .catch(err=>console.log(err))
-        let new_comment={username: "Self", avatar: this.file.avatar, content: con, time: t};
+        let new_comment={username: "Self", avatar: this.file.avatar, content: con, time: t2};
         console.log(new_comment);
         this.file.comments.push(new_comment);
         this.setState({updated:1});
@@ -314,7 +316,7 @@ class Page extends React.Component {
 
                                 <div className="container m-4" style={{ fontSize: '16px', width: '95%' }}>
                                     <div className="container-fluid row">
-                                        <div className="col-6 p-2" >{this.file.time}</div>
+                                        <div className="col-6 p-2" >{this.file.time.substring(0, 10) + '  ' + this.file.time.substring(11, 19)}</div>
                                         <div className="col-6 py-0  d-flex flex-row-reverse">
                                             
                                             <button className="p-2 likebuttons" id="retweetbtn" alt="Retweet" onClick={()=>{window.location.href='/retweet?tweetId='+this.file.tweetId}}><FontAwesomeIcon icon={faShare} /></button>
@@ -369,7 +371,7 @@ class CommentCard extends React.Component {
         fetch('/user/getUser/'+this.comment.user_id)
         .then(res=>res.json())
         .then(data=>{
-            this.setState({username: data.username})
+            this.setState({username: data.username, avatar: data.avatar_url})
         })
         this.setState({ isload: 1 });
     }
@@ -400,7 +402,7 @@ class CommentCard extends React.Component {
                         </div>
                         <div className="col-6 container">
                             <div className="container-fluid d-flex flex-row-reverse">
-                                <div className="p-2" style={{ fontSize: '14px' }}>{this.comment.time}</div>
+                                <div className="p-2" style={{ fontSize: '14px' }}>{this.comment.time.substring(0, 10) + '  ' + this.comment.time.substring(11, 19)}</div>
                             </div>
                         </div>
                     </div>

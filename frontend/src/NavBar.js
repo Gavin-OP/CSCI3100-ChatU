@@ -21,7 +21,7 @@ export function NavigationBar({ page }) {
                 setState(state=>({...state,avatar: userData.avatar_url}))
                 });
         }
-    });
+    },[]);
     let uid = getCookieValue("userId");
     let isadmin = getCookieValue("isAdmin");
     function handleLogout(){

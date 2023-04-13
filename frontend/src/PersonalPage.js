@@ -35,7 +35,7 @@ export class PersonalPage extends React.Component{
                let info = {
                     username: data.username,
                     userId: data.user_id,
-                    avatar: '../avatar.png',
+                    avatar: data.avatar_url,
                     description: 'Hello ChatU',
                     followStatus: '',
                     blackStatus: 0,
@@ -181,7 +181,7 @@ class PersonPage extends React.Component{
                         </div> 
                     </div>
                     <div className='m-2 p-2'>NO. {this.info.userId}</div> 
-                    <div className='m-2 p-2' style={{fontSize:'large',backgroundColor:'white'}}>{this.info.description}</div>
+                    <div className='m-2 p-2 descriptionbox' style={{fontSize:'large'}}><span className="mx-2">{this.info.description}</span></div>
              
 
                     <br/> <br/>

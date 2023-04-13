@@ -6,37 +6,6 @@ import { faHeart, faShare, faHeartBroken, faComment, faStar, faPaperPlane } from
 import './TweetPage.css';
 import { Loading } from './Loading'
 
-let test_file = {
-    username: 'David',
-    avatar: "./avatar2.png",
-    time: '2023-3-7 0:04',
-    tweetId: 9978,
-    content: "A test twitter: aobtb abyaaotbaotbao btap tnap tpiabt pabtapit bata tat ",
-    favos: 2,
-    likes: 9,
-    comments: [{ user: 'user1', avatar: "./avatar.png", content: 'Comment 1', time: '2023-3-21 19:00' },
-    { user: 'uagoab', avatar: "./avatar2.png", content: 'anoaotiba', time: '2023-3-22 11:40' },
-    { user: 'CSCI3100', avatar: "./avatar.png", content: 'Good job', time: '2023-3-22 14:38' }],
-    likeStatus: 0,
-    favorStatus: 0,
-    followStatus: 'Following',
-    //imageSrc: ['/tweet_card_pic_1.jpg'],
-    tweet_data: {
-        avatarUrl: './avatar.png',
-        username: 'Gavin OP',
-        tweetId: '100056',
-        likeStatus: 1,
-        dislikeStatus: 0,
-        starStatus: 1,
-        likeCount: 49,
-        //starCount: 32,
-        commentCount: 4,
-        followStatus: 'Following',
-        // imageSrc: '/tweet_card_pic_1.jpg',
-        tweetText: 'dfasdfanibh massa blandit orci, eget ultricies turpis lorem ut nulla.',
-    }
-}
-
 export class TweetPage extends React.Component{
     constructor(props){
         super(props);
@@ -56,7 +25,7 @@ export class TweetPage extends React.Component{
                 let new_file={
                     username: user.username,
                     userId: user.user_id,
-                    avatar: "../avatar.png",
+                    avatar: user.avatar_url,
                     time: data.tweet.time,
                     tweetId: data.tweet.tweet_id,
                     content: data.tweet.content,
@@ -118,15 +87,24 @@ class Page extends React.Component {
         super(props);
         this.file = this.props.file;
         this.state = {logined: 0, like: this.props.file.likeStatus, favor: this.props.file.favorStatus, 
-            follow: this.props.file.followStatus, type: 0 , updated: 0};
+            follow: this.props.file.followStatus, type: 0 , updated: 0, image_done: 0, image_index:0};
     }
     componentDidMount() {
         if (this.file.image !== undefined) {
-            addPic(this.file);
+            this.addPic();
             console.log("Has picture")
         }
         if (this.file.original > 0) {
             this.setState({ type: 1 });
+        }
+        if (this.state.follow === 'Self'){
+            document.getElementById('followbtn').style.background='#c9c9c9';
+        }
+        else if (this.state.follow === 'Following'){
+            document.getElementById('followbtn').style.background='#c9c9c9';
+        }
+        else {
+            document.getElementById('followbtn').style.background='#ff4444';
         }
     }
     componentDidUpdate(){
@@ -139,7 +117,6 @@ class Page extends React.Component {
         else {
              document.getElementById('followbtn').style.background='#ff4444';
         }
-
    }
     handleLike = () => {
         if (this.state.like === 1) {
@@ -205,6 +182,54 @@ class Page extends React.Component {
             .then(res=>console.log(res))
         }
     }
+    addPic = ()=>{
+        if (this.file.image.length>1){
+            document.getElementById('carousel-inner').innerHTML='';
+            for (let i = 0; i < this.file.image.length; i++){
+                var type = this.file.image[i].contentType;
+                var data = this.file.image[i].data;
+                let img_div = document.createElement('div');
+                img_div.classList.add("carousel-item");
+                if ( i === this.state.image_index ){
+                    img_div.classList.add("active");
+                }
+                img_div.id = "carousel-" + i;
+                document.getElementById('carousel-inner').appendChild(img_div);
+                let img_img = document.createElement('img');
+                img_img.classList.add('d-block');
+                img_img.style.maxHeight = '500px';
+                img_img.style.width = '98%';
+                img_img.src="data:" + type + ";base64, " +data;
+                document.getElementById('carousel-'+ i).appendChild(img_img);
+                
+            }
+            document.getElementById("carouselExampleControls").style.display = 'flex';
+        }
+        else {
+            var type = this.file.image[0].contentType;
+            var data = this.file.image[0].data;
+            let code = "<div class='container-fluid'><image class='p-1' src='data:" + type + ";base64, " + data + "' style='max-height:500px;max-width:98%'/></div> ";
+            document.getElementById('imgbox').innerHTML = code;
+        }
+    }
+    handlePrev = () => {
+        if (this.state.image_index===0){
+            this.setState({image_index: this.file.image.length - 1 });
+        }
+        else {
+            this.setState({image_index: this.state.image_index - 1 });
+        }
+        this.addPic();
+    }
+    handleNext = () => {
+        if (this.state.image_index===(this.file.image.length - 1)){
+            this.setState({image_index: 0 });
+        }
+        else {
+            this.setState({image_index: this.state.image_index + 1 });
+        }
+        this.addPic();
+    }
     sendComment = () => {
         const time = new Date();
         var yr=time.getFullYear();
@@ -264,6 +289,20 @@ class Page extends React.Component {
                                 <div className="container m-4" style={{ fontSize: '22px', width: '92%' }}>{this.file.tag}</div>
                                 <div className="container m-4" style={{ fontSize: '22px', width: '92%' }}>{this.file.content}</div>
                                 <div className="container m-2 d-flex justify-content-center" id="imgbox" style={{ width: '92%' }}>
+                                <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel" style={{display: 'none'}}>
+                                    <div id="carousel-inner" class="carousel-inner">
+                                    </div>
+                                    <button class="carousel-control-prev" type="button" onClick={this.handlePrev}>
+                                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                        <span class="sr-only">Previous</span>
+                                    </button>
+                                    <button class="carousel-control-next" type="button" onClick={this.handleNext}>
+                                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                        <span class="sr-only">Next</span>
+                                    </button>
+                                </div>
+                                </div>
+                                <div className="container m-2 d-flex justify-content-center" style={{ width: '92%' }}>
                                     {this.state.type === 1 ? <TweetCard tweet_id={this.file.original} /> : <div></div>}
                                 </div>
 
@@ -306,12 +345,12 @@ function addPic(file) {
     for (let i = 0; i < file.image.length; i++){
         var type = file.image[i].contentType;
         var data = file.image[i].data;
-        code += "<image className='p-1' src='data:" + type + ";base64, " + data + "' style='max-height:"+1000/file.image.length+"px;max-width:" + 98/file.image.length + "%'/> ";
+        code += "<div class='container-fluid'><image class='p-1' src='data:" + type + ";base64, " + data + "' style='max-height:500px;max-width:98%'/></div> ";
     }
     //console.log(data)
     div.innerHTML = code;
+    
 }
-
 
 class CommentCard extends React.Component {
     constructor(props) {

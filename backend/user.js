@@ -213,7 +213,7 @@ router.get('/getUser/:userId', (req, res) => {
                                         email: user.email,
                                         ban: user.ban,
                                         follow_status: followStatus,
-                                        avatar_rrl: avatar.avatarUrl,
+                                        avatar_url: avatar.avatar_url,
                                         avatar: {
                                             contentType: avatar.contentType,
                                             data: avatar.data
@@ -232,22 +232,60 @@ router.get('/getUser/:userId', (req, res) => {
                         });
                     });
             } else {
-                const user_info = {
-                    favorite: user.favorite,
-                    user_id: user.user_id,
-                    username: user.username,
-                    description: user.description,
-                    email: user.email,
-                    ban: user.ban,
-                    follow_status: 2,
-                    avatar: {
-                        contentType: user.avatar.contentType,
-                        data: user.avatar.data
-                    },
-                };
+                // const user_info = {
+                //     favorite: user.favorite,
+                //     user_id: user.user_id,
+                //     username: user.username,
+                //     description: user.description,
+                //     email: user.email,
+                //     ban: user.ban,
+                //     follow_status: 2,
+                //     avatar: {
+                //         contentType: user.avatar.contentType,
+                //         data: user.avatar.data
+                //     },
+                // };
+                Avatar.findOne({ user_id: user.user_id })
+                    .then((avatar) => {
+                        if (!avatar) {
+                            const user_info = {
+                                favorite: user.favorite,
+                                user_id: user.user_id,
+                                username: user.username,
+                                description: user.description,
+                                email: user.email,
+                                ban: user.ban,
+                                follow_status: 2,
+                                avatar_url: '../avatar.png',
+                                avatar: {
+                                    contentType: user.avatar.contentType,
+                                    data: user.avatar.data
+                                },
+                            };
 
-                res.set('Content-Type', 'application/json');
-                res.json(user_info);
+                            res.set('Content-Type', 'application/json');
+                            res.json(user_info);
+                        }
+                        else {
+                            const user_info = {
+                                favorite: user.favorite,
+                                user_id: user.user_id,
+                                username: user.username,
+                                description: user.description,
+                                email: user.email,
+                                ban: user.ban,
+                                follow_status: 2,
+                                avatar_url: avatar.avatar_url,
+                                avatar: {
+                                    contentType: avatar.contentType,
+                                    data: avatar.data
+                                },
+                            };
+
+                            res.set('Content-Type', 'application/json');
+                            res.json(user_info);
+                        }
+                    })
             }
         })
         .catch((err) => {
@@ -319,5 +357,45 @@ router.post('/create', upload.single("file"), (req, res) => {
             res.status(500).send("Server Error");
         })
 });
+
+router.post('/update', (req, res) => {
+    // req.file can be used to access all file properties
+    const loggedInUserId = req.cookies.userId;
+
+    User.findOneAndUpdate(
+        { user_id: loggedInUserId },
+        { username: req.body['username'],
+          description: req.body['description']} )
+        .then((user)=>{
+            if (!user) {
+                return res.status(404).json({
+                message: 'User not found.'
+            });
+            }
+            Avatar.findOneAndUpdate(
+                { user_id: loggedInUserId },
+                { avatar_url: req.body['avatar_url']},
+                { upsert: true, new: true }
+            )
+             .then(result=>{
+                console.log(req.body)
+                console.log(`Update user information with ID ${loggedInUserId}`);
+                res.send('Update user successfully');
+             })
+             .catch(error => {
+                console.error(`Error updating avatar for user with ID ${loggedInUserId}`, error);
+                res.status(500).json({
+                    message: "Failed to update the avatar"
+                });
+            });
+        })
+        .catch(error => {
+            console.error(`Error updating user information with user ID ${loggedInUserId}`, error);
+            res.status(500).json({
+                message: "Failed to update user information"
+            });
+        });
+        
+})
 
 module.exports = router;

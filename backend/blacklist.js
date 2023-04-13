@@ -146,6 +146,7 @@ router.get('/list', (req, res) => {
                             user_id: user.user_id,
                             username: user.username,
                             avatar: user.avatar,
+                            avatar_url: user.avatar_url,
                         };
                     });
             });
@@ -156,14 +157,14 @@ router.get('/list', (req, res) => {
                     res.status(200).json(users);
                 })
                 .catch(error => {
-                    console.error(`Error retrieving users from the blacklist of user with ID ${requestedUserId}:`, error);
+                    console.error(`Error retrieving users from the blacklist of user with ID ${loggedInUserId}:`, error);
                     res.status(500).json({
                         message: 'Failed to retrieve users from the blacklist.'
                     });
                 });
         })
         .catch(error => {
-            console.error(`Error retrieving blacklist of user with ID ${requestedUserId}:`, error);
+            console.error(`Error retrieving blacklist of user with ID ${loggedInUserId}:`, error);
             res.status(500).json({
                 message: 'Failed to retrieve blacklist.'
             });

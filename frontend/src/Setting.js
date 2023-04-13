@@ -7,6 +7,7 @@ import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import { Loading } from './Loading';
 import './Setting.css'
+import './Post.css'
 
 export class Setting extends React.Component{
      constructor(props){
@@ -24,11 +25,11 @@ export class Setting extends React.Component{
                     userId: data.user_id,
                     email: data.email,
                     description: 'Hello ChatU',
-                    avatar: data.avatar,
+                    avatar: data.avatar_url,
                }
                console.log(data)
                if (data.description!=='' && data.description!==undefined){
-                    info.description=data.description;
+                    info.description = data.description;
                }
                this.setState({isload:1, info: info})
           })
@@ -50,7 +51,7 @@ class SettingPage extends React.Component{
      componentDidMount(){
         let code = '';
         if (this.info.avatar.data===undefined){
-            code = "<image className='p-2' id='ava' src='../avatar.png' style='width:180px;height:180px;'/>";
+            code = "<image className='p-2' id='ava' src=" + this.info.avatar + " style='width:180px;height:180px;'/>";
             document.getElementById('avatarbox').innerHTML = code;
         }
      }
@@ -64,19 +65,34 @@ class SettingPage extends React.Component{
         let des = document.getElementById('formDescription').value;
         let avatar = document.getElementById('formAvatar').value;
         
-        let formdata = new FormData();
-        formdata.append("username", name);
-        formdata.append("description", des);
-        formdata.append("avatar", avatar);
-            
-        window.alert("Haven't connect to database now!")
-        // fetch('/user/update',
-        // {method:'POST', body: formdata})
-        //     .then(res=>{
-        //     console.log(res);
-        //     window.history.href='/home';
-        // })
-        // .catch(error=>console.log(error))
+        //window.alert("Haven't connect to database now!")
+        fetch('/user/update',
+        {method:'POST', body: JSON.stringify({
+            username: name,
+            description: des,
+            avatar_url: avatar,
+            }), headers:{'Content-Type': 'application/json'}})
+            .then(res=>{
+            console.log(res);
+            alert("Update successfully! Back to the homepage")
+            window.location.href='/home';
+        })
+        .catch(error=>console.log(error))
+    
+     }
+     handleFeedback=()=>{
+        let content = document.getElementById('formFeedback').value;
+
+        //window.alert("Haven't connect to database now!")
+        fetch('/feedback/creat',
+        {method:'POST', body: JSON.stringify({
+            content: content
+            }), headers:{'Content-Type': 'application/json'}})
+            .then(res=>{
+            console.log(res);
+            alert("Upload feedback successfully!")
+        })
+        .catch(error=>console.log(error))
     
      }
      render(){
@@ -89,7 +105,9 @@ class SettingPage extends React.Component{
                         <Row >
                             <Col md={{ span: 8, offset: 2 }} style={{backgroundColor:'#F7F7F7'}}>
                                 <Container fluid >
-                                <button class="return-button m-2" onClick={()=>window.history.back()}> <i class="fa fa-arrow-left"></i></button>
+                                <div className="container m-2"><button className='btn m-3' onClick={() => { window.history.back() }} style={{color:'#db2431',borderColor:'#a6366a'}}>
+                                    <i className="bi bi-arrow-left"></i> Back to Previous Page</button>
+                                </div>
                                 <div className="container offset-5 p-2" id="avatarbox"></div>
                                 <Form id="postform">
                                     <Form.Group className="m-3" controlId="formId" size='lg'>
@@ -112,8 +130,8 @@ class SettingPage extends React.Component{
                                     
                                     <Form.Group controlId="formAvatar" className="m-3">
                                         <Form.Label>Choose Avatar</Form.Label>
-                                        <Form.Select onChange={this.handleSelect} required>
-                                            <option value='../avatar.png' selected>1</option>
+                                        <Form.Select onChange={this.handleSelect} required defaultValue='../avatar.png'>
+                                            <option value='../avatar.png'>1</option>
                                             <option value='../avatar2.png'>2</option>
                                             <option value='../avatar3.jpg'>3</option>
                                             <option value='../avatar4.jpg'>4</option>
@@ -127,19 +145,34 @@ class SettingPage extends React.Component{
                                     </Form.Group>
                                     <div className="p-2" id="preview"></div>
 
-                                    <Container className="d-flex offset-1">
-                                        <Button className="m-3" variant="outline-dark" onClick={()=>{window.history.back()}}>
+                                    <Container className="d-flex justify-content-center">
+                                        <Button className="m-3 postpage-backbutton" variant="outline-dark" onClick={()=>{window.history.back()}}>
                                             Cancel and Back
                                         </Button>
-                                        <Button className="m-3" variant="outline-danger" type="reset">
+                                        <Button className="m-3 postpage-clearbutton" variant="outline-danger" type="reset">
                                             Clear
                                         </Button>
-                                        <Button className="m-3" variant="outline-primary" onClick={this.handlePost}>
+                                        <Button className="m-3 postpage-postbutton" variant="outline-primary" onClick={this.handlePost}>
                                             Submit
                                         </Button>
 
                                     </Container>
 
+                                </Form>
+                                <Form id="feedback">
+                                    <Form.Group className="m-3" controlId="formFeedback" size='lg'>
+                                        <Form.Label>Feedback</Form.Label>
+                                        <Form.Control as="textarea" rows={6} placeholder="Input your feedback" required />
+                                    </Form.Group>
+                                    <Container className="d-flex justify-content-center">
+                                        <Button className="m-3 postpage-clearbutton" variant="outline-danger" type="reset">
+                                            Clear
+                                        </Button>
+                                        <Button className="m-3 postpage-postbutton" variant="outline-primary" onClick={this.handleFeedback}>
+                                            Submit
+                                        </Button>
+
+                                    </Container>
                                 </Form>
                                 </Container>
                             </Col>

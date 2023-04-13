@@ -20,9 +20,15 @@
 .tweet-container {
     margin-left: 5%;
     white-space: normal;
-    
+
 }
 
+.descriptionbox {
+    background-color: #e0e5ec;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 5px 5px 10px #bebebe, -5px -5px 10px #ffffff;
+}
 .title {
     font-size: 30px;
     margin-left: 34%;

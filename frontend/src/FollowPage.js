@@ -36,7 +36,7 @@ export class FollowPage extends React.Component{
                    else if (user.follow_status===2){
                         followStatus = 'Self';
                    }
-                    return {userId: user.user_id, username: user.username, avatar: '../avatar.png', followStatus: followStatus}
+                    return {userId: user.user_id, username: user.username, avatar: user.avatar_url, followStatus: followStatus}
                 })
                 
             }

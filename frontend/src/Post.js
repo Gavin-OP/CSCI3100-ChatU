@@ -77,7 +77,7 @@ export function Post() {
                                 <option value={1}>Only visible to yourself</option>
                             </Form.Select>
                         </Form.Group>
-                        <Container className="d-flex offset-1">
+                        <Container className="d-flex justify-content-center">
                             <Button className="m-3 postpage-backbutton" variant="outline-dark" onClick={()=>{window.history.back()}}>
                                 Cancel and Back
                             </Button>

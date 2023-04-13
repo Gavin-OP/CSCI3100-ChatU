@@ -18,7 +18,7 @@ export class BlackList extends React.Component{
             if (data.message===undefined && data.length>0){
                 new_file = data.map((user)=>{
                     
-                    return {userId: user.user_id, username: user.username, avatar: '../avatar.png'}
+                    return {userId: user.user_id, username: user.username, avatar: user.avatar_url}
                 })
                 
             }

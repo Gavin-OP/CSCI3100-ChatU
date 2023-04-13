@@ -108,6 +108,7 @@ router.get('/fanList/:userId', (req, res) => {
                                     username: response.data.username,
                                     follow_status: response.data.follow_status,
                                     avatar: response.data.avatar,
+                                    avatar_url: response.data.avatar_url,
                                 };
                                 console.log(user_info);
                                 return user_info;

@@ -1239,6 +1239,7 @@ Backend is constructed by NodeJS and Express with MongoDB as the database.
       "email": "gavin@cuhk.com",
       "ban": false,
       "follow_status": 1,		// 0: not following, 1: following, 2: self
+      "avatar_url": "../avatar.png",		// '../avatar.png' is default url
       "avatar":
       {
           "contentType": "image/png",

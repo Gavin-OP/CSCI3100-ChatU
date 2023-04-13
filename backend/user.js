@@ -3,6 +3,7 @@ const router = express.Router();
 const User = require('./userSchema');
 const Follow = require('./followSchema');
 const Avatar = require('./avatarSchema');
+const General = require('./generalSchema');
 
 const multer = require('multer');
 const bodyParser = require('body-parser');      // is this really necessary???
@@ -166,22 +167,47 @@ router.get('/getUser/:userId', (req, res) => {
                             followStatus = 0;
                         }
 
-                        const user_info = {
-                            favorite: user.favorite,
-                            user_id: user.user_id,
-                            username: user.username,
-                            description: user.description,
-                            email: user.email,
-                            ban: user.ban,
-                            follow_status: followStatus,
-                            avatar: {
-                                contentType: user.avatar.contentType,
-                                data: user.avatar.data
-                            },
-                        };
+                        Avatar.findOne({ user_id: user.user_id })
+                            .then((avatar) => {
+                                if (!avatar) {
+                                    const user_info = {
+                                        favorite: user.favorite,
+                                        user_id: user.user_id,
+                                        username: user.username,
+                                        description: user.description,
+                                        email: user.email,
+                                        ban: user.ban,
+                                        follow_status: followStatus,
+                                        avatar_url: '../avatar.png',
+                                        avatar: {
+                                            contentType: user.avatar.contentType,
+                                            data: user.avatar.data
+                                        },
+                                    };
 
-                        res.set('Content-Type', 'application/json');
-                        res.json(user_info);
+                                    res.set('Content-Type', 'application/json');
+                                    res.json(user_info);
+                                }
+                                else {
+                                    const user_info = {
+                                        favorite: user.favorite,
+                                        user_id: user.user_id,
+                                        username: user.username,
+                                        description: user.description,
+                                        email: user.email,
+                                        ban: user.ban,
+                                        follow_status: followStatus,
+                                        avatar_rrl: avatar.avatarUrl,
+                                        avatar: {
+                                            contentType: avatar.contentType,
+                                            data: avatar.data
+                                        },
+                                    };
+
+                                    res.set('Content-Type', 'application/json');
+                                    res.json(user_info);
+                                }
+                            })
                     })
                     .catch((err) => {
                         console.error(err);

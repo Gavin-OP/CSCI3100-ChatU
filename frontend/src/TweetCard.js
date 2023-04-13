@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHeart, faShare, faHeartBroken, faComment, faStar, faPaperPlane } from '@fortawesome/free-solid-svg-icons';
@@ -529,7 +528,7 @@ export function TweetCard(tweetID) {
         else {
             return (
                 <div className='tweet-card-container my-3'>
-                <div className="tweet-card" >
+                    <div className="tweet-card" >
 
                         {/* User information and Tweet Information */}
                         <div className="tweet-header">

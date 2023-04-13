@@ -70,7 +70,14 @@ export class PersonalPage extends React.Component{
                                              }
                                         })
                                    }
-                                   fetch('/'+this.page +'/tweetId/'+uid)
+                                   let page_url='';
+                                   if (this.page === 'tweet'){
+                                        page_url='/personal/tweetId/'+uid;
+                                   }
+                                   else {
+                                        page_url='/favorite/tweetId/'+uid;
+                                   }
+                                   fetch(page_url)
                                    .then(res=>res.json())
                                    .then(res=>{
                                         console.log(res)

@@ -28,6 +28,7 @@ const homeRoutes = require('./home')
 const commentRoutes = require('./comment')
 const searchRoutes = require('./search')
 const generalRoutes = require('./general')
+// const settingRoutes = require('./setting')
 
 
 app.use('/feedback', feedbackRoutes)
@@ -43,5 +44,6 @@ app.use('/home', homeRoutes)
 app.use('/comment', commentRoutes)
 app.use('/search', searchRoutes)
 app.use('/general', generalRoutes)
+// app.use('/setting', settingRoutes)
 
 module.exports = app;

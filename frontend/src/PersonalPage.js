@@ -63,8 +63,9 @@ export class PersonalPage extends React.Component{
                     .then(fetch('/blacklist/list')
                               .then(res=>res.json())
                               .then(blacklist=>{
-                                   if (blacklist.message ===undefined && blacklist.length>0){
+                                   if (blacklist.message ===undefined && blacklist!==null && blacklist.length>0){
                                         blacklist.map((b)=>{
+                                             console.log(b)
                                              if (b.user_id===data.user_id){
                                                   info.blackStatus=1;
                                              }
@@ -108,6 +109,17 @@ class PersonPage extends React.Component{
           this.state = {follow: this.props.info.followStatus, black: this.props.info.blackStatus}
 
      };
+     componentDidMount(){
+          if (this.state.follow === 'Self'){
+               document.getElementById('followbtn').style.background='#c9c9c9';
+          }
+          else if (this.state.follow === 'Following'){
+               document.getElementById('followbtn').style.background='#c9c9c9';
+          }
+          else {
+               document.getElementById('followbtn').style.background='#ff4444';
+          }
+     }
      componentDidUpdate(){
           if (this.state.follow === 'Self'){
                document.getElementById('followbtn').style.background='#c9c9c9';

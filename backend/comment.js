@@ -5,6 +5,7 @@ const router = express.Router();
 const User = require('./userSchema');
 const Comment = require('./commentSchema');
 const Tweet = require('./tweetSchema');
+const General = require('./generalSchema');
 
 
 // create a comment
@@ -17,29 +18,37 @@ router.post('/create', (req, res) => {
     Comment.findOne({})
         .sort({ comment_id: -1 })
         .then((comment) => {
-            console.log(comment.comment_id)
-            const newComment = new Comment({
-                comment_id: comment ? comment.comment_id + 1 : 1,
-                user_id: user_id,
-                tweet_id: tweet_id,
-                content: content,
-                time: time
-            });
+            General.find()
+                .then((general) => {
+                    general[0].comment_cnt = general[0].comment_cnt + 1;
+                    return general[0].save();
+                })
 
-            return newComment.save();
-        })
-        .then((newComment) => {
-            console.log(newComment)
-            User.findOneAndUpdate(
-                { user_id: user_id },
-                { $push: { comment: newComment.comment_id } },
-                { upsert: true, new: true }
-            )
-                .then(() => {
-                    res.json({
-                        message: 'Comment created.',
-                        action_status: true,
+                .then((general) => {
+                    const newComment = new Comment({
+                        comment_id: general.comment_cnt,
+                        user_id: user_id,
+                        tweet_id: tweet_id,
+                        content: content,
+                        time: time
                     });
+
+                    return newComment.save();
+                })
+
+                .then((newComment) => {
+                    console.log(newComment)
+                    User.findOneAndUpdate(
+                        { user_id: user_id },
+                        { $push: { comment: newComment.comment_id } },
+                        { upsert: true, new: true }
+                    )
+                        .then(() => {
+                            res.json({
+                                message: 'Comment created.',
+                                action_status: true,
+                            });
+                        })
                 })
         })
         .catch(err => {

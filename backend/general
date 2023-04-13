@@ -1,0 +1,33 @@
+const express = require('express');
+const router = express.Router();
+const General = require('./generalSchema');
+
+
+// initialize general info
+router.get('/initCnt', (req, res) => {
+    General.findOne()
+        .then((general) => {
+            if (general == null) {
+                const newGeneral = new General();
+                newGeneral.save()
+                    .then((general) => {
+                        res.json({ general });
+                    })
+                    .catch((err) => {
+                        res.status(500).json({
+                            message: 'Internal server error.'
+                        });
+                    });
+            } else {
+                res.json({ general });
+            }
+        })
+        .catch((err) => {
+            res.status(500).json({
+                message: 'Internal server error.'
+            });
+        });
+});
+
+
+module.exports = router;

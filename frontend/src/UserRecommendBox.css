@@ -1,112 +1,145 @@
-/* .UserRecContainer {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    width: 100%;
-    height: 100%;
-    background-color: #fff;
-    border-radius: 4px;
-    padding: 10px;
-    
-    box-shadow: 0 0 10px 0 rgb(255, 4, 4);
-} */
-.delete-btn{
-    padding: 7px 7px;
-    border-radius: 10px;
-    background-color: #ff4444;
-    color: #ffeaea;
-    border: none;
-    font-size: 16px;
-    cursor: pointer;
-    border-radius: 20px;
-    transition: all 0.2s ease-in-out;
-    position: relative;
-    margin-left: 216px;
-    top: -20px;
+.user-recommend-body {
+  padding: 23px;
 }
-.delete-btn:hover{
-    background-color: #800000;
 
+.Fresh-btn {
+  padding: 8px 16px;
+  outline: none;
+  color: #ffeaea;
+  background: linear-gradient(to right, #d42a7ae8, #e90413e3);
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  margin-left: 10px;
+  box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.1), -4px -4px 8px rgba(255, 255, 255, 0.5);
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
 }
-.Fresh-btn{
-    padding: 1px 10px;
-    border-radius: 5px;
-    background-color: #ff4444;
-    color: #ffeaea;
-    border: none;
-    font-size: 16px;
-    cursor: pointer;
-    border-radius: 20px;
-    transition: all 0.2s ease-in-out;
-    margin-left: 10px;
+
+.Fresh-btn:hover {
+  background: linear-gradient(to right, #a6366a, #db2431);
 }
-.Fresh-btn:hover{
-    background-color: #e60000;
+
+.Container-for-two {
+  margin-top: 24px;
 }
+
 .URB-container {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
-    width: 250px;
-    padding: 15px;
-    background-color: #ffffff;
-    border: 1px solid #ddd;
-    border-radius: 10px;
-    margin: 10px;
-    box-shadow:  8px 5px 5px rgba(240, 211, 211, 0.605);
-  }
-  .UserRecContainer{
-    margin-top: 7px;
-  }
-  .Round-icon img {
-    width: 80px;
-    height: 80px;
-    border-radius: 50%;
-    position: relative;
-    left: 65px;
-    background-color: #ddd;
-  }
-  .User-name {
-    font-weight: bold;
-    position: relative;
-    left: -4px;
-  }
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 250px;
+  padding: 15px;
+  margin: 10px;
+  border-radius: 8px;
+  background-color: #ffffff;
+  box-shadow: 6px 6px 12px rgba(0, 0, 0, 0.1), -6px -6px 12px rgba(255, 255, 255, 0.5);
+}
 
-  .sign-title {
-    font-size: 16px;
-    font-weight: 600;
-    position: relative;
-    background: linear-gradient(90deg, #fc787869 0%, #d870f778 100%);
-    margin-bottom: 10px;
-  }
-  .User-name {
-    text-align: center;
-    margin-bottom: 10px;
-  }
-  .User-signature-container {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-top: 10px;
-    margin-bottom: 10px;
-    border-style: groove ;
-    box-shadow: inset 0 0 8px 0 rgba(255, 246, 246, 0.827);
-    border-radius: 5px;
-  }
-  .follow-btn {
-    padding: 1px 20px;
-    border-radius: 5px;
-    background-color: #ff4444;
-    color: #fff;
-    border: none;
-    font-size: 16px;
-    cursor: pointer;
-    transition: all 0.2s ease-in-out;
-  }
+.UserRecContainer {
+  margin-top: 7px;
+  padding: 16px;
+}
 
-  .follow-btn:hover {
-    background-color: #e60000;
-  }
-  
+.user-recom-card {
+  display: flex;
+  flex-direction: column;
+}
+
+.delete-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  right: 7px;
+  top: -10px;
+  margin-left: 216px;
+  border-radius: 10px;
+  width: 20px;
+  height: 20px;
+  background: linear-gradient(to right, #d42a7ae8, #e90413e3);
+  color: #ffeaea;
+  border: none;
+  outline: none;
+  font-size: 10px;
+  cursor: pointer;
+  border-radius: 20px;
+  transition: all 0.2s ease-in-out;
+}
+
+.delete-btn:hover {
+  background: linear-gradient(to right, #a6366a, #db2431);
+
+}
+
+
+.Round-icon {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  left: 55px;
+  overflow: hidden;
+  margin-bottom: 8px;
+  box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1), -2px -2px 4px rgba(255, 255, 255, 0.5);
+}
+
+.Round-icon img {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  background-color: #ddd;
+}
+
+.User-name {
+  font-size: 18px;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-justify: center;
+}
+
+.User-signature-container {
+  margin-top: 10px;
+  margin-bottom: 10px;
+  padding: 16px;
+  border-radius: 8px;
+  background-color: #e0e5ec65;
+  box-shadow: 6px 6px 12px rgba(0, 0, 0, 0.1), -6px -6px 12px rgba(255, 255, 255, 0.5);
+}
+
+.sign-title {
+  font-size: 16px;
+  font-weight: 600;
+  color: #555;
+  margin-bottom: 10px;
+}
+
+
+.User-signature {
+  margin-bottom: 10px;
+  font-size: 14px;
+  color: #777;
+}
+
+.follow-btn {
+  padding: 8px 16px;
+  font-size: 16px;
+  border-radius: 8px;
+  background: linear-gradient(to right, #d42a7ae8, #e90413e3);
+  color: #fff;
+  border: none;
+  outline: none;
+  box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1), -2px -2px 4px rgba(255, 255, 255, 0.5);
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+}
+
+.follow-btn:hover {
+  background: linear-gradient(to right, #a6366a, #db2431);
+}

@@ -225,7 +225,7 @@ router.get('/searchTweet', (req, res) =>{
              }); 
          }); 
 
-    } else if ( (keyword[0] == '#') && ( keyword.slice(1).match(/^[a-zA-Z]+$/) != null )  ) {
+    } else if ( (keyword[0] == '$') && ( keyword.slice(1).match(/^[a-zA-Z]+$/) != null )  ) {
            const givenTag = keyword.slice(1)
      
            Tweet.find( { "tag": {"$regex": givenTag, "$options": "i" } } )

@@ -188,12 +188,12 @@ Backend is constructed by NodeJS and Express with MongoDB as the database.
           }
        ]
     ```
-  - If 'search' starts with a '#' and follows with a string that contains only numbers, search tweets by tweet_id given in 'search' (exact match, can only return one result):
+  - If 'search' starts with a '*' and follows with a string that contains only numbers, search tweets by tweet_id given in 'search' (exact match, can only return one result):
    - Input:
    ```javascript
   [
     {
-    "search": "#1"
+    "search": "*1"
     }
   ]
    ```

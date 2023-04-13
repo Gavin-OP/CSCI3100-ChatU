@@ -253,7 +253,7 @@ class Page extends React.Component {
          headers: {'content-type': 'application/json'}})
         .then(res=>console.log(res))
         .catch(err=>console.log(err))
-        let new_comment={username: "Self", avatar: this.file.avatar, content: con, time: t2};
+        let new_comment={user_id: Number(uid), avatar: this.file.avatar, content: con, time: t2};
         console.log(new_comment);
         this.file.comments.push(new_comment);
         this.setState({updated:1});

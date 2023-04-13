@@ -13,20 +13,21 @@ export function SearchBar({ page }) {
 
 
          // Fake data!!!!!!!!!!!!!!!!!!!!!
-         let data1 =
-        [
-            { tweet_id: "#000001", content: "This is a tweet", user: "@user1", time: "2021.1.1" },
-            { tweet_id: "#114514", content: "AAAAAAAAAAAAAAAAAAA,senpai-sukisi!,AAAAAAAAAAAAAAAAAAAAAAAAAAAA", user: "@user2", time: "2021.11.4" },
-            { tweet_id: "#191981", content: "@*&!@(*$&@!$^*&", user: "@user3", time: "2021.5.14" },
-            { tweet_id: "#233333", content: "This is a long tweet! askdjqwfjqok q oqkdpqs os qj q0i pqoiqwqokdpqow niqfqwofjqpowjfwfqkwfnpqwfw qiwfqwokfpoqwkfpqwf qpwfqpokfpqwkfpqwkfpoqw qwpfjqpowkfqwokfpqowkfpoqwkfpq qwokdpqowkdpqwpqwokdq oqkwdpoqwkdpqokwdpok!!!!!!!!!!!!!!!", user: "Long tweet", time: "2021.6.6" },
-            { tweet_id: "#233334", content: "This is a short tweet! ", user: "short tweet", time: "2021.6.7" },
-        ];
+        //  let data1 =
+        // [
+        //     { tweet_id: "#000001", content: "This is a tweet", user: "@user1", time: "2021.1.1" },
+        //     { tweet_id: "#114514", content: "AAAAAAAAAAAAAAAAAAA,senpai-sukisi!,AAAAAAAAAAAAAAAAAAAAAAAAAAAA", user: "@user2", time: "2021.11.4" },
+        //     { tweet_id: "#191981", content: "@*&!@(*$&@!$^*&", user: "@user3", time: "2021.5.14" },
+        //     { tweet_id: "#233333", content: "This is a long tweet! askdjqwfjqok q oqkdpqs os qj q0i pqoiqwqokdpqow niqfqwofjqpowjfwfqkwfnpqwfw qiwfqwokfpoqwkfpqwf qpwfqpokfpqwkfpqwkfpoqw qwpfjqpowkfqwokfpqowkfpoqwkfpq qwokdpqowkdpqwpqwokdq oqkwdpoqwkdpqokwdpok!!!!!!!!!!!!!!!", user: "Long tweet", time: "2021.6.6" },
+        //     { tweet_id: "#233334", content: "This is a short tweet! ", user: "short tweet", time: "2021.6.7" },
+        // ];
 
         //this is the initial table
         fetch('/home/tweet')
         .then(response => response.json())
         //initail the admin table
         .then(data => {
+            console.log(data);
             FrontendFcn(data.tweets)
         })
         .catch(error => console.log(error));
@@ -34,23 +35,19 @@ export function SearchBar({ page }) {
         const handleSearch = (query) => {
             // send the search query to the backend
             let url = '';
-            if (query[0]==='#'){
-                url='/admin/tweet/search/'+query.substring(1);
-            }
-            else{
-                url='/admin/tweet/search/'+query;
-            }
+            url='/search/searchTweet?txt='+query;
             fetch(url)
             .then(response => response.json())
             .then(data => {
+                console.log(data);
                 FrontendFcn(data)
             })
             .catch(error => console.log(error));
             
 
             //test function
-            FrontendFcn(data1);
-            console.log(url);
+            // FrontendFcn(data1);
+            // console.log(url);
 
 
         };
@@ -87,7 +84,7 @@ export function SearchBar({ page }) {
                     <div className="search-box">
                         <i><FontAwesomeIcon icon={faMagnifyingGlass} /></i>
                         <form name="search" onSubmit={handleKeyDown}>
-                            <input type="text" className="search-input" name="txt" onmouseout="this.value = ''; this.blur();" placeholder='#ID/content' onKeyDown={handleKeyDown} />
+                            <input type="text" className="search-input" name="txt" onmouseout="this.value = ''; this.blur();" placeholder='userID/*tweetID/content' onKeyDown={handleKeyDown} />
                         </form>
                     </div>
                 </div>
@@ -102,16 +99,21 @@ export function SearchBar({ page }) {
 
         const handleSearch = (query) => {
             // send the search query to the backend
-            // fetch('/admin/user/search/'+query)
-            // .then(response => response.json())
-            // .then(data => {
-            //     FrontendFcn(data)
-            // })
-            // .catch(error => console.log(error));
-
+            if(query[0]==='*'){
+                FrontendFcn([query.substring(1)]);
+            }
+            else{
+                fetch('/search/homeSearch?txt='+query)
+                .then(response => response.json())
+                .then(data => {
+                    console.log(data);
+                    FrontendFcn(data.tweetId)
+                })
+                .catch(error => console.log(error));
+            }
             //test function
-            FrontendFcn(data1);
-            console.log('search query:', '/admin/user/search/'+query);
+            // FrontendFcn(data1);
+            // console.log('search query:', '/admin/user/search/'+query);
         };
 
         function FrontendFcn(tweetIDs) {
@@ -148,7 +150,7 @@ export function SearchBar({ page }) {
                 <div className="search-box">
                     <i><FontAwesomeIcon icon={faMagnifyingGlass} /></i>
                     <form name="search">
-                        <input type="text" className="search-input" name="txt" onmouseout="this.value = ''; this.blur();" placeholder='Tweet ID/Key Words/Tags' onKeyDown={handleKeyDown}/>
+                        <input type="text" className="search-input" name="txt" onmouseout="this.value = ''; this.blur();" placeholder='userId/*Tweet ID/Key Words/$Tags' onKeyDown={handleKeyDown}/>
                     </form>
                 </div>
             </div>
@@ -162,12 +164,12 @@ export function SearchBar({ page }) {
 
 
         // Fake data!!!!!!!!!!!!!!!!!!!!!
-        let data1 =
-        [
-            { user_id: "000001", email: "1314520@love.com", username: "@user1" , ban:false},
-            { user_id: "191981", email: "3100course@sb.com", username: "@user2", ban:true },
-            { user_id: "233333", email: "emmmmmm@qq.com", username: "@user3", ban:false},
-        ];
+        // let data1 =
+        // [
+        //     { user_id: "000001", email: "1314520@love.com", username: "@user1" , ban:false},
+        //     { user_id: "191981", email: "3100course@sb.com", username: "@user2", ban:true },
+        //     { user_id: "233333", email: "emmmmmm@qq.com", username: "@user3", ban:false},
+        // ];
         
 
         //this is the initial table
@@ -175,6 +177,7 @@ export function SearchBar({ page }) {
         .then(response => response.json())
         //initail the admin table
         .then(data => {
+            console.log(data);
             FrontendFcn(data);
         })
         .catch(error => console.log(error));
@@ -182,16 +185,17 @@ export function SearchBar({ page }) {
 
         const handleSearch = (query) => {
             // send the search query to the backend
-            // fetch('/admin/user/search/'+query)
-            // .then(response => response.json())
-            // .then(data => {
-            //     FrontendFcn(data)
-            // })
-            // .catch(error => console.log(error));
+            fetch('/search/searchUser?txt='+query)
+            .then(response => response.json())
+            .then(data => {
+                console.log(data);
+                FrontendFcn(data)
+            })
+            .catch(error => console.log(error));
 
             //test function
-            FrontendFcn(data1);
-            console.log('search query:', '/admin/user/search/'+query);
+            // FrontendFcn(data1);
+            // console.log('search query:', '/admin/user/search/'+query);
         };
         
 
@@ -225,7 +229,7 @@ export function SearchBar({ page }) {
                 <div className="search-box">
                     <i><FontAwesomeIcon icon={faMagnifyingGlass} /></i>
                     <form name="search">
-                        <input type="text" className="search-input" name="txt" onmouseout="this.value = ''; this.blur();" placeholder='ID/UserName' onKeyDown={handleKeyDown}/>
+                        <input type="text" className="search-input" name="txt" onmouseout="this.value = ''; this.blur();" placeholder='userID/UserName' onKeyDown={handleKeyDown}/>
                     </form>
                 </div>
             </div>
@@ -240,6 +244,7 @@ export function SearchBar({ page }) {
         .then(response => response.json())
         //initail the admin table
         .then(data => {
+            console.log(data);
             FrontendFcn(data);
         })
         .catch(error => console.log(error));
@@ -247,28 +252,29 @@ export function SearchBar({ page }) {
 
 
         // Fake data!!!!!!!!!!!!!!!!!!!!!
-        let data1 =
-        [
-            { comment_id: "#012391", content: "This is a comment", user_id: "@user1",  time: "2021.1.1" },
-            { comment_id: "#111114", content: "oh hohohohohohohohohohohohohohfuck this program!", user_id: "@user2",  time: "2021.11.4" },
-            { comment_id: "#100001", content: "@*&!@(*$&@!$^*&", user_id: "@user3",  time: "2021.5.14" },
-            { comment_id: "#123333", content: "This is a long comment! askdjqwfjqok q oqkdpqs os qj q0i pqoiqwqokdpqow niqfqwofjqpowjfwfqkwfnpqwfw qiwfqwokfpoqwkfpqwf qpwfqpokfpqwkfpqwkfpoqw qwpfjqpowkfqwokfpqowkfpoqwkfpq qwokdpqowkdpqwpqwokdq oqkwdpoqwkdpqokwdpok!!!!!!!!!!!!!!!", user_id: "Long comment",  time: "2021.6.6" },
-        ];
+        // let data1 =
+        // [
+        //     { comment_id: "#012391", content: "This is a comment", user_id: "@user1",  time: "2021.1.1" },
+        //     { comment_id: "#111114", content: "oh hohohohohohohohohohohohohohfuck this program!", user_id: "@user2",  time: "2021.11.4" },
+        //     { comment_id: "#100001", content: "@*&!@(*$&@!$^*&", user_id: "@user3",  time: "2021.5.14" },
+        //     { comment_id: "#123333", content: "This is a long comment! askdjqwfjqok q oqkdpqs os qj q0i pqoiqwqokdpqow niqfqwofjqpowjfwfqkwfnpqwfw qiwfqwokfpoqwkfpqwf qpwfqpokfpqwkfpqwkfpoqw qwpfjqpowkfqwokfpqowkfpoqwkfpq qwokdpqowkdpqwpqwokdq oqkwdpoqwkdpqokwdpok!!!!!!!!!!!!!!!", user_id: "Long comment",  time: "2021.6.6" },
+        // ];
 
 
         const handleSearch = (query) => {
             // send the search query to the backend
-            // fetch('/admin/comment/search/'+query)
-            // .then(response => response.json())
-            // .then(data => {
-            //     FrontendFcn(data)
-            // })
-            // .catch(error => console.log(error));
+            fetch('/search/searchComment?txt='+query)
+            .then(response => response.json())
+            .then(data => {
+                console.log(data)
+                FrontendFcn(data)
+            })
+            .catch(error => console.log(error));
             
 
             //test function
-            FrontendFcn(data1);
-            console.log('search query:', '/admin/comment/search/'+query);
+            // FrontendFcn(data1);
+            // console.log('search query:', '/admin/comment/search/'+query);
             };
             
         
@@ -304,7 +310,7 @@ export function SearchBar({ page }) {
                 <div className="search-box">
                     <i><FontAwesomeIcon icon={faMagnifyingGlass} /></i>
                     <form name="search">
-                        <input type="text" className="search-input" name="txt" onmouseout="this.value = ''; this.blur();" placeholder='#ID/content' onKeyDown={handleKeyDown}/>
+                        <input type="text" className="search-input" name="txt" onmouseout="this.value = ''; this.blur();" placeholder='commentID/content' onKeyDown={handleKeyDown}/>
                     </form>
                 </div>
             </div>

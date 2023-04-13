@@ -47,7 +47,7 @@ export function Test() {
             <NavigationBar page={'admin'} />
             {/* <RetweetCard {...retweet_data} /> */}
 
-            <TweetCard tweet_id={14}/>
+            <TweetCard tweet_id={30}/>
         </>
     );
 }

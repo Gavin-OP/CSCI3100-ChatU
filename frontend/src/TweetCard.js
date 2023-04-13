@@ -59,7 +59,9 @@ export function TweetCard(tweetID) {
                     fetch('/user/getUser/' + data.tweet.user)
                         .then(response => response.json())
                         .then(userData => {
-                            // console.log(props);
+                            console.log(userData);
+                            setProps(preProps=>({...preProps,retweetAvatarUrl: userData.avatar_url}))
+                            console.log(props);
                             //Determmine whether the current user is following the user, 0 for not following, 1 for following, 2 for self
                             if (userData.follow_status === 0) { setProps(preProps => ({ ...preProps, retweetFollowStatus: 'follow' })); } else if (userData.follow_status === 1) { setProps(preProps => ({ ...preProps, retweetFollowStatus: 'following' })); } else if (userData.follow_status === 2) { setProps(preProps => ({ ...preProps, retweetFollowStatus: 'self' })); };
                         })
@@ -95,7 +97,9 @@ export function TweetCard(tweetID) {
                             fetch('/user/getUser/' + data.tweet.user)
                                 .then(response => response.json())
                                 .then(userData => {
-                                    // console.log(props);
+                                    console.log(userData);
+                                    setProps(preProps=>({...preProps,avatarUrl: userData.avatar_url}))
+                                    console.log(props);
                                     //Determmine whether the current user is following the user, 0 for not following, 1 for following, 2 for self
                                     if (userData.follow_status === 0) { setProps(preProps => ({ ...preProps, followStatus: 'follow' })); } else if (userData.follow_status === 1) { setProps(preProps => ({ ...preProps, followStatus: 'following' })); } else if (userData.follow_status === 2) { setProps(preProps => ({ ...preProps, followStatus: 'self' })); };
                                     //Set the tweet card username
@@ -145,7 +149,9 @@ export function TweetCard(tweetID) {
                     fetch('/user/getUser/' + data.tweet.user)
                         .then(response => response.json())
                         .then(userData => {
-                            // console.log(props);
+                            console.log(userData);
+                            setProps(preProps=>({...preProps,avatarUrl: userData.avatar_url}))
+                            console.log(props);
                             //Determmine whether the current user is following the user, 0 for not following, 1 for following, 2 for self
                             if (userData.follow_status === 0) { setProps(preProps => ({ ...preProps, followStatus: 'follow' })); } else if (userData.follow_status === 1) { setProps(preProps => ({ ...preProps, followStatus: 'following' })); } else if (userData.follow_status === 2) { setProps(preProps => ({ ...preProps, followStatus: 'self' })); };
                             //Set the tweet card username
@@ -176,7 +182,7 @@ export function TweetCard(tweetID) {
 
     let [props, setProps] = useState({
         userId: '',
-        avatarUrl: './avatar.png',
+        avatarUrl: '../avatar.png',
         username: 'Loading',
         tweetId: 'Loading',
         likeStatus: 0,
@@ -192,7 +198,7 @@ export function TweetCard(tweetID) {
         //below is for retweet
         retweetId: '',
         retweetUserId: '',
-        retweetAvatarUrl: './avatar.png',
+        retweetAvatarUrl: '../avatar.png',
         retweetUsername: 'Loading',
         retweetFollowStatus: 'Loading',
         retweetcontent: 'Loading',

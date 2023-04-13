@@ -190,15 +190,18 @@ class Page extends React.Component {
                 var data = this.file.image[i].data;
                 let img_div = document.createElement('div');
                 img_div.classList.add("carousel-item");
+                img_div.classList.add("justify-content-center");
+                img_div.style.margin = 'auto';
+                img_div.style.float = 'auto';
                 if ( i === this.state.image_index ){
                     img_div.classList.add("active");
                 }
                 img_div.id = "carousel-" + i;
                 document.getElementById('carousel-inner').appendChild(img_div);
                 let img_img = document.createElement('img');
-                img_img.classList.add('d-block');
-                img_img.style.maxHeight = '500px';
-                img_img.style.width = '98%';
+                //img_img.classList.add('d-block');
+                img_img.style.maxHeight = '700px';
+                img_img.style.maxWidth = '98%';
                 img_img.src="data:" + type + ";base64, " +data;
                 document.getElementById('carousel-'+ i).appendChild(img_img);
                 
@@ -206,9 +209,10 @@ class Page extends React.Component {
             document.getElementById("carouselExampleControls").style.display = 'flex';
         }
         else {
+            console.log(this.file.image.length)
             var type = this.file.image[0].contentType;
             var data = this.file.image[0].data;
-            let code = "<div class='container-fluid'><image class='p-1' src='data:" + type + ";base64, " + data + "' style='max-height:500px;max-width:98%'/></div> ";
+            let code = "<div class='container-fluid justify-content-center'><image class='p-1' src='data:" + type + ";base64, " + data + "' style='max-height:500px; max-width:98%'/></div> ";
             document.getElementById('imgbox').innerHTML = code;
         }
     }
@@ -289,7 +293,8 @@ class Page extends React.Component {
                                 </div>
                                 <div className="container m-4" style={{ fontSize: '22px', width: '92%' }}>{this.file.tag}</div>
                                 <div className="container m-4" style={{ fontSize: '22px', width: '92%' }}>{this.file.content}</div>
-                                <div className="container m-2 d-flex justify-content-center" id="imgbox" style={{ width: '92%' }}>
+                                <div className="container m-2 d-flex justify-content-center" id="imgbox" style={{ width: '92%' }}></div> 
+
                                 <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel" style={{display: 'none'}}>
                                     <div id="carousel-inner" class="carousel-inner">
                                     </div>
@@ -301,7 +306,7 @@ class Page extends React.Component {
                                         <span class="carousel-control-next-icon" aria-hidden="true"></span>
                                         <span class="sr-only">Next</span>
                                     </button>
-                                </div>
+            
                                 </div>
                                 <div className="container m-2 d-flex justify-content-center" style={{ width: '92%' }}>
                                     {this.state.type === 1 ? <TweetCard tweet_id={this.file.original} /> : <div></div>}

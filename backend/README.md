@@ -143,19 +143,12 @@ Backend is constructed by NodeJS and Express with MongoDB as the database.
   ]
   ```
 
-#### `/search/searchTweet`
+#### `/search/homeSearch?txt=`
 
-- Usage: return list of tweet_id or the details of a tweet given a search string called 'search'
-- POST
-- If 'search' consists of numbers only, search tweets by user_id given in 'search' (exact match), return list of tweet_ids as result:
-    - Input:
- ```javascript
-  [
-      {
-        "search": "2"
-      } 
-  ]
- ```
+- Usage: return list of tweet_ids given a search string in txt
+- GET
+- If txt consists of numbers only, search tweets by user_id given in txt (exact match), return list of tweet_ids as result:
+    - Input: txt=2
    - Output:
    ```javascript
   [
@@ -168,121 +161,159 @@ Backend is constructed by NodeJS and Express with MongoDB as the database.
     }
   ]
    ```
-  - If 'search' start with a '$' and follows with a string that contains only letter, search tweets by tag given in 'search' (exact match, case-insensitive), return list of tweet_ids as results:
-    - Input:
-    ```javascript
-       [
-          {
-             "search": "$discussion"
-          }
-       ]
-    ```
+  - If txt start with a '$' and follows with a string that contains only letter, search tweets by tag given in txt (exact match, case-insensitive), return list of tweet_ids as results:
+    - Input: txt=$life
     - Output:
     ```javascript
        [
-          {
-            "tweetId": [
-                 13,
-                 14
-              ]
-          }
+          "tweetId": [
+                        1,
+                        12
+                     ]
        ]
     ```
-  - If 'search' starts with a '*' and follows with a string that contains only numbers, search tweets by tweet_id given in 'search' (exact match, can only return one result):
-   - Input:
-   ```javascript
-  [
-    {
-    "search": "*1"
-    }
-  ]
-   ```
-   - Output:
-   ```javascript
-  [
-    {
-    "tweet_id": "1",
-    "content": "This is the first tweet of ChatU",
-    "user": "2",
-    "time": "2023-04-06T01:38:28.052Z",
-    "original": -1,
-    "privacy_state": false,
-    "like": [
-        8
-    ],
-    "dislike": [
-        4
-    ],
-    "tag": "life"
-    }
-  ]
-   ```
-- If it is none of the 3 cases above, search tweets by keyword(s) in the string 'search' (partial match), return the list of tweet_ids of the matched tweets as result
-  - Input:
-    ```javascript
-         [
-            {
-               "search": "hat"
-            }
-         ]
-    ```
+- If it is none of the 2 cases above, search tweets by keyword(s) in the string txt (partial match), return the list of tweet_ids of the matched tweets as result
+  - Input: txt=hat
   - Output:
    ```javascript
   [
     {
-    "tweetId": [
-        1,
-        2,
-        13
-    ]
+        "tweetId": [
+             1,
+             2,
+             13
+         ]
     }
   ]
    ```
 
+#### `/search/searchTweet?txt=`
 
-#### `/search/searchUser`
-- Usage: search user by keyword given in a string called 'search'
-- POST
-- Input:
-```javascript
+- Usage: return some details of tweet(s) given a search string in txt
+- GET
+- If txt consists of numbers only, search tweets by user_id given in txt (exact match):
+   - Input: txt=2
+   - Output:
+   ```javascript
   [
     {
-    "search": "Gol"
+        "tweet_id": 1,
+        "content": "This is the first tweet of ChatU",
+        "user": "2",
+        "time": "2023-04-06T01:38:28.052Z"
+    },
+    {
+        "tweet_id": 2,
+        "content": "Welcome to ChatU",
+        "user": "2",
+        "time": "2023-04-06T01:38:46.523Z"
+    },
+    {
+        "tweet_id": 3,
+        "content": "I need some sunshine",
+        "user": "2",
+        "time": "2023-04-06T01:39:00.210Z"
     }
   ]
-```
+   ```
+  - If txt start with a '$' and follows with a string that contains only letter, search tweets by tag given in txt (exact match, case-insensitive):
+    - Input: txt=$life
+    - Output:
+    ```javascript
+       [
+          {
+            "tweet_id": 1,
+            "content": "This is the first tweet of ChatU",
+            "user": "2",
+            "time": "2023-04-06T01:38:28.052Z"
+         },
+         {
+            "tweet_id": 12,
+            "content": "A texture tweet",
+            "user": "11",
+            "time": "2023-04-08T03:45:38.409Z"
+         }
+       ]
+    ```
+  - If txt starts with a '*' and follows with a string that contains only numbers, search tweets by tweet_id given in txt (exact match, can only return one result):
+   - Input: txt=*1
+   - Output:
+   ```javascript
+         {
+           "tweet_id": 1,
+           "content": "This is the first tweet of ChatU",
+           "user": "2",
+           "time": "2023-04-06T01:38:28.052Z"
+         }
+   ```
+- If it is none of the 3 cases above, search tweets by keyword(s) in the string txt (partial match):
+  - Input: txt=hat
+  - Output:
+   ```javascript
+  [
+    {
+        "tweet_id": 1,
+        "content": "This is the first tweet of ChatU",
+        "user": "2",
+        "time": "2023-04-06T01:38:28.052Z"
+    },
+    {
+        "tweet_id": 2,
+        "content": "Welcome to ChatU",
+        "user": "2",
+        "time": "2023-04-06T01:38:46.523Z"
+    },
+    {
+        "tweet_id": 13,
+        "content": "It seems that I cannot upload image now...",
+        "user": "9",
+        "time": "2023-04-08T10:32:00.000Z"
+    }
+  ]
+   ```
+
+#### `/search/searchUser?txt=`
+- Usage: search user(s) by username keyword given in txt (partial match)
+- GET
+- Input: txt=ol
 - Output:
 ```javascript
   [
     {
         "user_id": 8,
-        "username": "Golden Fish",
         "email": "123456@com",
+        "username": "Golden Fish",
+        "ban": false
+    },
+    {
+        "user_id": 14,
+        "email": "follow",
+        "username": "test for follow erro",
+        "ban": false
+    },
+    {
+        "user_id": 15,
+        "email": "follow@123456",
+        "username": "followtest",
         "ban": false
     }
   ]
 ```
 
-#### `/search/searchComment`
-- Usage: search comment by keyword given in a string called 'search'
-- POST
-- Input:
-```javascript
-  [
-    {
-    "search": "con"
-    }
-  ]
-```
+
+
+#### `/search/searchComment?txt=`
+- Usage: search comment(s) by keyword given in txt (partial match)
+- GET
+- Input: txt=con
 - Output:
 ```javascript
   [
     {
         "comment_id": 1,
-        "tweet_id": 1,
+        "content": "Congrats",
         "user_id": 4,
-        "time": "2023-04-07T10:55:47.276Z",
-        "content": "Congrats"
+        "time": "2023-04-07T10:55:47.276Z"
     }
   ]
 ```

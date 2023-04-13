@@ -3,7 +3,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons'
 import { AdminTable } from './AdminTable';
 import { createRoot } from 'react-dom/client';
-
+import { TweetCard } from './TweetCard';
 export function SearchBar({ page }) {
 
     let Bar;
@@ -74,7 +74,7 @@ export function SearchBar({ page }) {
             searchBox.parentNode.insertBefore(resultElement, searchBox.nextSibling);
         };
         const handleKeyDown = (event) => {
-            if (event.keyCode === 13) {
+            if (event.keyCode === 13 && event.target.value !== '') {
                 event.preventDefault();
                 const query = event.target.value;
                 handleSearch(query);
@@ -98,15 +98,57 @@ export function SearchBar({ page }) {
     // Search bar for home page
     else if (page === 'homepage') {
 
+        let data1=[1,2,3]
 
+        const handleSearch = (query) => {
+            // send the search query to the backend
+            // fetch('/admin/user/search/'+query)
+            // .then(response => response.json())
+            // .then(data => {
+            //     FrontendFcn(data)
+            // })
+            // .catch(error => console.log(error));
 
+            //test function
+            FrontendFcn(data1);
+            console.log('search query:', '/admin/user/search/'+query);
+        };
+
+        function FrontendFcn(tweetIDs) {
+            //Create a HTML for the search results, if it exists, remove it
+            if (document.querySelector('.tweetCard-container')) {
+              document.querySelector('.tweetCard-container').remove();
+            }
+            if (document.querySelector('.search-result')) {
+              document.querySelector('.search-result').remove();
+            }
+            const resultElement = document.createElement('div');
+            resultElement.className = 'search-result';
+            // Define the JSX expression
+            var tweetCards = tweetIDs.map((tweetID) => (
+              <TweetCard tweet_id={tweetID} />
+            ));
+            // Render the JSX expression
+            const root = createRoot(resultElement);
+            root.render(tweetCards);
+            const searchBox = document.querySelector('.search-container');
+            // Insert the search results container after the search box
+            searchBox.parentNode.insertBefore(resultElement, searchBox.nextSibling);
+          }
+          const handleKeyDown = (event) => {
+            if (event.keyCode === 13 && event.target.value !== '') {
+              event.preventDefault();
+              const query = event.target.value;
+              handleSearch(query);
+            }
+        };
 
         Bar = (
             <div class="search-container">
                 <div className="search-box">
                     <i><FontAwesomeIcon icon={faMagnifyingGlass} /></i>
                     <form name="search">
-                        <input type="text" className="search-input" name="txt" onmouseout="this.value = ''; this.blur();" placeholder='Tweet ID/Key Words/Tags' />
+                        <input type="text" className="search-input" name="txt" onmouseout="this.value = ''; this.blur();" placeholder='Tweet ID/Key Words/Tags' onKeyDown={handleKeyDown}/>
                     </form>
                 </div>
             </div>
@@ -172,7 +214,7 @@ export function SearchBar({ page }) {
             searchBox.parentNode.insertBefore(resultElement, searchBox.nextSibling);
         };
         const handleKeyDown = (event) => {
-            if (event.keyCode === 13) {
+            if (event.keyCode === 13 && event.target.value !== '') {
               event.preventDefault();
               const query = event.target.value;
               handleSearch(query);
@@ -227,7 +269,8 @@ export function SearchBar({ page }) {
             //test function
             FrontendFcn(data1);
             console.log('search query:', '/admin/comment/search/'+query);
-        };
+            };
+            
         
 
             // Frontend function
@@ -248,7 +291,7 @@ export function SearchBar({ page }) {
             searchBox.parentNode.insertBefore(resultElement, searchBox.nextSibling);
         };
         const handleKeyDown = (event) => {
-            if (event.keyCode === 13) {
+            if (event.keyCode === 13 && event.target.value !== '') {
               event.preventDefault();
               const query = event.target.value;
               handleSearch(query);

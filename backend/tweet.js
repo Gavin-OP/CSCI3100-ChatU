@@ -3,6 +3,7 @@ const express = require('express');
 const router = express.Router();
 const Tweet = require('./tweetSchema');
 const User = require('./userSchema');
+const General = require('./generalSchema');
 
 const multer = require('multer');
 const { json } = require('body-parser');
@@ -12,7 +13,7 @@ const upload = multer({ storage: storage });
 
 // Create a new tweet
 router.post("/create", upload.any('image'), (req, res) => {
-        const userId = req.cookies.userId;
+    const userId = req.cookies.userId;
 
     if (!userId) {
         return res.status(401).json({
@@ -20,57 +21,61 @@ router.post("/create", upload.any('image'), (req, res) => {
         });
     }
 
-
-    
     Tweet.findOne({})
         .sort('-tweet_id')
         .exec()
         .then((tweet) => {
-            //check if the request has image(s) or not
-            console.log(req.files)
-            let images = [];
-            if (req.files) {
-                //if the request has image(s)
-                let i = 0;
-                while (i < req.files.length) {
-                    images.push({
-                        data: req.files[i].buffer,
-                        contentType: req.files[i].mimetype
+            General.find()
+                .then((general) => {
+                    general[0].tweet_cnt = general[0].tweet_cnt + 1;
+                    return general[0].save();
+                })
+
+                .then((general) => {
+                    //check if the request has image(s) or not
+                    let images = [];
+                    if (req.files) {
+                        //if the request has image(s)
+                        let i = 0;
+                        while (i < req.files.length) {
+                            images.push({
+                                data: req.files[i].buffer,
+                                contentType: req.files[i].mimetype
+                            });
+                            i++;
+                        }
+                    }
+
+                    const newTweet = new Tweet({
+                        tweet_id: general.tweet_cnt,
+                        content: req.body['content'],
+                        image: images,
+                        user: userId,
+                        time: req.body['time'],
+                        privacy_state: req.body['privacy_state'], // 0 if everyone can see the tweet; 1 if only self can see the tweet
+                        tag: req.body['tag'],
                     });
-                    i++;
-                }
-            }
 
-            const newTweet = new Tweet({
-                tweet_id: tweet ? tweet.tweet_id + 1 : 1,
-                content: req.body['content'],
-                image: images,
-                user: userId,
-                time: req.body['time'],
-                privacy_state: req.body['privacy_state'], // 0 if everyone can see the tweet; 1 if only self can see the tweet
-                tag: req.body['tag'],
-            });
+                    // saving the object into the database
+                    return newTweet.save()
+                })
 
-            // saving the object into the database
-            return newTweet.save()
+                .then((newTweet) => {
+                    console.log('tweet created', newTweet);
+
+                    User.findOneAndUpdate(
+                        { user_id: userId },
+                        { $push: { tweet: newTweet.tweet_id } },
+                        { upsert: true, new: true },
+                    )
+                        .then((user) => {
+                            res.json({
+                                message: 'Create tweet successfully',
+                                action_status: true
+                            });
+                        });
+                })
         })
-
-        .then((newTweet) => {
-            console.log('tweet created', newTweet);
-
-            User.findOneAndUpdate(
-                { user_id: userId },
-                { $push: { tweet: newTweet.tweet_id } },
-                { upsert: true, new: true },
-            )
-                .then((user) => {
-                    res.json({
-                        message: 'Create tweet successfully',
-                        action_status: true
-                    });
-                });
-        })
-
         .catch((err) => {
             console.error(err);
             res.status(500).send("Fail to save the new tweet. Backend Error.");

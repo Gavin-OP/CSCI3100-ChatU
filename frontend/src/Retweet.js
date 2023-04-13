@@ -81,15 +81,15 @@ export function Retweet() {
                                 </Form.Group>
                                 <Form.Group className="m-3" size='lg' controlId="formTag">
                                     <Form.Label>Tag</Form.Label>
-                                    <Form.Select required>
+                                    <Form.Select required defaultValue="None">
                                         {tags.map(addOption)}
                                     </Form.Select>
                                 </Form.Group>
                                 <Form.Group className="m-3" size='lg' controlId="formPrivacy">
                                     <Form.Label>Privacy</Form.Label>
                                     <Form.Select>
-                                        <option value={1}>Visible to everyone</option>
-                                        <option value={0}>Only visible to yourself</option>
+                                        <option value={0}>Visible to everyone</option>
+                                        <option value={1}>Only visible to yourself</option>
                                     </Form.Select>
                                 </Form.Group>
                                 <Container className="d-flex justify-content-center">

@@ -201,8 +201,8 @@ class Page extends React.Component {
                 document.getElementById('carousel-inner').appendChild(img_div);
                 let img_img = document.createElement('img');
                 //img_img.classList.add('d-block');
-                img_img.style.maxHeight = '700px';
-                img_img.style.maxWidth = '98%';
+                //img_img.style.maxHeight = '700px';
+                img_img.style.width = '98%';
                 img_img.src="data:" + type + ";base64, " +data;
                 document.getElementById('carousel-'+ i).appendChild(img_img);
                 
@@ -244,7 +244,7 @@ class Page extends React.Component {
         var min=time.getMinutes();
         var sec=time.getSeconds();
         var t = yr + '-' + mon + '-' + day + ' ' + hr + ':' + min;
-        var t2 = yr + '-' + mon + '-' + day + 'T' + hr + ':' + min + ':' + sec;
+        var t2 = yr + '-' + mon + '-' + day + ' T' + hr + ':' + min + ':' + sec;
         let con= document.getElementById("input").value;
         let uid = getCookieValue("userId");
         fetch('/comment/create',

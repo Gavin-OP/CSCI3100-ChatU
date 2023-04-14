@@ -12,6 +12,7 @@ const User = require('./userSchema');
 // Get all tweets posted by time
 router.get('/tweet', (req, res) => {
     Tweet.find()
+       // .limit(3)
         .sort({ time: -1 })
         .then((tweets) => {
             if (tweets.length == 0) {
@@ -72,6 +73,7 @@ router.get('/tweet', (req, res) => {
 // get all tweetId posted by time
 router.get('/tweetIdList', (req, res) => {
     Tweet.find({})
+       .limit(10)
         .sort({ tweet_id: -1 })
         .then((tweets) => {
             if (tweets.length == 0) {

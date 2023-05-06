@@ -13,7 +13,7 @@ const User = require('./userSchema');
 router.get('/tweet', (req, res) => {
     Tweet.find()
        // .limit(3)
-        .sort({ time: -1 })
+       // .sort({ time: -1 })
         .then((tweets) => {
             if (tweets.length == 0) {
                 return res.status(404).json({
@@ -73,8 +73,8 @@ router.get('/tweet', (req, res) => {
 // get all tweetId posted by time
 router.get('/tweetIdList', (req, res) => {
     Tweet.find({})
-       .limit(10)
-        .sort({ tweet_id: -1 })
+      // .limit(10)
+      //  .sort({ tweet_id: -1 })
         .then((tweets) => {
             if (tweets.length == 0) {
                 return res.status(404).json({
@@ -95,7 +95,7 @@ router.get('/tweetIdList', (req, res) => {
         });
 });
 
-
+//API providing services for recommending users to follow on the homepage
 router.get('/userRecommendation', (req, res) => {
     const loggedInUser = req.cookies.userId; // Make sure to declare loggedInUser with const to avoid global scope
 

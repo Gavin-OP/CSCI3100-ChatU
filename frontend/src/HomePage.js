@@ -26,6 +26,11 @@ function MapWithDelay(data, callback, delay) {
 
 export function HomePage() {
     //fetch data from '/home/tweetIdList'
+    let uid=getCookieValue("userId");
+    if (uid === '') {
+        alert("Please login to view the tweets")
+        window.location.href='/login'
+    }
     const [tweets, setTweets] = useState([]);
     //fetch the data from the API and update the state once
     useEffect(() => {
@@ -95,4 +100,9 @@ export function HomePage() {
     )
 }
 
+// Get cookie value
+function getCookieValue(name) {
+    let result = document.cookie.match("(^|[^;]+)\\s*" + name + "\\s*=\\s*([^;]+)")
+    return result ? result.pop() : ""
+}
 

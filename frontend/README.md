@@ -249,32 +249,7 @@ Requierd response example
 👍15 (opt) message box contact list (TYF).    
 👍16 (opt) message box. (TYF).   
 
-## To Do
 
-- [ ] Color consistent. post button, tweet, retweet page button, search bar font family
-- [ ] Search bar search button
-- [ ] Admin logout css
-- [ ] Sign up do not need email
-- [ ] TypeError: response.data.map is not a function,home.js 111, followlist???? If user do not have follower???
-- [ ] Signup, login enter keydown
-- [ ] retweet card css problem
-- [ ] Admin add user in admin management
-- [ ] Search for user based on username and userId
-- [ ] Comment focus black box
-- [ ] should not send empty comment 
-- [ ] refresh home page when click the retweet submit button
-- [ ] post tweet but nothing happen
-- [ ] Click anywhere to view the tweet detail
-- [ ] more images to show as slides
-- [ ] admin click user to view user personal page
-- [ ] admin click tweet to view tweet detail page
-- [ ] amin view home page and back to admin page
-- [ ] personal page css
-- [ ] following user list back button
-- [ ] persoanal page unfollow user
-- [ ] General Schema, usercount
-- [x] user recommendation close icon
-- [ ] sign up的时候后端崩了，但是前端依然可以跳转到home page。
 
 ## Available Scripts
 

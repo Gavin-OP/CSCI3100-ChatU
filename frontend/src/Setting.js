@@ -132,6 +132,7 @@ class SettingPage extends React.Component{
                                     </Form.Group>
                                     
                                     <Form.Group controlId="formAvatar" className="m-3">
+                                        {/* Select the avatar */}
                                         <Form.Label>Choose Avatar</Form.Label>
                                         <Form.Select onChange={this.handleSelect} required defaultValue='../avatar.png'>
                                             <option value='../avatar.png'>1</option>

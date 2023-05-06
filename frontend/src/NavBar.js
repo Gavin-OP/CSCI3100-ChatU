@@ -1,6 +1,7 @@
 import './NavBar.css';
 import { useEffect, useState } from 'react'
 
+// This NavBar is on the top of each page
 
 export function NavigationBar({ page }) {
     let current_user_id = -1;
@@ -13,6 +14,7 @@ export function NavigationBar({ page }) {
         avatar: '../avatar.png',
     });
     useEffect(() => {
+        // get user data from the server
         if (current_user_id !== -1) {
             fetch('/user/getUser/' + current_user_id)
             .then(response => response.json())
@@ -225,6 +227,7 @@ export function NavigationBar({ page }) {
 }
 
 function getCookieValue(name) {
+    // function to read some props in cookie
     let result = document.cookie.match("(^|[^;]+)\\s*" + name + "\\s*=\\s*([^;]+)")
     return result ? result.pop() : ""
 }

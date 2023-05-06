@@ -6,6 +6,8 @@ import "./PersonalPage.css";
 import { TweetCard } from './TweetCard';
 import { Loading } from './Loading';
 
+// TweetPage is the detailed page for each user. First use PersonalPage Component to load the data including user and his/her tweets, after loaded, 
+// use the PersonPage to generate the page. The page contains a Navbar, a user-info container and a tweet area with TweetCard/RetweetCard
 
 const tweet_data = {
     avatarUrl: '../avatar.png',

@@ -8,27 +8,18 @@ import Form from 'react-bootstrap/Form';
 import { TweetCard } from './TweetCard';
 import './Post.css';
 
+// A special version of post page. Difference: Post allows images input, Retweet must have the TweetID of original tweet, and will send this
+// TweetID to the server as one input.
 
+//Tags
 const tags = ["None", "Food", "Discussion", "Study", "Music", "Game", "Life", "Art", "Love", "Travel", "Sports", "Stars", "Photography"];
 
 function addOption(item) {
     return (<option value={item}>{item} </option>);
 }
 
-const tweet_data = {
-    avatarUrl: './avatar.png',
-    username: 'Gavin OP',
-    tweetId: '100056',
-    likeStatus: 1,
-    dislikeStatus: 0,
-    starStatus: 1,
-    likeCount: 49,
-    commentCount: 4,
-    followStatus: 'Following',
-    imageSrc: '/tweet_card_pic_1.jpg',
-    tweetText: 'dfasdfanibh massa blandit orci, eget ultricies turpis lorem ut nulla.',
-};
 export function Retweet() {
+    // Load the tweetID from the current URL
     let params = (new URL(document.location)).searchParams;
     let tid = params.get("tweetId");
 

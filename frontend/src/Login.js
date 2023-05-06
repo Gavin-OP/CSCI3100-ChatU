@@ -4,10 +4,12 @@ import React from "react";
 
 export class Login extends React.Component {
     handleLogin=(e)=>{
+        // function to handle the login
         e.preventDefault();
         let em = document.getElementById('email').value;
         let password = document.getElementById('pwd').value;
         
+        // POST the data to the server
         fetch('/user/login', 
         {method:'POST', 
         body: JSON.stringify({email: em, pwd: password}),
@@ -16,27 +18,31 @@ export class Login extends React.Component {
         .then(res=>{
             console.log(res.message);
             if (res.login_status===0 || res.login_status===1){
+                // fail to login
                 document.getElementById('warning').style.display='flex';
             }
             else if (res.login_status===2){
+                // success
                 console.log(document.cookie);
                 let is_admin=getCookieValue("isAdmin");
                 if (is_admin==='true'){
+                    // redirect to admin page
                     window.location.href="/admin/tweet";
                 }
                 else {
+                    // redirect to user page
                     window.location.href="/home";
                 }
                 
             }
             else {
+                // banned user
                 alert("You have been banned! ")
             }
         })
         .catch(error=>{
             console.log(error);
             
-
         })
     }
     render(){

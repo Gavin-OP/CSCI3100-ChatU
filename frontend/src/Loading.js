@@ -1,6 +1,9 @@
 import React from "react";
 import './Loading.css'
 
+// Loading page has no function or data, it just used before the required data is loaded.
+
+
 export class Loading extends React.Component{
     render(){
         return(

@@ -11,6 +11,7 @@ export class BlackList extends React.Component{
 
     }
     componentDidMount(){
+        // Load the data from the server
         fetch('/blacklist/list')
         .then(res=>res.json())
         .then(data=>{
@@ -22,6 +23,7 @@ export class BlackList extends React.Component{
                 })
                 
             }
+            // Start to render the page
             this.setState({isload: 1, file: new_file});
         })
     }
@@ -33,8 +35,6 @@ export class BlackList extends React.Component{
         )
     }
 }
-
-
 
 
 class BlackPage extends React.Component{

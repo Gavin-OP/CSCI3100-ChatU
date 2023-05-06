@@ -6,6 +6,8 @@
 
 A social media application to post, view tweets, follow others, and engage in real-time chat with other users.
 
+The requirements of running our application: In terms of the software requirements, you need react.js for frontend interface display, express.js for backend server hosting, and MongoDB for database connections and access. There are no worthy-to-mention hardware requirements, just use any modern personal computer or laptop. 
+
 ## Table of Contents
 
 - [Install](https://github.com/Gavin-OP/CSCI3100-ChatU/blob/main/README.md#install)  

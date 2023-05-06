@@ -6,22 +6,29 @@ import { faHeart, faShare, faHeartBroken, faComment, faStar, faPaperPlane } from
 import './TweetPage.css';
 import { Loading } from './Loading'
 
+// TweetPage is the detailed page for each tweet. First use Tweetpage Component to load the data including tweet and user, after loaded, use the Page
+// Component to generate the page. The page contains a Navbar, a tweet container and a comment area with CommentCard.
+
 export class TweetPage extends React.Component{
     constructor(props){
         super(props);
         this.state={loaded:0, file:{}};
     }
     componentDidMount(){
+        // Load the data from the server after mounting.
         let params = (new URL(document.location)).searchParams;
+        // Use URL to pass the tweetID
         let tid = params.get("tweetId");
         let uid = getCookieValue("userId");
         fetch('/tweet/getTweet/'+tid)
         .then(res=>res.json())
         .then(data=>{
+            // Get the tweet data of this tweet
             console.log(data);
             fetch('/user/getUser/'+data.tweet.user)
             .then(res=>res.json())
             .then(user=>{
+                // Get the user data for the poster of the tweet
                 let new_file={
                     username: user.username,
                     userId: user.user_id,
@@ -40,23 +47,29 @@ export class TweetPage extends React.Component{
                 }
                 console.log(data.tweet.like)
                 if (data.tweet.tag!=='None'){
+                    // Create the tag
                     new_file.tag = '#' + data.tweet.tag;
                 }
                 if (data.tweet.like.includes(Number(uid))){
+                    // Decide if the status of like button
                     new_file.likeStatus = 1;
                 }
                 if (data.tweet.dislike.includes(Number(uid))){
+                    // Decide if the status of dislike button
                     new_file.likeStatus = -1;
                 }
                 if (data.favorite!== undefined && data.favorite.includes(Number(uid))){
+                    // Decide if the status of favorite button
                     new_file.favorStatus = 1;
                 }
                 if (user.follow_status===1){
+                    // Decide if the status of follow button
                     new_file.followStatus = 'Following';
                 }
                 else if (user.follow_status===2){
                     new_file.followStatus = 'Self';
                 }
+                // Load the comments
                 fetch('/comment/commentList/'+tid)
                     .then(res=>res.json())
                     .then(res=>{
@@ -85,16 +98,19 @@ export class TweetPage extends React.Component{
 class Page extends React.Component {
     constructor(props) {
         super(props);
+        // Every data is already loaded
         this.file = this.props.file;
         this.state = {logined: 0, like: this.props.file.likeStatus, favor: this.props.file.favorStatus, 
             follow: this.props.file.followStatus, type: 0 , updated: 0, image_done: 0, image_index:0};
     }
     componentDidMount() {
+        // After rendering the basic structure, load the image if has.
         if (this.file.image !== undefined) {
             this.addPic();
             console.log("Has picture")
         }
         if (this.file.original > 0) {
+            // This should be a retweet, load the tweet card instead of image
             this.setState({ type: 1 });
             document.getElementById('retweetbtn').display = 'none';
         }
@@ -109,6 +125,7 @@ class Page extends React.Component {
         }
     }
     componentDidUpdate(){
+        // Handle the change of follow status
         if (this.state.follow === 'Self'){
              document.getElementById('followbtn').style.background='#c9c9c9';
         }
@@ -120,19 +137,23 @@ class Page extends React.Component {
         }
    }
     handleLike = () => {
+        // Handle the click event for like button
         if (this.state.like === 1) {
+            // Cancel the like
             this.setState({ like: 0 });
             this.file.likes -= 1;
             fetch('/tweet/unlike/'+this.file.tweetId)
             .then(res=>console.log(res))
         }
         else if (this.state.like === -1) {
+            // Change from dislike to like
             this.setState({ like: 1 });
             this.file.likes += 2;
             fetch('/tweet/like/'+this.file.tweetId)
             .then(res=>console.log(res))
         }
         else {
+            // Like
             this.setState({ like: 1 });
             this.file.likes += 1;
             fetch('/tweet/like/'+this.file.tweetId)
@@ -140,6 +161,7 @@ class Page extends React.Component {
         }
     }
     handleDislike = () => {
+        // Handle the click event for dislike button
         if (this.state.like === -1) {
             this.setState({ like: 0 });
             this.file.likes += 1;
@@ -160,6 +182,7 @@ class Page extends React.Component {
         }
     }
     handleFavor = () => {
+        // Handle the click event for favorite button
         if (this.state.favor === 1) {
             this.setState({ favor: 0 });
             fetch('/favorite/delete/'+this.file.tweetId)
@@ -172,6 +195,7 @@ class Page extends React.Component {
         }
     }
     handleFollow = () => {
+        // Handle the click event for follow button
         if (this.state.follow === 'Following') {
             this.setState({ follow: 'Follow' });
             fetch('/follow/delete/'+this.file.userId)
@@ -184,7 +208,9 @@ class Page extends React.Component {
         }
     }
     addPic = ()=>{
+        // Load the image by creating a new img element, set the src be the base64 data of the image
         if (this.file.image.length>1){
+            // If there are more than 1 image, use a carousel to display one image each time, and add two buttons to change current image (This part in HTML).
             document.getElementById('carousel-inner').innerHTML='';
             for (let i = 0; i < this.file.image.length; i++){
                 var type = this.file.image[i].contentType;
@@ -218,6 +244,7 @@ class Page extends React.Component {
         }
     }
     handlePrev = () => {
+        // Handle functions for two buttons in carousel
         if (this.state.image_index===0){
             this.setState({image_index: this.file.image.length - 1 });
         }
@@ -227,6 +254,7 @@ class Page extends React.Component {
         this.addPic();
     }
     handleNext = () => {
+        // Handle functions for two buttons in carousel
         if (this.state.image_index===(this.file.image.length - 1)){
             this.setState({image_index: 0 });
         }
@@ -236,6 +264,7 @@ class Page extends React.Component {
         this.addPic();
     }
     sendComment = () => {
+        // Send a new comment to server, and display it immediately
         const time = new Date();
         var yr=time.getFullYear();
         var mon=time.getMonth()+1;
@@ -253,6 +282,8 @@ class Page extends React.Component {
          headers: {'content-type': 'application/json'}})
         .then(res=>console.log(res))
         .catch(err=>console.log(err))
+
+        // This part to display the new comment immediately
         let new_comment={user_id: Number(uid), avatar: this.file.avatar, content: con, time: t2};
         console.log(new_comment);
         this.file.comments.push(new_comment);
@@ -296,8 +327,10 @@ class Page extends React.Component {
                                 <div className="container m-4" style={{ fontSize: '22px', width: '92%' }}>{this.file.tag}</div>
                                 <div className="container m-4" style={{ fontSize: '22px', width: '92%' }}>{this.file.content}</div>
                                 <div className="container m-2 d-flex justify-content-center" id="imgbox" style={{ width: '92%' }}></div> 
+                                {/* Here imgbox for single image to display */}
 
                                 <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel" style={{display: 'none'}}>
+                                    {/* Here carousel for multiple images to display */}
                                     <div id="carousel-inner" class="carousel-inner">
                                     </div>
                                     <button class="carousel-control-prev" type="button" onClick={this.handlePrev}>
@@ -311,6 +344,7 @@ class Page extends React.Component {
             
                                 </div>
                                 <div className="container m-2 d-flex justify-content-center" style={{ width: '92%' }}>
+                                    {/* Here container for tweet card to display */}
                                     {this.state.type === 1 ? <TweetCard tweet_id={this.file.original} /> : <div></div>}
                                 </div>
 

@@ -4,19 +4,19 @@ import {
   Route,
 } from 'react-router-dom';
 import './App.css';
-import { Login } from './Login';
-import { Test } from './Test'
-import { SignUp } from './SignUp';
-import { AdminPage } from './AdminPage';
-import { HomePage } from './HomePage';
-import { PersonalPage } from './PersonalPage';
+import { Login } from './Login'; // Login page
+import { Test } from './Test' // Test for developers.
+import { SignUp } from './SignUp'; // Signup page
+import { AdminPage } from './AdminPage'; // Admin page, with 3 subpages: tweet, user, comment
+import { HomePage } from './HomePage'; // User Page, the main page with some tweets, post button, user recommendation
+import { PersonalPage } from './PersonalPage'; // User homepage, showing user's information and tweet he/she posts/favorites
 import { UnderDevelopment } from './UnderDevelopment';
-import { Post } from './Post'
-import { Retweet } from './Retweet'
-import { TweetPage } from './TweetPage'
-import { FollowPage } from './FollowPage'
-import { Setting } from "./Setting";
-import { BlackList } from './BlackList'
+import { Post } from './Post'  // Post page, a form allowing images.
+import { Retweet } from './Retweet'  // Retweet page, a special post page, showing the tweet user want to retweet.
+import { TweetPage } from './TweetPage' // Tweet detailed page, with tweet data, comments.
+import { FollowPage } from './FollowPage'  // Following page, show one user's following/fans list
+import { Setting } from "./Setting";  // Setting page, user can set their information and change avatar.
+import { BlackList } from './BlackList' // Blacklist page, show user's blacklist.
 // import { ChatPage } from "./ChatPage";
 function App() {
   return (

@@ -11,6 +11,7 @@ export class FollowPage extends React.Component{
         this.page = this.props.page;
     }
     componentDidMount(){
+        // Load the data from the server
         let url='';
         let params = (new URL(document.location)).searchParams;
         let uid = params.get("userId");
@@ -26,6 +27,7 @@ export class FollowPage extends React.Component{
             let new_file=[];
             var followStatus='';
             if (data.message===undefined && data.length>0){
+                // data contains the followlist of the user we are seeing, we need to know the follow status between these users and us
                 new_file = data.map((user)=>{
                     if (user.follow_status===0){
                         followStatus = 'Follow';
@@ -40,6 +42,7 @@ export class FollowPage extends React.Component{
                 })
                 
             }
+            // Start to render the page
             this.setState({isload: 1, file: new_file});
         })
     }
@@ -134,6 +137,7 @@ class UserCard extends React.Component{
 }
 
 function getCookieValue(name) {
+    // function to read data from cookie
     let result = document.cookie.match("(^|[^;]+)\\s*" + name + "\\s*=\\s*([^;]+)")
     return result ? result.pop() : ""
 }

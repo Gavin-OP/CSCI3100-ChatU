@@ -7,6 +7,7 @@ import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import './Post.css'
 
+// Tags
 const tags=["None", "Food", "Discussion", "Study", "Music", "Game", "Life", "Art", "Love", "Travel", "Sports", "Stars", "Photography"];
 
 function addOption(item, i) {
@@ -16,10 +17,12 @@ function addOption(item, i) {
 
 export function Post() {
     const handlePost=()=>{
+        // Function to handle the post
         let content = document.getElementById('formContent').value;
         let tag = document.getElementById('formTag').value;
         let picture = document.getElementById('formPictures').files;
         let privacy = document.getElementById('formPrivacy').value;
+        // We only allow no more than 3 images
         if (picture.length > 3){
             window.alert("Too many images! Please upload no more than 3 pictures!")
             return false;
@@ -32,6 +35,7 @@ export function Post() {
         var hr = time.getHours();
         var min = time.getMinutes();
         var t = yr + '-' + mon + '-' + day + ' ' + hr + ':' + min;
+        
         let formdata = new FormData();
         formdata.append("content", content);
         formdata.append("tag", tag);
@@ -43,6 +47,7 @@ export function Post() {
         fetch('/tweet/create',
         {method:'POST', body: formdata})
         .then(res=>{
+            // redirect to home after successfully post
             console.log(res);
             window.location.href='/home';
         })
@@ -78,6 +83,7 @@ export function Post() {
                             </Form.Select>
                         </Form.Group>
                         <Container className="d-flex justify-content-center">
+                            {/* Here 3 buttons: one for back to previous page, one for reset the input, one for submit */}
                             <Button className="m-3 postpage-backbutton" variant="outline-dark" onClick={()=>{window.history.back()}}>
                                 Cancel and Back
                             </Button>

@@ -10,22 +10,22 @@ The requirements of running our application: In terms of the software requiremen
 
 ## Table of Contents
 
-- [Install](https://github.com/Gavin-OP/CSCI3100-ChatU/blob/main/README.md#install)  
-- [Usage](https://github.com/Gavin-OP/CSCI3100-ChatU/blob/main/README.md#usage)
-- [To Do](https://github.com/Gavin-OP/CSCI3100-ChatU/blob/main/README.md#to-do)  
-- [Reference](https://github.com/Gavin-OP/CSCI3100-ChatU/blob/main/README.md#reference)  
-- [Contributing](https://github.com/Gavin-OP/CSCI3100-ChatU/blob/main/README.md#contributing)  
-- [License](https://github.com/Gavin-OP/CSCI3100-ChatU/blob/main/README.md#license)  
+- [Install](#install)  
+- [Usage](#usage)
+- [To Do](#to-do)  
+- [Reference](#reference)  
+- [Contributing](#contributing)  
+- [License](#license)  
 
 ## Install
 
 1. Download [Node.js](https://nodejs.org/en/download) and [Git](https://git-scm.com/downloads)
-2. Open terminal and go to the directory where you want to install the project.
+2. Open the terminal and go to the directory where you want to install the project.
 3. Type `git clone https://github.com/Gavin-OP/CSCI3100-ChatU.git` in the terminal.
 
 ## Usage
 
-- Open terminal under the project folder `./CSCI3100-ChatU/`.
+- Open the terminal under the project folder `./CSCI3100-ChatU/`.
 
 ---
 
@@ -34,9 +34,9 @@ The requirements of running our application: In terms of the software requiremen
 - `cd frontend`: Go to the frontend folder.  
 - `npm install`: Install all the dependencies.
 - `npm start`: Start the frontend.
-- Go to the web browser, access the web app in localhost port 3000: [http://localhost:3000/](http://localhost:3000/)  
+- Go to the web browser, and access the web app in localhost port 3000: [http://localhost:3000/](http://localhost:3000/)  
 
-> Note: Frontend is connected to backend by setting the proxy in the the file `./frontend/package.json` with "http://localhost:5555". If presented in a public IP, this proxy link need to be updated to [{public IP}]()
+> Note: Frontend is connected to the backend by setting the proxy in the file `./frontend/package.json` with "http://localhost:5555". If presented in a public IP, this proxy link needs to be updated to [{public IP}]()
 
 ---
 
@@ -45,7 +45,7 @@ The requirements of running our application: In terms of the software requiremen
 - `cd backend`: Go to the backend folder.
 - `npm install`: Install all dependencies.
 - `npx nodemon server.js`: Start the backend server, connect to mongoDB
-- Go to the web browser, server can be accessed in localhost port 5000: [http://localhost:5555/](http://localhost:5555/)
+- Go to the web browser, the server can be accessed in localhost port 5000: [http://localhost:5555/](http://localhost:5555/)
 
 ---
 
@@ -55,10 +55,10 @@ The requirements of running our application: In terms of the software requiremen
 
 1. Change Navbar.
    1. Navbar for login, click logo is the home page, click icon is login
-   2. Navbar for user, Navbar is slightly different in the toggle list for personal page and setting.
+   2. Navbar for user, Navbar is slightly different in the toggle list for the personal page and setting.
 
 1. admin user ban
-2. Change tweet card and retweet card CSS background color to be consistance with login and signup.
+2. Change tweet card and retweet card CSS background color to be consistent with login and signup.
 
 ## Reference
 
@@ -73,4 +73,4 @@ PRs and [issues](https://github.com/Gavin-OP/CSCI3100-ChatU/issues) gladly accep
 
 ## License
 
-`UNLICENSED`
+[UNLICENSE](./LICENSE)
